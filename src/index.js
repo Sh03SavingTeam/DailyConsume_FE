@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import MapPage from "./pages/MapPage";
+import ReviewRegister from "./pages/ReviewRegister";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -12,6 +13,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/MapPage" element={<MapPage />}></Route>
+        <Route path="/MapPage/ReviewReg" element={<ReviewRegister />}></Route>
         <Route path="/" element={<App />}></Route>
       </Routes>
     </BrowserRouter>
