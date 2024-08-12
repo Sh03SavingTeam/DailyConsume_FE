@@ -1,7 +1,7 @@
 // logo.svg 파일을 import합니다.
 import logo from "../logo.svg";
 // React 라이브러리를 import합니다.
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // App.css 파일을 import하여 스타일을 적용합니다.
 import "../App.css";
 // Footer 컴포넌트를 import합니다.
@@ -14,6 +14,32 @@ import { Map, MapMarker } from "react-kakao-maps-sdk";
 import useKakaoLoader from "../services/useKakaoLoader";
 
 function MapPage() {
+  const [location, setLocation] = useState({ latitude: null, longitude: null });
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        (error) => {
+          setError(error.message);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      setError("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
   useKakaoLoader();
 
   // 사용자의 결제이력을 가져와 다음과 같이 리스트 생성
@@ -34,12 +60,20 @@ function MapPage() {
       title: "근린공원",
       latlng: { lat: 33.451393, lng: 126.570738 },
     },
+    {
+      title: "GPS위치",
+      latlng: { lat: 37.5683776, lng: 126.9218479 },
+    },
   ];
   return (
     <div className="container">
+      <p>
+        Latitude: {location.latitude} <br />
+        Longitude: {location.longitude}
+      </p>
       <Map
         id="map"
-        center={{ lat: 33.450701, lng: 126.570667 }}
+        center={{ lat: location.latitude, lng: location.longitude }}
         style={{ width: "100%", height: "1100px" }}
         level={3} // 지도의 확대 레벨
       >
