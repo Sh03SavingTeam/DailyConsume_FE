@@ -50,6 +50,17 @@ h2 {
   display: flex;
   justify-content: space-between;
 }
+.changecard-button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  flex: 1;
+  margin: 0 5px;
+}
 
 .action-button {
   background-color: #333;
