@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import HomeOn from '../assets/HomeOn.png';
 import HomeOff from '../assets/HomeOff.png';
@@ -18,20 +19,6 @@ const Footer = () => {
         navi(path);
     };
 
-    const getButtonImage = (buttonName) => {
-        switch (buttonName) {
-            case 'home':
-                return selectedButton === 'home' ? HomeOn : HomeOff;
-            case 'map':
-                return selectedButton === 'map' ? MapOn : MapOff;
-            case 'calendar':
-                return selectedButton === 'calendar' ? CalendarOn : CalendarOff;
-            case 'mypage':
-                return selectedButton === 'mypage' ? MyPageOn : MyPageOff;
-            default:
-                return HomeOff;
-        }
-    };
 
     return (
         <footer className="footer-container">
