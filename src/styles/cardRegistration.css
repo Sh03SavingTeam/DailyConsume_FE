@@ -1,0 +1,102 @@
+.card-registration {
+  text-align: center;
+}
+
+.card-registration h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.camera-view {
+  width: 100%;
+  padding-bottom: 75%; /* 4:3 비율 유지 */
+  background-color: #ededed;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.capture-button {
+  background-color: #3b4cca;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.card-form {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group .required {
+  color: red;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-row .form-group:first-child {
+  margin-right: 10px;
+}
+
+#card-number {
+  width: 200px;
+}
+
+#expiry-date {
+  width: 100px;
+}
+#cvc {
+  width: 100px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.radio-group {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.radio-group label {
+  margin-right: 10px;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #3b4cca;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
