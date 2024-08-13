@@ -62,7 +62,7 @@ function MapPage() {
     },
     {
       title: "GPS위치",
-      latlng: { lat: 37.5683776, lng: 126.9218479 },
+      latlng: { lat: location.latitude, lng: location.longitude },
     },
   ];
   return (
@@ -74,7 +74,7 @@ function MapPage() {
       <Map
         id="map"
         center={{ lat: location.latitude, lng: location.longitude }}
-        style={{ width: "100%", height: "1100px" }}
+        style={{ width: "100%", aspectRatio: 9 / 16 }}
         level={3} // 지도의 확대 레벨
       >
         {positions.map((position, index) => (

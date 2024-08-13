@@ -2,11 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 //import Webcam from "react-webcam";
 import { Camera } from "react-camera-pro";
 import Footer from "../components/Footer";
-import "../styles/WebCam.css";
-import Rate from "rc-rate";
-import { Star } from "@mui/icons-material";
+import "../styles/captured.css";
 import ReactStars from "react-stars";
-//import jsQR from "jsqr";
 
 function ReviewRegister(props) {
   // const webcamRef = useRef(null);
@@ -33,14 +30,14 @@ function ReviewRegister(props) {
         <>
           <Camera
             ref={cameraRef}
-            aspectRatio={16 / 9}
+            aspectRatio={4 / 3}
             facingMode={"environment"}
           />
           <button onClick={takePicture}>Take Picture</button>
         </>
       ) : (
         <>
-          <img className="capturedIMG" src={image} alt="Captured" />
+          <img className="capRecieptIMG" src={image} alt="Captured" />
           <button onClick={() => setImage(null)}>Retake</button>
         </>
       )}
@@ -48,10 +45,11 @@ function ReviewRegister(props) {
         count={5}
         value={rating}
         onChange={(newRating) => setRating(newRating)}
-        size={24}
+        size={50}
         color2={"#ffd700"}
       />
       <p>Current Rating: {rating}</p>
+      <button>등록하기</button>
 
       <Footer />
     </div>
