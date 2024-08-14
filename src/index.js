@@ -8,6 +8,9 @@ import MapPage from "./pages/MapPage";
 import ReviewRegister from "./pages/ReviewRegister";
 import CardRegister from "./pages/CardRegister";
 import ConsumeHistory from "./pages/ConsumeHistory";
+import Home from "./pages/Home";
+import AddressList from "./pages/AddressList";
+import AddressRegister from "./pages/AddressRegister";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,6 +22,12 @@ root.render(
         <Route path="/MapPage/ReviewReg" element={<ReviewRegister />}></Route>
         <Route path="/" element={<App />}></Route>
         <Route path="/ConsumeHistory" element={<ConsumeHistory />}></Route>
+        <Route path="/Home" element={<Home />}></Route>
+        <Route path="/MyPage/AddrList" element={<AddressList />}></Route>
+        <Route
+          path="/MyPage/AddrRegister"
+          element={<AddressRegister />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   </div>
