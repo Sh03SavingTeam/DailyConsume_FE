@@ -1,3 +1,21 @@
+@font-face {
+  font-family: "OneShinhan";
+  font-weight: bold;
+  src: url(./assets/fonts/OneShinhanBold.ttf);
+}
+
+@font-face {
+  font-family: "OneShinhan";
+  font-weight: normal;
+  src: url(./assets/fonts/OneShinhanMedium.ttf);
+}
+
+@font-face {
+  font-family: "OneShinhan";
+  font-weight: lighter;
+  src: url(./assets/fonts/OneShinhanLight.ttf);
+}
+
 /* 전체 페이지를 가운데 정렬하는 기본 설정 */
 .container {
   max-width: 480px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
@@ -128,4 +146,8 @@ body {
 
 .bottom-navigation button img {
   margin-bottom: 5px;
+}
+
+#map {
+  width: 10px;
 }

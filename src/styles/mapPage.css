@@ -1,0 +1,14 @@
+.map_top_selector {
+    width: 80%;
+    background-color: aqua;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 10%;
+}
+
+.map_top_selector>div {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}

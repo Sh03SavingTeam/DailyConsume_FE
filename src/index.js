@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import "./index.css";
+import CardRegister from "./pages/CardRegister";
 import MapPage from "./pages/MapPage";
 import ReviewRegister from "./pages/ReviewRegister";
-import CardRegister from "./pages/CardRegister";
+import reportWebVitals from "./reportWebVitals";
+import RecommendMap from "./pages/RecommendMap"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,6 +17,7 @@ root.render(
         <Route path="/Home/CardRegister" element={<CardRegister />}></Route>
         <Route path="/MapPage" element={<MapPage />}></Route>
         <Route path="/MapPage/ReviewReg" element={<ReviewRegister />}></Route>
+        <Route path="/recommend" element={<RecommendMap></RecommendMap>}></Route>
         <Route path="/" element={<App />}></Route>
       </Routes>
     </BrowserRouter>
