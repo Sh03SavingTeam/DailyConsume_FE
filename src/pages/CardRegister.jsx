@@ -9,18 +9,29 @@ function CardRegister(props) {
   const cameraRef = useRef(null);
   const [image, setImage] = useState(null);
 
-  //S#
-
   const takePicture = () => {
     const photo = cameraRef.current.takePhoto();
     setImage(photo);
-    const blob = dataURLtoBlob(photo);
-    return blob;
+    //const blob = dataURLtoBlob(photo);
+    return photo;
   };
 
   const getFileName = () => {
     const timestamp = Date.now();
     return `cardimg_${timestamp}.jpg`;
+  };
+
+  const uploadToServer = (filename, photo) => {
+    const formData = new FormData();
+    formData.append("file", dataURLtoBlob(photo), filename);
+
+    fetch("http://localhost:5000/uploadd", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("Uploaded file path:", data.filePath))
+      .catch((error) => console.error("Error:", error));
   };
 
   const uploadToS3 = (filename, fileBlob) => {
@@ -30,8 +41,6 @@ function CardRegister(props) {
       secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
       region: process.env.REACT_APP_AWS_ACCESS_REGION,
     });
-
-    const s3 = new AWS.S3();
 
     const upload = new AWS.S3.ManagedUpload({
       params: {
@@ -46,7 +55,8 @@ function CardRegister(props) {
   const handleTakePhoto = () => {
     const photoBlob = takePicture();
     const fileName = getFileName();
-    uploadToS3(fileName, photoBlob);
+    // uploadToS3(fileName, photoBlob);
+    uploadToServer(fileName, photoBlob);
   };
 
   return (
