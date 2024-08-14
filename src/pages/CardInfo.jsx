@@ -28,6 +28,7 @@ function CardInfo(props) {
 
         <img
           src="https://www.shinhancard.com/pconts/images/contents/card/plate/cdCheckBGNDC0s.png"
+          alt="카드이미지"
           className="card-image"
         />
         <button class="changecard-button">After</button>
@@ -44,12 +45,8 @@ function CardInfo(props) {
         <button class="action-button" onClick={openPopUp}>
           카드 삭제
         </button>
-        <CardDeltePopUp
-          open={popupOpen}
-          close={closePopUp}
-          header="PopUp Heading"
-        >
-          카드를 삭제할까요?
+        <CardDeltePopUp open={popupOpen} close={closePopUp}>
+          선택하신 카드를 삭제할까요?
         </CardDeltePopUp>
       </div>
     </div>

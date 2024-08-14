@@ -15,10 +15,10 @@ function CustomPopUp(props) {
           </header>
           <main>{props.children}</main>
           <footer>
-            <button className="close" onClick={close}>
+            <button className="no" onClick={close}>
               아니오
             </button>
-            <button className="close" onClick={close}>
+            <button className="yes" onClick={close}>
               예
             </button>
           </footer>

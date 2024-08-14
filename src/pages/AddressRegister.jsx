@@ -59,12 +59,12 @@ function AddressRegister(props) {
         <h2>신규 주소 등록</h2>
         <button onClick={handleGetLocationClick}>현재 위치</button>
         <div class="form-group">
-          <label for="address">
+          <label for="card-number">
             주소 <span class="required">*</span>
           </label>
           <input
             type="text"
-            id="address"
+            id="card-number"
             placeholder=""
             value={address}
             //onChange={(e) => setAddress(e.target.value)} // 사용자 수정을 허용

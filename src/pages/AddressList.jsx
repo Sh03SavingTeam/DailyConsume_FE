@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import "../styles/cardInfo.css";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import CardDeltePopUp from "../components/CustomPopUp";
 
 const Container = styled.div`
   display: flex;
@@ -92,6 +93,21 @@ function AddressList(props) {
     navigate("/MyPage/AddrRegister");
   };
 
+  const [popupOpen, setPopupOpen] = useState(false);
+
+  const openPopUp = () => {
+    setPopupOpen(true);
+  };
+
+  const closePopUp = () => {
+    setPopupOpen(false);
+  };
+
+  const handleCardRegisterClick = () => {
+    navigate("/Home/CardRegister");
+  };
+
+  //백엔드에서 넘겨받는 데이터를 다음과 같이 리스트로 저장
   const data = [
     { label: "", address: "서울시 마포구 동교동" },
     { label: "직장", address: "서울시 서대문구 연남동" },
@@ -115,7 +131,10 @@ function AddressList(props) {
               <tr key={index}>
                 <td>{item.label}</td>
                 <td>{item.address}</td>
-                <button>✕</button>
+                <button onClick={openPopUp}>✕</button>
+                <CardDeltePopUp open={popupOpen} close={closePopUp}>
+                  선택하신 주소를 삭제할까요?
+                </CardDeltePopUp>
               </tr>
             ))}
           </tbody>
