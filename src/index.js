@@ -7,6 +7,8 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import MapPage from "./pages/MapPage";
 import ReviewRegister from "./pages/ReviewRegister";
 import CardRegister from "./pages/CardRegister";
+import Home from "./pages/Home";
+import MyPage from "./pages/MyPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,7 +18,8 @@ root.render(
         <Route path="/Home/CardRegister" element={<CardRegister />}></Route>
         <Route path="/MapPage" element={<MapPage />}></Route>
         <Route path="/MapPage/ReviewReg" element={<ReviewRegister />}></Route>
-        <Route path="/" element={<App />}></Route>
+        <Route path="/Home" element={<Home />}></Route>
+        <Route path="/MyPage" element={<MyPage/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>
