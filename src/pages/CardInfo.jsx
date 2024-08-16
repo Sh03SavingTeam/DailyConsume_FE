@@ -15,7 +15,7 @@ function CardInfo(props) {
   };
   const navigate = useNavigate();
   const handleCardRegisterClick = () => {
-    navigate("/Home/CardRegister");
+    navigate("/home/cardregister");
   };
 
   return (

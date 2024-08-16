@@ -28,7 +28,7 @@ function AddressList(props) {
   const navigate = useNavigate();
 
   const handleAddrRegisterClick = () => {
-    navigate("/MyPage/AddrRegister");
+    navigate("/mypage/addrregister");
   };
 
   const [popupOpen, setPopupOpen] = useState(false);
