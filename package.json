@@ -1,5 +1,5 @@
 {
-  "name": "dayconsume",
+  "name": "reactjs",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +16,9 @@
     "lodash": "<4.17.21",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.7.4",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -43,5 +45,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:9999"
 }
