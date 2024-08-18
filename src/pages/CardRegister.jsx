@@ -1,10 +1,34 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import { Camera } from "react-camera-pro";
 import "../styles/cardRegistration.css";
 import AWS from "aws-sdk";
+import { useLocation } from "react-router-dom";
+import { Call } from "@mui/icons-material";
+import axios from "axios";
+import { Col, Row, Form, Button, InputGroup } from "react-bootstrap";
 
 function CardRegister(props) {
+  const location = useLocation();
+
+  // 로컬 스토리지에서 ACCESS TOKEN 가져오기
+  const accessToken = localStorage.getItem("ACCESS_TOKEN");
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
+
+  //카드 객체
+  const [memberCard, setMemberCard] = useState({
+    card_num: "",
+    expiration_date: "",
+    cvc: "",
+  });
+
+  const handleChange = (e) => {
+    setMemberCard({ ...memberCard, [e.target.name]: e.target.value });
+  };
+
   //카메라용
   const cameraRef = useRef(null);
   const [image, setImage] = useState(null);
@@ -25,7 +49,7 @@ function CardRegister(props) {
     const formData = new FormData();
     formData.append("file", dataURLtoBlob(photo), filename);
 
-    fetch("http://localhost:5000/uploadd", {
+    fetch("http://localhost:5000/upload", {
       method: "POST",
       body: formData,
     })
@@ -55,14 +79,46 @@ function CardRegister(props) {
   const handleTakePhoto = () => {
     const photoBlob = takePicture();
     const fileName = getFileName();
-    // uploadToS3(fileName, photoBlob);
-    uploadToServer(fileName, photoBlob);
+    uploadToS3(fileName, photoBlob);
+    //uploadToServer(fileName, photoBlob);
+  };
+
+  const handleRegisterCard = async (e) => {
+    e.preventDefault();
+
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:9999/card/cardRegister",
+    //     memberCard,
+    //     {
+    //       headers: {
+    //         "X-CSRF-TOKEN": accessToken, // 서버에서 받은 CSRF 토큰
+    //       },
+    //     }
+    //   );
+    //   console.log(response);
+    // } catch (error) {
+    //   console.error("카드 등록 오류:", error);
+    // }
+
+    axios({
+      method: "post",
+      url: "http://localhost:9999/api/card/cardRegister",
+      data: memberCard,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+        throw new Error(error);
+      });
   };
 
   return (
     <div className="container">
-      <div class="card-registration">
-        <h2>신규 카드 등록</h2>
+      <div className="card-registration">
+        <h2 className="title">신규 카드 등록</h2>
         {!image ? (
           <>
             <Camera
@@ -71,63 +127,73 @@ function CardRegister(props) {
               aspectRatio={4 / 3}
               facingMode={"environment"}
             />
-            <button class="capture-button" onClick={handleTakePhoto}>
+            <button className="capture-button" onClick={handleTakePhoto}>
               촬영하기
             </button>
           </>
         ) : (
           <>
             <img className="capRecieptIMG" src={image} alt="Captured" />
-            <button class="capture-button" onClick={() => setImage(null)}>
+            <button className="capture-button" onClick={() => setImage(null)}>
               다시 촬영하기
             </button>
           </>
         )}
-        <form class="card-form">
-          <div class="form-group">
+
+        <form className="card-form">
+          <div className="form-group">
             <label for="card-number">
-              카드번호 <span class="required">*</span>
+              카드번호 <span className="required">*</span>
             </label>
             <input
               type="text"
-              id="card-number"
+              name="card_num"
               placeholder="1234 5678 4321 9876"
               required
+              onChange={handleChange}
+              value={memberCard.card_num}
             />
           </div>
 
-          <div class="form-row">
-            <div class="form-group">
+          <div className="form-row">
+            <div className="form-group">
               <label for="expiry-date">
-                유효일자 <span class="required">*</span>
+                유효일자 <span className="required">*</span>
               </label>
               <input
                 type="text"
-                id="expiry-date"
+                name="expiration_date"
                 placeholder="09/27"
                 required
+                onChange={handleChange}
+                value={memberCard.expiration_date}
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="cvc">
-                CVC <span class="required">*</span>
+                CVC <span className="required">*</span>
               </label>
-              <input type="text" id="cvc" placeholder="111" required />
+              <input
+                type="text"
+                name="cvc"
+                placeholder="111"
+                required
+                onChange={handleChange}
+                value={memberCard.cvc}
+              />
             </div>
           </div>
 
-          <div class="form-group">
+          <div className="form-group">
             <label>
-              카드선택 <span class="required">*</span>
+              카드선택 <span className="required">*</span>
             </label>
-            <div class="radio-group">
+            <div className="radio-group">
               <label>
-                <input type="radio" name="card-type" value="credit" required />{" "}
-                신용
+                <input type="radio" name="card-type" value="credit" /> 신용
               </label>
               <label>
-                <input type="radio" name="card-type" value="debit" required />{" "}
-                체크
+                <input type="radio" name="card-type" value="check" /> 체크
               </label>
             </div>
             <select>
@@ -135,7 +201,11 @@ function CardRegister(props) {
             </select>
           </div>
 
-          <button type="submit" class="submit-button">
+          <button
+            type="submit"
+            className="submit-button"
+            onClick={handleRegisterCard}
+          >
             등록하기
           </button>
         </form>

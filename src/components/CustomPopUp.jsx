@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/customPopUp.css";
 
 function CustomPopUp(props) {
-  const { open, close, header } = props;
+  const { open, close, header, onConfirm } = props;
   return (
     <div className={open ? "openModal modal" : "modal"}>
       {open ? (
@@ -18,7 +18,7 @@ function CustomPopUp(props) {
             <button className="no" onClick={close}>
               아니오
             </button>
-            <button className="yes" onClick={close}>
+            <button className="yes" onClick={onConfirm}>
               예
             </button>
           </footer>
