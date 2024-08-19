@@ -1,11 +1,54 @@
 import React, { useCallback, useState } from "react";
 import Footer from "../components/Footer";
 import "../styles/cardInfo.css";
+import axios from "axios";
 
 function AddressRegister(props) {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [error, setError] = useState(null);
   const [address, setAddress] = useState("");
+  const [district, setDistrict] = useState(""); // 시군구를 저장하는 상태
+
+  //DB에 저장할 주소 객체
+  const [dbAddress, setDbaddress] = useState({
+    addrName: "",
+    addrDetail: "",
+  });
+
+  const handleChange = (e) => {
+    setDbaddress({ ...dbAddress, [e.target.name]: e.target.value });
+  };
+
+  const handleRegisterAddr = async (e) => {
+    e.preventDefault();
+
+    axios({
+      method: "post",
+      url: "/api/addr/addrRegister",
+      data: dbAddress,
+    });
+  };
+
+  const extractDistrict = (fullAddress) => {
+    // 주소를 공백으로 나누기
+    const addressParts = fullAddress.split(" ");
+
+    // 시군구를 추출하기 위해 여러 패턴을 고려
+    const districtPatterns = ["시", "군", "구"];
+
+    // 시군구를 저장할 배열
+    const districtParts = [];
+    for (let i = 0; i < addressParts.length; i++) {
+      const part = addressParts[i];
+      // 패턴 중 하나가 포함된 경우 시군구로 추정
+      if (districtPatterns.some((pattern) => part.includes(pattern))) {
+        districtParts.push(part);
+      }
+    }
+    // 배열을 합쳐서 시군구로 반환
+    console.log(districtParts);
+    return districtParts.join(" ");
+  };
 
   const handleGetLocationClick = () => {
     if (navigator.geolocation) {
@@ -28,7 +71,10 @@ function AddressRegister(props) {
 
             const callback = function (result, status) {
               if (status === window.kakao.maps.services.Status.OK) {
+                const fullAddress = result[0].address.address_name;
                 setAddress(result[0].address.address_name);
+                setDistrict(extractDistrict(fullAddress));
+                handleChange();
               }
             };
 
@@ -71,13 +117,32 @@ function AddressRegister(props) {
             required
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="district">
+            시군구 <span className="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="district"
+            placeholder="시군구"
+            value={district}
+            readOnly
+            required
+          />
+        </div>
         <div class="form-group">
           <label for="card-number">
             별명 <span class="required">*</span>
           </label>
           <input type="text" id="card-number" placeholder="거주지" required />
         </div>
-        <button>등록하기</button>
+        <button
+          type="submit"
+          className="submit-button"
+          onClick={handleRegisterAddr}
+        >
+          등록하기
+        </button>
       </div>
 
       <Footer />

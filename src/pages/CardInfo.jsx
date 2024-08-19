@@ -2,10 +2,51 @@ import React, { useEffect, useState } from "react";
 import "../styles/cardInfo.css";
 import CardDeltePopUp from "../components/CustomPopUp";
 import Header from "./../components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 function CardInfo(props) {
-  const [CardList, setCardList] = useState([]);
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "/api/card/memberCardList",
+      params: {
+        memberId: "abcd",
+      },
+    })
+      .then((response) => {
+        console.log(response.data);
+
+        // 카드 목록을 상태에 저장
+        const cardList = response.data;
+        setCardList(cardList);
+
+        // 첫 번째 항목을 기본값으로 설정
+        if (cardList.length > 0) {
+          setSelectedCard(cardList[0].cardName);
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, []);
+
+  const handleChange = (event) => {
+    setSelectedCard(event.target.value);
+  };
+
+  //카드목록
+  const [cardList, setCardList] = useState([]);
+
+  //선택한 카드
+  const [selectedCard, setSelectedCard] = useState("");
+
   const [popupOpen, setPopupOpen] = useState(false);
 
   const handleDeleteCard = async (e) => {
@@ -35,18 +76,23 @@ function CardInfo(props) {
 
   return (
     <div class="card-container">
+      <h2>등록 카드 목록 조회</h2>
+      <select value={selectedCard} onChange={handleChange}>
+        {cardList.map((card, index) => (
+          <option key={index} value={card.card}>
+            {card.cardNum}
+          </option>
+        ))}
+      </select>
       {/* 카드명, 이미지 파일은 DB에서, 혜택들은 상세페이지 URL로 크롤링해서 가져온다. */}
       <h2>신한카드 Deep Dream</h2>
       <div>{cardNum}</div>
       <div class="card-wrapper">
-        <button class="changecard-button">Before</button>
-
         <img
           src="https://www.shinhancard.com/pconts/images/contents/card/plate/cdCheckBGNDC0s.png"
           alt="카드이미지"
           className="card-image"
         />
-        <button class="changecard-button">After</button>
       </div>
 
       <div>해외 이용 수수료 면제</div>

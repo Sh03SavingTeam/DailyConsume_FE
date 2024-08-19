@@ -24,6 +24,7 @@ function CardRegister(props) {
     expirationDate: "",
     cvc: "",
     cardName: "",
+    memberId: "abcd",
   });
 
   // 카드 OCR 요청 결과
@@ -68,6 +69,15 @@ function CardRegister(props) {
     setCardType(event.target.value);
   };
 
+  // Select에서 선택한 카드 이름을 memberCard 상태에 저장하는 함수
+  const handleCardSelectChange = (event) => {
+    const selectedCardName = event.target.value;
+    setMemberCard((prevMemberCard) => ({
+      ...prevMemberCard,
+      cardName: selectedCardName,
+    }));
+  };
+
   //카메라용
   const cameraRef = useRef(null);
   const [image, setImage] = useState(null);
@@ -75,8 +85,8 @@ function CardRegister(props) {
   const takePicture = () => {
     const photo = cameraRef.current.takePhoto();
     setImage(photo);
-    //const blob = dataURLtoBlob(photo);
-    return photo;
+    const blob = dataURLtoBlob(photo);
+    return blob;
   };
 
   const getFileName = () => {
@@ -249,7 +259,7 @@ function CardRegister(props) {
             </div>
             {loading && <p>Loading...</p>}
             {error && <p>Error loading data!</p>}
-            <select>
+            <select onChange={handleCardSelectChange}>
               {cards.length === 0 && !loading && !error ? (
                 <option>카드 목록이 없습니다</option>
               ) : (
