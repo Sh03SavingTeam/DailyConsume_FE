@@ -1,19 +1,59 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import Footer from "../components/Footer";
+import customMarker from "../assets/restaurant.png"
 
+import axios from "axios";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import MapTopSelector from "../components/MapTopSelector";
 import useKakaoLoader from "../services/useKakaoLoader";
+import MapStoreList from "components/MapStoreList";
 
 function MapPage() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
-  const [error, setError] = useState(null);
-
+  
   const center = {
-    // 지도의 중심좌표
     lat: 33.450701,
     lng: 126.570667,
+  };
+
+  const [position, setPosition] = useState({
+    lat: Number,
+    lng: Number,
+  });
+
+  const [stores, setStores] = useState([]);
+
+  const getRecommendStore = () => {
+    axios({
+      url: "/api/recommend/store",
+      method: "GET",
+    })
+      .then((res) => {
+        console.log(res.data);
+        setStores(res.data);
+      })
+      .catch((error) => {
+        console.log("에러: " + error);
+      });
+  };
+
+  const searchDetailAddr = (lat, lng) => {
+    const geocoder = new window.kakao.maps.services.Geocoder();
+
+    geocoder.coord2Address(lng, lat, function (result, status) {
+      if (status === window.kakao.maps.services.Status.OK) {
+        // 도로명 주소가 있는 경우 출력
+        if (result[0].road_address) {
+          console.log(result[0].road_address.address_name);
+        } else {
+          // 도로명 주소가 없으면 지번 주소 출력
+          console.log(result[0].address.address_name);
+        }
+      } else {
+        console.error("주소 변환에 실패했습니다.");
+      }
+    });
   };
 
   const mapClickHandler = (_, mouseEvent) => {
@@ -22,12 +62,11 @@ function MapPage() {
       lat: latlng.getLat(),
       lng: latlng.getLng(),
     });
-  };
 
-  const [position, setPosition] = useState({
-    lat: Number,
-    lng: Number,
-  });
+    console.log(position);
+
+    searchDetailAddr(latlng.getLat(), latlng.getLng());
+  };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -39,7 +78,7 @@ function MapPage() {
           });
         },
         (error) => {
-          setError(error.message);
+          console.log(error.message);
         },
         {
           enableHighAccuracy: true,
@@ -47,8 +86,9 @@ function MapPage() {
           maximumAge: 0,
         }
       );
+      getRecommendStore();
     } else {
-      setError("Geolocation is not supported by this browser.");
+      console.log("Geolocation is not supported by this browser.");
     }
   }, []);
 
@@ -64,12 +104,24 @@ function MapPage() {
         onClick={mapClickHandler}
       >
         <MapMarker position={position ?? center} />
+
+        {stores.map((store, index) => (
+          <MapMarker
+            key={index}
+            position={{ lat: store.storeLatX, lng: store.storeLonY }}
+            image={{
+              src: customMarker,
+              size: {
+                width: 30,
+                height: 30,
+              },
+            }}
+            title={store.storeName}
+          />
+        ))}
       </Map>
       <MapTopSelector />
-      <div id="clickLatlng">
-        {position &&
-          `클릭한 위치의 위도는 ${position.lat} 이고, 경도는 ${position.lng} 입니다`}
-      </div>
+      <MapStoreList stores = {stores}/>
       <Footer />
     </div>
   );

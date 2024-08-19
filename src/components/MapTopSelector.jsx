@@ -9,7 +9,7 @@ function MapTopSelector(props) {
 
     return (
         <div className='map_top_selector'>
-            <div>결제이력</div>
+            <div className='top_selected'>결제이력</div>
             <div>장소추천</div>
         </div>
     );
