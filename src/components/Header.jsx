@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
     return (
-        <header className="header">
+        <header className="header-container">
             <div className="logo">Naver</div>
             <div className="search-bar">
                 <input type="text" placeholder="Search..." />
