@@ -18,15 +18,27 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <BrowserRouter>
       <Routes>
-        <Route path="/Home/CardRegister" element={<CardRegister />}></Route>
-        <Route path="/MapPage" element={<MapPage />}></Route>
-        <Route path="/MapPage/ReviewReg" element={<ReviewRegister />}></Route>
         <Route path="/" element={<App />}></Route>
-        <Route path="/ConsumeHistory" element={<ConsumeHistory />}></Route>
-        <Route path="/Home" element={<Home />}></Route>
-        <Route path="/MyPage/AddrList" element={<AddressList />}></Route>
-        <Route path="/MyPage/AddrRegister" element={<AddressRegister />}></Route>
-        <Route path="/Calendar" element={<Calendar />}></Route>
+        {/* 홈 */}
+        <Route path="/home" element={<Home />}></Route>
+        <Route path="/home/cardregister" element={<CardRegister />}></Route>
+
+        {/* 지도 */}
+        <Route path="/map" element={<MapPage />}></Route>
+        <Route path="/map/reviewregister" element={<ReviewRegister />}></Route>
+
+        {/* 캘린더 */}
+
+        {/* 마이페이지 */}
+        <Route
+          path="/mypage/consumehistory"
+          element={<ConsumeHistory />}
+        ></Route>
+        <Route path="/mypage/addrlist" element={<AddressList />}></Route>
+        <Route
+          path="/mypage/addrregister"
+          element={<AddressRegister />}
+        ></Route>
       </Routes>
     </BrowserRouter>
 );
