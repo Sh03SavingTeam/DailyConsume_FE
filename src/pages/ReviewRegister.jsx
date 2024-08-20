@@ -14,12 +14,23 @@ function ReviewRegister(props) {
   //   facingMode: { exact: "environment" },
   // };
 
+  //상호명
+
+  //사업자등록번호
+  const [bizNum, setBizNum] = useState("");
+
+  //리뷰객체
+  const [review, setReview] = useState({
+    bizNum: "",
+    rating: 0.0,
+  });
+
   //카메라용
   const cameraRef = useRef(null);
   const [image, setImage] = useState(null);
 
   //별점용
-  const [rating, setRating] = useState(4);
+  const [rating, setRating] = useState(2.5);
 
   // 영수증 OCR 요청 결과
   const [ocrResult, setOcrResult] = useState({
@@ -73,9 +84,14 @@ function ReviewRegister(props) {
       console.log("영수증OCR:" + response.data);
 
       const { name, bizNum, price } = response.data;
+      console.log("상호명 : ", name);
+      console.log("사업자등록번호 : ", bizNum);
+      setBizNum(bizNum);
 
-      // console.log("Card Number:", number);
-      // console.log("Valid Thru:", validThru);
+      //지도 -> 결제이력 -> 리뷰 작성 버튼 클릭 -> 상호명, 사업자등록번호 가지고 이동
+      //-> 리뷰 작성 페이지로 이동 -> OCR 수행 -> 상호명, 사업자등록번호
+      //-> 지도 페이지에서 갖고 온 데이터와 OCR 수행 데이터를 비교
+      //-> 일치하면 리뷰 등록 버튼 활성화
 
       // 상태 업데이트
     } catch (error) {
@@ -89,51 +105,70 @@ function ReviewRegister(props) {
   const handleRegisterReview = async (e) => {
     e.preventDefault();
 
-    axios({});
+    const updatedReview = {
+      ...review,
+      bizNum: bizNum,
+      rating: rating,
+    };
+
+    axios({
+      method: "post",
+      url: "/api/review/reviewRegister",
+      data: updatedReview,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+        throw new Error(error);
+      });
   };
 
   return (
-    <div className="container">
-      <div className="pictureContainer">
-        {!image ? (
-          <>
-            <Camera
-              ref={cameraRef}
-              aspectRatio={4 / 3}
-              facingMode={"environment"}
-            />
-            <button className="picturebutton" onClick={handleTakePhoto}>
-              촬영하기
-            </button>
-          </>
-        ) : (
-          <>
-            <img className="capRecieptIMG" src={image} alt="Captured" />
-            <button className="picturebutton" onClick={() => setImage(null)}>
-              다시 촬영하기
-            </button>
-          </>
-        )}
-      </div>
+    <div className="app-container">
+      <div className="main-content">
+        <div className="pictureContainer">
+          {!image ? (
+            <>
+              <Camera
+                ref={cameraRef}
+                aspectRatio={4 / 3}
+                facingMode={"environment"}
+              />
+              <button className="picturebutton" onClick={handleTakePhoto}>
+                촬영하기
+              </button>
+            </>
+          ) : (
+            <>
+              <img className="capRecieptIMG" src={image} alt="Captured" />
+              <button className="picturebutton" onClick={() => setImage(null)}>
+                다시 촬영하기
+              </button>
+            </>
+          )}
+        </div>
 
-      <div className="reactstar">
-        <ReactStars
-          count={5}
-          value={rating}
-          onChange={(newRating) => setRating(newRating)}
-          size={50}
-          color2={"#ffd700"}
-        />
-      </div>
-      <div className="pictureContainer">
-        <p>Current Rating: {rating}</p>
-        <button
-          type="submit"
-          className="picturebutton"
-          onClick={handleRegisterReview}
-        >
-          등록하기
-        </button>
+        <div className="reactstar">
+          <ReactStars
+            count={5}
+            value={rating}
+            onChange={(newRating) => setRating(newRating)}
+            size={50}
+            color2={"#ffd700"}
+          />
+        </div>
+        <div className="pictureContainer">
+          <p>Current Rating: {rating}</p>
+          <button
+            type="submit"
+            className="picturebutton"
+            onClick={handleRegisterReview}
+          >
+            등록하기
+          </button>
+        </div>
       </div>
 
       <Footer />

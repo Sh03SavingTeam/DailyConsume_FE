@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'OneShinhanBold';
-  src: url('./assets/OneShinhanBold.ttf') format('truetype');
+  font-family: "OneShinhanBold";
+  src: url("./assets/OneShinhanBold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -11,11 +11,11 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: 'OneShinhanBold', sans-serif; /* 사용자 정의 폰트 */
+  font-family: "OneShinhanBold", sans-serif; /* 사용자 정의 폰트 */
   overflow: hidden; /* 불필요한 스크롤 제거 */
 }
 
@@ -26,7 +26,7 @@ h1 {
 }
 
 .app-container {
-  width: 480px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@ h1 {
   flex: 1;
   overflow-y: auto;
   padding: 20px;
-  padding-bottom: 80px; /* Footer의 높이 + 여유 공간 */
+  padding-bottom: 50%; /* Footer의 높이 + 여유 공간 */
   box-sizing: border-box; /* padding을 높이에 포함 */
 }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import { Camera } from "react-camera-pro";
 import "../styles/cardRegistration.css";
+import "../App.css";
 import AWS from "aws-sdk";
 import { useLocation } from "react-router-dom";
 import { Call } from "@mui/icons-material";
@@ -163,126 +164,127 @@ function CardRegister(props) {
   };
 
   return (
-    <div className="container">
-      <div className="card-registration">
-        <h2 className="title">신규 카드 등록</h2>
-        {!image ? (
-          <>
-            <Camera
-              className="camera-view"
-              ref={cameraRef}
-              aspectRatio={4 / 3}
-              facingMode={"environment"}
-            />
-            <button className="capture-button" onClick={handleTakePhoto}>
-              촬영하기
-            </button>
-          </>
-        ) : (
-          <>
-            <img className="capRecieptIMG" src={image} alt="Captured" />
-            <button className="capture-button" onClick={() => setImage(null)}>
-              다시 촬영하기
-            </button>
-          </>
-        )}
+    <div className="app-container">
+      <div className="main-content">
+        <div className="card-registration">
+          <h2 className="title">신규 카드 등록</h2>
+          {!image ? (
+            <>
+              <Camera
+                className="camera-view"
+                ref={cameraRef}
+                aspectRatio={4 / 3}
+                facingMode={"environment"}
+              />
+              <button className="capture-button" onClick={handleTakePhoto}>
+                촬영하기
+              </button>
+            </>
+          ) : (
+            <>
+              <img className="capRecieptIMG" src={image} alt="Captured" />
+              <button className="capture-button" onClick={() => setImage(null)}>
+                다시 촬영하기
+              </button>
+            </>
+          )}
 
-        <form className="card-form">
-          <div className="form-group">
-            <label for="cardNum">
-              카드번호 <span className="required">*</span>
-            </label>
-            <input
-              type="text"
-              name="cardNum"
-              placeholder="1234 5678 4321 9876"
-              required
-              onChange={handleChange}
-              value={memberCard.cardNum}
-            />
-          </div>
-
-          <div className="form-row">
+          <form className="card-form">
             <div className="form-group">
-              <label for="expirationDate">
-                유효일자 <span className="required">*</span>
+              <label for="cardNum">
+                카드번호 <span className="required">*</span>
               </label>
               <input
                 type="text"
-                name="expirationDate"
-                placeholder="09/27"
+                name="cardNum"
+                placeholder="1234 5678 4321 9876"
                 required
                 onChange={handleChange}
-                value={memberCard.expirationDate}
+                value={memberCard.cardNum}
               />
             </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label for="expirationDate">
+                  유효일자 <span className="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="expirationDate"
+                  placeholder="09/27"
+                  required
+                  onChange={handleChange}
+                  value={memberCard.expirationDate}
+                />
+              </div>
+              <div className="form-group">
+                <label for="cvc">
+                  CVC <span className="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="cvc"
+                  placeholder="111"
+                  required
+                  onChange={handleChange}
+                  value={memberCard.cvc}
+                />
+              </div>
+            </div>
+
             <div className="form-group">
-              <label for="cvc">
-                CVC <span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                name="cvc"
-                placeholder="111"
-                required
-                onChange={handleChange}
-                value={memberCard.cvc}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label>
-              카드선택 <span className="required">*</span>
-            </label>
-            <div className="radio-group">
               <label>
-                <input
-                  type="radio"
-                  name="card-type"
-                  value="credit"
-                  checked={cardType === "credit"}
-                  onChange={handleCardTypeChange}
-                />
-                신용
+                카드선택 <span className="required">*</span>
               </label>
-              <label>
-                <input
-                  type="radio"
-                  name="card-type"
-                  value="check"
-                  checked={cardType === "check"}
-                  onChange={handleCardTypeChange}
-                />
-                체크
-              </label>
+              <div className="radio-group">
+                <label>
+                  <input
+                    type="radio"
+                    name="card-type"
+                    value="credit"
+                    checked={cardType === "credit"}
+                    onChange={handleCardTypeChange}
+                  />
+                  신용
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="card-type"
+                    value="check"
+                    checked={cardType === "check"}
+                    onChange={handleCardTypeChange}
+                  />
+                  체크
+                </label>
+              </div>
+              {loading && <p>Loading...</p>}
+              {error && <p>Error loading data!</p>}
+              <select onChange={handleCardSelectChange}>
+                {cards.length === 0 && !loading && !error ? (
+                  <option>카드 목록이 없습니다</option>
+                ) : (
+                  cards.map((card) => (
+                    <option key={card.cardName} value={card.cardName}>
+                      {card.cardName}
+                    </option>
+                  ))
+                )}
+              </select>
             </div>
-            {loading && <p>Loading...</p>}
-            {error && <p>Error loading data!</p>}
-            <select onChange={handleCardSelectChange}>
-              {cards.length === 0 && !loading && !error ? (
-                <option>카드 목록이 없습니다</option>
-              ) : (
-                cards.map((card) => (
-                  <option key={card.cardName} value={card.cardName}>
-                    {card.cardName}
-                  </option>
-                ))
-              )}
-            </select>
-          </div>
 
-          <button
-            type="submit"
-            className="submit-button"
-            onClick={handleRegisterCard}
-          >
-            등록하기
-          </button>
-        </form>
-
-        <Footer />
+            <button
+              type="submit"
+              className="submit-button"
+              onClick={handleRegisterCard}
+            >
+              등록하기
+            </button>
+          </form>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Footer from "../components/Footer";
-import "../styles/cardInfo.css";
+import "../styles/cardRegistration.css";
+
 import axios from "axios";
 
 function AddressRegister(props) {
@@ -104,65 +105,69 @@ function AddressRegister(props) {
   }, [nickname]);
 
   return (
-    <div className="container">
-      <p>
-        Latitude: {location.latitude} <br />
-        Longitude: {location.longitude}
-      </p>
-      <div className="card-container">
-        <h2>신규 주소 등록</h2>
-        <button onClick={handleGetLocationClick}>현재 위치</button>
-        <div className="form-group">
-          <label for="card-number">
-            주소 <span class="required">*</span>
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="card-number"
-            placeholder=""
-            value={address}
-            onChange={(e) => setNickname(e.target.value)} // 사용자 수정을 허용
-            required
-          />
+    <div className="app-container">
+      <div className="main-content">
+        <p>
+          Latitude: {location.latitude} <br />
+          Longitude: {location.longitude}
+        </p>
+        <div className="card-registration">
+          <h2>신규 주소 등록</h2>
+          <button className="capture-button" onClick={handleGetLocationClick}>
+            현재 위치
+          </button>
+          {/* <div className="form-group">
+            <label for="card-number">
+              주소 <span class="required">*</span>
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="card-number"
+              placeholder=""
+              value={address}
+              onChange={(e) => setNickname(e.target.value)} // 사용자 수정을 허용
+              required
+            />
+          </div> */}
+          <div className="form-group">
+            <label htmlFor="district">
+              시군구 주소<span className="required">*</span>
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="district"
+              placeholder="시군구"
+              value={district}
+              readOnly
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label for="nickname">
+              별명 <span class="required">*</span>
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="nickname"
+              placeholder="거주지"
+              required
+              onChange={(e) => setNickname(e.target.value)}
+            />
+          </div>
+          <button
+            type="submit"
+            className="submit-button"
+            onClick={handleRegisterAddr}
+          >
+            등록하기
+          </button>
         </div>
-        <div className="form-group">
-          <label htmlFor="district">
-            시군구 <span className="required">*</span>
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="district"
-            placeholder="시군구"
-            value={district}
-            readOnly
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label for="nickname">
-            별명 <span class="required">*</span>
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="nickname"
-            placeholder="거주지"
-            required
-            onChange={(e) => setNickname(e.target.value)}
-          />
-        </div>
-        <button
-          type="submit"
-          className="submit-button"
-          onClick={handleRegisterAddr}
-        >
-          등록하기
-        </button>
-      </div>
 
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }
