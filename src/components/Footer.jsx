@@ -56,37 +56,37 @@ const Footer = () => {
   };
 
   return (
-      <footer className="footer-container">
-        <div className="bottom-navigation">
-          <button
-              onClick={() => handleButtonClick("home", "/")}
-              className={selectedButton === "home" ? "selected" : ""}
-          >
-            <img src={getButtonImage("home")} alt="Home" />홈
-          </button>
-          <button
-              onClick={() => handleButtonClick("map", "/MapPage")}
-              className={selectedButton === "map" ? "selected" : ""}
-          >
-            <img src={getButtonImage("map")} alt="Map" />
-            지도
-          </button>
-          <button
-              onClick={() => handleButtonClick("calendar", "/Calendar")}
-              className={selectedButton === "calendar" ? "selected" : ""}
-          >
-            <img src={getButtonImage("calendar")} alt="Calendar" />
-            캘린더
-          </button>
-          <button
-              onClick={() => handleButtonClick("mypage", "/MyPage/AddrList")}
-              className={selectedButton === "mypage" ? "selected" : ""}
-          >
-            <img src={getButtonImage("mypage")} alt="My Page" />
-            마이페이지
-          </button>
-        </div>
-      </footer>
+    <footer className="footer-container">
+      <div className="bottom-navigation">
+        <button
+          onClick={() => handleButtonClick("home", "/")}
+          className={selectedButton === "home" ? "selected" : ""}
+        >
+          <img src={getButtonImage("home")} alt="Home" />홈
+        </button>
+        <button
+          onClick={() => handleButtonClick("map", "/MapPage")}
+          className={selectedButton === "map" ? "selected" : ""}
+        >
+          <img src={getButtonImage("map")} alt="Map" />
+          지도
+        </button>
+        <button
+          onClick={() => handleButtonClick("calendar", "/Calendar")}
+          className={selectedButton === "calendar" ? "selected" : ""}
+        >
+          <img src={getButtonImage("calendar")} alt="Calendar" />
+          캘린더
+        </button>
+        <button
+          onClick={() => handleButtonClick("mypage", "/MyPage/AddrList")}
+          className={selectedButton === "mypage" ? "selected" : ""}
+        >
+          <img src={getButtonImage("mypage")} alt="My Page" />
+          마이페이지
+        </button>
+      </div>
+    </footer>
   );
 };
 

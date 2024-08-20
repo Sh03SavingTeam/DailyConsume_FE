@@ -112,9 +112,6 @@ function CardInfo(props) {
     });
   };
 
-  // 예시 카드 데이터
-  const cardNum2 = "1234 5678 9928 1029";
-
   const openPopUp = () => {
     setPopupOpen(true);
   };
@@ -169,14 +166,14 @@ function CardInfo(props) {
           <div>혜택 정보를 불러오는 중입니다...</div>
         )}
       </div>
-
       <div class="button-container">
         <button class="action-button" onClick={handleCardRegisterClick}>
-          신규 카드 등록
+          카드 등록
         </button>
         <button class="action-button" onClick={openPopUp}>
           카드 삭제
         </button>
+
         <CardDeltePopUp
           open={popupOpen}
           close={closePopUp}
