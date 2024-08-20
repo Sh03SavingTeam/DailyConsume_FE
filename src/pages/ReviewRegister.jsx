@@ -16,10 +16,11 @@ function ReviewRegister(props) {
 
   //상호명
 
-  //주민등록번호
+  //사업자등록번호
+  const [bizNum, setBizNum] = useState("");
 
   //리뷰객체
-  const [review, serReview] = useState({
+  const [review, setReview] = useState({
     bizNum: "",
     rating: 0.0,
   });
@@ -85,6 +86,7 @@ function ReviewRegister(props) {
       const { name, bizNum, price } = response.data;
       console.log("상호명 : ", name);
       console.log("사업자등록번호 : ", bizNum);
+      setBizNum(bizNum);
 
       //지도 -> 결제이력 -> 리뷰 작성 버튼 클릭 -> 상호명, 사업자등록번호 가지고 이동
       //-> 리뷰 작성 페이지로 이동 -> OCR 수행 -> 상호명, 사업자등록번호
@@ -103,10 +105,16 @@ function ReviewRegister(props) {
   const handleRegisterReview = async (e) => {
     e.preventDefault();
 
+    const updatedReview = {
+      ...review,
+      bizNum: bizNum,
+      rating: rating,
+    };
+
     axios({
       method: "post",
       url: "/api/review/reviewRegister",
-      data: review,
+      data: updatedReview,
     })
       .then((res) => {
         console.log(res);
