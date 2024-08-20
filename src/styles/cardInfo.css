@@ -81,3 +81,7 @@ h2 {
 #address {
   width: 300px;
 }
+
+.form-group {
+  width: 100%;
+}

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import "../styles/cardInfo.css";
 import axios from "axios";
@@ -8,24 +8,29 @@ function AddressRegister(props) {
   const [error, setError] = useState(null);
   const [address, setAddress] = useState("");
   const [district, setDistrict] = useState(""); // 시군구를 저장하는 상태
+  const [nickname, setNickname] = useState(""); // 별명을 저장하는 상태
 
   //DB에 저장할 주소 객체
   const [dbAddress, setDbaddress] = useState({
-    addrName: "",
-    addrDetail: "",
+    addrName: "별명예시",
+    addrDetail: "주소예시",
+    memberId: "abcd",
   });
-
-  const handleChange = (e) => {
-    setDbaddress({ ...dbAddress, [e.target.name]: e.target.value });
-  };
 
   const handleRegisterAddr = async (e) => {
     e.preventDefault();
 
+    // 주소 객체 업데이트
+    const updatedDbAddress = {
+      ...dbAddress,
+      addrName: nickname,
+      addrDetail: district, // 별명을 addrDetail로 저장
+    };
+
     axios({
       method: "post",
-      url: "/api/addr/addrRegister",
-      data: dbAddress,
+      url: "/api/address/addrRegister",
+      data: updatedDbAddress,
     });
   };
 
@@ -74,7 +79,6 @@ function AddressRegister(props) {
                 const fullAddress = result[0].address.address_name;
                 setAddress(result[0].address.address_name);
                 setDistrict(extractDistrict(fullAddress));
-                handleChange();
               }
             };
 
@@ -95,6 +99,10 @@ function AddressRegister(props) {
     }
   };
 
+  useEffect(() => {
+    console.log(nickname);
+  }, [nickname]);
+
   return (
     <div className="container">
       <p>
@@ -104,16 +112,17 @@ function AddressRegister(props) {
       <div className="card-container">
         <h2>신규 주소 등록</h2>
         <button onClick={handleGetLocationClick}>현재 위치</button>
-        <div class="form-group">
+        <div className="form-group">
           <label for="card-number">
             주소 <span class="required">*</span>
           </label>
           <input
+            className="input"
             type="text"
             id="card-number"
             placeholder=""
             value={address}
-            //onChange={(e) => setAddress(e.target.value)} // 사용자 수정을 허용
+            onChange={(e) => setNickname(e.target.value)} // 사용자 수정을 허용
             required
           />
         </div>
@@ -122,6 +131,7 @@ function AddressRegister(props) {
             시군구 <span className="required">*</span>
           </label>
           <input
+            className="input"
             type="text"
             id="district"
             placeholder="시군구"
@@ -130,11 +140,18 @@ function AddressRegister(props) {
             required
           />
         </div>
-        <div class="form-group">
-          <label for="card-number">
+        <div className="form-group">
+          <label for="nickname">
             별명 <span class="required">*</span>
           </label>
-          <input type="text" id="card-number" placeholder="거주지" required />
+          <input
+            className="input"
+            type="text"
+            id="nickname"
+            placeholder="거주지"
+            required
+            onChange={(e) => setNickname(e.target.value)}
+          />
         </div>
         <button
           type="submit"

@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+  background-color: #f4feff;
+  align-items: centers;
+  border-spacing: 3px;
+}
+
+.deleteButton {
+  font-weight: bold;
+  background-color: #f4feff;
+  border: none; /* Removes the border */
+  outline: none; /* Removes the outline when focused */
+  &:hover {
+    color: red;
+  }
+}

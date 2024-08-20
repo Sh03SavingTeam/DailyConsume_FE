@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import "../styles/cardInfo.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CardDeltePopUp from "../components/CustomPopUp";
+import axios from "axios";
+import "../styles/addrList.css";
 
 const Title = styled.h2`
   margin-bottom: 20px;
@@ -16,9 +18,9 @@ const AddButton = styled.button`
   background-color: #bfe6e1;
   color: #000000;
   border: none;
-  border-radius: 10px;
   cursor: pointer;
-
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   &:hover {
     background-color: #a0d6cf;
   }
@@ -33,21 +35,67 @@ function AddressList(props) {
 
   const [popupOpen, setPopupOpen] = useState(false);
 
-  const openPopUp = () => {
+  //주소 목록
+  const [addrList, setAddrList] = useState([]);
+
+  const [selectedAddrId, setSelectedAddrId] = useState(null);
+
+  //삭제확인 팝업창 열기
+  const openPopUp = (addrId) => {
+    setSelectedAddrId(addrId);
     setPopupOpen(true);
   };
 
+  //삭제확인 팝업창 닫기
   const closePopUp = () => {
     setPopupOpen(false);
   };
 
-  //백엔드에서 넘겨받는 데이터를 다음과 같이 리스트로 저장
-  const data = [
-    { label: "", address: "서울시 마포구 동교동" },
-    { label: "직장", address: "서울시 서대문구 연남동" },
-    { label: "거주지", address: "경기도 수원시 장안구 조원동" },
-    { label: "", address: "경기도 평택시 팽성읍" },
-  ];
+  //삭제버튼 클릭 시 삭제 수행
+  const handleConfirmDelete = () => {
+    handleDeleteAddr();
+    closePopUp();
+  };
+
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
+
+  //memberId가 'abcd'인 주소 데이터 조회
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "/api/address/addrList",
+      params: {
+        memberId: "abcd",
+      },
+    }).then((response) => {
+      console.log(response.data);
+      const addressList = response.data;
+      setAddrList(addressList);
+    });
+  }, []);
+
+  const handleDeleteAddr = () => {
+    if (selectedAddrId) {
+      axios({
+        method: "delete",
+        url: "/api/address/addrDelete",
+        params: {
+          addrId: selectedAddrId,
+        },
+      }).then(() => {
+        // After deletion, fetch the updated list
+        setAddrList((prevList) =>
+          prevList.filter((item) => item.addrId !== selectedAddrId)
+        );
+        closePopUp();
+      });
+    }
+  };
+
   return (
     <div className="container">
       <div className="card-container">
@@ -61,12 +109,21 @@ function AddressList(props) {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {addrList.map((item, index) => (
               <tr key={index}>
-                <td>{item.label}</td>
-                <td>{item.address}</td>
-                <button onClick={openPopUp}>✕</button>
-                <CardDeltePopUp open={popupOpen} close={closePopUp}>
+                <td>{item.addrName}</td>
+                <td>{item.addrDetail}</td>
+                <button
+                  className="deleteButton"
+                  onClick={() => openPopUp(item.addrId)}
+                >
+                  ✕
+                </button>
+                <CardDeltePopUp
+                  open={popupOpen}
+                  close={closePopUp}
+                  onConfirm={handleConfirmDelete}
+                >
                   선택하신 주소를 삭제할까요?
                 </CardDeltePopUp>
               </tr>
