@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import "../styles/cardInfo.css";
+import "../App.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CardDeltePopUp from "../components/CustomPopUp";
@@ -15,8 +16,8 @@ const Title = styled.h2`
 const AddButton = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: #bfe6e1;
-  color: #000000;
+  background-color: #303473;
+  color: #ffffff;
   border: none;
   cursor: pointer;
   border-bottom-left-radius: 20px;
@@ -97,42 +98,45 @@ function AddressList(props) {
   };
 
   return (
-    <div className="container">
-      <div className="card-container">
-        <Title>주소 목록</Title>
-        <table>
-          <thead>
-            <tr>
-              <th>별명</th>
-              <th>주소</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {addrList.map((item, index) => (
-              <tr key={index}>
-                <td>{item.addrName}</td>
-                <td>{item.addrDetail}</td>
-                <button
-                  className="deleteButton"
-                  onClick={() => openPopUp(item.addrId)}
-                >
-                  ✕
-                </button>
-                <CardDeltePopUp
-                  open={popupOpen}
-                  close={closePopUp}
-                  onConfirm={handleConfirmDelete}
-                >
-                  선택하신 주소를 삭제할까요?
-                </CardDeltePopUp>
+    <div className="app-container">
+      <div className="main-content">
+        <div className="card-container">
+          <Title>주소 목록</Title>
+          <table>
+            <thead>
+              <tr>
+                <th>별명</th>
+                <th>주소</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <AddButton onClick={handleAddrRegisterClick}>신규 주소 등록</AddButton>
+            </thead>
+            <tbody>
+              {addrList.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.addrName}</td>
+                  <td>{item.addrDetail}</td>
+                  <button
+                    className="deleteButton"
+                    onClick={() => openPopUp(item.addrId)}
+                  >
+                    ✕
+                  </button>
+                  <CardDeltePopUp
+                    open={popupOpen}
+                    close={closePopUp}
+                    onConfirm={handleConfirmDelete}
+                  >
+                    선택하신 주소를 삭제할까요?
+                  </CardDeltePopUp>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <AddButton onClick={handleAddrRegisterClick}>
+            신규 주소 등록
+          </AddButton>
+        </div>
       </div>
-
       <Footer />
     </div>
   );

@@ -3,6 +3,12 @@ table {
   background-color: #f4feff;
   align-items: centers;
   border-spacing: 3px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+th {
+  background-color: #94dbe0;
 }
 
 .deleteButton {

@@ -6,13 +6,10 @@ import "../styles/reviewRegister.css";
 import ReactStars from "react-stars";
 import AWS from "aws-sdk";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function ReviewRegister(props) {
-  // const webcamRef = useRef(null);
-
-  // const videoConstraints = {
-  //   facingMode: { exact: "environment" },
-  // };
+  const navigate = useNavigate(); // useNavigate 사용
 
   //상호명
 
@@ -118,6 +115,7 @@ function ReviewRegister(props) {
     })
       .then((res) => {
         console.log(res);
+        navigate("/map");
       })
       .catch((error) => {
         console.log(error);
@@ -128,6 +126,7 @@ function ReviewRegister(props) {
   return (
     <div className="app-container">
       <div className="main-content">
+        <h2 className="title">영수증 인증</h2>
         <div className="pictureContainer">
           {!image ? (
             <>

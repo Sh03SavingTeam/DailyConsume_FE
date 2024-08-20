@@ -50,6 +50,7 @@ h2 {
 .button-container {
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
 .changecard-button {
   background-color: #333;
@@ -64,7 +65,7 @@ h2 {
 }
 
 .action-button {
-  background-color: #333;
+  background-color: #303473;
   color: white;
   border: none;
   padding: 10px 20px;
