@@ -1,59 +1,66 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import "../App.css";
 import "../styles/Calendar.css";
 import AmountListForDay from "./AmountListForDay";
-const CustomCalendar = ({ onChange, value }) => {
-    const [nowDate, setNowDate] = useState("날짜");
-    const [amountList, setAmountList] = useState([]);
 
-    useEffect(() => {
-        // 서버에서 데이터 받아오기
-        axios({
-            url: "http://localhost:9999/",
-            method: "GET",
-        })
-            .then((response) => {
-                // 서버에서 받아온 데이터를 amountList 상태로 설정
-                setAmountList(response.data);
-            })
-            .catch((error) => {
-                console.error("데이터를 가져오는 데 실패했습니다.", error);  // 콘솔 로그 추가
-            });
-    }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행
+const CustomCalendar = () => {
+    const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일")); // 현재 날짜를 기본값으로 설정
+    const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
+    const [amountList, setAmountList] = useState([
+        { day: "2024/08/01", amount: 1000 },
+        { day: "2024/08/02", amount: 2000 },
+        { day: "2024/08/12", amount: 3000 },
+        { day: "2024/08/22", amount: 4000 },
+    ]);
 
-    const handleDateChange = (e) => {
-        console.log(e);
-        setNowDate(moment(e).format("YYYY년 MM월 DD일"));
+    const handleDateChange = (date) => {
+        setNowDate(moment(date).format("YYYY년 MM월 DD일"));
     };
+
+    const handleMonthChange = ({ activeStartDate }) => {
+        setCurrentMonth(moment(activeStartDate).format("M월"));
+    };
+
     const f_formatDay = (locale, date) => {
         let currentDay = moment(date).format("YYYY/MM/DD");
         let filterData = amountList.filter((data) => data.day === currentDay);
-        if (filterData.length > 0)
-            return moment(date).format(`DD ${filterData[0].amount}`);
-        return moment(date).format("DD" );
-    };
-    // const changeHandler = () => {
-    //     navi("/login");
-    // };
-    return (
-        <div className="container">
-            <div className="calendar-container">
-                <Calendar
-                    onChange={handleDateChange}
-                    value={value}
-                    formatDay={f_formatDay}
-                />
-            </div>
-            {nowDate && <AmountListForDay day = {nowDate}/>}
-            <Footer/>
-        </div>
 
+        if (filterData.length > 0) {
+            return (
+                <div className="calendar-info">
+                    <span>{moment(date).format("D")}</span>
+                    <span className="calendar-count">{filterData.length}건</span>
+                    <span className="calendar-amount">{filterData[0].amount}원</span>
+                </div>
+            );
+        } else {
+            return moment(date).format("D");
+        }
+    };
+
+    return (
+        <div className="app-container">
+            <h1> 소비 캘린더 </h1>
+            <div className="main-content">
+                <div className="calendar-container">
+                    <h2 className="month-title">{currentMonth}</h2>
+                    <Calendar
+                        onChange={handleDateChange}
+                        value={moment(nowDate, "YYYY년 MM월 DD일").toDate()} // 날짜를 Date 객체로 변환하여 Calendar에 전달
+                        formatDay={f_formatDay}
+                        onActiveStartDateChange={handleMonthChange}
+                    />
+                    <hr className="calendar-divider" />
+                    <AmountListForDay initialDay={nowDate} /> {/* 선택한 날짜를 AmountListForDay에 전달 */}
+                </div>
+            </div>
+            <Footer />
+        </div>
     );
 };
+
 export default CustomCalendar;
