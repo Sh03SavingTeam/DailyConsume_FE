@@ -185,7 +185,7 @@ function ReviewRegister(props) {
             <>
               <Camera
                 ref={cameraRef}
-                aspectRatio={4 / 3}
+                aspectRatio={3 / 4}
                 facingMode={"environment"}
               />
               <button className="picturebutton" onClick={handleTakePhoto}>
