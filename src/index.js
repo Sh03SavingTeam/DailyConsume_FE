@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./App";
 import "./App.css"; // 전역 스타일로 불러오기
 import reportWebVitals from "./reportWebVitals";
@@ -13,6 +12,7 @@ import Home from "./pages/Home";
 import AddressList from "./pages/AddressList";
 import AddressRegister from "./pages/AddressRegister";
 import Calendar from "./components/Calendar";
+import RecommendMap from "./pages/RecommendMap"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -26,6 +26,7 @@ root.render(
       {/* 지도 */}
       <Route path="/map" element={<MapPage />}></Route>
       <Route path="/map/reviewregister" element={<ReviewRegister />}></Route>
+      <Route path="/map/recommend" element={<RecommendMap/>}></Route>
 
       {/* 캘린더 */}
       <Route path="/calander" element={<Calendar />}></Route>
