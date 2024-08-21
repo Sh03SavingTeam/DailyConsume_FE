@@ -1,0 +1,10 @@
+
+.content {
+    background-color: white;
+    border-radius:5%;
+    box-shadow: 5px 5px 5px lightgray;
+    padding: auto;
+}
+h2 {
+    padding: 4%;
+}

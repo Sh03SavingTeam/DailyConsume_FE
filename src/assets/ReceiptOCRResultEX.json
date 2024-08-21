@@ -1,0 +1,313 @@
+{
+  "images": [
+    {
+      "uid": "cf25615c7f9d438383a2fac4873e3be3",
+      "validationResult": { "result": "NO_REQUESTED" },
+      "inferResult": "SUCCESS",
+      "name": "medium",
+      "receipt": {
+        "result": {
+          "storeInfo": {
+            "addresses": [
+              {
+                "confidenceScore": 0.93764,
+                "boundingPolys": [
+                  {
+                    "vertices": [
+                      { "x": 293, "y": 291 },
+                      { "x": 348, "y": 291 },
+                      { "x": 348, "y": 320 },
+                      { "x": 293, "y": 320 }
+                    ]
+                  },
+                  {
+                    "vertices": [
+                      { "x": 354, "y": 289 },
+                      { "x": 435, "y": 289 },
+                      { "x": 435, "y": 320 },
+                      { "x": 354, "y": 320 }
+                    ]
+                  },
+                  {
+                    "vertices": [
+                      { "x": 442, "y": 291 },
+                      { "x": 521, "y": 291 },
+                      { "x": 521, "y": 320 },
+                      { "x": 442, "y": 320 }
+                    ]
+                  },
+                  {
+                    "vertices": [
+                      { "x": 528, "y": 292 },
+                      { "x": 571, "y": 292 },
+                      { "x": 571, "y": 318 },
+                      { "x": 528, "y": 318 }
+                    ]
+                  },
+                  {
+                    "vertices": [
+                      { "x": 576, "y": 292 },
+                      { "x": 680, "y": 292 },
+                      { "x": 680, "y": 321 },
+                      { "x": 576, "y": 321 }
+                    ]
+                  },
+                  {
+                    "vertices": [
+                      { "x": 685, "y": 294 },
+                      { "x": 705, "y": 294 },
+                      { "x": 705, "y": 319 },
+                      { "x": 685, "y": 319 }
+                    ]
+                  }
+                ],
+                "formatted": { "value": "서울 마포구 동교로 187(동교동)1" },
+                "keyText": "[주 소]",
+                "text": "서울 마포구 동교로 187 (동교동) 1",
+                "maskingPolys": []
+              }
+            ],
+            "name": {
+              "confidenceScore": 0.96971,
+              "boundingPolys": [
+                {
+                  "vertices": [
+                    { "x": 293, "y": 261 },
+                    { "x": 396, "y": 261 },
+                    { "x": 396, "y": 292 },
+                    { "x": 293, "y": 292 }
+                  ]
+                }
+              ],
+              "formatted": { "value": "키토분식" },
+              "keyText": "[매장명]",
+              "text": "키토분식",
+              "maskingPolys": []
+            },
+            "bizNum": {
+              "confidenceScore": 0.88896,
+              "boundingPolys": [
+                {
+                  "vertices": [
+                    { "x": 526, "y": 263 },
+                    { "x": 679, "y": 266 },
+                    { "x": 679, "y": 290 },
+                    { "x": 526, "y": 288 }
+                  ]
+                }
+              ],
+              "formatted": { "value": "632-85-00430" },
+              "keyText": "[사업자]",
+              "text": "632-85-00430",
+              "maskingPolys": []
+            }
+          },
+          "subTotal": [
+            {
+              "taxPrice": [
+                {
+                  "confidenceScore": 0.93279,
+                  "boundingPolys": [
+                    {
+                      "vertices": [
+                        { "x": 667, "y": 620 },
+                        { "x": 714, "y": 620 },
+                        { "x": 714, "y": 647 },
+                        { "x": 667, "y": 647 }
+                      ]
+                    }
+                  ],
+                  "formatted": { "value": "863" },
+                  "keyText": "부 가 세",
+                  "text": "863"
+                }
+              ]
+            }
+          ],
+          "subResults": [
+            {
+              "items": [
+                {
+                  "price": {
+                    "unitPrice": {
+                      "confidenceScore": 0.96089,
+                      "boundingPolys": [
+                        {
+                          "vertices": [
+                            { "x": 442, "y": 468 },
+                            { "x": 513, "y": 468 },
+                            { "x": 513, "y": 496 },
+                            { "x": 442, "y": 496 }
+                          ]
+                        }
+                      ],
+                      "formatted": { "value": "9500" },
+                      "keyText": "",
+                      "text": "9,500"
+                    },
+                    "price": {
+                      "confidenceScore": 0.93095,
+                      "boundingPolys": [
+                        {
+                          "vertices": [
+                            { "x": 642, "y": 467 },
+                            { "x": 712, "y": 467 },
+                            { "x": 712, "y": 495 },
+                            { "x": 642, "y": 495 }
+                          ]
+                        }
+                      ],
+                      "formatted": { "value": "9500" },
+                      "keyText": "",
+                      "text": "9,500"
+                    }
+                  },
+                  "name": {
+                    "confidenceScore": 0.94109,
+                    "boundingPolys": [
+                      {
+                        "vertices": [
+                          { "x": 181, "y": 467 },
+                          { "x": 336, "y": 467 },
+                          { "x": 336, "y": 498 },
+                          { "x": 181, "y": 498 }
+                        ]
+                      }
+                    ],
+                    "formatted": { "value": "들기름막국수" },
+                    "keyText": "",
+                    "text": "들기름막국수",
+                    "maskingPolys": []
+                  },
+                  "count": {
+                    "confidenceScore": 0.9523,
+                    "boundingPolys": [
+                      {
+                        "vertices": [
+                          { "x": 557, "y": 469 },
+                          { "x": 573, "y": 469 },
+                          { "x": 573, "y": 494 },
+                          { "x": 557, "y": 494 }
+                        ]
+                      }
+                    ],
+                    "formatted": { "value": "1" },
+                    "keyText": "",
+                    "text": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          "paymentInfo": {
+            "date": {
+              "confidenceScore": 0.8785,
+              "boundingPolys": [
+                {
+                  "vertices": [
+                    { "x": 346, "y": 1047 },
+                    { "x": 481, "y": 1045 },
+                    { "x": 481, "y": 1072 },
+                    { "x": 346, "y": 1074 }
+                  ]
+                }
+              ],
+              "formatted": { "month": "08", "year": "2024", "day": "07" },
+              "keyText": "승인일시",
+              "text": "2024-08-07",
+              "maskingPolys": []
+            },
+            "cardInfo": {
+              "number": {
+                "confidenceScore": 0.93639,
+                "boundingPolys": [
+                  {
+                    "vertices": [
+                      { "x": 347, "y": 861 },
+                      { "x": 589, "y": 861 },
+                      { "x": 589, "y": 886 },
+                      { "x": 347, "y": 886 }
+                    ]
+                  }
+                ],
+                "formatted": { "value": "5107-37**-****-****" },
+                "keyText": "카드번호:",
+                "text": "5107-37**-****-****",
+                "maskingPolys": []
+              },
+              "company": {
+                "confidenceScore": 0.9462,
+                "boundingPolys": [
+                  {
+                    "vertices": [
+                      { "x": 561, "y": 828 },
+                      { "x": 717, "y": 828 },
+                      { "x": 717, "y": 859 },
+                      { "x": 561, "y": 859 }
+                    ]
+                  }
+                ],
+                "formatted": { "value": "신한체크카드" },
+                "keyText": "카드종류",
+                "text": "신한체크카드",
+                "maskingPolys": []
+              }
+            },
+            "confirmNum": {
+              "confidenceScore": 0.98224,
+              "boundingPolys": [
+                {
+                  "vertices": [
+                    { "x": 346, "y": 1017 },
+                    { "x": 455, "y": 1015 },
+                    { "x": 455, "y": 1042 },
+                    { "x": 346, "y": 1044 }
+                  ]
+                }
+              ],
+              "keyText": "승인번호:",
+              "text": "21469952"
+            },
+            "time": {
+              "confidenceScore": 0.94665,
+              "boundingPolys": [
+                {
+                  "vertices": [
+                    { "x": 489, "y": 1047 },
+                    { "x": 526, "y": 1047 },
+                    { "x": 526, "y": 1071 },
+                    { "x": 489, "y": 1071 }
+                  ]
+                },
+                {
+                  "vertices": [
+                    { "x": 525, "y": 1047 },
+                    { "x": 564, "y": 1047 },
+                    { "x": 564, "y": 1071 },
+                    { "x": 525, "y": 1071 }
+                  ]
+                },
+                {
+                  "vertices": [
+                    { "x": 563, "y": 1047 },
+                    { "x": 595, "y": 1047 },
+                    { "x": 595, "y": 1072 },
+                    { "x": 563, "y": 1072 }
+                  ]
+                }
+              ],
+              "formatted": { "hour": "13", "minute": "01", "second": "48" },
+              "keyText": "",
+              "text": "13: 01: 48"
+            }
+          }
+        },
+        "meta": { "estimatedLanguage": "ko" }
+      },
+      "message": "SUCCESS"
+    }
+  ],
+  "requestId": "0811457e-27e1-43e2-b286-bac4d9a88ad4",
+  "version": "V2",
+  "timestamp": 1724027859445
+}
