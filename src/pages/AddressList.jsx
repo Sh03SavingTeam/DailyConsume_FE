@@ -5,6 +5,7 @@ import "../App.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CardDeltePopUp from "../components/CustomPopUp";
+import DefaultAddrUpdatePopUp from "../components/CustomPopUp";
 import axios from "axios";
 import "../styles/addrList.css";
 
@@ -35,6 +36,8 @@ function AddressList(props) {
   };
 
   const [popupOpen, setPopupOpen] = useState(false);
+  const [defaultAddrPopupOpen, setDefaultAddrPopupOpen] = useState(false); // 기본 주소 팝업 상태
+  const [tempSelectedAddrId, setTempSelectedAddrId] = useState(null); // 임시로 선택된 주소
 
   //주소 목록
   const [addrList, setAddrList] = useState([]);
@@ -52,9 +55,29 @@ function AddressList(props) {
     setPopupOpen(false);
   };
 
+  const openDefaultAddrPopup = (addrId) => {
+    setTempSelectedAddrId(addrId); // 임시로 선택된 주소 저장
+    setDefaultAddrPopupOpen(true); // 기본 주소 팝업 열기
+  };
+
+  const closeDefaultAddrPopup = () => {
+    setDefaultAddrPopupOpen(false); // 팝업 닫기
+  };
+
+  const handleConfirmDefaultAddrChange = () => {
+    handleRadioChange(tempSelectedAddrId); // 기본 주소 변경
+    closeDefaultAddrPopup(); // 팝업 닫기
+  };
+
   //삭제버튼 클릭 시 삭제 수행
   const handleConfirmDelete = () => {
     handleDeleteAddr();
+    closePopUp();
+  };
+
+  //기본주소 변경 확인 시 수행
+  const handleDefaultAddrUpdate = (addrId) => {
+    handleRadioChange(addrId);
     closePopUp();
   };
 
@@ -76,6 +99,12 @@ function AddressList(props) {
       console.log(response.data);
       const addressList = response.data;
       setAddrList(addressList);
+
+      // 기본 주소 설정: addr_default 값이 1인 항목
+      const defaultAddress = addressList.find((item) => item.addrDefault === 1);
+      if (defaultAddress) {
+        setSelectedAddrId(defaultAddress.addrId); // 기본 주소의 ID를 선택된 상태로 설정
+      }
     });
   }, []);
 
@@ -97,14 +126,48 @@ function AddressList(props) {
     }
   };
 
+  // Radio 버튼 선택 처리
+  const handleRadioChange = (addrId) => {
+    //setSelectedAddrId(addrId);
+    // 선택된 주소 ID 설정
+
+    axios({
+      method: "put",
+      url: "/api/address/changeDefaultAddr",
+      params: {
+        memberId: "abcd",
+        addrId: addrId,
+      },
+    })
+      .then(() => {
+        // 기본 주소가 변경된 후 선택된 주소 상태를 업데이트
+        setSelectedAddrId(addrId);
+
+        // addrList에서 addrDefault 값을 업데이트
+        setAddrList((prevList) =>
+          prevList.map((item) =>
+            item.addrId === addrId
+              ? { ...item, addrDefault: 1 }
+              : { ...item, addrDefault: 0 }
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Failed to update default address:", error);
+      });
+    //window.location.reload();
+  };
+
   return (
     <div className="app-container">
       <div className="main-content">
         <div className="card-container">
           <Title>주소 목록</Title>
+          <h2>{selectedAddrId}</h2>
           <table>
             <thead>
               <tr>
+                <th></th>
                 <th>별명</th>
                 <th>주소</th>
                 <th></th>
@@ -113,6 +176,15 @@ function AddressList(props) {
             <tbody>
               {addrList.map((item, index) => (
                 <tr key={index}>
+                  <td>
+                    <input
+                      type="radio"
+                      name="selectedAddr"
+                      value={item.addrId}
+                      checked={selectedAddrId === item.addrId} // 선택된 항목인지 확인
+                      onChange={() => openDefaultAddrPopup(item.addrId)} // Radio 버튼 변경 처리
+                    />
+                  </td>
                   <td>{item.addrName}</td>
                   <td>{item.addrDetail}</td>
                   <button
@@ -138,6 +210,15 @@ function AddressList(props) {
         </div>
       </div>
       <Footer />
+
+      {/* 기본 주소 팝업 */}
+      <DefaultAddrUpdatePopUp
+        open={defaultAddrPopupOpen}
+        close={closeDefaultAddrPopup}
+        onConfirm={handleConfirmDefaultAddrChange}
+      >
+        기본 주소를 변경하시겠습니까?
+      </DefaultAddrUpdatePopUp>
     </div>
   );
 }
