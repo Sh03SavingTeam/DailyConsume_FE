@@ -184,7 +184,7 @@ function CardRegister(props) {
             </>
           ) : (
             <>
-              <img className="capRecieptIMG" src={image} alt="Captured" />
+              <img className="capCardIMG" src={image} alt="Captured" />
               <button className="capture-button" onClick={() => setImage(null)}>
                 다시 촬영하기
               </button>

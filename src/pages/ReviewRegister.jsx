@@ -118,11 +118,11 @@ function ReviewRegister(props) {
       //-> 일치하면 리뷰 등록 버튼 활성화
 
       //지도 페이지에서 가져온 상호명
-      //const str_name = storeInfo.storename;
-      const str_name = "키토분식";
+      const str_name = storeInfo.storename;
+      //const str_name = "키토분식";
       //지도 페이지에서 가져온 사업자등록번호
-      //const str_bizNum = storeInfo.bizNum;
-      const str_bizNum = "632-85-00430";
+      const str_bizNum = storeInfo.bizNum;
+      //const str_bizNum = "632-85-00430";
 
       // 상호명과 사업자등록번호 비교
       if (name === str_name && bizNum === str_bizNum) {
