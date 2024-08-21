@@ -131,40 +131,42 @@ function AddressRegister(props) {
               required
             />
           </div> */}
-          <div className="form-group">
-            <label htmlFor="district">
-              시군구 주소<span className="required">*</span>
-            </label>
-            <input
-              className="input"
-              type="text"
-              id="district"
-              placeholder="시군구"
-              value={district}
-              readOnly
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label for="nickname">
-              별명 <span class="required">*</span>
-            </label>
-            <input
-              className="input"
-              type="text"
-              id="nickname"
-              placeholder="거주지"
-              required
-              onChange={(e) => setNickname(e.target.value)}
-            />
-          </div>
-          <button
-            type="submit"
-            className="submit-button"
-            onClick={handleRegisterAddr}
-          >
-            등록하기
-          </button>
+          <form className="card-form">
+            <div className="form-group">
+              <label htmlFor="district">
+                주소(시군구)<span className="required">*</span>
+              </label>
+              <input
+                className="input"
+                type="text"
+                id="district"
+                placeholder="현재 위치 버튼을 눌러주세요"
+                value={district}
+                readOnly
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label for="nickname">
+                별명 <span class="required">*</span>
+              </label>
+              <input
+                className="input"
+                type="text"
+                id="nickname"
+                placeholder="별명을 입력해주세요"
+                required
+                onChange={(e) => setNickname(e.target.value)}
+              />
+            </div>
+            <button
+              type="submit"
+              className="submit-button"
+              onClick={handleRegisterAddr}
+            >
+              등록하기
+            </button>
+          </form>
         </div>
 
         <Footer />
