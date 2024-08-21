@@ -102,10 +102,12 @@ function ReviewRegister(props) {
 
       // 상호명과 사업자등록번호 비교
       if (name === str_name && bizNum === str_bizNum) {
+        //일치(콘솔로만 띄워져있음. 팝업창으로도 띄워야 함)
         console.log("상호명과 사업자등록번호가 모두 일치합니다.");
         // 리뷰 등록 버튼 활성화 로직
         setReviewButtonEnabled(true); // 예: 리뷰 등록 버튼 활성화하는 함수 호출
       } else {
+        //불일치(콘솔로만 띄워져있음. 팝업창으로도 띄워야 함)
         console.log("상호명 또는 사업자등록번호가 일치하지 않습니다.");
         // 일치하지 않을 때의 처리
         setReviewButtonEnabled(false); // 예: 리뷰 등록 버튼 비활성화하는 함수 호출
