@@ -19,6 +19,7 @@ function AddressRegister(props) {
     addrName: "별명예시",
     addrDetail: "주소예시",
     memberId: "abcd",
+    addrDefault: 0,
   });
 
   const handleRegisterAddr = async (e) => {
