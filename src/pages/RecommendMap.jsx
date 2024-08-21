@@ -25,6 +25,7 @@ function MapPage() {
   const [stores, setStores] = useState([]);
 
   const getRecommendStore = () => {
+    // const geocoder = new window.kakao.maps.services.Geocoder();
     axios({
       url: "/api/recommend/store",
       method: "GET",
@@ -32,11 +33,47 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        // 딜레이를 생성하는 함수
+        // const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        // const processStores = async (stores) => {
+        //   for (let index = 0; index < stores.length; index++) {
+        //     const store = stores[index];
+        //     await delay(1000); // 1초 지연
+        //     geocoder.addressSearch(store.storeAddr, function(result, status) {
+        //       if (status === window.kakao.maps.services.Status.OK) {
+        //         console.log("가맹점 코드:" + store.storeRegNum + "    y: " + result[0].y + " x: " + result[0].x);
+        //         updateLatLon(store.storeRegNum, result[0].y, result[0].x)
+        //       }
+        //     });
+        //   }
+        // };
+
+        // processStores(res.data);
+        
       })
       .catch((error) => {
         console.log("에러: " + error);
       });
   };
+
+  // const updateLatLon = (storeRegNum, y, x) => {
+  //   axios({
+  //     url: "/api/recommend/updateStore",
+  //     method: "PUT",
+  //     data: {"storeRegNum": storeRegNum, "storeLatX":y, "storeLonY": x }
+  //   })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     }).catch((error) => {
+  //       console.log(error);
+  //     })
+  // }
+
+
+  const markerClickHandler = (store, e) => {
+    console.log(store);
+  }
 
   const searchDetailAddr = (lat, lng) => {
     const geocoder = new window.kakao.maps.services.Geocoder();
@@ -103,7 +140,6 @@ function MapPage() {
         level={3} // 지도의 확대 레벨
         onClick={mapClickHandler}
       >
-        <MapMarker position={position ?? center} />
 
         {stores.map((store, index) => (
           <MapMarker
@@ -117,6 +153,7 @@ function MapPage() {
               },
             }}
             title={store.storeName}
+            onClick={ () => markerClickHandler(store) }
           />
         ))}
       </Map>
