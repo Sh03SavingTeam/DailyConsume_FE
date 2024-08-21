@@ -90,6 +90,9 @@ h1 {
   height: 24px; /* 아이콘의 높이 */
 }
 
+#map {
+  width: 10px;
+}
 /*!* 전체 페이지를 가운데 정렬하는 기본 설정 *!*/
 /*.app-container {*/
 /*  height: 100%;*/
