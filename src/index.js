@@ -12,7 +12,8 @@ import Home from "./pages/Home";
 import AddressList from "./pages/AddressList";
 import AddressRegister from "./pages/AddressRegister";
 import Calendar from "./components/Calendar";
-import RecommendMap from "./pages/RecommendMap"
+import RecommendMap from "./pages/RecommendMap";
+import PayHistoryMap from "./pages/PayHistoryMap";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -26,7 +27,8 @@ root.render(
       {/* 지도 */}
       <Route path="/map" element={<MapPage />}></Route>
       <Route path="/map/reviewregister" element={<ReviewRegister />}></Route>
-      <Route path="/map/recommend" element={<RecommendMap/>}></Route>
+      <Route path="/map/recommend" element={<RecommendMap />}></Route>
+      <Route path="/map/payhistory" element={<PayHistoryMap />}></Route>
 
       {/* 캘린더 */}
       <Route path="/calander" element={<Calendar />}></Route>
