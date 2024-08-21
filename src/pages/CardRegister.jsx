@@ -4,13 +4,14 @@ import { Camera } from "react-camera-pro";
 import "../styles/cardRegistration.css";
 import "../App.css";
 import AWS from "aws-sdk";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Call } from "@mui/icons-material";
 import axios from "axios";
 import { Col, Row, Form, Button, InputGroup } from "react-bootstrap";
 
 function CardRegister(props) {
   const location = useLocation();
+  const navigate = useNavigate(); // useNavigate 사용
 
   // 로컬 스토리지에서 ACCESS TOKEN 가져오기
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
@@ -156,6 +157,7 @@ function CardRegister(props) {
     })
       .then((res) => {
         console.log(res);
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error);

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import "../styles/cardRegistration.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -10,6 +11,8 @@ function AddressRegister(props) {
   const [address, setAddress] = useState("");
   const [district, setDistrict] = useState(""); // 시군구를 저장하는 상태
   const [nickname, setNickname] = useState(""); // 별명을 저장하는 상태
+
+  const navigate = useNavigate(); // useNavigate 사용
 
   //DB에 저장할 주소 객체
   const [dbAddress, setDbaddress] = useState({
@@ -33,6 +36,8 @@ function AddressRegister(props) {
       url: "/api/address/addrRegister",
       data: updatedDbAddress,
     });
+
+    navigate("/mypage/addrlist");
   };
 
   const extractDistrict = (fullAddress) => {
@@ -107,10 +112,6 @@ function AddressRegister(props) {
   return (
     <div className="app-container">
       <div className="main-content">
-        <p>
-          Latitude: {location.latitude} <br />
-          Longitude: {location.longitude}
-        </p>
         <div className="card-registration">
           <h2>신규 주소 등록</h2>
           <button className="capture-button" onClick={handleGetLocationClick}>

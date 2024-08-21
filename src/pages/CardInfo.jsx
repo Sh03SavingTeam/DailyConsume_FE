@@ -132,7 +132,7 @@ function CardInfo(props) {
 
   return (
     <div class="card-container">
-      <h2>등록 카드 목록 조회</h2>
+      <h2>카드 목록 조회</h2>
       <select value={selectedCard} onChange={handleChange}>
         <option value="">카드를 선택해주세요</option> {/* 기본 옵션 추가 */}
         {cardList.map((card, index) => (

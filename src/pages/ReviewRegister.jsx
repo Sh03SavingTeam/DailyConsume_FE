@@ -6,13 +6,13 @@ import "../styles/reviewRegister.css";
 import ReactStars from "react-stars";
 import AWS from "aws-sdk";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function ReviewRegister(props) {
-  // const webcamRef = useRef(null);
+  const navigate = useNavigate(); // useNavigate 사용
 
-  // const videoConstraints = {
-  //   facingMode: { exact: "environment" },
-  // };
+  const location = useLocation();
+  const storeInfo = { ...location.state };
 
   //상호명
 
@@ -38,6 +38,8 @@ function ReviewRegister(props) {
     bizNum: "",
     price: "",
   });
+  // 등록 버튼 활성화 상태
+  const [isReviewButtonEnabled, setReviewButtonEnabled] = useState(false);
 
   const takePicture = () => {
     const photo = cameraRef.current.takePhoto();
@@ -93,6 +95,24 @@ function ReviewRegister(props) {
       //-> 지도 페이지에서 갖고 온 데이터와 OCR 수행 데이터를 비교
       //-> 일치하면 리뷰 등록 버튼 활성화
 
+      //지도 페이지에서 가져온 상호명
+      const str_name = storeInfo.storename;
+      //지도 페이지에서 가져온 사업자등록번호
+      const str_bizNum = storeInfo.bizNum;
+
+      // 상호명과 사업자등록번호 비교
+      if (name === str_name && bizNum === str_bizNum) {
+        //일치(콘솔로만 띄워져있음. 팝업창으로도 띄워야 함)
+        console.log("상호명과 사업자등록번호가 모두 일치합니다.");
+        // 리뷰 등록 버튼 활성화 로직
+        setReviewButtonEnabled(true); // 예: 리뷰 등록 버튼 활성화하는 함수 호출
+      } else {
+        //불일치(콘솔로만 띄워져있음. 팝업창으로도 띄워야 함)
+        console.log("상호명 또는 사업자등록번호가 일치하지 않습니다.");
+        // 일치하지 않을 때의 처리
+        setReviewButtonEnabled(false); // 예: 리뷰 등록 버튼 비활성화하는 함수 호출
+      }
+
       // 상태 업데이트
     } catch (error) {
       console.error(error);
@@ -118,6 +138,7 @@ function ReviewRegister(props) {
     })
       .then((res) => {
         console.log(res);
+        navigate("/map");
       })
       .catch((error) => {
         console.log(error);
@@ -128,6 +149,7 @@ function ReviewRegister(props) {
   return (
     <div className="app-container">
       <div className="main-content">
+        <h2 className="title">영수증 인증</h2>
         <div className="pictureContainer">
           {!image ? (
             <>
@@ -165,6 +187,7 @@ function ReviewRegister(props) {
             type="submit"
             className="picturebutton"
             onClick={handleRegisterReview}
+            disabled={!isReviewButtonEnabled} // 버튼 비활성화 상태 제어
           >
             등록하기
           </button>
