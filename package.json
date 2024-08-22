@@ -12,7 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.52.0",
     "aws-sdk": "^2.1673.0",
-    "axios": "^1.7.3",
+    "axios": "^1.7.4",
     "bootstrap": "^5.2.3",
     "date-fns": "^3.6.0",
     "geolib": "^3.3.4",
@@ -25,6 +25,7 @@
     "rc-rate": "^2.13.0",
     "react": "^18.3.1",
     "react-apexcharts": "^1.4.1",
+    "react-bootstrap": "^2.10.4",
     "react-calendar": "^5.0.0",
     "react-camera-pro": "^1.4.0",
     "react-dom": "^18.3.1",
@@ -37,7 +38,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "HTTPS=true SSL_CRT_FILE=./cert.pem SSL_KEY_FILE=./key.pem react-scripts start",
+    "start": "set HTTPS=true&&set SSL_CRT_FILE=cert.pem&&set SSL_KEY_FILE=key.pem&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -60,5 +61,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.0.70:9999"
+  "proxy": "http://localhost:9999"
 }

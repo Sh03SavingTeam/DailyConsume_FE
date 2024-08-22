@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";  // 전역 스타일로 불러오기
 import Footer from "./components/Footer";
 
 const App = () => {
     return (
+
         <div className="app-container">
             <div className="main-content">
                 <h1>안녕하세요</h1>
