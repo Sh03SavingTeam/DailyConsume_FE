@@ -25,11 +25,12 @@ function MapSelectedStore(props) {
       });
   };
 
-  const registerReview = ({ store }) => {
+  const registerReview = (event, store) => {
+    event.stopPropagation();
     navigate("/map/reviewregister", {
       state: {
-        storename: `${store.storeName}`,
-        bizNum: `${store.storeRegNum}`,
+        storename: store.storeName,
+        storebizNum: store.storeRegNum,
       },
     });
   };
@@ -45,7 +46,9 @@ function MapSelectedStore(props) {
         <div>{store.storeName}</div>
         <div>음식점 &gt; 한식</div>
         <div>{store.storeAddr}</div>
-        <button onClick={() => registerReview({ store })}>리뷰 작성하기</button>
+        <button onClick={(event) => registerReview(event, store)}>
+          리뷰 작성하기
+        </button>
       </div>
       {selectedStore && (
         <div className="store_detail">

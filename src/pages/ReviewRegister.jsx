@@ -13,7 +13,7 @@ function ReviewRegister(props) {
   const navigate = useNavigate(); // useNavigate 사용
 
   const location = useLocation();
-  const storeInfo = { ...location.state };
+  const { storename, storebizNum } = location.state || {};
 
   //상호명
 
@@ -22,7 +22,7 @@ function ReviewRegister(props) {
 
   //리뷰객체
   const [review, setReview] = useState({
-    bizNum: "",
+    storeRegNum: "",
     rating: 0.0,
   });
 
@@ -118,10 +118,12 @@ function ReviewRegister(props) {
       //-> 일치하면 리뷰 등록 버튼 활성화
 
       //지도 페이지에서 가져온 상호명
-      const str_name = storeInfo.storename;
+      const str_name = storename;
+      console.log("선택한 상호명 : " + str_name);
       //const str_name = "키토분식";
       //지도 페이지에서 가져온 사업자등록번호
-      const str_bizNum = storeInfo.bizNum;
+      const str_bizNum = storebizNum;
+      console.log("선택한 사업자번호 : " + str_bizNum);
       //const str_bizNum = "632-85-00430";
 
       // 상호명과 사업자등록번호 비교
@@ -157,7 +159,7 @@ function ReviewRegister(props) {
 
     const updatedReview = {
       ...review,
-      bizNum: bizNum,
+      storeRegNum: storebizNum,
       rating: rating,
     };
 
@@ -168,7 +170,7 @@ function ReviewRegister(props) {
     })
       .then((res) => {
         console.log(res);
-        navigate("/map");
+        navigate("/map/payhistory");
       })
       .catch((error) => {
         console.log(error);
@@ -180,6 +182,8 @@ function ReviewRegister(props) {
     <div className="app-container">
       <div className="main-content">
         <h2 className="title">영수증 인증</h2>
+        {/* <p>가게 이름: {storename}</p>
+        <p>사업자 번호: {storebizNum}</p> */}
         <div className="pictureContainer">
           {!image ? (
             <>
