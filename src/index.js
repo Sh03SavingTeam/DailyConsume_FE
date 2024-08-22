@@ -1,30 +1,37 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
-import "./index.css";
+import "./App.css"; // 전역 스타일로 불러오기
 import CardRegister from "./pages/CardRegister";
+import Home from "./pages/Home";
 import MapPage from "./pages/MapPage";
+import RecommendMap from "./pages/RecommendMap";
 import ReviewRegister from "./pages/ReviewRegister";
 import reportWebVitals from "./reportWebVitals";
-import RecommendMap from "./pages/RecommendMap"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <div>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/Home/CardRegister" element={<CardRegister />}></Route>
-        <Route path="/MapPage" element={<MapPage />}></Route>
-        <Route path="/MapPage/ReviewReg" element={<ReviewRegister />}></Route>
-        <Route path="/recommend" element={<RecommendMap></RecommendMap>}></Route>
-        <Route path="/" element={<App />}></Route>
-      </Routes>
-    </BrowserRouter>
-  </div>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />}></Route>
+      {/* 홈 */}
+      <Route path="/home" element={<Home />}></Route>
+      <Route path="/home/cardregister" element={<CardRegister />}></Route>
+
+      {/* 지도 */}
+      <Route path="/map" element={<MapPage />}></Route>
+      <Route path="/map/reviewregister" element={<ReviewRegister />}></Route>
+      <Route path="/map/recommend" element={<RecommendMap/>}></Route>
+
+      {/* 캘린더 */}
+      {/* <Route path="/calander" element={<Calendar />}></Route> */}
+
+      {/* 마이페이지 */}
+      {/* <Route path="/mypage/consumehistory" element={<ConsumeHistory />}></Route>
+      <Route path="/mypage/addrlist" element={<AddressList />}></Route>
+      <Route path="/mypage/addrregister" element={<AddressRegister />}></Route> */}
+    </Routes>
+  </BrowserRouter>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

@@ -1,7 +1,7 @@
-import React from "react";
 
 function StoreDetail(props) {
     const {store, setStore} = props
+
 
     const exitClickHandler = () => {
         setStore(null)
@@ -17,7 +17,7 @@ function StoreDetail(props) {
       <div className="detail_info">
         <div>
           <span>{store.storeName}</span>
-          <span> 한식당</span>
+          <span>{store.storeCate}</span>
         </div>
         <div>
           <span>★</span>
@@ -26,7 +26,22 @@ function StoreDetail(props) {
         </div>
         <div>{store.storeAddr}</div>
       </div>
-      <div className="detail_menu_area"></div>
+      <div className="detail_menu_area">
+        <div>메뉴</div>
+        <div>
+          <ul>
+            {store.menus.map((menu,index) => (
+              <li key = {menu.menuId}>
+                <img src = {menu.menuImg} alt={menu.menuName}/>
+                <div className="menu_info_area">
+                  <div>{menu.menuName}</div>
+                  <div>{menu.menuPrice}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

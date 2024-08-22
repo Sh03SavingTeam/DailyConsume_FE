@@ -159,6 +159,7 @@ function MapPage() {
       </Map>
       <MapTopSelector />
       <MapStoreList stores = {stores}/>
+      
       <Footer />
     </div>
   );

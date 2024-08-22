@@ -28,6 +28,7 @@
 
 .footer-container {
   padding: 0px !important;
+  width: 100%;
 }
 
 #map {
@@ -90,6 +91,7 @@
 .store_info {
   margin-left: 5px;
   display: inline-block;
+  width: 72%;
 }
 
 .store_info div {
@@ -123,9 +125,10 @@
   z-index: 50;
   top: 0;
   background: white;
+  overflow: scroll;
 }
 
-.store_detail_div img {
+.store_detail_div>img {
   height: 300px;
   object-fit: cover;
   width: 100%;
@@ -171,4 +174,36 @@
     font-size: 20px;
     font-weight: 600;
     color: gray;
+}
+
+.detail_menu_area ul li>img {
+  width: 100px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.detail_menu_area ul {
+  list-style: none;
+  padding-left: 5px;
+}
+
+.detail_menu_area ul li{
+  padding-top: 17px;
+  padding-bottom: 16px;
+}
+
+.detail_menu_area ul li::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: rgba(var(--gray95), 1);
+  content: "";
+}
+
+.menu_info_area {
+  display: inline-block;
+  width: 72%;
 }
