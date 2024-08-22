@@ -46,7 +46,7 @@ function MapSelectedStore(props) {
         <div>{store.storeName}</div>
         <div>음식점 &gt; 한식</div>
         <div>{store.storeAddr}</div>
-        <button onClick={(event) => registerReview(event, store)}>
+        <button className="goto_review_register" onClick={(event) => registerReview(event, store)}>
           리뷰 작성하기
         </button>
       </div>

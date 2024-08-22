@@ -21,3 +21,9 @@
 .store_detail {
   margin-top: 10px;
 }
+
+.goto_review_register {
+  background-color: #3b4cca;
+  color: #fff;
+  border-radius: 30px;
+}

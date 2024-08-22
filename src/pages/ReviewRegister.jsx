@@ -181,7 +181,6 @@ function ReviewRegister(props) {
   return (
     <div className="app-container">
       <div className="main-content">
-        <h2 className="title">영수증 인증</h2>
         {/* <p>가게 이름: {storename}</p>
         <p>사업자 번호: {storebizNum}</p> */}
         <div className="pictureContainer">
@@ -193,14 +192,14 @@ function ReviewRegister(props) {
                 facingMode={"environment"}
               />
               <button className="picturebutton" onClick={handleTakePhoto}>
-                촬영하기
+                영수증 인증
               </button>
             </>
           ) : (
             <>
               <img className="capRecieptIMG" src={image} alt="Captured" />
               <button className="picturebutton" onClick={() => setImage(null)}>
-                다시 촬영하기
+                다시 인증하기
               </button>
             </>
           )}
@@ -225,14 +224,13 @@ function ReviewRegister(props) {
           />
         </div>
         <div className="pictureContainer">
-          <p>Current Rating: {rating}</p>
           <button
             type="submit"
             className="picturebutton"
             onClick={handleRegisterReview}
             disabled={!isReviewButtonEnabled} // 버튼 비활성화 상태 제어
           >
-            등록하기
+            리뷰 등록
           </button>
         </div>
       </div>

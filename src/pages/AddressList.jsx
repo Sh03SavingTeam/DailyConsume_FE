@@ -163,7 +163,6 @@ function AddressList(props) {
       <div className="main-content">
         <div className="card-container">
           <Title>주소 목록</Title>
-          <h2>{selectedAddrId}</h2>
           <table>
             <thead>
               <tr>
@@ -177,13 +176,19 @@ function AddressList(props) {
               {addrList.map((item, index) => (
                 <tr key={index}>
                   <td>
-                    <input
-                      type="radio"
-                      name="selectedAddr"
-                      value={item.addrId}
-                      checked={selectedAddrId === item.addrId} // 선택된 항목인지 확인
-                      onChange={() => openDefaultAddrPopup(item.addrId)} // Radio 버튼 변경 처리
-                    />
+                    <div class="form_radio_btn">
+                      <input
+                        id={`addrSelectRadio_${item.addrId}`}
+                        type="radio"
+                        name="selectedAddr"
+                        value={item.addrId}
+                        checked={selectedAddrId === item.addrId} // 선택된 항목인지 확인
+                        onChange={() => openDefaultAddrPopup(item.addrId)} // Radio 버튼 변경 처리
+                      />
+                      <label htmlFor={`addrSelectRadio_${item.addrId}`}>
+                        {selectedAddrId === item.addrId ? "기본주소" : "선택"}
+                      </label>
+                    </div>
                   </td>
                   <td>{item.addrName}</td>
                   <td>{item.addrDetail}</td>

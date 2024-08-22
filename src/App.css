@@ -5,6 +5,19 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "OneShinhanLight";
+  src: url("./assets/OneShinhanLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "OneShinhanMedium";
+  src: url("./assets/OneShinhanMedium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 *,
 *::before,
 *::after {
@@ -92,6 +105,10 @@ h1 {
 
 #map {
   width: 10px;
+}
+
+td {
+  font-family: "OneShinhanMedium", sans-serif;
 }
 /*!* 전체 페이지를 가운데 정렬하는 기본 설정 *!*/
 /*.app-container {*/
