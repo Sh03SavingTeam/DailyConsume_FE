@@ -3,11 +3,18 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MapPage from "./pages/MapPage";
 import ReviewRegister from "./pages/ReviewRegister";
 import CardRegister from "./pages/CardRegister";
+import ConsumeHistory from "./pages/ConsumeHistory";
 import Home from "./pages/Home";
+import AddressList from "./pages/AddressList";
+import AddressRegister from "./pages/AddressRegister";
+import DiscountInfo from "./pages/DiscountInfo";
+import Point from "./pages/Point";
+import Refund from "./pages/Refund";
+import Refundconfirm from "./pages/RefundConfirm";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,7 +24,18 @@ root.render(
         <Route path="/Home/CardRegister" element={<CardRegister />}></Route>
         <Route path="/MapPage" element={<MapPage />}></Route>
         <Route path="/MapPage/ReviewReg" element={<ReviewRegister />}></Route>
+        <Route path="/" element={<App />}></Route>
+        <Route path="/ConsumeHistory" element={<ConsumeHistory />}></Route>
         <Route path="/Home" element={<Home />}></Route>
+        <Route path="/MyPage/AddrList" element={<AddressList />}></Route>
+        <Route
+          path="/MyPage/AddrRegister"
+          element={<AddressRegister />}
+        ></Route>
+        <Route path="/MyPage/DiscountInfo" element={<DiscountInfo memberId='jeongin'/>}></Route>
+        <Route path="/MyPage/Point" element={<Point memberId='jeongin'/>}></Route>
+        <Route path="/MyPage/Refund" element={<Refund memberId='jeongin'/>}></Route>
+        <Route path="/MyPage/Refund/Confirm" element={<Refundconfirm/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>
