@@ -12,22 +12,18 @@ import Home from "./pages/Home";
 import AddressList from "./pages/AddressList";
 import AddressRegister from "./pages/AddressRegister";
 import Calendar from "./pages/Calendar";
-import Calendar from "./pages/Calendar";
 import RecommendMap from "./pages/RecommendMap";
 import PayHistoryMap from "./pages/PayHistoryMap";
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-
-      
       <Route path="/" element={<App />}></Route>
       <Route path="/ConsumeHistory" element={<ConsumeHistory />}></Route>
-      
+
       <Route path="/Calendar" element={<Calendar />}></Route>
-      
+
       {/* 홈 */}
       <Route path="/home" element={<Home />}></Route>
       <Route path="/home/cardregister" element={<CardRegister />}></Route>
@@ -38,7 +34,6 @@ root.render(
       <Route path="/map/recommend" element={<RecommendMap />}></Route>
       <Route path="/map/payhistory" element={<PayHistoryMap />}></Route>
 
-      
       {/* 마이페이지 */}
       <Route path="/mypage/consumehistory" element={<ConsumeHistory />}></Route>
       <Route path="/mypage/addrlist" element={<AddressList />}></Route>
