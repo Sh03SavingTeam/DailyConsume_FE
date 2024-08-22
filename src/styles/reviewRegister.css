@@ -1,0 +1,28 @@
+.capRecieptIMG {
+  width: 100%;
+  aspect-ratio: 3/4;
+}
+
+.reactstar {
+  display: grid;
+  place-items: center;
+}
+
+.pictureContainer {
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  flex-direction: column;
+}
+
+.picturebutton {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px; /* 버튼 사이의 간격을 추가 */
+  background-color: #3b4cca;
+  color: #fff;
+  border-radius: 30px;
+  font-weight: bold;
+  width: 60%;
+}
