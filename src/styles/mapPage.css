@@ -143,32 +143,45 @@
 }
 
 .detail_info {
-    padding: 2px;
-    margin-top: 10px;
+  padding: 2px;
+  margin-top: 10px;
 }
 
 .detail_info div:nth-child(1) span:nth-child(1) {
-    font-size: 30px;
-    font-weight: 600;
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .detail_info div:nth-child(1) span:nth-child(2) {
-    font-size: 15px;
-    color: #949494;
-    font-weight: 600;
+  font-size: 15px;
+  color: #949494;
+  font-weight: 600;
 }
 
 .detail_info div:nth-child(2) span:nth-child(1) {
-    color:red;
+  color: red;
 }
 
 .detail_info div:nth-child(2) span:nth-child(2) {
-    font-weight: 600;
+  font-weight: 600;
 }
 
-.detail_info>div:nth-child(3) {
-    margin-top: 5px;
-    font-size: 20px;
-    font-weight: 600;
-    color: gray;
+.detail_info > div:nth-child(3) {
+  margin-top: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  color: gray;
+}
+
+.map-selected-store-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 60px;
+  background-color: #fff; /* 배경색 조정 가능 */
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  box-sizing: border-box;
+  z-index: 1000; /* 지도 위에 표시되도록 설정 */
 }

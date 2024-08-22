@@ -1,0 +1,29 @@
+/* MapSelectedStore.css */
+
+.store_area {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.store_area img {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+.store_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.store_detail {
+  margin-top: 10px;
+}
+
+.goto_review_register {
+  background-color: #3b4cca;
+  color: #fff;
+  border-radius: 30px;
+}
