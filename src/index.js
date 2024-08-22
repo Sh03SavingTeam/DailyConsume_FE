@@ -11,7 +11,7 @@ import ConsumeHistory from "./pages/ConsumeHistory";
 import Home from "./pages/Home";
 import AddressList from "./pages/AddressList";
 import AddressRegister from "./pages/AddressRegister";
-import Calendar from "./components/Calendar";
+import Calendar from "./pages/Calendar";
 import RecommendMap from "./pages/RecommendMap";
 import PayHistoryMap from "./pages/PayHistoryMap";
 
