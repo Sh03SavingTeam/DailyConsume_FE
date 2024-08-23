@@ -16,7 +16,7 @@ import ConsumeJoin from "./pages/ConsumeJoin";
 import Home from "./pages/Home";
 import AddressList from "./pages/AddressList";
 import AddressRegister from "./pages/AddressRegister";
-import Calendar from "./components/Calendar";
+import Calendar from "./pages/Calendar";
 import PayHistoryMap from "./pages/PayHistoryMap";
 import DiscountInfo from "./pages/DiscountInfo";
 import Point from "./pages/Point";
