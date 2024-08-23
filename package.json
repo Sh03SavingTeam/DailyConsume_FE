@@ -1,5 +1,5 @@
 {
-  "name": "dayconsume",
+  "name": "reactjs",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -62,5 +62,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.0.103:9999"
+  "proxy": "http://localhost:9999"
 }
