@@ -71,10 +71,11 @@ const CustomCalendar = () => {
       );
       return (
         <div className="calendar-info">
+          <img src="/RabbitComplete.png" className="calanderRabbit-style" />
           <span>{moment(date).format("D")}</span>
           <span className="calendar-count">{filterData.length}건</span>
           <span className="calendar-amount">
-            {totalAmount.toLocaleString()}원
+            {totalAmount.toLocaleString()}
           </span>
         </div>
       );
