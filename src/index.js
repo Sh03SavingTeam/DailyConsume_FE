@@ -22,6 +22,8 @@ import DiscountInfo from "./pages/DiscountInfo";
 import Point from "./pages/Point";
 import Refund from "./pages/Refund";
 import Refundconfirm from "./pages/RefundConfirm";
+import MyPage from "./pages/MyPage";
+import RankInfo from "./pages/RankInfo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -57,6 +59,9 @@ root.render(
         <Route path="/MyPage/Point" element={<Point memberId='jeongin'/>}></Route>
         <Route path="/MyPage/Refund" element={<Refund memberId='jeongin'/>}></Route>
         <Route path="/MyPage/Refund/Confirm" element={<Refundconfirm/>}></Route>
+
+        <Route path="/rank/AddrList" element={<AddressList />}></Route>
+        <Route path="/rank/benefits/:memberId" element={<RankInfo/>}></Route>
     </Routes>
   </BrowserRouter>
 );
