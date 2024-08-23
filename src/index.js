@@ -8,6 +8,11 @@ import MapPage from "./pages/MapPage";
 import ReviewRegister from "./pages/ReviewRegister";
 import CardRegister from "./pages/CardRegister";
 import ConsumeHistory from "./pages/ConsumeHistory";
+import ConsumeCompare from "./pages/ConsumeCompare";
+import ConsumeSet from "./pages/ConsumeSet";
+import ConsumeLogin from "./pages/ConsumeLogin";
+import ConsumeJoin from "./pages/ConsumeJoin";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,7 +23,11 @@ root.render(
         <Route path="/MapPage" element={<MapPage />}></Route>
         <Route path="/MapPage/ReviewReg" element={<ReviewRegister />}></Route>
         <Route path="/" element={<App />}></Route>
-        <Route path="/ConsumeHistory" element={<ConsumeHistory />}></Route>
+        <Route path="/ConsumeHistory" element={<ConsumeHistory memberId="min"/> }></Route>
+        <Route path="/ConsumeCompare" element={<ConsumeCompare memberId="min"/> }></Route>
+        <Route path="/ConsumeSet" element={<ConsumeSet memberId="min"/> }></Route>
+        <Route path="/Login" element={<ConsumeLogin />}></Route>
+        <Route path="/Join" element={<ConsumeJoin />}></Route>
       </Routes>
     </BrowserRouter>
   </div>
