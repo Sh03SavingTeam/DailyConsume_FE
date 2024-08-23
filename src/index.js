@@ -8,6 +8,11 @@ import RecommendMap from "./pages/RecommendMap";
 import ReviewRegister from "./pages/ReviewRegister";
 import CardRegister from "./pages/CardRegister";
 import ConsumeHistory from "./pages/ConsumeHistory";
+import ConsumeCompare from "./pages/ConsumeCompare";
+import ConsumeSet from "./pages/ConsumeSet";
+import ConsumeLogin from "./pages/ConsumeLogin";
+import ConsumeJoin from "./pages/ConsumeJoin";
+
 import Home from "./pages/Home";
 import AddressList from "./pages/AddressList";
 import AddressRegister from "./pages/AddressRegister";
@@ -37,6 +42,12 @@ root.render(
       <Route path="/mypage/consumehistory" element={<ConsumeHistory />}></Route>
       <Route path="/mypage/addrlist" element={<AddressList />}></Route>
       <Route path="/mypage/addrregister" element={<AddressRegister />}></Route>
+
+      <Route path="/ConsumeHistory" element={<ConsumeHistory memberId="min"/> }></Route>
+      <Route path="/ConsumeCompare" element={<ConsumeCompare memberId="min"/> }></Route>
+      <Route path="/ConsumeSet" element={<ConsumeSet memberId="min"/> }></Route>
+      <Route path="/Login" element={<ConsumeLogin />}></Route>
+      <Route path="/Join" element={<ConsumeJoin />}></Route>
     </Routes>
   </BrowserRouter>
 );
