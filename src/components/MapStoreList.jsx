@@ -44,7 +44,7 @@ function MapStoreList(props) {
             <img src={store.storeImg} alt={store.storeName} />
             <div className="store_info">
               <div>{store.storeName}</div>
-              <div>음식점 &gt; 한식</div>
+              <div>{store.cate}</div>
               <div>{store.storeAddr}</div>
             </div>
           </div>

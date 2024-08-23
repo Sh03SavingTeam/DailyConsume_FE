@@ -1,5 +1,5 @@
 {
-  "name": "dayconsume",
+  "name": "reactjs",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -38,7 +38,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set HTTPS=true&&set SSL_CRT_FILE=cert.pem&&set SSL_KEY_FILE=key.pem&&react-scripts start",
+    "start": "export HTTPS=true&&SSL_CRT_FILE=cert.pem&&SSL_KEY_FILE=key.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -61,5 +61,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.0.103:9999"
+  "proxy": "http://localhost:9999"
 }

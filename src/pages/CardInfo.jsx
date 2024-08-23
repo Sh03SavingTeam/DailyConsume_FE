@@ -53,6 +53,17 @@ function CardInfo(props) {
 
   const handleChange = (event) => {
     const selectedCardNum = event.target.value; // 선택된 카드 번호를 직접 가져옴
+
+    if (selectedCardNum === "") {
+      // "카드를 선택해주세요"를 선택했을 때 초기화
+      setSelectedCard("");
+      setCardName("");
+      setCardImgurl("");
+      setCardInfo(null);
+      setBenefits([]);
+      return;
+    }
+
     setSelectedCard(selectedCardNum); // 상태 업데이트
     axios({
       method: "get",
@@ -163,7 +174,7 @@ function CardInfo(props) {
             <div key={benefit.benefitId}>{benefit.benefit}</div>
           ))
         ) : (
-          <div>혜택 정보를 불러오는 중입니다...</div>
+          <div>카드를 선택해주세요...</div>
         )}
       </div>
       <div class="button-container">

@@ -1,21 +1,28 @@
-@font-face {
-  font-family: "OneShinhanBold";
-  src: url("./assets/OneShinhanBold.ttf") format("truetype");
+/*font 정의*/
+@font-face{
+  font-family : "OneShinhanBold";
   font-weight: normal;
-  font-style: normal;
+  src:url("./assets/OneShinhanBold.ttf") format("truetype");
 }
-
-@font-face {
+@font-face{
   font-family: "OneShinhanLight";
-  src: url("./assets/OneShinhanLight.ttf") format("truetype");
   font-weight: normal;
-  font-style: normal;
+  src:url("./assets/OneShinhanLight.ttf") format("truetype");
 }
-@font-face {
+@font-face{
   font-family: "OneShinhanMedium";
-  src: url("./assets/OneShinhanMedium.ttf") format("truetype");
   font-weight: normal;
-  font-style: normal;
+  src:url("./assets/OneShinhanMedium.ttf") format("truetype");
+}
+/* 전체 페이지를 가운데 정렬하는 기본 설정 */
+.container {
+  max-width: 480px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
+  margin: 0 auto; /* 자동 마진을 사용하여 중앙에 배치합니다. */
+  padding: 20px; /* 내부 패딩을 설정합니다. */
+  background-color: #F2F2F7; /* 배경 색상을 연한 회색으로 설정합니다. */
+  min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정합니다. */
+  position: relative;
+  overflow: hidden;
 }
 
 *,
@@ -36,6 +43,20 @@ h1 {
   text-align: center; /* 가운데 정렬 */
   margin-top: 20px; /* 상단 간격 */
   font-size: 2.5rem; /* 글자 크기 */
+}
+
+.app-container {
+  width: 100%;
+  max-width: 400px; /* 검색 바의 최대 너비 설정 */
+  margin-bottom: 10px; /* 모바일에서 검색 바와 메뉴 사이의 간격을 위한 마진 추가 */
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  border: none;
+  font-size: 1rem; /* 입력 필드의 텍스트 크기 증가 */
 }
 
 .app-container {
@@ -108,6 +129,10 @@ h1 {
 }
 
 td {
+  font-family: "OneShinhanMedium", sans-serif;
+}
+
+button {
   font-family: "OneShinhanMedium", sans-serif;
 }
 /*!* 전체 페이지를 가운데 정렬하는 기본 설정 *!*/

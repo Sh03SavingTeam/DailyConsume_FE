@@ -27,7 +27,7 @@ td {
   }
 }
 
-input[type="radio"] {
+.form_radio_btn input[type="radio"] {
   display: none;
 }
 

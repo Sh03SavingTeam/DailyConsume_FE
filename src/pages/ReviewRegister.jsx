@@ -183,6 +183,7 @@ function ReviewRegister(props) {
       <div className="main-content">
         {/* <p>가게 이름: {storename}</p>
         <p>사업자 번호: {storebizNum}</p> */}
+        <h2 className="title">리뷰 등록</h2>
         <div className="pictureContainer">
           {!image ? (
             <>
@@ -226,7 +227,7 @@ function ReviewRegister(props) {
         <div className="pictureContainer">
           <button
             type="submit"
-            className="picturebutton"
+            className="submit-button"
             onClick={handleRegisterReview}
             disabled={!isReviewButtonEnabled} // 버튼 비활성화 상태 제어
           >
