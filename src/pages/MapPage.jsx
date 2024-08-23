@@ -12,6 +12,7 @@ import Main from "../components/Main";
 
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import useKakaoLoader from "../services/useKakaoLoader";
+import MapTopSelector from "../components/MapTopSelector";
 
 function MapPage() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });

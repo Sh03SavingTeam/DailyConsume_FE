@@ -1,86 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import "../styles/cardInfo.css";
-import { useNavigate } from "react-router-dom";
+import "../App.css";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CardDeltePopUp from "../components/CustomPopUp";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: #f3f4f7;
-  min-height: 100vh;
-`;
-
-const Tabs = styled.div`
-  display: flex;
-  margin-bottom: 20px;
-`;
-
-const Tab = styled.div`
-  padding: 10px 20px;
-  border-radius: 20px;
-  background-color: ${(props) => (props.active ? "#6A5ACD" : "#BFE6E1")};
-  color: ${(props) => (props.active ? "#ffffff" : "#000000")};
-  margin-right: 10px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${(props) => (props.active ? "#483D8B" : "#A0D6CF")};
-  }
-`;
-
-const Card = styled.div`
-  width: 350px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-`;
+import DefaultAddrUpdatePopUp from "../components/CustomPopUp";
+import axios from "axios";
+import "../styles/addrList.css";
 
 const Title = styled.h2`
   margin-bottom: 20px;
   text-align: center;
 `;
 
-const table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-
-  th,
-  td {
-    border: 1px solid #e3e6eb;
-    padding: 10px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #e0f7f1;
-  }
-
-  td {
-    background-color: #f7fbfc;
-  }
-
-  td:last-child {
-    text-align: center;
-    cursor: pointer;
-    color: red;
-  }
-`;
-
 const AddButton = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: #bfe6e1;
-  color: #000000;
+  background-color: #303473;
+  color: #ffffff;
   border: none;
-  border-radius: 10px;
   cursor: pointer;
-
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   &:hover {
     background-color: #a0d6cf;
   }
@@ -90,59 +32,198 @@ function AddressList(props) {
   const navigate = useNavigate();
 
   const handleAddrRegisterClick = () => {
-    navigate("/MyPage/AddrRegister");
+    navigate("/mypage/addrregister");
   };
 
   const [popupOpen, setPopupOpen] = useState(false);
+  const [defaultAddrPopupOpen, setDefaultAddrPopupOpen] = useState(false); // 기본 주소 팝업 상태
+  const [tempSelectedAddrId, setTempSelectedAddrId] = useState(null); // 임시로 선택된 주소
 
-  const openPopUp = () => {
+  //주소 목록
+  const [addrList, setAddrList] = useState([]);
+
+  const [selectedAddrId, setSelectedAddrId] = useState(null);
+
+  //삭제확인 팝업창 열기
+  const openPopUp = (addrId) => {
+    setSelectedAddrId(addrId);
     setPopupOpen(true);
   };
 
+  //삭제확인 팝업창 닫기
   const closePopUp = () => {
     setPopupOpen(false);
   };
 
-  const handleCardRegisterClick = () => {
-    navigate("/Home/CardRegister");
+  const openDefaultAddrPopup = (addrId) => {
+    setTempSelectedAddrId(addrId); // 임시로 선택된 주소 저장
+    setDefaultAddrPopupOpen(true); // 기본 주소 팝업 열기
   };
 
-  //백엔드에서 넘겨받는 데이터를 다음과 같이 리스트로 저장
-  const data = [
-    { label: "", address: "서울시 마포구 동교동" },
-    { label: "직장", address: "서울시 서대문구 연남동" },
-    { label: "거주지", address: "경기도 수원시 장안구 조원동" },
-    { label: "", address: "경기도 평택시 팽성읍" },
-  ];
-  return (
-    <div className="container">
-      <div className="card-container">
-        <Title>주소 목록</Title>
-        <table>
-          <thead>
-            <tr>
-              <th>별명</th>
-              <th>주소</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={index}>
-                <td>{item.label}</td>
-                <td>{item.address}</td>
-                <button onClick={openPopUp}>✕</button>
-                <CardDeltePopUp open={popupOpen} close={closePopUp}>
-                  선택하신 주소를 삭제할까요?
-                </CardDeltePopUp>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <AddButton onClick={handleAddrRegisterClick}>신규 주소 등록</AddButton>
-      </div>
+  const closeDefaultAddrPopup = () => {
+    setDefaultAddrPopupOpen(false); // 팝업 닫기
+  };
 
+  const handleConfirmDefaultAddrChange = () => {
+    handleRadioChange(tempSelectedAddrId); // 기본 주소 변경
+    closeDefaultAddrPopup(); // 팝업 닫기
+  };
+
+  //삭제버튼 클릭 시 삭제 수행
+  const handleConfirmDelete = () => {
+    handleDeleteAddr();
+    closePopUp();
+  };
+
+  //기본주소 변경 확인 시 수행
+  const handleDefaultAddrUpdate = (addrId) => {
+    handleRadioChange(addrId);
+    closePopUp();
+  };
+
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
+
+  //memberId가 'abcd'인 주소 데이터 조회
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "/api/address/addrList",
+      params: {
+        memberId: "abcd",
+      },
+    }).then((response) => {
+      console.log(response.data);
+      const addressList = response.data;
+      setAddrList(addressList);
+
+      // 기본 주소 설정: addr_default 값이 1인 항목
+      const defaultAddress = addressList.find((item) => item.addrDefault === 1);
+      if (defaultAddress) {
+        setSelectedAddrId(defaultAddress.addrId); // 기본 주소의 ID를 선택된 상태로 설정
+      }
+    });
+  }, []);
+
+  const handleDeleteAddr = () => {
+    if (selectedAddrId) {
+      axios({
+        method: "delete",
+        url: "/api/address/addrDelete",
+        params: {
+          addrId: selectedAddrId,
+        },
+      }).then(() => {
+        // After deletion, fetch the updated list
+        setAddrList((prevList) =>
+          prevList.filter((item) => item.addrId !== selectedAddrId)
+        );
+        closePopUp();
+      });
+    }
+  };
+
+  // Radio 버튼 선택 처리
+  const handleRadioChange = (addrId) => {
+    //setSelectedAddrId(addrId);
+    // 선택된 주소 ID 설정
+
+    axios({
+      method: "put",
+      url: "/api/address/changeDefaultAddr",
+      params: {
+        memberId: "abcd",
+        addrId: addrId,
+      },
+    })
+      .then(() => {
+        // 기본 주소가 변경된 후 선택된 주소 상태를 업데이트
+        setSelectedAddrId(addrId);
+
+        // addrList에서 addrDefault 값을 업데이트
+        setAddrList((prevList) =>
+          prevList.map((item) =>
+            item.addrId === addrId
+              ? { ...item, addrDefault: 1 }
+              : { ...item, addrDefault: 0 }
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Failed to update default address:", error);
+      });
+    //window.location.reload();
+  };
+
+  return (
+    <div className="app-container">
+      <div className="main-content">
+        <div className="card-container">
+          <Title>주소 목록</Title>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>별명</th>
+                <th>주소</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {addrList.map((item, index) => (
+                <tr key={index}>
+                  <td>
+                    <div class="form_radio_btn">
+                      <input
+                        id={`addrSelectRadio_${item.addrId}`}
+                        type="radio"
+                        name="selectedAddr"
+                        value={item.addrId}
+                        checked={selectedAddrId === item.addrId} // 선택된 항목인지 확인
+                        onChange={() => openDefaultAddrPopup(item.addrId)} // Radio 버튼 변경 처리
+                      />
+                      <label htmlFor={`addrSelectRadio_${item.addrId}`}>
+                        {selectedAddrId === item.addrId ? "기본주소" : "선택"}
+                      </label>
+                    </div>
+                  </td>
+                  <td>{item.addrName}</td>
+                  <td>{item.addrDetail}</td>
+                  <button
+                    className="deleteButton"
+                    onClick={() => openPopUp(item.addrId)}
+                  >
+                    ✕
+                  </button>
+                  <CardDeltePopUp
+                    open={popupOpen}
+                    close={closePopUp}
+                    onConfirm={handleConfirmDelete}
+                  >
+                    선택하신 주소를 삭제할까요?
+                  </CardDeltePopUp>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <AddButton onClick={handleAddrRegisterClick}>
+            신규 주소 등록
+          </AddButton>
+        </div>
+      </div>
       <Footer />
+
+      {/* 기본 주소 팝업 */}
+      <DefaultAddrUpdatePopUp
+        open={defaultAddrPopupOpen}
+        close={closeDefaultAddrPopup}
+        onConfirm={handleConfirmDefaultAddrChange}
+      >
+        기본 주소를 변경하시겠습니까?
+      </DefaultAddrUpdatePopUp>
     </div>
   );
 }

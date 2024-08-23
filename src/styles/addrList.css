@@ -1,0 +1,51 @@
+table {
+  width: 100%;
+  background-color: #f4feff;
+  align-items: centers;
+  border-spacing: 3px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+th {
+  background-color: #94dbe0;
+  height: 30px;
+  font-size: 15px;
+}
+td {
+  height: 40px;
+  font-size: 10px;
+}
+
+.deleteButton {
+  font-weight: bold;
+  background-color: #f4feff;
+  border: none; /* Removes the border */
+  outline: none; /* Removes the outline when focused */
+  &:hover {
+    color: red;
+  }
+}
+
+.form_radio_btn input[type="radio"] {
+  display: none;
+}
+
+/* Checked */
+.form_radio_btn input[type="radio"]:checked + label {
+  background: #184da0;
+  color: #fff;
+}
+
+/* Hover */
+.form_radio_btn label:hover {
+  color: #666;
+}
+
+/* Disabled */
+.form_radio_btn input[type="radio"] + label {
+  /* background: #f9fafc; */
+  color: #666;
+  border-radius: 15%;
+  padding: 5px;
+}

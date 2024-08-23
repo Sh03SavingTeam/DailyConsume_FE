@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import HomeOn from "../assets/HomeOn.png";
 import HomeOff from "../assets/HomeOff.png";
 import MapOff from "../assets/MapOff.png";
@@ -7,11 +8,32 @@ import CalendarOff from "../assets/CalendarOff.png";
 import CalendarOn from "../assets/CalendarOn.png";
 import MyPageOff from "../assets/MyPageOff.png";
 import MyPageOn from "../assets/MyPageOn.png";
-import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const [selectedButton, setSelectedButton] = useState("home");
   const navi = useNavigate();
+  const location = useLocation(); // 현재 위치를 가져오기 위해 useLocation 사용
+
+  // 현재 URL 경로에 따라 상태 업데이트
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/":
+        setSelectedButton("home");
+        break;
+      case "/MapPage":
+        setSelectedButton("map");
+        break;
+      case "/Calendar":
+        setSelectedButton("calendar");
+        break;
+      case "/MyPage/AddrList":
+      case "/MyPage/AddrRegister":
+        setSelectedButton("mypage");
+        break;
+      default:
+        setSelectedButton("");
+    }
+  }, [location.pathname]);
 
   const handleButtonClick = (buttonName, path) => {
     setSelectedButton(buttonName);
@@ -43,21 +65,21 @@ const Footer = () => {
           <img src={getButtonImage("home")} alt="Home" />홈
         </button>
         <button
-          onClick={() => handleButtonClick("map", "/map")}
+          onClick={() => handleButtonClick("map", "/MapPage")}
           className={selectedButton === "map" ? "selected" : ""}
         >
           <img src={getButtonImage("map")} alt="Map" />
           지도
         </button>
         <button
-          onClick={() => handleButtonClick("calendar", "/calendar")}
+          onClick={() => handleButtonClick("calendar", "/Calendar")}
           className={selectedButton === "calendar" ? "selected" : ""}
         >
           <img src={getButtonImage("calendar")} alt="Calendar" />
           캘린더
         </button>
         <button
-          onClick={() => handleButtonClick("mypage", "/mypage")}
+          onClick={() => handleButtonClick("mypage", "/MyPage/AddrList")}
           className={selectedButton === "mypage" ? "selected" : ""}
         >
           <img src={getButtonImage("mypage")} alt="My Page" />
