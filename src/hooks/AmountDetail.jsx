@@ -21,6 +21,8 @@ function AmountDetail({ item, onClose }) {
           }
         );
 
+        console.log("Response data:", response.data); // 응답 데이터를 로그에 출력
+
         setDetail(response.data);
         setIsNormal(response.data.myPayCheck === 1);
       } catch (error) {
@@ -42,6 +44,7 @@ function AmountDetail({ item, onClose }) {
   const handleNormalButtonClick = async () => {
     try {
       // 서버에 myPayCheck 값을 1로 업데이트 요청
+      console.log("Sending update request with:", item.memberId, item.id);
       await axios.post("http://localhost:9999/api/calendar/payhistory/update", {
         memberId: item.memberId,
         payId: item.id,
@@ -53,15 +56,23 @@ function AmountDetail({ item, onClose }) {
       setShowContactModal(false); // 신고하기 모달이 떠 있으면 닫기
 
       // 서버에서 갱신된 데이터를 가져와서 다시 렌더링
+      console.log(
+        "Fetching updated details for:",
+        item.memberId,
+        item.payId,
+        item.myPayCheck
+      );
       const response = await axios.get(
         "http://localhost:9999/api/calendar/payhistory/detail",
         {
           params: {
             memberId: item.memberId,
-            payId: item.id,
+            payId: item.payId,
+            myPayCheck: item.myPayCheck,
           },
         }
       );
+      console.log("Updated response data:", response.data);
 
       setDetail(response.data);
     } catch (error) {
@@ -114,16 +125,13 @@ function AmountDetail({ item, onClose }) {
             <strong>카테고리:</strong> {detail.consumeCategory || "N/A"}
           </div>
           <div className="detail-item">
-            <strong>결제 수단:</strong> {detail.paymentMethod || "N/A"}
-          </div>
-          <div className="detail-item">
-            <strong>결제 방법:</strong> {detail.paymentType || "N/A"}
+            <strong>결제 수단:</strong> {detail.cardName || "N/A"}
           </div>
           <div className="detail-item important">
             <strong>결제 일자:</strong> {formattedDateTime}
           </div>
           <div className="detail-item">
-            <strong>결제 상품:</strong> {detail.product || "N/A"}
+            <strong>결제 상품:</strong> {detail.menuName || "N/A"}
           </div>
           <div className="detail-item">
             <strong>결제 장소:</strong> {detail.storeName || "N/A"}
@@ -131,10 +139,7 @@ function AmountDetail({ item, onClose }) {
           <div className="detail-item total-amount">
             <strong>결제 금액:</strong> 총 {detail.payAmount || "N/A"}원
           </div>
-          <hr />
-          <div className="detail-item weekly-budget">
-            <strong>주간소비잔여금액:</strong> {detail.remainingAmount || "N/A"}
-          </div>
+
           {!isNormal && (
             <div className="warning-section">
               <p>여기서 결제한게 맞으신가요?</p>

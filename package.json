@@ -1,5 +1,5 @@
 {
-  "name": "dayconsume",
+  "name": "reactjs",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,6 +25,7 @@
     "rc-rate": "^2.13.0",
     "react": "^18.3.1",
     "react-apexcharts": "^1.4.1",
+    "react-bootstrap": "^2.10.2",
     "react-bootstrap": "^2.10.4",
     "react-calendar": "^5.0.0",
     "react-camera-pro": "^1.4.0",
@@ -61,5 +62,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.0.103:9999"
+  "proxy": "http://localhost:9999"
 }

@@ -102,6 +102,10 @@ function AmountListForDay({ initialDay }) {
       {isDetailVisible && selectedItem && (
         <AmountDetail item={selectedItem} onClose={handleCloseDetail} />
       )}
+      <hr />
+      <div className="detail-item weekly-budget">
+        <strong>주간소비잔여금액:</strong>
+      </div>
     </div>
   );
 }

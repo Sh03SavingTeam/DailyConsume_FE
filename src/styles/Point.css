@@ -1,0 +1,172 @@
+@font-face {
+    font-family: "OneShinhanBold";
+    font-weight: normal;
+    src: url("../fonts/OneShinhanBold.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "OneShinhanMedium";
+    font-weight: normal;
+    src: url("../fonts/OneShinhanMedium.ttf") format("truetype");
+  }
+
+.point-container {
+    font-family: "OneShinhanBold";
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 0;
+    background-color: white;
+    min-height: 100vh;
+    padding-bottom: 70px;
+}
+
+.point-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f2f2f7;
+    border-bottom: 1px solid #ddd;
+}
+
+.point-header h2 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+    font-size: 15px;
+}
+
+.back-button {
+    position: absolute;
+    left:0;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+}
+
+.balance {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: linear-gradient(90deg, #303473 0%, #5B62D9 50%, #757BDE 100%);
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: right;
+    height: 40px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.balance p {
+    font-size: 20px;
+    font-weight: bold;
+    color:white;
+    margin-left:auto;
+    margin-right: 10px;
+}
+
+.balance button{
+    font-family: "OneShinhanBold";
+    border-radius: 10px;
+    border: 1px solid #FFF;
+    background-color: transparent;
+    font-size: 15px;
+    color: #FFF;
+    margin-right: auto;
+    margin-left: 10px;
+    padding: 5px 20px 5px 20px;
+}
+
+.history-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.filter-button {
+    font-size: 12px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #EAEAEA;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "OneShinhanMedium";
+}
+
+.filter-button img {
+    margin-right:5px;
+}
+
+.history-list {
+    padding: 0 20px;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.history-item .description {
+    flex-grow: 1;
+    font-size: 15px;
+    color: #333;
+}
+
+.history-item-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+
+.history-item .amount {
+    font-size: 15px;
+    margin: 0;
+}
+
+.history-item .amount.positive {
+    color: #4f4fe1;
+}
+
+.history-item .amount.negative {
+    color: #e14f4f;
+}
+
+.history-item .date {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.more-button {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.more-button img{
+    margin-left:5px;
+}
+
+.more-button button {
+    font-size: 12px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #EAEAEA;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "OneShinhanMedium";
+}
+
+.footer-container {
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 0;
+    background-color: white;
+}
