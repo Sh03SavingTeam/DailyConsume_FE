@@ -1,3 +1,23 @@
+@font-face {
+  font-family: "OneShinhanBold";
+  src: url("../assets/OneShinhanBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OneShinhanLight";
+  src: url("../assets/OneShinhanLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "OneShinhanMedium";
+  src: url("../assets/OneShinhanMedium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .capCardIMG {
   width: 100%;
   aspect-ratio: 4/3;
@@ -8,7 +28,8 @@
 }
 
 .card-registration h2 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   color: #333;
 }
 
@@ -31,8 +52,9 @@
   padding: 10px 20px;
   border-radius: 30px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
+  /* font-size: 16px;
+  font-weight: bold; */
+  font-family: "OneShinhanMedium", sans-serif;
   margin-top: 20px; /* 버튼 사이의 간격을 추가 */
 }
 
@@ -105,8 +127,9 @@ select {
   padding: 10px 20px;
   border-radius: 30px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
+  /* font-size: 16px;
+  font-weight: bold; */
+  font-family: "OneShinhanMedium", sans-serif;
 }
 
 .title {

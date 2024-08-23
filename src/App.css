@@ -110,6 +110,10 @@ h1 {
 td {
   font-family: "OneShinhanMedium", sans-serif;
 }
+
+button {
+  font-family: "OneShinhanMedium", sans-serif;
+}
 /*!* 전체 페이지를 가운데 정렬하는 기본 설정 *!*/
 /*.app-container {*/
 /*  height: 100%;*/
