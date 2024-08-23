@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import Footer from "../components/Footer";
-import customMarker from "../assets/restaurant.png"
+import customMarker from "../assets/location.png"
 
 import axios from "axios";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import MapTopSelector from "../components/MapTopSelector";
 import useKakaoLoader from "../services/useKakaoLoader";
 import MapStoreList from "components/MapStoreList";
+import calendarIcon from"../assets/calendar.png"
+import consumptionIcon from"../assets/consumption.png"
+import robotIcon from"../assets/robot.png"
+import happyIcon from"../assets/happy.png"
 
 function MapPage() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -158,7 +162,14 @@ function MapPage() {
         ))}
       </Map>
       <MapTopSelector />
+      <div className="marker_category_div">
+        <div><img src={consumptionIcon} alt="calendarIcon"/> 소비 패턴</div>
+        <div><img src={happyIcon} alt="calendarIcon"/> 또래 추천</div>
+        <div><img src={calendarIcon} alt="calendarIcon"/> 요일 소비</div>
+        <div><img src={robotIcon} alt="calendarIcon"/> 통합 추천</div>
+      </div>
       <MapStoreList stores = {stores}/>
+      
       <Footer />
     </div>
   );

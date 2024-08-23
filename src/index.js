@@ -1,10 +1,10 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./App.css"; // 전역 스타일로 불러오기
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MapPage from "./pages/MapPage";
+import RecommendMap from "./pages/RecommendMap";
 import ReviewRegister from "./pages/ReviewRegister";
 import CardRegister from "./pages/CardRegister";
 import ConsumeHistory from "./pages/ConsumeHistory";
@@ -12,7 +12,6 @@ import Home from "./pages/Home";
 import AddressList from "./pages/AddressList";
 import AddressRegister from "./pages/AddressRegister";
 import Calendar from "./components/Calendar";
-import RecommendMap from "./pages/RecommendMap";
 import PayHistoryMap from "./pages/PayHistoryMap";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
