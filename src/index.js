@@ -16,14 +16,14 @@ import ConsumeJoin from "./pages/ConsumeJoin";
 import Home from "./pages/Home";
 import AddressList from "./pages/AddressList";
 import AddressRegister from "./pages/AddressRegister";
-import Calendar from "./components/Calendar";
+
 import PayHistoryMap from "./pages/PayHistoryMap";
 import DiscountInfo from "./pages/DiscountInfo";
 import Point from "./pages/Point";
 import Refund from "./pages/Refund";
 import Refundconfirm from "./pages/RefundConfirm";
-import MyPage from "./pages/MyPage";
 import RankInfo from "./pages/RankInfo";
+import Calendar from "./pages/Calendar";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -32,7 +32,7 @@ root.render(
       <Route path="/" element={<App />}></Route>
       <Route path="/ConsumeHistory" element={<ConsumeHistory />}></Route>
 
-      <Route path="/Calendar" element={<Calendar />}></Route>
+      <Route path="/calendar" element={<Calendar />}></Route>
 
       {/* 홈 */}
       <Route path="/home" element={<Home />}></Route>
