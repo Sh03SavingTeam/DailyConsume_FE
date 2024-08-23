@@ -1,10 +1,85 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import { Camera } from "react-camera-pro";
 import "../styles/cardRegistration.css";
+import "../App.css";
 import AWS from "aws-sdk";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Call } from "@mui/icons-material";
+import axios from "axios";
+import { Col, Row, Form, Button, InputGroup } from "react-bootstrap";
 
 function CardRegister(props) {
+  const location = useLocation();
+  const navigate = useNavigate(); // useNavigate 사용
+
+  // 로컬 스토리지에서 ACCESS TOKEN 가져오기
+  const accessToken = localStorage.getItem("ACCESS_TOKEN");
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
+
+  //카드 객체
+  const [memberCard, setMemberCard] = useState({
+    cardNum: "",
+    expirationDate: "",
+    cvc: "",
+    cardName: "",
+    memberId: "abcd",
+  });
+
+  // 카드 OCR 요청 결과
+  const [ocrResult, setOcrResult] = useState({
+    number: "",
+    validThru: "",
+  });
+
+  //선택 카드 타입
+  const [cardType, setCardType] = useState("credit");
+  //카드 목록
+  const [cards, setCards] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleChange = (e) => {
+    setMemberCard({ ...memberCard, [e.target.name]: e.target.value });
+  };
+
+  // 카드 목록을 가져오는 함수
+  const fetchCards = async (type) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(`/api/card/${type}CardList`);
+      setCards(response.data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 카드 타입이 변경될 때마다 카드 목록을 업데이트
+  useEffect(() => {
+    fetchCards(cardType);
+  }, [cardType]);
+
+  // 라디오 버튼 클릭 핸들러
+  const handleCardTypeChange = (event) => {
+    setCardType(event.target.value);
+  };
+
+  // Select에서 선택한 카드 이름을 memberCard 상태에 저장하는 함수
+  const handleCardSelectChange = (event) => {
+    const selectedCardName = event.target.value;
+    setMemberCard((prevMemberCard) => ({
+      ...prevMemberCard,
+      cardName: selectedCardName,
+    }));
+  };
+
   //카메라용
   const cameraRef = useRef(null);
   const [image, setImage] = useState(null);
@@ -12,26 +87,13 @@ function CardRegister(props) {
   const takePicture = () => {
     const photo = cameraRef.current.takePhoto();
     setImage(photo);
-    //const blob = dataURLtoBlob(photo);
-    return photo;
+    const blob = dataURLtoBlob(photo);
+    return blob;
   };
 
   const getFileName = () => {
     const timestamp = Date.now();
     return `cardimg_${timestamp}.jpg`;
-  };
-
-  const uploadToServer = (filename, photo) => {
-    const formData = new FormData();
-    formData.append("file", dataURLtoBlob(photo), filename);
-
-    fetch("http://localhost:5000/uploadd", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("Uploaded file path:", data.filePath))
-      .catch((error) => console.error("Error:", error));
   };
 
   const uploadToS3 = (filename, fileBlob) => {
@@ -52,96 +114,179 @@ function CardRegister(props) {
     upload.promise().then(console.log("업로드"));
   };
 
-  const handleTakePhoto = () => {
-    const photoBlob = takePicture();
-    const fileName = getFileName();
-    // uploadToS3(fileName, photoBlob);
-    uploadToServer(fileName, photoBlob);
+  const handleTakePhoto = async () => {
+    try {
+      const photoBlob = takePicture();
+      const fileName = getFileName();
+      uploadToS3(fileName, photoBlob);
+
+      const response = await axios({
+        method: "post",
+        url: "/api/card/cardOCR",
+        data: {
+          fileName: fileName,
+        },
+      });
+
+      const { number, validThru } = response.data;
+
+      console.log("Card Number:", number);
+      console.log("Valid Thru:", validThru);
+
+      // 상태 업데이트
+      setMemberCard({
+        ...memberCard,
+        cardNum: number,
+        expirationDate: validThru,
+      });
+    } catch (error) {
+      console.error(error);
+      // 오류를 사용자에게 알리거나 상태에 저장할 수 있습니다.
+      // 예를 들어, 상태에 저장하는 경우:
+      // setError(error.message);
+    }
+  };
+
+  const handleRegisterCard = async (e) => {
+    e.preventDefault();
+
+    axios({
+      method: "post",
+      url: "/api/card/cardRegister",
+      data: memberCard,
+    })
+      .then((res) => {
+        console.log(res);
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error);
+        throw new Error(error);
+      });
   };
 
   return (
-    <div className="container">
-      <div class="card-registration">
-        <h2>신규 카드 등록</h2>
-        {!image ? (
-          <>
-            <Camera
-              className="camera-view"
-              ref={cameraRef}
-              aspectRatio={4 / 3}
-              facingMode={"environment"}
-            />
-            <button class="capture-button" onClick={handleTakePhoto}>
-              촬영하기
-            </button>
-          </>
-        ) : (
-          <>
-            <img className="capRecieptIMG" src={image} alt="Captured" />
-            <button class="capture-button" onClick={() => setImage(null)}>
-              다시 촬영하기
-            </button>
-          </>
-        )}
-        <form class="card-form">
-          <div class="form-group">
-            <label for="card-number">
-              카드번호 <span class="required">*</span>
-            </label>
-            <input
-              type="text"
-              id="card-number"
-              placeholder="1234 5678 4321 9876"
-              required
-            />
-          </div>
+    <div className="app-container">
+      <div className="main-content">
+        <div className="card-registration">
+          <h2 className="title">신규 카드 등록</h2>
+          {!image ? (
+            <>
+              <Camera
+                className="camera-view"
+                ref={cameraRef}
+                aspectRatio={4 / 3}
+                facingMode={"environment"}
+              />
+              <button className="capture-button" onClick={handleTakePhoto}>
+                촬영하기
+              </button>
+            </>
+          ) : (
+            <>
+              <img className="capCardIMG" src={image} alt="Captured" />
+              <button className="capture-button" onClick={() => setImage(null)}>
+                다시 촬영하기
+              </button>
+            </>
+          )}
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="expiry-date">
-                유효일자 <span class="required">*</span>
+          <form className="card-form">
+            <div className="form-group">
+              <label for="cardNum">
+                카드번호 <span className="required">*</span>
               </label>
               <input
                 type="text"
-                id="expiry-date"
-                placeholder="09/27"
+                name="cardNum"
+                placeholder="1234 5678 4321 9876"
                 required
+                onChange={handleChange}
+                value={memberCard.cardNum}
               />
             </div>
-            <div class="form-group">
-              <label for="cvc">
-                CVC <span class="required">*</span>
-              </label>
-              <input type="text" id="cvc" placeholder="111" required />
+
+            <div className="form-row">
+              <div className="form-group">
+                <label for="expirationDate">
+                  유효일자 <span className="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="expirationDate"
+                  placeholder="09/27"
+                  required
+                  onChange={handleChange}
+                  value={memberCard.expirationDate}
+                />
+              </div>
+              <div className="form-group">
+                <label for="cvc">
+                  CVC <span className="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="cvc"
+                  placeholder="111"
+                  required
+                  onChange={handleChange}
+                  value={memberCard.cvc}
+                />
+              </div>
             </div>
-          </div>
 
-          <div class="form-group">
-            <label>
-              카드선택 <span class="required">*</span>
-            </label>
-            <div class="radio-group">
+            <div className="form-group">
               <label>
-                <input type="radio" name="card-type" value="credit" required />{" "}
-                신용
+                카드선택 <span className="required">*</span>
               </label>
-              <label>
-                <input type="radio" name="card-type" value="debit" required />{" "}
-                체크
-              </label>
+              <div className="radio-group">
+                <label>
+                  <input
+                    type="radio"
+                    name="card-type"
+                    value="credit"
+                    checked={cardType === "credit"}
+                    onChange={handleCardTypeChange}
+                  />
+                  신용
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="card-type"
+                    value="check"
+                    checked={cardType === "check"}
+                    onChange={handleCardTypeChange}
+                  />
+                  체크
+                </label>
+              </div>
+              {loading && <p>Loading...</p>}
+              {error && <p>Error loading data!</p>}
+              <select onChange={handleCardSelectChange}>
+                {cards.length === 0 && !loading && !error ? (
+                  <option>카드 목록이 없습니다</option>
+                ) : (
+                  cards.map((card) => (
+                    <option key={card.cardName} value={card.cardName}>
+                      {card.cardName}
+                    </option>
+                  ))
+                )}
+              </select>
             </div>
-            <select>
-              <option>신한카드 Deep Dream</option>
-            </select>
-          </div>
 
-          <button type="submit" class="submit-button">
-            등록하기
-          </button>
-        </form>
-
-        <Footer />
+            <button
+              type="submit"
+              className="submit-button"
+              onClick={handleRegisterCard}
+            >
+              등록하기
+            </button>
+          </form>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
