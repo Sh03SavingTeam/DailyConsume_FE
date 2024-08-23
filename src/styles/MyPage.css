@@ -1,12 +1,13 @@
 body {
     
 }
+/*상단 랭크부분*/
 .rank-container {
     background-color: white;
     border-radius: 10px;
     display: flex;
     padding:10px;
-
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 }
 .character-container{
@@ -15,9 +16,52 @@ body {
 .rank-info-container{
     padding-left: 10px;
     border-left: 1px solid gray;
+    width: 100%;
+}
+.rank-image{
+  width: 128px;
+  height: 99px;
+  
+}
+.rank-id{
+  text-align: center;
+  /*   background-image: url('../assets/BackLayer2.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;  */
+    padding: 10px; 
+   
+    
 }
 
+.rank-info3 {
+  text-align: right; /* 텍스트를 오른쪽 정렬 */
+  font-size: 12px; /* 글씨 크기를 12px로 설정 */
+  
+  margin-bottom: 2px;
+}
 
+.rank-info3 .highlight {
+  color: #303473; /* '20점' 부분의 색상 설정 */
+}
+
+.rank-info4 {
+  text-align: right;
+  font-size : 14px;
+  margin-top : 16px;
+}
+.rank-info5 {
+  text-align: right;
+  font-size : 10px;
+  color : #B6B6B6;
+  text-decoration: underline;
+  margin-top:4px;
+  margin-right: 4px;
+
+}
+.rank-info4 .rank-score{
+  font-size : 16px;
+}
 @keyframes progress-bar-stripes {
     0% {
       background-position-x: 1rem; } }
@@ -53,3 +97,211 @@ body {
     @media (prefers-reduced-motion: reduce) {
       .progress-bar-animated {
         animation: none; } }
+
+
+/*랭킹 리스트 부분*/
+.text-wrap {
+  margin : 6px;
+  font-weight: bold;
+}
+.list-container{
+  margin-top:10px;
+}
+.list-item{
+  background-color: white;
+    border-radius: 10px;
+    display: flex;
+    padding:10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.item-rank-image{
+  width: 98px;
+  height: 69px;
+}
+.item-info {
+  width: 100%;
+  padding: 6px;
+}
+.rank-count{
+  font-weight: bolder;
+}
+.item-info1{
+  font-size:14px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.item-info2{
+  font-size:14px;
+  width: 50%;
+}
+.item-info2 .highlight2 {
+  font-size:16px;
+}
+.info-link {
+  font-size: 10px;
+  color:#B6B6B6;
+  text-decoration: underline;
+  width: 50%;
+  text-align: right;
+
+}
+.item-info2-wrap {
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  width: 100%;
+}
+
+
+/*등급별 혜택-RankInfo부분*/
+.benefit-container{
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  padding:10px;
+  align-items: center;
+  margin-bottom:20px;
+}
+.benefit-rank-info span{
+  display: block;
+  margin-bottom:6px;
+}
+.benefit-rank-info{
+  width:260px;
+}
+.button-container{
+  width:200px;
+  text-align: right;
+}
+
+.rankinfo-container{
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  padding:10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+.rank1-container, .rank2-container, .rank3-container, .rank4-container{
+  width:107px; 
+  margin-left:4px; 
+  margin-right:4px; 
+  text-align: center;  
+  display: flex;          
+  flex-direction: column;  
+  align-items: center;     
+  justify-content: flex-end;
+  border-radius: 5px;
+  border:1px solid lightgray;
+  padding-bottom: 10px;
+  height:100%;
+}
+.rank1-container.selected {
+  background-color: #b6d9ffc8;
+}
+.rank1-container:hover {
+  background-color: #b6d9ffc8;
+  
+}
+.rank2-container.selected {
+  background-color: #daffdac8;
+}
+.rank2-container:hover {
+  background-color: #daffdac8;
+}
+.rank3-container.selected {
+  background-color: #ffdabed6;
+}
+.rank3-container:hover {
+  background-color: #ffdabed6;
+}
+.rank4-container.selected {
+  background-color: #ffd8ebcf;
+}
+.rank4-container:hover {
+  background-color: #ffd8ebcf;
+}
+.benefit-rank-image1{
+  width:66px;
+  height:36px;
+}
+.benefit-rank-image2{
+  width:72px;
+  height:42px;
+}
+.benefit-rank-image3{
+  width:80px;
+  height:50px;
+}
+.benefit-rank-image4{
+  width:104px;
+  height:74px;
+}
+.rank-name1, .rank-range1 {
+  font-size:10px;
+}
+.rank-name2, .rank-range2 {
+  font-size:12px;
+}
+.rank-name3, .rank-range3 {
+  font-size:14px;
+}
+.rank-name4, .rank-range4 {
+  font-size:16px;
+}
+
+.benefit-info-container{
+  background-color: white;
+  border-radius: 10px;
+  padding:12px;
+}
+.rank-name, .rank-standard, .rank-benefit-info {
+  margin-bottom: 6px;
+}
+/*혜택버튼*/
+.benefit-btn{
+  color:white;
+  background-color: #303473;
+  border:1px solid #303473;
+  border-radius: 18px;
+  width:130px;
+  height: 40px;
+
+  font-size:12px;
+  font-family: "OneShinhanBold";
+}
+/*등급안내footer*/
+.footer-info{
+  background-color: #EBEBEB;
+  margin-top:20px;
+  width:440px;
+  height:440px;
+  padding:20px;
+  font-size:10px;
+}
+.footer-title{
+  display: grid !important;
+  margin-bottom:14px !important;
+  font-size:12px !important;
+}
+.footer-info span {
+  display: inline-block;
+  margin-bottom: 10px;
+  color:#464646;
+}
+
+.sec_container {
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.prev-btn {
+  z-index: 210;
+  position: absolute;
+  top: 0;
+  left: 10px;
+}

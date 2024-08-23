@@ -9,6 +9,7 @@ import ReviewRegister from "./pages/ReviewRegister";
 import CardRegister from "./pages/CardRegister";
 import Home from "./pages/Home";
 import MyPage from "./pages/MyPage";
+import RankInfo from "./pages/RankInfo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,7 +20,9 @@ root.render(
         <Route path="/MapPage" element={<MapPage />}></Route>
         <Route path="/MapPage/ReviewReg" element={<ReviewRegister />}></Route>
         <Route path="/Home" element={<Home />}></Route>
-        <Route path="/MyPage" element={<MyPage/>}></Route>
+        <Route path="/rank" element={<MyPage/>}></Route>
+        <Route path="/rank/benefits/:memberId" element={<RankInfo/>}></Route>
+       
       </Routes>
     </BrowserRouter>
   </div>
