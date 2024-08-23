@@ -40,6 +40,10 @@ const CustomCalendar = () => {
   };
 
   useEffect(() => {
+    console.log(amountList);
+  }, [amountList]);
+
+  useEffect(() => {
     const memberId = getMemberId();
     const month = moment().format("MM");
     fetchAmountList(month, memberId);

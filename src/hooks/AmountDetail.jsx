@@ -43,38 +43,22 @@ function AmountDetail({ item, onClose }) {
 
   const handleNormalButtonClick = async () => {
     try {
-      // 서버에 myPayCheck 값을 1로 업데이트 요청
-      console.log("Sending update request with:", item.memberId, item.id);
-      await axios.post("http://localhost:9999/api/calendar/payhistory/update", {
-        memberId: item.memberId,
-        payId: item.id,
-        myPayCheck: 1,
-      });
+      // 서버에 myPayCheck 값을 1로 업데이트 요청 (PUT 요청)
+      const response = await axios.put(
+        "http://localhost:9999/api/calendar/payhistory/update",
+        {
+          memberId: item.memberId,
+          payId: item.id,
+          myPayCheck: 1,
+        }
+      );
 
       // 상태를 정상으로 업데이트
       setIsNormal(true);
       setShowContactModal(false); // 신고하기 모달이 떠 있으면 닫기
 
-      // 서버에서 갱신된 데이터를 가져와서 다시 렌더링
-      console.log(
-        "Fetching updated details for:",
-        item.memberId,
-        item.payId,
-        item.myPayCheck
-      );
-      const response = await axios.get(
-        "http://localhost:9999/api/calendar/payhistory/detail",
-        {
-          params: {
-            memberId: item.memberId,
-            payId: item.payId,
-            myPayCheck: item.myPayCheck,
-          },
-        }
-      );
-      console.log("Updated response data:", response.data);
-
-      setDetail(response.data);
+      // 업데이트 후 목록을 새로고침
+      onClose(); // AmountListForDay로 돌아가면서 목록을 새로고침
     } catch (error) {
       console.error("Failed to update payment status", error);
     }

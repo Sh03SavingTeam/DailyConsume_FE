@@ -15,42 +15,43 @@ function AmountListForDay({ initialDay }) {
     setDay(initialDay);
   }, [initialDay]);
 
+  // fetchOrderList 함수 정의를 useEffect 외부로 이동
+  const fetchOrderList = async () => {
+    try {
+      const formattedDate = moment(day, "YYYY년 MM월 DD일");
+      const year = formattedDate.format("YYYY");
+      const month = formattedDate.format("MM");
+      const dayOfMonth = formattedDate.format("DD");
+
+      const response = await axios.get(
+        "http://localhost:9999/api/calendar/payhistory/daily",
+        {
+          params: {
+            memberId: "user01", // 실제 로그인 사용자 ID로 변경
+            day: dayOfMonth,
+            month: month,
+            year: year,
+          },
+        }
+      );
+
+      const fetchedData = response.data.map((item) => ({
+        id: item.payId,
+        time: moment(item.payDate).format("HH:mm:ss"),
+        amount: item.payAmount,
+        description: item.storeName || "Unknown Store",
+        myPayCheck: item.myPayCheck, // 본인 결제 여부 추가
+        type: item.myPayCheck === 1 ? "normal" : "suspicious", // 정상/이상 결제 구분
+      }));
+
+      setOrderList(fetchedData);
+    } catch (err) {
+      setError("Failed to fetch data from server");
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    const fetchOrderList = async () => {
-      try {
-        const formattedDate = moment(day, "YYYY년 MM월 DD일");
-        const year = formattedDate.format("YYYY");
-        const month = formattedDate.format("MM");
-        const dayOfMonth = formattedDate.format("DD");
-
-        const response = await axios.get(
-          "http://localhost:9999/api/calendar/payhistory/daily",
-          {
-            params: {
-              memberId: "user01", // 실제 로그인 사용자 ID로 변경
-              day: dayOfMonth,
-              month: month,
-              year: year,
-            },
-          }
-        );
-
-        const fetchedData = response.data.map((item) => ({
-          id: item.payId,
-          time: moment(item.payDate).format("HH:mm:ss"),
-          amount: item.payAmount,
-          description: item.storeName || "Unknown Store",
-          myPayCheck: item.myPayCheck, // 본인 결제 여부 추가
-          type: item.myPayCheck === 1 ? "normal" : "suspicious", // 정상/이상 결제 구분
-        }));
-
-        setOrderList(fetchedData);
-      } catch (err) {
-        setError("Failed to fetch data from server");
-        console.error(err);
-      }
-    };
-
     fetchOrderList();
   }, [day]);
 
@@ -68,6 +69,7 @@ function AmountListForDay({ initialDay }) {
   const handleCloseDetail = () => {
     setIsDetailVisible(false);
     setSelectedItem(null);
+    fetchOrderList(); // 상세보기 닫을 때 목록 새로고침
   };
 
   return (
@@ -102,10 +104,6 @@ function AmountListForDay({ initialDay }) {
       {isDetailVisible && selectedItem && (
         <AmountDetail item={selectedItem} onClose={handleCloseDetail} />
       )}
-      <hr />
-      <div className="detail-item weekly-budget">
-        <strong>주간소비잔여금액:</strong>
-      </div>
     </div>
   );
 }
