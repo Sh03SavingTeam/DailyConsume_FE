@@ -13,6 +13,9 @@ import ConsumeSet from "./pages/ConsumeSet";
 import ConsumeLogin from "./pages/ConsumeLogin";
 import ConsumeJoin from "./pages/ConsumeJoin";
 
+import Home from "./pages/Home";
+import AddressList from "./pages/AddressList";
+import AddressRegister from "./pages/AddressRegister";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -28,6 +31,13 @@ root.render(
         <Route path="/ConsumeSet" element={<ConsumeSet memberId="min"/> }></Route>
         <Route path="/Login" element={<ConsumeLogin />}></Route>
         <Route path="/Join" element={<ConsumeJoin />}></Route>
+        <Route path="/ConsumeHistory" element={<ConsumeHistory />}></Route>
+        <Route path="/Home" element={<Home />}></Route>
+        <Route path="/MyPage/AddrList" element={<AddressList />}></Route>
+        <Route
+          path="/MyPage/AddrRegister"
+          element={<AddressRegister />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   </div>
