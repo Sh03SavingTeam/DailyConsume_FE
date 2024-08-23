@@ -55,7 +55,7 @@
   bottom: 6%;
   width: 100%;
   background-color: rgb(248, 248, 248);
-  max-height: 70vh;
+  max-height: 55vh;
   transition: height 1s ease;
   z-index: 5;
   padding-top: 10px;
@@ -128,7 +128,7 @@
   overflow: scroll;
 }
 
-.store_detail_div>img {
+.store_detail_div > img {
   height: 300px;
   object-fit: cover;
   width: 100%;
@@ -146,37 +146,37 @@
 }
 
 .detail_info {
-    padding: 2px;
-    margin-top: 10px;
+  padding: 2px;
+  margin-top: 10px;
 }
 
 .detail_info div:nth-child(1) span:nth-child(1) {
-    font-size: 30px;
-    font-weight: 600;
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .detail_info div:nth-child(1) span:nth-child(2) {
-    font-size: 15px;
-    color: #949494;
-    font-weight: 600;
+  font-size: 15px;
+  color: #949494;
+  font-weight: 600;
 }
 
 .detail_info div:nth-child(2) span:nth-child(1) {
-    color:red;
+  color: red;
 }
 
 .detail_info div:nth-child(2) span:nth-child(2) {
-    font-weight: 600;
+  font-weight: 600;
 }
 
-.detail_info>div:nth-child(3) {
-    margin-top: 5px;
-    font-size: 20px;
-    font-weight: 600;
-    color: gray;
+.detail_info > div:nth-child(3) {
+  margin-top: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  color: gray;
 }
 
-.detail_menu_area ul li>img {
+.detail_menu_area ul li > img {
   width: 100px;
   height: 110px;
   object-fit: cover;
@@ -188,9 +188,10 @@
   padding-left: 5px;
 }
 
-.detail_menu_area ul li{
+.detail_menu_area ul li {
   padding-top: 17px;
   padding-bottom: 16px;
+  position: relative;
 }
 
 .detail_menu_area ul li::before {
@@ -199,11 +200,51 @@
   right: 0;
   left: 0;
   height: 1px;
-  background: rgba(var(--gray95), 1);
+  background: #9e9e9e;
   content: "";
 }
 
 .menu_info_area {
   display: inline-block;
   width: 72%;
+  position: absolute;
+  top: 10%;
+}
+
+.menu_info_area > div:nth-child(1) {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.menu_info_area > div:nth-child(2) {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.marker_category_div {
+  position: absolute;
+  top: 7%;
+  z-index: 20;
+  /* left: 0%; */
+  width: 100%;
+  padding: 0 3%;
+  overflow: scroll;
+  white-space: nowrap;
+  min-height: 4%;
+}
+
+.marker_category_div div {
+  display: inline-block;
+  background: white;
+  padding: 1px 5px;
+  margin-right: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 15px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.19), 0 2px 2px rgba(0,0,0,0.23);
+}
+
+.marker_category_div img {
+  width: 20px;
+  height: 20px;
 }

@@ -7,6 +7,10 @@ function StoreDetail(props) {
         setStore(null)
     }
 
+    function moneyComma(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
   return (
     <div className="store_detail_div">
       <div className="before_btn" onClick={exitClickHandler}>&#12296;</div>
@@ -35,7 +39,7 @@ function StoreDetail(props) {
                 <img src = {menu.menuImg} alt={menu.menuName}/>
                 <div className="menu_info_area">
                   <div>{menu.menuName}</div>
-                  <div>{menu.menuPrice}</div>
+                  <div>{moneyComma(menu.menuPrice)} 원</div>
                 </div>
               </li>
             ))}
