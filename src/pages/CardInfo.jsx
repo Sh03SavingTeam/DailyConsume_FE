@@ -6,6 +6,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 function CardInfo(props) {
+  //회원 객체
+  const [memberId, setMemberId] = useState("");
   //카드목록
   const [cardList, setCardList] = useState([]);
 
@@ -22,32 +24,52 @@ function CardInfo(props) {
 
   const location = useLocation();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     console.log(location);
   }, [location]);
 
   useEffect(() => {
+    const token = localStorage.getItem("token"); // JWT 토큰 가져오기
+
+    //JWT로 로그인한 사용자 정보 가져오기
     axios({
       method: "get",
-      url: "/api/card/memberCardList",
-      params: {
-        memberId: "abcd",
+      url: "/api/member/memberSession",
+      headers: {
+        Authorization: `Bearer ${token}`, // JWT 토큰 포함
       },
     })
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.memberId);
+        setMemberId(response.data.memberId);
 
-        // 카드 목록을 상태에 저장
-        const cardList = response.data;
-        setCardList(cardList);
+        axios({
+          method: "get",
+          url: "/api/card/memberCardList",
+          params: {
+            memberId: response.data.memberId,
+          },
+        })
+          .then((response) => {
+            console.log(response.data);
 
-        // 첫 번째 항목을 기본값으로 설정
-        // if (cardList.length > 0) {
-        //   setSelectedCard(cardList[0].cardNum);
-        // }
+            // 카드 목록을 상태에 저장
+            const cardList = response.data;
+            setCardList(cardList);
+
+            // 첫 번째 항목을 기본값으로 설정
+            // if (cardList.length > 0) {
+            //   setSelectedCard(cardList[0].cardNum);
+            // }
+          })
+          .catch((error) => {
+            console.error("There was an error!", error);
+          });
       })
       .catch((error) => {
-        console.error("There was an error!", error);
+        console.error("There was an error fetching the session data!", error);
       });
   }, []);
 
@@ -136,7 +158,6 @@ function CardInfo(props) {
     closePopUp();
   };
 
-  const navigate = useNavigate();
   const handleCardRegisterClick = () => {
     navigate("/home/cardregister");
   };
@@ -177,11 +198,11 @@ function CardInfo(props) {
           <div>카드를 선택해주세요...</div>
         )}
       </div>
-      <div class="button-container">
-        <button class="action-button" onClick={handleCardRegisterClick}>
+      <div className="cardinfo-button-container">
+        <button className="action-button" onClick={handleCardRegisterClick}>
           카드 등록
         </button>
-        <button class="action-button" onClick={openPopUp}>
+        <button className="action-button" onClick={openPopUp}>
           카드 삭제
         </button>
 

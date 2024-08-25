@@ -181,9 +181,7 @@ function ReviewRegister(props) {
   return (
     <div className="app-container">
       <div className="main-content">
-        {/* <p>가게 이름: {storename}</p>
-        <p>사업자 번호: {storebizNum}</p> */}
-        <h2 className="title">리뷰 등록</h2>
+        <h2 className="reviewRegtitle">리뷰 등록</h2>
         <div className="pictureContainer">
           {!image ? (
             <>
