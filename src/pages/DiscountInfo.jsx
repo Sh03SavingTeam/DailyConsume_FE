@@ -50,11 +50,6 @@ function DiscountInfo({ memberId }) {
         setPage((prevPage) => prevPage + 1);
     };
 
-    // 뒤로 가기 버튼 클릭 시 이전 페이지로 이동
-     const backClick = () => {
-        navigate(-1); // Go back to the previous page
-    };
-
     return (
         <div className="discount-container">
             <div className="discount-title">이번달은 <span>{category}</span>에 <br/>가장 많은 돈을 썼어요</div>

@@ -3,11 +3,12 @@ import Footer from "../components/Footer";
 import profileImg from "../assets/profileImg.png"
 import "../styles/MypageMain.css";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ConsumeHistory from "./ConsumeHistory";
 import Point from "./Point";
 import MyPage from "./MyPage";
 import AddressList from "./AddressList";
+import ConsumeCompare from "./ConsumeCompare";
 
 function MypageMain({memberId}){
 
@@ -17,18 +18,23 @@ function MypageMain({memberId}){
     const[check, setCheck] = useState(true);
     const [sunday, setSunday] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [selectedTab, setSelectedTab] = useState('analysis');
+
+    const location = useLocation();
+    const [selectedTab, setSelectedTab] = useState(location.state?.selectedTab || 'analysis');
+    console.log(selectedTab);
 
     const renderContent = () => {
         switch (selectedTab) {
             case 'analysis':
-                return <ConsumeHistory memberId={"min"}/>
+                return <ConsumeHistory memberId={"jeongin"}/>
             case 'point':
                 return <Point memberId='jeongin'/>;
             case 'rank':
                 return <MyPage memberId="min"/>;
             case 'address':
                 return <AddressList />;
+            case 'consumeCompare':
+                return <ConsumeCompare memberId={"jeongin"}/>;
             default:
                 return <ConsumeHistory />;
         }
@@ -37,6 +43,12 @@ function MypageMain({memberId}){
     useEffect(() => {
         fetchMemberInfo();
     }, []);
+
+    useEffect(() => {
+        if (location.state?.selectedTab) {
+          setSelectedTab(location.state.selectedTab);
+        }
+      }, [location.state]);
 
     useEffect(() => {
         const getSunday = () => {
@@ -59,11 +71,17 @@ function MypageMain({memberId}){
 
         setSunday(sunday);
 
-        if(sunday==endDate){
-            setCheck(false);
-        }
-
     }, []);
+
+    useEffect(() => {
+        if (sunday && endDate) {  // 둘 다 유효한 값일 때만 비교
+            if (sunday === endDate) {
+                setCheck(false);
+            } else {
+                setCheck(true);  // 혹시 이전에 false로 잘못 설정된 상태를 다시 true로 돌려놓기 위해 추가
+            }
+        }
+    }, [sunday, endDate]);
 
     console.log(sunday);
 
