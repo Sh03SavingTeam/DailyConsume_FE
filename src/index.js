@@ -16,7 +16,7 @@ import ConsumeJoin from "./pages/ConsumeJoin";
 import Home from "./pages/Home";
 import AddressList from "./pages/AddressList";
 import AddressRegister from "./pages/AddressRegister";
-import Calendar from "./components/Calendar";
+import Calendar from "./pages/Calendar";
 import PayHistoryMap from "./pages/PayHistoryMap";
 import DiscountInfo from "./pages/DiscountInfo";
 import Point from "./pages/Point";
@@ -24,6 +24,7 @@ import Refund from "./pages/Refund";
 import Refundconfirm from "./pages/RefundConfirm";
 import MyPage from "./pages/MyPage";
 import RankInfo from "./pages/RankInfo";
+import MypageMain from "pages/MypageMain";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -45,6 +46,7 @@ root.render(
       <Route path="/map/payhistory" element={<PayHistoryMap />}></Route>
 
       {/* 마이페이지 */}
+      <Route path="/mypage" element={<MypageMain memberId='jeongin'/>}></Route>
       <Route path="/mypage/consumehistory" element={<ConsumeHistory />}></Route>
       <Route path="/mypage/addrlist" element={<AddressList />}></Route>
       <Route path="/mypage/addrregister" element={<AddressRegister />}></Route>

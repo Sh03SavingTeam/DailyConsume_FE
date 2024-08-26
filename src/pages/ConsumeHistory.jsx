@@ -5,6 +5,7 @@ import ApexCharts from "react-apexcharts";
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function ConsumeHistory({ memberId }) {
   let [userList, setUserList] = useState([]);
@@ -182,6 +183,7 @@ function ConsumeHistory({ memberId }) {
       </div>
       <div className="content">
         <h2>나의 소비 별 통계</h2>
+        <Link to='/MyPage/DiscountInfo'><button class="content-discount">나를 위한 할인 정보 보러가기</button></Link>
         <ApexCharts
           options={donutData.options}
           series={donutData.series}
