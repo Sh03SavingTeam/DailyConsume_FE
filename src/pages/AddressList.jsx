@@ -44,6 +44,7 @@ function AddressList(props) {
   const [addrList, setAddrList] = useState([]);
 
   const [selectedAddrId, setSelectedAddrId] = useState(null);
+  const [memberId, setMemberId] = useState("");
 
   //삭제확인 팝업창 열기
   const openPopUp = (addrId) => {
@@ -68,6 +69,7 @@ function AddressList(props) {
   const handleConfirmDefaultAddrChange = () => {
     handleRadioChange(tempSelectedAddrId); // 기본 주소 변경
     closeDefaultAddrPopup(); // 팝업 닫기
+    window.location.reload();
   };
 
   //삭제버튼 클릭 시 삭제 수행
@@ -93,6 +95,7 @@ function AddressList(props) {
     checkJWT("/api/member/memberSession", "get", null).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
+      setMemberId(fetchedMemberId);
 
       axios({
         method: "get",
@@ -162,7 +165,7 @@ function AddressList(props) {
       method: "put",
       url: "/api/address/changeDefaultAddr",
       params: {
-        memberId: "bih63879",
+        memberId: memberId,
         addrId: addrId,
       },
     })

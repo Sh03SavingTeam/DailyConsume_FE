@@ -13,7 +13,7 @@ function ReviewRegister(props) {
   const navigate = useNavigate(); // useNavigate 사용
 
   const location = useLocation();
-  const { storename, storebizNum } = location.state || {};
+  //const { storename, storebizNum } = location.state || {};
 
   //상호명
 
@@ -131,6 +131,9 @@ function ReviewRegister(props) {
         //일치(콘솔로만 띄워져있음. 팝업창으로도 띄워야 함)
         console.log("상호명과 사업자등록번호가 모두 일치합니다.");
         openPopUp("인증되었습니다", () => {
+          setReview({
+            storeRegNum: bizNum,
+          });
           setReviewButtonEnabled(true); // 리뷰 등록 버튼 활성화
           closePopUp(); // 팝업 닫기
         });
@@ -159,7 +162,6 @@ function ReviewRegister(props) {
 
     const updatedReview = {
       ...review,
-      storeRegNum: storebizNum,
       rating: rating,
     };
 
