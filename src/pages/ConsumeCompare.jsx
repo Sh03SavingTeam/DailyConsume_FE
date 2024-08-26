@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function ConsumeCompare({ memberId }) {
   let [userList, setUserList] = useState([]);
@@ -44,6 +45,11 @@ function ConsumeCompare({ memberId }) {
 
   return (
     <div className="container con2">
+      <div className="point-header">
+      <Link to="/mypage" state={{selectedTab: 'analysis'}}>
+        <button className="back-button">&lt;</button>
+      </Link>
+      </div>
       <div className="title">
         <h2 className="set">또래보다 아껴 썼어요!</h2>
       </div>
