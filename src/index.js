@@ -30,7 +30,7 @@ root.render(
           path="/MyPage/AddrRegister"
           element={<AddressRegister />}
         ></Route>
-
+        <Route path="/rank" element={<MyPage/>}></Route>
         <Route path="/rank/benefits/:memberId" element={<RankInfo/>}></Route>
        
       </Routes>
