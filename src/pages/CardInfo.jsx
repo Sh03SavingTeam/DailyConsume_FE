@@ -4,6 +4,7 @@ import CardDeltePopUp from "../components/CustomPopUp";
 import Header from "./../components/Header";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { checkJWT } from "services/checkJWT";
 
 function CardInfo(props) {
   //회원 객체
@@ -31,25 +32,30 @@ function CardInfo(props) {
   }, [location]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token"); // JWT 토큰 가져오기
+    // const token = localStorage.getItem("token"); // JWT 토큰 가져오기
 
-    //JWT로 로그인한 사용자 정보 가져오기
-    axios({
-      method: "get",
-      url: "/api/member/memberSession",
-      headers: {
-        Authorization: `Bearer ${token}`, // JWT 토큰 포함
-      },
-    })
-      .then((response) => {
-        console.log(response.data.memberId);
-        setMemberId(response.data.memberId);
+    // //JWT로 로그인한 사용자 정보 가져오기
+    // axios({
+    //   method: "get",
+    //   url: "/api/member/memberSession",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`, // JWT 토큰 포함
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log(response.data.memberId);
+    //     setMemberId(response.data.memberId);
 
+    checkJWT("/api/member/memberSession", "get", null)
+      .then((resopnse) => {
+        console.log("JWT 확인 결과" + resopnse.memberId);
+
+        // 카드 목록 정보 가지고 오는 axios
         axios({
           method: "get",
           url: "/api/card/memberCardList",
           params: {
-            memberId: response.data.memberId,
+            memberId: resopnse.memberId,
           },
         })
           .then((response) => {
@@ -69,8 +75,10 @@ function CardInfo(props) {
           });
       })
       .catch((error) => {
-        console.error("There was an error fetching the session data!", error);
+        console.log(error);
       });
+
+    //memberId가 null이면 로그인페이지로 가게
   }, []);
 
   const handleChange = (event) => {

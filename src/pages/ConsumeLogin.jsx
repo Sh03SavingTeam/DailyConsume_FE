@@ -42,7 +42,7 @@ function ConsumeLogin(props) {
           localStorage.setItem("token", res.data.token);
 
           // 이후 원하는 페이지로 이동
-          //navigate("/home");
+          navigate("/home");
         } else {
           setErrorMessage("로그인 실패. 아이디 또는 비밀번호를 확인하세요.");
         }

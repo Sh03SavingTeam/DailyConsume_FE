@@ -175,6 +175,7 @@ function ConsumeJoin(props) {
             <div className="col-lg-6">
               <input
                 type="password"
+                name="memberPw"
                 className="form-control"
                 required
                 placeholder="Enter a User Password.."
@@ -182,7 +183,7 @@ function ConsumeJoin(props) {
               />
             </div>
           </div>
-          <div className="form-group mb-3 row">
+          {/* <div className="form-group mb-3 row">
             <label className="col-lg-4 col-form-label" htmlFor="val-password">
               비밀번호확인<span className="text-danger">*</span>
             </label>
@@ -196,7 +197,7 @@ function ConsumeJoin(props) {
                 onChange={handleChange}
               />
             </div>
-          </div>
+          </div> */}
           <div className="form-group mb-3 row">
             <label className="col-lg-4 col-form-label" htmlFor="val-username">
               회원이름<span className="text-danger">*</span>

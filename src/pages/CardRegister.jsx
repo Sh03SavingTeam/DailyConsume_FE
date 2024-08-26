@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Call } from "@mui/icons-material";
 import axios from "axios";
 import { Col, Row, Form, Button, InputGroup } from "react-bootstrap";
+import { checkJWT } from "services/checkJWT";
 
 function CardRegister(props) {
   //회원 객체
@@ -36,26 +37,38 @@ function CardRegister(props) {
     const token = localStorage.getItem("token"); // JWT 토큰 가져오기
 
     //JWT로 로그인한 사용자 정보 가져오기
-    axios({
-      method: "get",
-      url: "/api/member/memberSession",
-      headers: {
-        Authorization: `Bearer ${token}`, // JWT 토큰 포함
-      },
-    })
-      .then((response) => {
-        console.log(response.data.memberId);
-        const fetchedMemberId = response.data.memberId;
 
-        // memberCard 상태 업데이트
-        setMemberCard((prevMemberCard) => ({
-          ...prevMemberCard,
-          memberId: fetchedMemberId,
-        }));
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the session data!", error);
-      });
+    // axios({
+    //   method: "get",
+    //   url: "/api/member/memberSession",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`, // JWT 토큰 포함
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log(response.data.memberId);
+    //     const fetchedMemberId = response.data.memberId;
+
+    //     // memberCard 상태 업데이트
+    //     setMemberCard((prevMemberCard) => ({
+    //       ...prevMemberCard,
+    //       memberId: fetchedMemberId,
+    //     }));
+    //   })
+    //   .catch((error) => {
+    //     console.error("There was an error fetching the session data!", error);
+    //   });
+
+    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+      console.log("JWT 확인 결과" + response.memberId);
+      const fetchedMemberId = response.memberId;
+
+      // memberCard 상태 업데이트
+      setMemberCard((prevMemberCard) => ({
+        ...prevMemberCard,
+        memberId: fetchedMemberId,
+      }));
+    });
   }, []);
 
   // 카드 OCR 요청 결과
