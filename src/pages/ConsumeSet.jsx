@@ -3,6 +3,7 @@ import "../styles/ConsumeHistory.css";
 import Footer from "../components/Footer";
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function ConsumeSet({ memberId }) {
   // 금액을 저장할 상태
@@ -27,7 +28,7 @@ function ConsumeSet({ memberId }) {
     try {
       const amount = selectedAmount.replace(/,/g, "").replace("원", "");
       const response = await axios.post(
-        `http://localhost:9999/mypage/myweeklymoney?memberId=min&weeklyMoney=${amount}`
+        `http://localhost:9999/mypage/myweeklymoney?memberId=${memberId}&weeklyMoney=${amount}`
       );
       console.log(response.data);
     } catch (error) {
@@ -51,9 +52,10 @@ function ConsumeSet({ memberId }) {
           <p onClick={() => handleSelect("300,000원")}>300,000원</p>
         </div>
       </div>
-      <button className="select" onClick={handleSetAmount}>
-        설정
-      </button>
+      <Link to="/mypage" state={{selectedTab: 'analysis'}}>
+        <button className="select" onClick={handleSetAmount}>설정</button>
+      </Link>
+      
       <Footer />
     </div>
   );

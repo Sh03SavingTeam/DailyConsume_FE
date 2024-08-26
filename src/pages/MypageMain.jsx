@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
-import profileImg from "../assets/profileImg.png"
+import profileImg from "../assets/profileImg.jpg"
 import "../styles/MypageMain.css";
 import axios from 'axios';
 import { Link, useLocation } from "react-router-dom";
@@ -24,7 +24,7 @@ function MypageMain({memberId}){
     const renderContent = () => {
         switch (selectedTab) {
             case 'analysis':
-                return <ConsumeHistory memberId={"jeongin"}/>
+                return <ConsumeHistory memberId={"min"}/>
             case 'point':
                 return <Point memberId='jeongin'/>;
             case 'rank':
