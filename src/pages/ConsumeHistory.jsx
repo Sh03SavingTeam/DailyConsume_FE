@@ -6,7 +6,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 function ConsumeHistory({ memberId }) {
   let [userList, setUserList] = useState([]);
   let [peerList, setPeerList] = useState([]);
@@ -15,7 +14,6 @@ function ConsumeHistory({ memberId }) {
   let [currentMonth, setCurrentMonth] = useState(0);
   let [userPayment, setUserPayment] = useState(0);
   let [peerPayment, setPeerPayment] = useState(0);
-
   useEffect(() => {
     axios
       .get(`http://localhost:9999/mypage/mycardHistory?memberId=${memberId}`)
@@ -29,7 +27,6 @@ function ConsumeHistory({ memberId }) {
         console.error("Error fetching data:", error);
       });
   }, []);
-
   useEffect(() => {
     axios
       .get(`http://localhost:9999/mypage/peercardHistory?memberId=${memberId}`)
@@ -45,19 +42,16 @@ function ConsumeHistory({ memberId }) {
         console.error("Error fetching data:", error);
       });
   }, []);
-
   // userList가 업데이트될 때마다 합계 계산
   useEffect(() => {
     const totalUserPayment = userList.reduce((acc, curr) => acc + curr, 0);
     setUserPayment(totalUserPayment);
   }, [userList]);
-
   // peerList가 업데이트될 때마다 합계 계산
   useEffect(() => {
     const totalPeerPayment = peerList.reduce((acc, curr) => acc + curr, 0);
     setPeerPayment(totalPeerPayment);
   }, [peerList]);
-
   const donutData = {
     series: userPercentList,
     options: {
@@ -91,9 +85,7 @@ function ConsumeHistory({ memberId }) {
       },
     },
   };
-
   const navigate = useNavigate();
-
   return (
      <div className="container">
       <div className="total-payment">
@@ -145,7 +137,6 @@ function ConsumeHistory({ memberId }) {
                 show: false, // y축 레이블 숨기기
               },
             },
-
             dataLabels: {
               enabled: true,
               formatter: function (val) {
@@ -201,5 +192,4 @@ function ConsumeHistory({ memberId }) {
     </div>
   );
 }
-
 export default ConsumeHistory;

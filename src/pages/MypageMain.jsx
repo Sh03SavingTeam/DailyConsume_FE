@@ -11,14 +11,12 @@ import AddressList from "./AddressList";
 import ConsumeCompare from "./ConsumeCompare";
 
 function MypageMain({memberId}){
-
     const[memberImg, setMemberImg] = useState("");
     const[memberName, setMemberName] = useState("");
     const[weeklyMoney, setWeeklyMoney] = useState(0);
     const[check, setCheck] = useState(true);
     const [sunday, setSunday] = useState("");
     const [endDate, setEndDate] = useState("");
-
     const location = useLocation();
     const [selectedTab, setSelectedTab] = useState(location.state?.selectedTab || 'analysis');
     console.log(selectedTab);
@@ -34,16 +32,19 @@ function MypageMain({memberId}){
             case 'address':
                 return <AddressList />;
             case 'consumeCompare':
-                return <ConsumeCompare memberId={"jeongin"}/>;
+                return <ConsumeCompare memberId={"min"}/>;
             default:
                 return <ConsumeHistory />;
         }
     };
-
     useEffect(() => {
         fetchMemberInfo();
     }, []);
-
+    useEffect(() => {
+        if (location.state?.selectedTab) {
+          setSelectedTab(location.state.selectedTab);
+        }
+      }, [location.state]);
     useEffect(() => {
         if (location.state?.selectedTab) {
           setSelectedTab(location.state.selectedTab);
@@ -63,12 +64,9 @@ function MypageMain({memberId}){
             const year = sundayDate.getFullYear();
             const month = String(sundayDate.getMonth() + 1).padStart(2, '0');
             const day = String(sundayDate.getDate()).padStart(2, '0');
-
             return `${year}-${month}-${day}`;
         };
-
         const sunday = getSunday();
-
         setSunday(sunday);
 
     }, []);
@@ -84,13 +82,11 @@ function MypageMain({memberId}){
     }, [sunday, endDate]);
 
     console.log(sunday);
-
     // 데이터 불러오는 함수
     const fetchMemberInfo = async() => {
         try{
             const response = await axios.get(`http://localhost:9999/mypage/${memberId}`);
             const data = response.data;
-
             setMemberImg(data.memberImg);
             setMemberName(data.memberName);
             setWeeklyMoney(data.weeklyMoney);
@@ -101,7 +97,6 @@ function MypageMain({memberId}){
         }   
     };
         
-
     return(
         <div className="mymain-container">
             <div className="memberinfo">
@@ -116,8 +111,8 @@ function MypageMain({memberId}){
                 </div>
             </div>
             <div className="tabs">
-                <button 
-                    className={selectedTab === 'analysis' ? 'active' : ''}
+                <button
+                    className={selectedTab === 'analysis' || selectedTab === 'consumeCompare' ? 'active' : ''}
                     onClick={() => setSelectedTab('analysis')}
                 >
                     소비분석
@@ -148,5 +143,4 @@ function MypageMain({memberId}){
         </div>
     );
 }
-
 export default MypageMain;
