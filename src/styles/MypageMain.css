@@ -41,6 +41,10 @@
     margin-bottom: 5px;
 }
 
+.week-button button{
+    cursor: pointer;
+}
+
 .info-name-big{
     font-size: 20px;
 }
@@ -82,7 +86,7 @@
 
 .content{
     overflow-y: auto;
-    height: 400px;
+    height: 67vh;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
 }

@@ -93,7 +93,7 @@ function MypageMain({memberId}){
                 <p className="info-week">이번주 설정 금액 {weeklyMoney!=0?weeklyMoney.toLocaleString()+"원":"없음"}</p>
                 <div className="week-button">
                 {check && (
-                    <Link to='/ConsumeSet'><button>주간소비금액 설정</button></Link>
+                    <Link to='/mypage/ConsumeSet'><button>주간소비금액 설정</button></Link>
                 )}
                 </div>
             </div>

@@ -6,9 +6,16 @@
   }
 
 .container {
-    height: auto;
+    height: 115vh;
+    overflow-y: auto;
     min-height: 115vh; /*115vh*/
     background-color: #f8f8fdbf;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+display: none; /* Chrome, Safari, Opera*/
 }
 
 .con2 {
@@ -253,8 +260,12 @@ input.form-control {
 
 .content-discount{
     border: none;
-    background-color: transparent;
     cursor: pointer;
     width: 50%;
-    margin-left: 125px;
+    margin-left: 105px;
+    background-color: #303473;
+    font-family: "OneShinhanBold";
+    color: whitesmoke;
+    border-radius:5px;
+    padding: 5px;
 }

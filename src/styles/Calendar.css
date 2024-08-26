@@ -100,6 +100,22 @@
   flex-direction: column;
   align-items: center;
   vertical-align: top;
+  position: relative;
+}
+
+.calendar-info img{
+  z-index: 1;
+  width: 200%;
+  height: 200%;
+  object-fit: cover;
+  position: absolute;
+  top:-45%;
+  left:-45%;
+}
+
+.calendar-info span{
+  z-index: 0;
+  position: relative;
 }
 
 /* .calendar-info span {
