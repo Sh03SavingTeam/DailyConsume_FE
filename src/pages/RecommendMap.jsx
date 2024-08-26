@@ -29,7 +29,7 @@ function MapPage() {
     console.log("시작");
     setLoading(true);
     axios({
-      url: "/api/recommend/consume",
+      url: "http://localhost:9999/api/recommend/consume",
       method: "GET",
     })
       .then((res) => {
@@ -45,7 +45,7 @@ function MapPage() {
   const getRecommendStore = () => {
     // const geocoder = new window.kakao.maps.services.Geocoder();
     axios({
-      url: "/api/recommend/store",
+      url: "http://localhost:9999/api/recommend/store",
       method: "GET",
     })
       .then((res) => {
