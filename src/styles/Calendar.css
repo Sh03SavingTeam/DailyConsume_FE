@@ -49,7 +49,7 @@
 
 .react-calendar__tile {
   width: 100px; /* 기본 너비 설정 */
-  height: 100px; /* 기본 높이 설정 */
+  height: 20%; /* 기본 높이 설정 */
   text-align: center;
   padding: 5px;
   font-size: 1rem;
@@ -99,7 +99,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  vertical-align: top;
 }
+
+/* .calendar-info span {
+  background-image: url("../assets/RabbitFail.png");
+} */
 
 .calendar-count {
   font-size: 0.7rem;
@@ -107,7 +112,7 @@
 }
 
 .calendar-amount {
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   color: #333;
 }
 
@@ -126,7 +131,8 @@
 .amount-list-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
+  vertical-align: top;
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
   font-size: 1rem;

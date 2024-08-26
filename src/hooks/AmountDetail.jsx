@@ -78,6 +78,15 @@ function AmountDetail({ item, onClose }) {
     second: "numeric",
   });
 
+  const handleCustomerServiceClick = () => {
+    // 고객센터 버튼을 클릭했을 때 동작할 함수
+    window.location.href = "tel:1544-7000"; // 전화 걸기 기능
+  };
+  const handleCardLossClick = () => {
+    // 카드분실/승인 ARS 버튼을 클릭했을 때 동작할 함수
+    window.location.href = "tel:1544-7200"; // 전화 걸기 기능
+  };
+
   // AmountDetail.jsx에서 데이터를 렌더링하는 부분
   return (
     <div className="amount-detail">
@@ -121,7 +130,8 @@ function AmountDetail({ item, onClose }) {
             <strong>결제 장소:</strong> {detail.storeName || "N/A"}
           </div>
           <div className="detail-item total-amount">
-            <strong>결제 금액:</strong> 총 {detail.payAmount || "N/A"}원
+            <strong>결제 금액:</strong> 총{" "}
+            {detail.payAmount.toLocaleString() || "N/A"}원
           </div>
 
           {!isNormal && (
@@ -149,22 +159,19 @@ function AmountDetail({ item, onClose }) {
               X
             </button>
             <div className="contact-info">
-              <div className="contact-item">
-                <img
-                  src="https://path-to-headset-icon.png"
-                  alt="Customer Service"
-                />
+              <div
+                className="contact-item"
+                onClick={handleCustomerServiceClick}
+              >
+                <img src="/call-teller.png" alt="Customer Service" />
                 <p>
                   고객센터 대표번호
                   <br />
                   <strong>1544-7000</strong>
                 </p>
               </div>
-              <div className="contact-item">
-                <img
-                  src="https://path-to-card-icon.png"
-                  alt="Card Loss/Approval"
-                />
+              <div className="contact-item" onClick={handleCardLossClick}>
+                <img src="/card-icon.png" alt="Card Loss/Approval" />
                 <p>
                   카드분실/승인 ARS
                   <br />
