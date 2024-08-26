@@ -12,6 +12,13 @@
     background-color: white;
     min-height: 100vh;
     padding-bottom: 70px;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.discount-container::-webkit-scrollbar {
+display: none; /* Chrome, Safari, Opera*/
 }
 
 .discount-title {
@@ -38,7 +45,6 @@
   font-size: 15px;
   margin-left:23px;
 }
-
 
 .discount-item {
   position: relative;
@@ -74,26 +80,11 @@
   color: #333;
   white-space: nowrap; 
   text-overflow: ellipsis;
+  word-break: break-all;
 }
 
 .amount {
   color: #333;
-}
-
-.tag {
-  font-size:15px;
-  position: absolute;
-  top: 7%;
-  right: 7%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.productContent {
-  color: #333;
-  padding: 5px 10px;
 }
 
 .discount-button {

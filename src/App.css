@@ -16,7 +16,7 @@
 }
 /* 전체 페이지를 가운데 정렬하는 기본 설정 */
 .container {
-  max-width: 480px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
+  max-width: 414px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
   margin: 0 auto; /* 자동 마진을 사용하여 중앙에 배치합니다. */
   padding: 20px; /* 내부 패딩을 설정합니다. */
   background-color: #F2F2F7; /* 배경 색상을 연한 회색으로 설정합니다. */
@@ -36,7 +36,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "OneShinhanBold", sans-serif; /* 사용자 정의 폰트 */
-  overflow: hidden; /* 불필요한 스크롤 제거 */
+  /*overflow: hidden;  불필요한 스크롤 제거 */
 }
 
 h1 {
@@ -100,6 +100,7 @@ h1 {
   display: flex;
   justify-content: space-around;
   width: 100%; /* 전체 너비 사용 */
+  font-size: 15px;
 }
 
 .bottom-navigation button {

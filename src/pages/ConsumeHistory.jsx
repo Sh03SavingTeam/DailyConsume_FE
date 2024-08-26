@@ -5,6 +5,7 @@ import ApexCharts from "react-apexcharts";
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function ConsumeHistory({ memberId }) {
   let [userList, setUserList] = useState([]);
@@ -17,28 +18,28 @@ function ConsumeHistory({ memberId }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9999/mypage/mycardHistory?memberId=${memberId}`) // 스프링 서버의 엔드포인트로 수정 필요
+      .get(`http://localhost:9999/mypage/mycardHistory?memberId=${memberId}`)
       .then((response) => {
         const payAmounts = response.data.map((item) => item.payAmount);
         const percentage = response.data.map((item) => item.percentage);
-        setUserList(payAmounts); // payAmount 값을 상태로 저장
+        setUserList(payAmounts);
         setUserPercentList(percentage);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []); // 빈 배열은 컴포넌트가 처음 렌더링될 때만 useEffect 실행을 의미
+  }, []);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9999/mypage/peercardHistory?memberId=${memberId}`) // 스프링 서버의 엔드포인트로 수정 필요
+      .get(`http://localhost:9999/mypage/peercardHistory?memberId=${memberId}`)
       .then((response) => {
         const payAmounts = response.data.payHistories.map(
           (item) => item.payAmount
         );
         setAge(response.data.age);
         setCurrentMonth(response.data.currentMonth);
-        setPeerList(payAmounts); // payAmount 값을 상태로 저장
+        setPeerList(payAmounts);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -65,7 +66,7 @@ function ConsumeHistory({ memberId }) {
         position: "bottom", // 범례
         horizontalAlign: "center",
         fontFamily: "OneShinhanBold, sans-serif",
-        fontSize: "12px",
+        fontSize: "11px",
         fontWeight: "light",
         colors: ["#303473"],
       },
@@ -83,7 +84,7 @@ function ConsumeHistory({ memberId }) {
         enabled: true,
         style: {
           fontFamily: "OneShinhanBold, sans-serif", // 도넛 안의 수치 글꼴
-          fontSize: "14px", 
+          fontSize: "12px", 
           fontWeight: "bold", 
           colors: ["#FFFFFF"],
         },
@@ -91,10 +92,12 @@ function ConsumeHistory({ memberId }) {
     },
   };
 
+  const navigate = useNavigate();
+
   return (
-    <div className="container">
+     <div className="container">
       <div className="total-payment">
-        <h2 className="header">{currentMonth}월 총 결제 금액</h2>
+        <h3 className="header">{currentMonth}월 총 결제 금액</h3>
         <div className="amounts">
           <div>
             <div>{memberId}님</div>
@@ -106,8 +109,9 @@ function ConsumeHistory({ memberId }) {
           </div>
         </div>
       </div>
-      <div className="content">
-        <h2>카테고리별 소비 비교</h2>
+      <div className="container2">
+      <div className="content chart card" id="test">
+        <h3>카테고리별 소비 비교 <button onClick={() => navigate('/mypage/consumeCompare')} className="plus" >+</button></h3>
         <ApexCharts
           type="bar"
           series={[
@@ -124,7 +128,7 @@ function ConsumeHistory({ memberId }) {
               labels: {
                 style: {
                   fontFamily: "OneShinhanBold, sans-serif",
-                  fontSize: "14px",
+                  fontSize: "10px",
                   fontWeight: "light", // Optional: 'bold', 'normal', 'light', etc.
                   colors: "#000000",
                 },
@@ -150,15 +154,15 @@ function ConsumeHistory({ memberId }) {
               offsetY: -20, // 막대 위로 올리기 위한 y축 오프셋
               style: {
                 fontFamily: "OneShinhanBold, sans-serif",
-                fontSize: "8px",
-                fontWeight: "light",
+                fontSize: "7px",
+                fontWeight: "bold",
                 colors: ["#303473"],
               },
             },
             plotOptions: {
               bar: {
                 borderRadius: 10,
-                columnWidth: "80%",
+                columnWidth: "85%",
                 dataLabels: {
                   position: "top",
                 },
@@ -173,21 +177,25 @@ function ConsumeHistory({ memberId }) {
               position: "bottom", // 범례
               horizontalAlign: "center",
               fontFamily: "OneShinhanBold, sans-serif",
-              fontSize: "12px",
+              fontSize: "11px",
               fontWeight: "normal",
               colors: ["#303473"],
             },
           }}
         />
       </div>
-      <div className="content">
-        <h2>나의 소비 별 통계</h2>
+      <div className="content card" id="test"> 
+        <h3>나의 소비 별 통계</h3>
+        <Link to='/MyPage/DiscountInfo'>
+          <button class="content-discount">나를 위한 할인 정보 보러가기</button>
+        </Link>
         <ApexCharts
           options={donutData.options}
           series={donutData.series}
           type="donut"
           width="100%"
         />
+      </div>
       </div>
       <Footer />
     </div>

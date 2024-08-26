@@ -14,15 +14,24 @@ function Refund({ memberId }){
     const [point, setPoint] = useState(0);
     const [account, setAccount] = useState("");
 
+    // 처음 데이터 받아오는 useEffect
+    useEffect(() => {
+        fetchPointAccount();
+    }, []);
+    
     // 뒤로 가기 버튼 클릭 시 이전 페이지로 이동
     const backClick = () => {
         navigate(-1); // Go back to the previous page
     };
 
+    // 환급 동의 체크했는지 확인
     const handleRefundClick = (e) => {
         if (!check) {
             e.preventDefault(); // 버튼 클릭 시 페이지 이동 방지
             setWarning("환급 동의에 체크해주세요."); // 경고 메시지 설정
+        }
+        else{
+            refundPoint(text);
         }
     };
 
@@ -38,6 +47,16 @@ function Refund({ memberId }){
         } catch (error) {
             console.error("정보가 없습니다.", error);
         }   
+    };
+
+    // 포인트 환급 함수
+    const refundPoint = async (point) => {
+        try {
+            const response = await axios.put(`http://localhost:9999/mypage/refund/${memberId}?point=${point}`);
+            console.log("환급 성공: ", response.data);
+        } catch (error) {
+            console.error("환급에 실패했습니다.", error);
+        }
     };
 
     return(
