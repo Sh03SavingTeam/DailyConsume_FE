@@ -102,7 +102,7 @@ function ConsumeHistory({ memberId }) {
         </div>
       </div>
       <div className="container2">
-      <div className="content chart card" id="test">
+      <div className="content-card card" id="test">
         <h3>카테고리별 소비 비교 <Link to="/mypage" state={{selectedTab: 'consumeCompare'}}><button className="plus" >+</button></Link></h3>
         <ApexCharts
           type="bar"
@@ -175,7 +175,7 @@ function ConsumeHistory({ memberId }) {
           }}
         />
       </div>
-      <div className="content card" id="test"> 
+      <div className="content-card card" id="test"> 
         <h3>나의 소비 별 통계</h3>
         <Link to='/MyPage/DiscountInfo'>
           <button class="content-discount">나를 위한 할인 정보 보러가기</button>

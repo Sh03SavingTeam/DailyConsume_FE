@@ -88,7 +88,7 @@
 
 .content{
     overflow-y: auto;
-    height: 63.5vh;
+    height: 67.5vh;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
 }
