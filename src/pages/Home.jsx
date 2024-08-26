@@ -5,8 +5,10 @@ import CardInfo from "./CardInfo";
 
 function Home(props) {
   return (
-    <div className="container">
-      <CardInfo />
+    <div className="app-container">
+      <div className="main-content">
+        <CardInfo />
+      </div>
 
       <Footer />
     </div>

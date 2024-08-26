@@ -1,0 +1,179 @@
+.amount-detail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.amount-detail-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 480px;
+    height: 80%;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ddd;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.detail-header .icon img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.detail-header .company-amount p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.details {
+    margin-top: 20px;
+}
+
+.detail-item {
+    margin-bottom: 10px;
+}
+
+.detail-item.important {
+    color: #ff0000;
+}
+
+.detail-item.total-amount {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+.detail-item.weekly-budget {
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
+    margin-top: 20px;
+}
+
+.warning-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.warning-section p {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.normal-button, .report-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #fff;
+}
+
+.normal-button {
+    background-color: #4caf50;
+}
+
+.report-button {
+    background-color: #f44336;
+}
+
+.contact-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.contact-modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ddd;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.contact-item img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.contact-item p {
+    margin: 0;
+    font-size: 1rem;
+}

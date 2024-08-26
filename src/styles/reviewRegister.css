@@ -1,0 +1,74 @@
+@font-face {
+  font-family: "OneShinhanBold";
+  src: url("../assets/OneShinhanBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OneShinhanLight";
+  src: url("../assets/OneShinhanLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "OneShinhanMedium";
+  src: url("../assets/OneShinhanMedium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.capRecieptIMG {
+  width: 100%;
+  aspect-ratio: 3/4;
+}
+
+h2 {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: #333;
+}
+.reactstar {
+  display: grid;
+  place-items: center;
+}
+
+.pictureContainer {
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  flex-direction: column;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.picturebutton {
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px; /* 버튼 사이의 간격을 추가 */
+  background-color: #3b4cca;
+  color: #fff;
+  border-radius: 30px;
+  /* font-size: 16px;
+  font-weight: bold; */
+  font-family: "OneShinhanMedium", sans-serif;
+  width: 60%;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #3b4cca;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  /* font-size: 16px;
+  font-weight: bold; */
+  font-family: "OneShinhanMedium", sans-serif;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
