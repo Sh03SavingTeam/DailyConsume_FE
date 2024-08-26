@@ -59,7 +59,7 @@ function Point({ memberId }){
 
         <div className="balance">
             <Link to='/MyPage/Refund'><button>환급받기</button></Link>
-            <p>{totalPoint.toLocaleString()}P</p>
+            <p>{totalPoint !== null ? totalPoint.toLocaleString() : '0'}P</p>
         </div>
 
         <div className="history-title">
@@ -79,7 +79,7 @@ function Point({ memberId }){
             <div className="history-item" key={index}>
             <div className="description">{history.cmt}</div>
             <div className="history-item-right">
-                    <div className={`amount ${className}`}>{amountSign} {history.amount.toLocaleString()}P</div>
+                    <div className={`amount ${className}`}>{amountSign} {history.amount !== null && history.amount !== undefined ? history.amount.toLocaleString() : '0'}P</div>
                     <div className="date">{history.pointRegDate}</div>
             </div>
         </div>

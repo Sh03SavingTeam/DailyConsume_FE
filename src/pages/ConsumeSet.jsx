@@ -19,11 +19,11 @@ function ConsumeSet({ memberId }) {
       alert("금액을 선택해주세요.");
       return;
     } else {
-      Test(selectedAmount);
+      setMoney(selectedAmount);
     }
   };
 
-  const Test = async (selectedAmount) => {
+  const setMoney = async (selectedAmount) => {
     try {
       const amount = selectedAmount.replace(/,/g, "").replace("원", "");
       const response = await axios.post(
@@ -39,7 +39,7 @@ function ConsumeSet({ memberId }) {
     <div className="container con2">
       <div className="title center">
         <h2 className="set">💰주간소비금액💰 설정</h2>
-        <p>1주간 사용할 금액을 설정해주세요.</p>
+        <p className="p-set">1주간 사용할 금액을 설정해주세요.</p>
       </div>
       <div className="dropdown">
         <button className="dropbtn">{selectedAmount}</button>
