@@ -4,8 +4,10 @@ import Footer from "../components/Footer";
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function ConsumeCompare({ memberId }) {
+  const navigate = useNavigate();
   let [userList, setUserList] = useState([]);
   let [peerList, setPeerList] = useState([]);
 
@@ -44,10 +46,14 @@ function ConsumeCompare({ memberId }) {
 
   return (
     <div className="container con2">
-      <div className="title">
-        <h2 className="set">또래보다 아껴 썼어요!</h2>
+      <div className="point-header2">
+      <Link to="/mypage" state={{selectedTab: 'analysis'}}>
+        <button className="back-button2">&lt;</button>
+      </Link>
       </div>
-      <hr />
+      <div className="title">
+        <h3 className="set">또래보다 아껴 썼어요!</h3>
+      </div>
       <div className="card-list">
         {differenceList[0] > 0 && (
           <div className="card">
@@ -59,11 +65,11 @@ function ConsumeCompare({ memberId }) {
             </div>
             <div className="card-content">
               <div className="my-expense">
-                <p>내 소비</p>
+                <p className="p-num">내 소비</p>
                 <p className="amount my">{userList[0].toLocaleString()}원</p>
               </div>
               <div className="peer-expense">
-                <p>또래 소비</p>
+                <p className="p-num">또래 소비</p>
                 <p className="amount">{peerList[0].toLocaleString()}원</p>
               </div>
             </div>
@@ -79,11 +85,11 @@ function ConsumeCompare({ memberId }) {
             </div>
             <div className="card-content">
               <div className="my-expense">
-                <p>내 소비</p>
+                <p className="p-num">내 소비</p>
                 <p className="amount my">{userList[1].toLocaleString()}원</p>
               </div>
               <div className="peer-expense">
-                <p>또래 소비</p>
+                <p className="p-num">또래 소비</p>
                 <p className="amount">{peerList[1].toLocaleString()}원</p>
               </div>
             </div>
@@ -98,11 +104,11 @@ function ConsumeCompare({ memberId }) {
             </div>
             <div className="card-content">
               <div className="my-expense">
-                <p>내 소비</p>
+                <p className="p-num">내 소비</p>
                 <p className="amount my">{userList[2].toLocaleString()}원</p>
               </div>
               <div className="peer-expense">
-                <p>또래 소비</p>
+                <p className="p-num">또래 소비</p>
                 <p className="amount">{peerList[2].toLocaleString()}원</p>
               </div>
             </div>
@@ -117,11 +123,11 @@ function ConsumeCompare({ memberId }) {
             </div>
             <div className="card-content">
               <div className="my-expense">
-                <p>내 소비</p>
+                <p className="p-num">내 소비</p>
                 <p className="amount my">{userList[3].toLocaleString()}원</p>
               </div>
               <div className="peer-expense">
-                <p>또래 소비</p>
+                <p className="p-num">또래 소비</p>
                 <p className="amount">{peerList[3].toLocaleString()}원</p>
               </div>
             </div>

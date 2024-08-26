@@ -3,22 +3,22 @@ import Footer from "../components/Footer";
 import profileImg from "../assets/profileImg.png"
 import "../styles/MypageMain.css";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ConsumeHistory from "./ConsumeHistory";
 import Point from "./Point";
 import MyPage from "./MyPage";
 import AddressList from "./AddressList";
-
+import ConsumeCompare from "./ConsumeCompare";
 function MypageMain({memberId}){
-
     const[memberImg, setMemberImg] = useState("");
     const[memberName, setMemberName] = useState("");
     const[weeklyMoney, setWeeklyMoney] = useState(0);
     const[check, setCheck] = useState(true);
     const [sunday, setSunday] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [selectedTab, setSelectedTab] = useState('analysis');
-
+    const location = useLocation();
+    const [selectedTab, setSelectedTab] = useState(location.state?.selectedTab || 'analysis');
+    console.log(selectedTab);
     const renderContent = () => {
         switch (selectedTab) {
             case 'analysis':
@@ -29,15 +29,20 @@ function MypageMain({memberId}){
                 return <MyPage memberId="min"/>;
             case 'address':
                 return <AddressList />;
+            case 'consumeCompare':
+                return <ConsumeCompare memberId={"min"}/>;
             default:
                 return <ConsumeHistory />;
         }
     };
-
     useEffect(() => {
         fetchMemberInfo();
     }, []);
-
+    useEffect(() => {
+        if (location.state?.selectedTab) {
+          setSelectedTab(location.state.selectedTab);
+        }
+      }, [location.state]);
     useEffect(() => {
         const getSunday = () => {
             const today = new Date();
@@ -51,28 +56,20 @@ function MypageMain({memberId}){
             const year = sundayDate.getFullYear();
             const month = String(sundayDate.getMonth() + 1).padStart(2, '0');
             const day = String(sundayDate.getDate()).padStart(2, '0');
-
             return `${year}-${month}-${day}`;
         };
-
         const sunday = getSunday();
-
         setSunday(sunday);
-
         if(sunday==endDate){
             setCheck(false);
         }
-
     }, []);
-
     console.log(sunday);
-
     // 데이터 불러오는 함수
     const fetchMemberInfo = async() => {
         try{
             const response = await axios.get(`http://localhost:9999/mypage/${memberId}`);
             const data = response.data;
-
             setMemberImg(data.memberImg);
             setMemberName(data.memberName);
             setWeeklyMoney(data.weeklyMoney);
@@ -83,7 +80,6 @@ function MypageMain({memberId}){
         }   
     };
         
-
     return(
         <div className="mymain-container">
             <div className="memberinfo">
@@ -93,13 +89,13 @@ function MypageMain({memberId}){
                 <p className="info-week">이번주 설정 금액 {weeklyMoney!=0?weeklyMoney.toLocaleString()+"원":"없음"}</p>
                 <div className="week-button">
                 {check && (
-                    <Link to='/ConsumeSet'><button>주간소비금액 설정</button></Link>
+                    <Link to='/mypage/ConsumeSet'><button>주간소비금액 설정</button></Link>
                 )}
                 </div>
             </div>
             <div className="tabs">
-                <button 
-                    className={selectedTab === 'analysis' ? 'active' : ''}
+                <button
+                    className={selectedTab === 'analysis' || selectedTab === 'consumeCompare' ? 'active' : ''}
                     onClick={() => setSelectedTab('analysis')}
                 >
                     소비분석
@@ -130,5 +126,4 @@ function MypageMain({memberId}){
         </div>
     );
 }
-
 export default MypageMain;
