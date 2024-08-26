@@ -21,6 +21,7 @@ const Footer = () => {
         setSelectedButton("home");
         break;
       case "/map":
+      case "/map/recommend":
         setSelectedButton("map");
         break;
       case "/calendar":
