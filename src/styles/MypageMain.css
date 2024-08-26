@@ -7,7 +7,7 @@
 .mymain-container{
     font-family: "OneShinhanBold";
     font-size: 15px;
-    width: 375px;
+    width: 414px;
     margin: 0 auto;
     padding: 0;
     background-color: #f2f2f7;
@@ -82,7 +82,7 @@
 
 .content{
     overflow-y: auto;
-    height: 400px;
+    height: 59vh;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
 }

@@ -22,11 +22,11 @@ function MypageMain({memberId}){
     const renderContent = () => {
         switch (selectedTab) {
             case 'analysis':
-                return <ConsumeHistory />
+                return <ConsumeHistory memberId={"min"}/>
             case 'point':
                 return <Point memberId='jeongin'/>;
             case 'rank':
-                return <MyPage />;
+                return <MyPage memberId="min"/>;
             case 'address':
                 return <AddressList />;
             default:
