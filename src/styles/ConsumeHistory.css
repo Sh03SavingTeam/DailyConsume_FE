@@ -15,7 +15,7 @@
     min-height: 120vh;
 }
 
-.content, .card {
+.card {
     font-family: "OneShinhanBold";
     background-color: white;
     border-radius:5%;

@@ -89,7 +89,7 @@ function MyPage(props) {
     };
 
     return (
-        <div className='container'>
+        <div className='rank-main-container'>
             <div className='rank-container'>
                 <div className='character-container'>
                     <div className='character-image'>
