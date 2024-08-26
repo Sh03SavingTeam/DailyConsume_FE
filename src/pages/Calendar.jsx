@@ -12,13 +12,14 @@ const CustomCalendar = () => {
   const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일"));
   const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
   const [amountList, setAmountList] = useState([]);
+  const [weeklyAchievements, setWeeklyAchievements] = useState([]); // 새로운 상태 추가
 
   // 사용자의 memberId를 동적으로 받아오는 함수
   const getMemberId = () => {
     return "user01"; // 실제 로그인 상태에서 받아온 사용자 ID를 반환해야 함
   };
 
-  // 서버에서 데이터를 가져오는 함수
+  // 서버에서 일별 결제 내역을 가져오는 함수
   const fetchAmountList = async (month, memberId) => {
     try {
       const response = await axios.get("/api/calendar/payhistory", {
@@ -39,18 +40,36 @@ const CustomCalendar = () => {
     }
   };
 
+  // 서버에서 주간 달성 여부를 가져오는 함수
+  const fetchWeeklyAchievements = async (month, memberId) => {
+    try {
+      const response = await axios.get("/api/calendar/weeklyConsume/month", {
+        params: { month, memberId },
+      });
+      console.log(response.data);
+      setWeeklyAchievements(response.data);
+    } catch (error) {
+      console.error("Failed to fetch weekly achieve data from server", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log(amountList);
+  }, [amountList]);
+
   useEffect(() => {
     const memberId = getMemberId();
     const month = moment().format("MM");
     fetchAmountList(month, memberId);
+    fetchWeeklyAchievements(month, memberId); // 주간 달성 여부 데이터도 함께 로드
   }, []);
 
   const handleDateChange = (date) => {
     setNowDate(moment(date).format("YYYY년 MM월 DD일"));
     const memberId = getMemberId();
     const month = moment(date).format("MM");
-    // const day = moment(date).format("DD");
     fetchAmountList(month, memberId);
+    fetchWeeklyAchievements(month, memberId); // 선택한 날짜에 대한 주간 달성 여부도 함께 로드
   };
 
   const handleMonthChange = ({ activeStartDate }) => {
@@ -58,30 +77,52 @@ const CustomCalendar = () => {
     setCurrentMonth(moment(activeStartDate).format("M월"));
     const memberId = getMemberId();
     fetchAmountList(newMonth, memberId);
+    fetchWeeklyAchievements(newMonth, memberId); // 월이 변경될 때 주간 달성 여부도 함께 로드
   };
 
   const f_formatDay = (locale, date) => {
     const currentDay = moment(date).format("YYYY/MM/DD");
+
     const filterData = amountList.filter((data) => data.day === currentDay);
 
-    if (filterData.length > 0) {
-      const totalAmount = filterData.reduce(
-        (sum, item) => sum + item.amount,
-        0
+    const achievementsForDay = weeklyAchievements.filter((achievement) => {
+      console.log(
+        moment(achievement["종료일"]).format("YYYY-MM-DD"),
+        currentDay
       );
-      return (
-        <div className="calendar-info">
-          <img src="/RabbitComplete.png" className="calanderRabbit-style" />
-          <span>{moment(date).format("D")}</span>
-          <span className="calendar-count">{filterData.length}건</span>
-          <span className="calendar-amount">
-            {totalAmount.toLocaleString()}
-          </span>
-        </div>
-      );
-    } else {
-      return moment(date).format("D");
-    }
+      return moment(achievement["종료일"]).format("YYYY/MM/DD") === currentDay;
+    });
+
+    return (
+      <div className="calendar-info">
+        <span>{moment(date).format("D")}</span>
+        {filterData.length > 0 && (
+          <div>
+            <span className="calendar-count">{filterData.length}건</span>
+            <span className="calendar-amount">
+              {filterData
+                .reduce((sum, item) => sum + item.amount, 0)
+                .toLocaleString()}
+            </span>
+          </div>
+        )}
+        {achievementsForDay.map((achievement, index) => {
+          console.log("Achievement:", achievement);
+          return (
+            <img
+              key={index}
+              src={
+                achievement["달성여부"] === "1"
+                  ? "../assets/RabbitComplete.png"
+                  : ""
+              }
+              className="calanderRabbit-style"
+              alt="Weekly Achievement"
+            />
+          );
+        })}
+      </div>
+    );
   };
 
   return (
