@@ -24,15 +24,15 @@ function MypageMain({memberId}){
     const renderContent = () => {
         switch (selectedTab) {
             case 'analysis':
-                return <ConsumeHistory memberId={"jeongin"}/>
+                return <ConsumeHistory memberId='jeongin'/>
             case 'point':
                 return <Point memberId='jeongin'/>;
             case 'rank':
-                return <MyPage memberId="min"/>;
+                return <MyPage memberId='jeongin'/>;
             case 'address':
                 return <AddressList />;
             case 'consumeCompare':
-                return <ConsumeCompare memberId={"min"}/>;
+                return <ConsumeCompare memberId='jeongin'/>;
             default:
                 return <ConsumeHistory />;
         }
