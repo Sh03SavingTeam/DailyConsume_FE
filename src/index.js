@@ -30,8 +30,6 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}></Route>
-      <Route path="/ConsumeHistory" element={<ConsumeHistory />}></Route>
-
       <Route path="/Calendar" element={<Calendar />}></Route>
 
       {/* 홈 */}
@@ -45,13 +43,11 @@ root.render(
       <Route path="/map/payhistory" element={<PayHistoryMap />}></Route>
 
       {/* 마이페이지 */}
-      <Route path="/mypage/consumehistory" element={<ConsumeHistory />}></Route>
       <Route path="/mypage/addrlist" element={<AddressList />}></Route>
       <Route path="/mypage/addrregister" element={<AddressRegister />}></Route>
-
-      <Route path="/ConsumeHistory" element={<ConsumeHistory memberId="min"/> }></Route>
-      <Route path="/ConsumeCompare" element={<ConsumeCompare memberId="min"/> }></Route>
-      <Route path="/ConsumeSet" element={<ConsumeSet memberId="min"/> }></Route>
+      <Route path="/mypage/consumehistory" element={<ConsumeHistory memberId="min"/> }></Route>
+      <Route path="/mypage/consumecompare" element={<ConsumeCompare memberId="min"/> }></Route>
+      <Route path="/mypage/consumeset" element={<ConsumeSet memberId="min"/> }></Route>
       <Route path="/Login" element={<ConsumeLogin />}></Route>
       <Route path="/Join" element={<ConsumeJoin />}></Route>
 
