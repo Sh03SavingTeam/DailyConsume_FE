@@ -5,7 +5,7 @@ import ApexCharts from "react-apexcharts";
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ConsumeHistory({ memberId }) {
   let [userList, setUserList] = useState([]);
@@ -18,28 +18,28 @@ function ConsumeHistory({ memberId }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9999/mypage/mycardHistory?memberId=${memberId}`) // 스프링 서버의 엔드포인트로 수정 필요
+      .get(`http://localhost:9999/mypage/mycardHistory?memberId=${memberId}`)
       .then((response) => {
         const payAmounts = response.data.map((item) => item.payAmount);
         const percentage = response.data.map((item) => item.percentage);
-        setUserList(payAmounts); // payAmount 값을 상태로 저장
+        setUserList(payAmounts);
         setUserPercentList(percentage);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []); // 빈 배열은 컴포넌트가 처음 렌더링될 때만 useEffect 실행을 의미
+  }, []);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9999/mypage/peercardHistory?memberId=${memberId}`) // 스프링 서버의 엔드포인트로 수정 필요
+      .get(`http://localhost:9999/mypage/peercardHistory?memberId=${memberId}`)
       .then((response) => {
         const payAmounts = response.data.payHistories.map(
           (item) => item.payAmount
         );
         setAge(response.data.age);
         setCurrentMonth(response.data.currentMonth);
-        setPeerList(payAmounts); // payAmount 값을 상태로 저장
+        setPeerList(payAmounts);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -92,6 +92,8 @@ function ConsumeHistory({ memberId }) {
     },
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="container">
       <div className="total-payment">
@@ -108,7 +110,7 @@ function ConsumeHistory({ memberId }) {
         </div>
       </div>
       <div className="content">
-        <h2>카테고리별 소비 비교</h2>
+        <h3>카테고리별 소비 비교 <button onClick={() => navigate('/mypage/consumeCompare')} className="plus" >+</button></h3>
         <ApexCharts
           type="bar"
           series={[
@@ -182,7 +184,7 @@ function ConsumeHistory({ memberId }) {
         />
       </div>
       <div className="content">
-        <h2>나의 소비 별 통계</h2>
+        <h3>나의 소비 별 통계</h3>
         <Link to='/MyPage/DiscountInfo'><button class="content-discount">나를 위한 할인 정보 보러가기</button></Link>
         <ApexCharts
           options={donutData.options}
