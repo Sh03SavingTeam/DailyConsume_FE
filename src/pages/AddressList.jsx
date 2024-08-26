@@ -93,7 +93,7 @@ function AddressList(props) {
       method: "get",
       url: "/api/address/addrList",
       params: {
-        memberId: "abcd",
+        memberId: "bih63879",
       },
     }).then((response) => {
       console.log(response.data);
@@ -124,6 +124,7 @@ function AddressList(props) {
         closePopUp();
       });
     }
+    window.location.reload();
   };
 
   // Radio 버튼 선택 처리
@@ -135,7 +136,7 @@ function AddressList(props) {
       method: "put",
       url: "/api/address/changeDefaultAddr",
       params: {
-        memberId: "abcd",
+        memberId: "bih63879",
         addrId: addrId,
       },
     })
@@ -166,10 +167,10 @@ function AddressList(props) {
           <table>
             <thead>
               <tr>
-                <th></th>
+                <th className="defaultSelectArea"></th>
                 <th>별명</th>
                 <th>주소</th>
-                <th></th>
+                <th className="DeleteArea"></th>
               </tr>
             </thead>
             <tbody>

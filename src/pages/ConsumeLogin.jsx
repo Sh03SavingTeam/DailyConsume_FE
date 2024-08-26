@@ -86,7 +86,7 @@ function ConsumeLogin(props) {
           </label>
           <div className="col-lg-6">
             <input
-              type="text"
+              type="password"
               name="memberPw"
               className="form-control"
               required
