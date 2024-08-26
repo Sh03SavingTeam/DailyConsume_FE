@@ -77,7 +77,7 @@ function RankInfo({ setIsVisable }) {
     };
 
     return (
-        <div className="container sec_container">
+        <div className="rinfo-container sec_container">
             <div className='prev-btn' onClick={clickPrevHandler}>&lt;</div>
             <div className="benefit-container">
                 <div className="benefit-rank-info">

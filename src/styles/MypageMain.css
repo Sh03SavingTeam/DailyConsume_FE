@@ -8,11 +8,12 @@
     font-family: "OneShinhanBold";
     font-size: 15px;
     width: 375px;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     background-color: #f2f2f7;
     min-height: 100vh;
     overflow: auto;
+    width: 100%;
 }
 
 .memberinfo{
@@ -82,7 +83,7 @@
 
 .content{
     overflow-y: auto;
-    height: 400px;
+    height: 63.5vh;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
 }
