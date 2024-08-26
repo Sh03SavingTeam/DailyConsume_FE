@@ -16,7 +16,7 @@ const RankerCalendar = ({ memberId }) => {
   // 서버에서 데이터를 가져오는 함수
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get("/api/calendar/payhistory", {
+      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
         params: { month, memberId },
       });
       const fetchedData = response.data.map((item) => ({

@@ -9,6 +9,7 @@ import axios from 'axios';
 import RankInfo from './RankInfo';
 import RankerCalendar from './RankerCalendar'; 
 
+
 function MyPage(props) {
     const date = new Date(); 
     const month = date.getMonth() + 1;
