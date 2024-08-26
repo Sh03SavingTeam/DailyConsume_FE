@@ -250,3 +250,11 @@ input.form-control {
 .col-form-label{
     font-family: "OneShinhanBold";
 }
+
+.content-discount{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 50%;
+    margin-left: 125px;
+}
