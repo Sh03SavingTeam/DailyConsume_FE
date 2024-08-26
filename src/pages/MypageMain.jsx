@@ -9,6 +9,7 @@ import Point from "./Point";
 import MyPage from "./MyPage";
 import AddressList from "./AddressList";
 import ConsumeCompare from "./ConsumeCompare";
+
 function MypageMain({memberId}){
     const[memberImg, setMemberImg] = useState("");
     const[memberName, setMemberName] = useState("");
@@ -19,10 +20,11 @@ function MypageMain({memberId}){
     const location = useLocation();
     const [selectedTab, setSelectedTab] = useState(location.state?.selectedTab || 'analysis');
     console.log(selectedTab);
+
     const renderContent = () => {
         switch (selectedTab) {
             case 'analysis':
-                return <ConsumeHistory memberId={"min"}/>
+                return <ConsumeHistory memberId={"jeongin"}/>
             case 'point':
                 return <Point memberId='jeongin'/>;
             case 'rank':
@@ -44,6 +46,12 @@ function MypageMain({memberId}){
         }
       }, [location.state]);
     useEffect(() => {
+        if (location.state?.selectedTab) {
+          setSelectedTab(location.state.selectedTab);
+        }
+      }, [location.state]);
+
+    useEffect(() => {
         const getSunday = () => {
             const today = new Date();
             const dayOfWeek = today.getDay(); // 일요일 = 0, 월요일 = 1, ..., 토요일 = 6
@@ -60,10 +68,19 @@ function MypageMain({memberId}){
         };
         const sunday = getSunday();
         setSunday(sunday);
-        if(sunday==endDate){
-            setCheck(false);
-        }
+
     }, []);
+
+    useEffect(() => {
+        if (sunday && endDate) {  // 둘 다 유효한 값일 때만 비교
+            if (sunday === endDate) {
+                setCheck(false);
+            } else {
+                setCheck(true);  // 혹시 이전에 false로 잘못 설정된 상태를 다시 true로 돌려놓기 위해 추가
+            }
+        }
+    }, [sunday, endDate]);
+
     console.log(sunday);
     // 데이터 불러오는 함수
     const fetchMemberInfo = async() => {

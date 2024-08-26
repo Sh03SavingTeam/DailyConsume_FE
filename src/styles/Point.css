@@ -16,8 +16,15 @@
     margin: 0 auto;
     padding: 0;
     background-color: white;
-    min-height: 100vh;
-    padding-bottom: 70px;
+    height: 63.5vh;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+    margin-bottom: 10px;
+}
+
+.point-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 
 .point-header {
@@ -56,6 +63,7 @@
     height: 40px;
     width: 80%;
     margin: 0 auto;
+    margin-top: 10px;
 }
 
 .balance p {

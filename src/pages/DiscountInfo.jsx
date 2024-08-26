@@ -21,25 +21,6 @@ function DiscountInfo({ memberId }) {
     const month = String(now.getMonth()+1).padStart(2,'0');
     const day = new Date(year, month, 0).getDate();
 
-     // const discounts=[
-    //     {
-    //         "storeName": "CU",
-    //         "productName": "2080)센서티브미세모",
-    //         "amount": "3,200 원",
-    //         "productContent": "1+1",
-    //         "productCategory": "생활용품",
-    //         "prodImg": "https://tqklhszfkvzk6518638.cdn.ntruss.com/product/8801046860458.jpg"
-    //     },
-    //     {
-    //         "storeName": "CU",
-    //         "productName": "2080)슈퍼클린초극세모",
-    //         "amount": "2,000 원",
-    //         "productContent": "1+1",
-    //         "productCategory": "생활용품",
-    //         "prodImg": "https://tqklhszfkvzk6518638.cdn.ntruss.com/product/8801046356807.png"
-    //     }
-    // ];
-
     // 데이터 불러오는 함수
     const fetchDiscountInfos = async (page) => {
         try {
@@ -69,11 +50,6 @@ function DiscountInfo({ memberId }) {
         setPage((prevPage) => prevPage + 1);
     };
 
-    // 뒤로 가기 버튼 클릭 시 이전 페이지로 이동
-     const backClick = () => {
-        navigate(-1); // Go back to the previous page
-    };
-
     return (
         <div className="discount-container">
             <div className="discount-title">이번달은 <span>{category}</span>에 <br/>가장 많은 돈을 썼어요</div>
@@ -85,11 +61,8 @@ function DiscountInfo({ memberId }) {
                     <div className="info">
                         <p className="storeName">{item.storeName}</p>
                         <p className="productName">{item.productName}</p>
-                        <p className="amount">{item.amount}</p>
+                        <p className="amount">{item.amount} ({item.productContent})</p>
                         <p className="expiry">~{year}.{month}.{day}</p>
-                    </div>
-                    <div className="tag">
-                        <div className="productContent">{item.productContent}</div>
                     </div>
                 </div>
             ))}

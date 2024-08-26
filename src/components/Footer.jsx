@@ -79,7 +79,7 @@ const Footer = () => {
           캘린더
         </button>
         <button
-          onClick={() => handleButtonClick("mypage", "/MyPage/AddrList")}
+          onClick={() => handleButtonClick("mypage", "/MyPage")}
           className={selectedButton === "mypage" ? "selected" : ""}
         >
           <img src={getButtonImage("mypage")} alt="My Page" />

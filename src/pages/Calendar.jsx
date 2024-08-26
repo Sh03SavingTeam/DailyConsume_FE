@@ -10,7 +10,6 @@ import AmountListForDay from "../hooks/AmountListForDay";
 import RabbitCompleteImage from "../assets/RabbitComplete.png"; // 이미지 파일 import
 import RabbitFail from "../assets/RabbitFail.png";
 import RabbitEmpty from "../assets/RabbitEmpty.png";
-
 const CustomCalendar = () => {
   const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일"));
   const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
@@ -34,7 +33,6 @@ const CustomCalendar = () => {
       setAmountList([]);
     }
   };
-
   const fetchWeeklyAchievements = async (month, memberId) => {
     try {
       const response = await axios.get("/api/calendar/weeklyConsume/month", {
@@ -46,14 +44,12 @@ const CustomCalendar = () => {
       setWeeklyAchievements([]); // 에러가 발생하면 빈 배열로 설정
     }
   };
-
   useEffect(() => {
     const memberId = getMemberId();
     const month = moment().format("MM");
     fetchAmountList(month, memberId);
     fetchWeeklyAchievements(month, memberId);
   }, []);
-
   const handleDateChange = (date) => {
     setNowDate(moment(date).format("YYYY년 MM월 DD일"));
     const memberId = getMemberId();
@@ -61,7 +57,6 @@ const CustomCalendar = () => {
     fetchAmountList(month, memberId);
     fetchWeeklyAchievements(month, memberId);
   };
-
   const handleMonthChange = ({ activeStartDate }) => {
     const newMonth = moment(activeStartDate).format("MM");
     setCurrentMonth(moment(activeStartDate).format("M월"));
@@ -69,11 +64,9 @@ const CustomCalendar = () => {
     fetchAmountList(newMonth, memberId);
     fetchWeeklyAchievements(newMonth, memberId);
   };
-
   const f_formatDay = (locale, date) => {
     const currentDay = moment(date).format("YYYY/MM/DD");
     const filterData = amountList.filter((data) => data.day === currentDay);
-
     const achievementsForDay = (weeklyAchievements || []).filter(
       (achievement) => {
         return (
@@ -81,20 +74,23 @@ const CustomCalendar = () => {
         );
       }
     );
-
     return (
       <div className="calendar-info">
-        {achievementsForDay.map((achievement, index) => (
-          <img
-            key={index}
-            src={
-              achievement["달성여부"] === "1" ? RabbitCompleteImage : RabbitFail
-            }
-            className="calanderRabbit-style"
-            alt="Weekly Achievement"
-          />
-        ))}
-        <span>{moment(date).format("D")}</span>
+        <span>
+          {achievementsForDay.map((achievement, index) => (
+            <img
+              key={index}
+              src={
+                achievement["달성여부"] === "1"
+                  ? RabbitCompleteImage
+                  : RabbitFail
+              }
+              className="calanderRabbit-style"
+              alt="Weekly Achievement"
+            />
+          ))}
+          {moment(date).format("D")}
+        </span>
         {filterData.length > 0 && (
           <div>
             <span className="calendar-count">{filterData.length}건</span>
@@ -108,13 +104,12 @@ const CustomCalendar = () => {
       </div>
     );
   };
-
   return (
     <div className="app-container">
       <h1> 소비 캘린더 </h1>
       <div className="main-content">
         <div className="calendar-container">
-          <h2 className="month-title">{currentMonth}</h2>
+          {/* <h2 className="month-title">{currentMonth}</h2> */}
           <Calendar
             onChange={handleDateChange}
             value={moment(nowDate, "YYYY년 MM월 DD일").toDate()}
@@ -129,5 +124,4 @@ const CustomCalendar = () => {
     </div>
   );
 };
-
 export default CustomCalendar;
