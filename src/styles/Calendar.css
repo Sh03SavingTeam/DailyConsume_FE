@@ -10,7 +10,6 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
-
 .month-title {
   align-self: flex-start;
   margin-left: 0;
@@ -18,14 +17,12 @@
   font-weight: bold;
   margin-bottom: 20px;
 }
-
 .react-calendar {
   width: 100%;
   background-color: transparent;
   border: none;
   box-shadow: none;
 }
-
 .react-calendar__month-view__weekdays {
   display: flex;
   justify-content: space-around;
@@ -36,31 +33,26 @@
   border-bottom: 2px solid #e0e0e0;
   margin-bottom: 10px;
 }
-
 .react-calendar__month-view__weekdays__weekday {
   text-decoration: none;
   width: 14.28%;
 }
-
 .react-calendar__month-view__weekdays__weekday abbr {
   text-decoration: none;
   border-bottom: none;
 }
-
 .react-calendar__tile {
-  width: 100px; /* 기본 너비 설정 */
-  height: 20%; /* 기본 높이 설정 */
+  width: 100px;
+  height: 70px; /* 높이를 충분히 크게 설정 */
   text-align: center;
   padding: 5px;
   font-size: 1rem;
-  border-radius: 15%; /* 원형으로 만듦 */
-  display: grid;
+  border-radius: 15%;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* 아이템들을 위쪽으로 정렬 */
   align-items: center;
   box-sizing: border-box;
-  grid-template-rows: 1fr auto; /* 첫 번째 행은 가변, 두 번째 행은 고정 */
-  align-items: center; /* 가운데 정렬 */
 }
 
 .react-calendar__tile--active {
@@ -69,32 +61,26 @@
   border-radius: 15%;
   font-weight: bold;
 }
-
 .react-calendar__tile--now {
   background-color: #94dbe0;
   border-radius: 15%;
   color: #ff0000;
   font-weight: bold;
 }
-
 .react-calendar__tile--hasActive {
   background-color: #cfeff9;
 }
-
 .react-calendar__tile--active:enabled:hover {
   background-color: #b6e0f2;
 }
-
 .react-calendar__tile--active:enabled:focus {
   background-color: #b6e0f2;
 }
-
 .react-calendar__tile abbr {
   display: block;
   margin-bottom: 5px;
   align-self: center;
 }
-
 /* 월, 화, 수, 목, 금 스타일 (검은색) */
 .react-calendar__month-view__weekdays__weekday:nth-child(1),
 .react-calendar__month-view__weekdays__weekday:nth-child(2),
@@ -103,13 +89,11 @@
 .react-calendar__month-view__weekdays__weekday:nth-child(5) {
   color: black;
 }
-
 /* 토요일 스타일, 일요일 스타일 (빨간색) */
 .react-calendar__month-view__weekdays__weekday:nth-child(6),
 .react-calendar__month-view__weekdays__weekday:nth-child(7) {
   color: red;
 }
-
 /* .react-calendar button {
   position: relative;
 }
@@ -118,7 +102,6 @@
   top: 0;
   left: 0;
 } */
-
 .calendar-info {
   display: flex;
   flex-direction: column;
@@ -126,7 +109,6 @@
   vertical-align: top;
   position: relative;
 }
-
 .calendar-info img {
   z-index: 1;
   width: 200%;
@@ -136,57 +118,47 @@
   top: -45%;
   left: -45%;
 }
-
 .calendar-info span {
   z-index: 0;
   position: relative;
 }
-
 .react-calendar__navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 0; /* 상하 패딩을 추가하여 높이를 키웁니다 */
 }
-
 .react-calendar__navigation button {
   min-width: 44px; /* 버튼 크기 증가 */
   background: none;
   font-size: 1.2rem; /* 버튼의 텍스트 크기를 증가 */
   cursor: pointer;
 }
-
 .react-calendar__navigation__label {
   font-size: 1.5rem; /* 월과 년도의 텍스트 크기 증가 */
   font-weight: bold;
 }
-
 /* .calendar-info span {
   background-image: url("../assets/RabbitFail.png");
 } */
-
 .calendar-count {
   font-size: 0.7rem;
   color: #555;
 }
-
 .calendar-amount {
   font-size: 0.6rem;
   color: #333;
 }
-
 .calendar-divider {
   width: 100%;
   border: none;
   border-top: 2px solid #e0e0e0;
   margin-top: 20px;
 }
-
 .amount-list-half {
   width: 100%;
   margin-top: 5px;
 }
-
 .amount-list-item {
   display: flex;
   justify-content: space-between;
@@ -196,16 +168,13 @@
   border-bottom: 1px solid #e0e0e0;
   font-size: 1rem;
 }
-
 .amount-list-item .amount {
   font-weight: bold;
 }
-
 .amount-list-item .description {
   color: #888;
   font-size: 0.9rem;
 }
-
 .calanderRabbit-style {
   width: 40px;
   height: 40px;
