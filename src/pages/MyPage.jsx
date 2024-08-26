@@ -124,7 +124,7 @@ function MyPage(props) {
                     </div>
                 </div>
             </div>
-            <div className='list-container'>
+            <div className={`list-container ${isVisable && 'isVisable'}`}>
                 <div className='text-wrap'>
                     전체 랭킹 
                 </div>
