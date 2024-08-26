@@ -8,6 +8,7 @@ import CardDeltePopUp from "../components/CustomPopUp";
 import DefaultAddrUpdatePopUp from "../components/CustomPopUp";
 import axios from "axios";
 import "../styles/addrList.css";
+import { checkJWT } from "services/checkJWT";
 
 const Title = styled.h2`
   margin-bottom: 20px;
@@ -89,23 +90,48 @@ function AddressList(props) {
 
   //memberId가 'abcd'인 주소 데이터 조회
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "/api/address/addrList",
-      params: {
-        memberId: "bih63879",
-      },
-    }).then((response) => {
-      console.log(response.data);
-      const addressList = response.data;
-      setAddrList(addressList);
+    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+      console.log("JWT 확인 결과" + response.memberId);
+      const fetchedMemberId = response.memberId;
 
-      // 기본 주소 설정: addr_default 값이 1인 항목
-      const defaultAddress = addressList.find((item) => item.addrDefault === 1);
-      if (defaultAddress) {
-        setSelectedAddrId(defaultAddress.addrId); // 기본 주소의 ID를 선택된 상태로 설정
-      }
+      axios({
+        method: "get",
+        url: "/api/address/addrList",
+        params: {
+          memberId: fetchedMemberId,
+        },
+      }).then((response) => {
+        console.log(response.data);
+        const addressList = response.data;
+        setAddrList(addressList);
+
+        // 기본 주소 설정: addr_default 값이 1인 항목
+        const defaultAddress = addressList.find(
+          (item) => item.addrDefault === 1
+        );
+        if (defaultAddress) {
+          setSelectedAddrId(defaultAddress.addrId); // 기본 주소의 ID를 선택된 상태로 설정
+        }
+      });
     });
+
+    // axios({
+    //   method: "get",
+    //   url: "/api/address/addrList",
+    //   params: {
+    //     memberId: "bih63879",
+    //   },
+    // }).then((response) => {
+    //   console.log(response.data);
+    //   const addressList = response.data;
+    //   setAddrList(addressList);
+
+    //   // 기본 주소 설정: addr_default 값이 1인 항목
+    //   const defaultAddress = addressList.find((item) => item.addrDefault === 1);
+    //   if (defaultAddress) {
+    //     setSelectedAddrId(defaultAddress.addrId); // 기본 주소의 ID를 선택된 상태로 설정
+    //   }
+    // });
   }, []);
 
   const handleDeleteAddr = () => {
