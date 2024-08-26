@@ -27,9 +27,10 @@ function ConsumeSet({ memberId }) {
     try {
       const amount = selectedAmount.replace(/,/g, "").replace("원", "");
       const response = await axios.post(
-        `http://localhost:9999/mypage/myweeklymoney?memberId=min&weeklyMoney=${amount}`
+        `http://localhost:9999/mypage/myweeklymoney?memberId=${memberId}&weeklyMoney=${amount}`
       );
       console.log(response.data);
+      window.location.href = '/mypage';
     } catch (error) {
       console.error("실패", error);
     }
