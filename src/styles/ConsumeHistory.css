@@ -5,47 +5,72 @@
     src: url("../fonts/OneShinhanBold.ttf") format("truetype");
   }
 
-.container{
-    height: auto;
+.container {
+    height: 115vh;
+    overflow-y: auto;
     min-height: 115vh; /*115vh*/
     background-color: #f8f8fdbf;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
 }
 
-.con2{
+.container::-webkit-scrollbar {
+display: none; /* Chrome, Safari, Opera*/
+}
+.container2 {
+    height: 115vh;
+    overflow-y: auto;
+    min-height: 115vh; /*115vh*/
+    background-color: #f8f8fdbf;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+}
+.container2::-webkit-scrollbar {
+display: none; /* Chrome, Safari, Opera*/
+}
+
+.con2 {
     min-height: 120vh;
+    overflow-y: auto;
 }
 
-.content, .card {
+.card {
     font-family: "OneShinhanBold";
     background-color: white;
-    border-radius:5%;
+    border-radius: 20px;
     box-shadow: 5px 5px 5px lightgray;
-    padding: auto;
+    margin: 5%;
+    padding-top: 3%;
+    padding-bottom: 1%;
+    margin-bottom: 10px;
 }
-
-.card{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+#test{
+    height:auto;
+}
+.plus {
+    background-color: #303473;
+    font-family: "OneShinhanBold";
+    color: whitesmoke;
+    border-radius:20%;
 }
 
 .card-header {
-    height: 24px;
+    height: fit-content;
     line-height: 24px;
     background-color: #303473;
     border-radius:20px;
     margin: auto;
-    width: 55%;
-    padding: 15px;
+    width: 70%;
+    padding: 2%;
     
 }
 
 .savings {
-    font-size: 18px;
+    font-size: 13px;
     font-weight: bold;
     color: whitesmoke;
     text-align: center;
-    height: 24px;
+    height: 20px;
     line-height: 24px;
 }
 
@@ -60,7 +85,7 @@
 }
 
 .my-expense, .peer-expense {
-    width: 40%;
+    width: 50%;
     float: left;
 }
 
@@ -78,8 +103,12 @@
     padding-right: 10%;
 }
 
+.p-num{
+    font-size: 13px;
+}
+
 .amount {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: bold;
     color: #303473;
     margin-top: 5px;
@@ -103,22 +132,26 @@
     
 }
 
-h2 {
-    padding: 4%;
+h3 {
+    text-align: center;
 }
 
 .set{
-    padding: 0%;
-    
+    font-size: large;
+}
+
+.p-set{
+    font-size: 16px;
 }
 
 .total-payment, .title{
     font-family: "OneShinhanBold";
     background: #fff;
     border-radius: 15px;
-    padding: 20px;
+    padding: 3%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin: 5%;
+    margin-bottom: 0%;
 }
 .center{
     text-align: center;
@@ -126,6 +159,7 @@ h2 {
 .header {
     font-weight: bold;
     padding: 0px;
+    font-size: large;
 }
 
 .amounts {
@@ -135,13 +169,12 @@ h2 {
 }
 
 .amounts div {
-    font-size: 18px;
+    font-size: 14px;
 }
 /* ************************************************* */
 .dropdown {
     font-family: "OneShinhanBold";
     position: relative;
-    padding-top: 10%;
     margin: 0 auto;
     text-align: center;
    
@@ -152,10 +185,10 @@ h2 {
     background-color: #a7d9db;
     color: #42456d;
     padding: 15px;
-    font-size: 20px;
+    font-size: 15px;
     border: none;
     cursor: pointer;
-    width: 70%; 
+    width: 50%; 
     text-align: center;
     border-radius: 15px;
 }
@@ -164,7 +197,7 @@ h2 {
     display: block;
     position: relative;
     background-color: #F4FEFF;
-    width: 70%;
+    width: 58%;
     /* min-width: 280px; */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -179,7 +212,7 @@ h2 {
     text-decoration: none;
     display: block;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .dropdown-content p:hover {
@@ -190,15 +223,15 @@ h2 {
 
 .select {
     font-family: "OneShinhanBold";
-    margin-top: 10%; /* 드롭다운 메뉴와 버튼 사이에 여유 공간을 추가 */
-    padding: 15px;
-    font-size: 20px;
+    margin-top: 5%; /* 드롭다운 메뉴와 버튼 사이에 여유 공간을 추가 */
+    padding: 1%;
+    font-size: 18px;
     background-color: #303473; /* 버튼 배경색 설정 */
     color: white;
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
     cursor: pointer;
-    width: 50%;
+    width: 30%;
     text-align: center;
     display: block;
     margin-left: auto;
@@ -237,4 +270,23 @@ input.form-control {
 }
 .col-form-label{
     font-family: "OneShinhanBold";
+}
+
+.content{
+    text-align: center;
+}
+
+.content-discount{
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    margin-left: 125px;
+}
+
+.back-button2 {
+    background-color: #303473;
+    color: white;
+    border-radius: 20px;
+    margin-left: 2%;
+    margin-top: 1%;
 }

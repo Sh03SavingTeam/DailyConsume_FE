@@ -15,7 +15,9 @@ const CustomCalendar = () => {
   const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
   const [amountList, setAmountList] = useState([]);
   const [weeklyAchievements, setWeeklyAchievements] = useState([]);
+
   const getMemberId = () => "user01"; // 실제 로그인 상태에서 받아온 사용자 ID를 반환해야 함
+
   const fetchAmountList = async (month, memberId) => {
     try {
       const response = await axios.get("/api/calendar/payhistory", {

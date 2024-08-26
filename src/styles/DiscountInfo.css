@@ -11,21 +11,31 @@
     padding: 0;
     background-color: white;
     min-height: 100vh;
+    max-width: 414px;
     padding-bottom: 70px;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.discount-container::-webkit-scrollbar {
+display: none; /* Chrome, Safari, Opera*/
 }
 
 .discount-title {
   font-size: 20px;
   color: #333;
   margin-top:40px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   margin-left: 40px;
   text-align: left;
 }
 
 .discount-body{
-  background-color:#f8f8fdbf;
-  max-width: 375px;
+  margin-top: 20px;
+  background-color: #f2f2f7;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .discount-title span {
@@ -38,7 +48,6 @@
   font-size: 15px;
   margin-left:23px;
 }
-
 
 .discount-item {
   position: relative;
@@ -74,26 +83,11 @@
   color: #333;
   white-space: nowrap; 
   text-overflow: ellipsis;
+  word-break: break-all;
 }
 
 .amount {
   color: #333;
-}
-
-.tag {
-  font-size:15px;
-  position: absolute;
-  top: 7%;
-  right: 7%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.productContent {
-  color: #333;
-  padding: 5px 10px;
 }
 
 .discount-button {
