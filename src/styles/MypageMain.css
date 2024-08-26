@@ -13,6 +13,7 @@
     background-color: #f2f2f7;
     min-height: 100vh;
     overflow: auto;
+    width: 100%;
 }
 
 .memberinfo{
@@ -82,7 +83,7 @@
 
 .content{
     overflow-y: auto;
-    height: 59vh;
+    height: 63.5vh;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
 }

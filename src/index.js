@@ -59,6 +59,7 @@ root.render(
       <Route path="/MyPage/Refund/Confirm" element={<Refundconfirm/>}></Route>
 
       <Route path="/rank/AddrList" element={<AddressList />}></Route>
+      <Route path="/rank" element={<MyPage/>}></Route>
       <Route path="/rank/benefits/:memberId" element={<RankInfo/>}></Route>
     </Routes>
   </BrowserRouter>
