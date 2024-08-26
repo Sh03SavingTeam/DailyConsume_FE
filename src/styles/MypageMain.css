@@ -14,6 +14,7 @@
     min-height: 100vh;
     overflow: auto;
     width: 100%;
+    max-width: 414px;
 }
 
 .memberinfo{
@@ -40,6 +41,10 @@
 .info-name, .info-week, .week-button{
     margin: 0 auto;
     margin-bottom: 5px;
+}
+
+.week-button button{
+    cursor: pointer;
 }
 
 .info-name-big{

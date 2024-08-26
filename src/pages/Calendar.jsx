@@ -17,7 +17,7 @@ const CustomCalendar = () => {
   const [amountList, setAmountList] = useState([]);
   const [weeklyAchievements, setWeeklyAchievements] = useState([]);
 
-  const getMemberId = () => "user01"; // 실제 로그인 상태에서 받아온 사용자 ID를 반환해야 함
+  const getMemberId = () => "jeongin"; // 실제 로그인 상태에서 받아온 사용자 ID를 반환해야 함
 
   const fetchAmountList = async (month, memberId) => {
     try {
@@ -84,7 +84,8 @@ const CustomCalendar = () => {
 
     return (
       <div className="calendar-info">
-        {achievementsForDay.map((achievement, index) => (
+        
+        <span>{achievementsForDay.map((achievement, index) => (
           <img
             key={index}
             src={
@@ -93,8 +94,7 @@ const CustomCalendar = () => {
             className="calanderRabbit-style"
             alt="Weekly Achievement"
           />
-        ))}
-        <span>{moment(date).format("D")}</span>
+        ))}{moment(date).format("D")}</span>
         {filterData.length > 0 && (
           <div>
             <span className="calendar-count">{filterData.length}건</span>
