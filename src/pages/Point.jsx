@@ -52,10 +52,10 @@ function Point({ memberId }){
 
     return (
     <div className="point-container">
-        <div className="point-header">
+        {/* <div className="point-header">
             <h2>포인트</h2>
             <a className="back-button" onClick={backClick}>&lt;</a>
-        </div>
+        </div> */}
 
         <div className="balance">
             <Link to='/MyPage/Refund'><button>환급받기</button></Link>

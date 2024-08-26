@@ -1,6 +1,6 @@
 .amount-list {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
 .date-header {
@@ -64,4 +64,16 @@
 .no-data {
   color: #888;
   font-style: italic;
+}
+
+.weekly-budget {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.WeekBudgetAmount {
+  font-size: 1rem; /* 폰트 크기를 크게 조정 */
+  margin-top: 10px; /* 위 텍스트와의 간격을 조정 */
+  text-align: center; /* 텍스트를 중앙 정렬 */
 }

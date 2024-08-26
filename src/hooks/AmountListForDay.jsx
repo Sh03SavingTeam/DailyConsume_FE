@@ -8,15 +8,14 @@ function AmountListForDay({ initialDay }) {
   const [day, setDay] = useState(initialDay);
   const [orderList, setOrderList] = useState([]);
   const [error, setError] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null); // 선택된 항목
-  const [isDetailVisible, setIsDetailVisible] = useState(false); // 상세보기 표시 상태
-  const [weeklyBudget, setWeeklyBudget] = useState(null); // 주간 소비 잔액 상태
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isDetailVisible, setIsDetailVisible] = useState(false);
+  const [weeklyBudget, setWeeklyBudget] = useState(null);
 
   useEffect(() => {
     setDay(initialDay);
   }, [initialDay]);
 
-  // fetchOrderList 함수 정의를 useEffect 외부로 이동
   const fetchOrderList = async () => {
     try {
       const formattedDate = moment(day, "YYYY년 MM월 DD일");
@@ -28,7 +27,7 @@ function AmountListForDay({ initialDay }) {
         "http://localhost:9999/api/calendar/payhistory/daily",
         {
           params: {
-            memberId: "user01", // 실제 로그인 사용자 ID로 변경
+            memberId: "user01",
             day: dayOfMonth,
             month: month,
             year: year,
@@ -41,8 +40,8 @@ function AmountListForDay({ initialDay }) {
         time: moment(item.payDate).format("HH:mm:ss"),
         amount: item.payAmount,
         description: item.storeName || "Unknown Store",
-        myPayCheck: item.myPayCheck, // 본인 결제 여부 추가
-        type: item.myPayCheck === 1 ? "normal" : "suspicious", // 정상/이상 결제 구분
+        myPayCheck: item.myPayCheck,
+        type: item.myPayCheck === 1 ? "normal" : "suspicious",
       }));
 
       setOrderList(fetchedData);
@@ -52,7 +51,6 @@ function AmountListForDay({ initialDay }) {
     }
   };
 
-  // 주간 소비 잔액 데이터를 가져오는 함수
   const fetchWeeklyBudget = async () => {
     try {
       const formattedDate = moment(day, "YYYY년 MM월 DD일");
@@ -64,7 +62,7 @@ function AmountListForDay({ initialDay }) {
         "http://localhost:9999/api/calendar/payweekly",
         {
           params: {
-            memberId: "user01", // 실제 로그인 사용자 ID로 변경
+            memberId: "user01",
             year: year,
             month: month,
             day: dayOfMonth,
@@ -72,7 +70,7 @@ function AmountListForDay({ initialDay }) {
         }
       );
 
-      setWeeklyBudget(response.data); // 주간 소비 잔액 데이터 저장
+      setWeeklyBudget(response.data);
     } catch (err) {
       setError("Failed to fetch weekly budget data");
       console.error(err);
@@ -81,28 +79,40 @@ function AmountListForDay({ initialDay }) {
 
   useEffect(() => {
     fetchOrderList();
-    fetchWeeklyBudget(); // 주간 소비 잔액 데이터 가져오기
+    fetchWeeklyBudget();
   }, [day]);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  const formattedDay = moment(day, "YYYY년 MM월 DD일").format("YY.MM.DD");
+  useEffect(() => {
+    return () => {
+      setOrderList([]);
+      setWeeklyBudget(null);
+    };
+  }, [initialDay]);
 
   const handleItemClick = (item) => {
-    setSelectedItem({ ...item, memberId: "user01" }); // memberId 추가
+    setSelectedItem({ ...item, memberId: "user01" });
     setIsDetailVisible(true);
   };
 
   const handleCloseDetail = () => {
     setIsDetailVisible(false);
     setSelectedItem(null);
-    fetchOrderList(); // 상세보기 닫을 때 목록 새로고침
+    fetchOrderList();
   };
+
+  const formattedDay = moment(day, "YYYY년 MM월 DD일").format("YY.MM.DD");
 
   return (
     <div className="amount-list">
+      <div className="detail-item">
+        <div className="weekly-budget">
+          주간소비잔여금액 :{" "}
+          {weeklyBudget
+            ? `${weeklyBudget.잔여금액.toLocaleString()}원`
+            : "Loading..."}
+        </div>
+      </div>
+      <hr />
       <div className="date-header">{formattedDay}</div>
       <ul>
         {orderList.length > 0 ? (
@@ -121,7 +131,7 @@ function AmountListForDay({ initialDay }) {
               </div>
               <div className="item-details">
                 <span className="time">{item.time}</span>
-                <span className="amount">{item.amount}원</span>
+                <span className="amount">{item.amount.toLocaleString()}원</span>
                 <span className="description">{item.description}</span>
               </div>
             </li>
@@ -134,10 +144,6 @@ function AmountListForDay({ initialDay }) {
         <AmountDetail item={selectedItem} onClose={handleCloseDetail} />
       )}
       <hr />
-      <div className="detail-item weekly-budget">
-        <strong>주간소비잔여금액:</strong>{" "}
-        {weeklyBudget ? `${weeklyBudget.잔여금액}원` : "Loading..."}
-      </div>
     </div>
   );
 }
