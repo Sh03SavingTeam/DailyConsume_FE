@@ -130,10 +130,7 @@ function ConsumeJoin(props) {
   return (
     <div className="app-container">
       <div className="main-content">
-        <div className="title">
-          <h2 className="set">하루소비 회원가입</h2>
-          <p>아래 정보를 입력해주세요.</p>
-        </div>
+        <h2 className="set">회원가입</h2>
         <div className="col-xl-6">
           <div className="form-group mb-3 row">
             <label className="col-lg-4 col-form-label" htmlFor="val-userphoto">
@@ -144,13 +141,14 @@ function ConsumeJoin(props) {
                 type="file"
                 accept="image/*"
                 name="memberImg"
+                className="profileRegImg"
                 onChange={handleImageChange}
               />
             </div>
             <img
               src={previewUrl}
               alt="이미지 미리보기"
-              style={{ width: "300px", height: "auto" }}
+              style={{ width: "100px", height: "auto" }}
             />
           </div>
           <div className="form-group mb-3 row">

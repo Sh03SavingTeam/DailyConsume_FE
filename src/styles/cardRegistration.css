@@ -108,6 +108,14 @@ select {
   font-size: 14px;
 }
 
+.pwStyle {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
 .radio-group {
   margin-bottom: 10px;
   display: flex;
@@ -123,6 +131,7 @@ select {
   color: #fff;
   border: none;
   padding: 10px 20px;
+  margin-bottom: 10px;
   border-radius: 30px;
   cursor: pointer;
   font-size: 16px;

@@ -1,7 +1,6 @@
 import "../App.css";
-import "../styles/ConsumeHistory.css";
 import Footer from "../components/Footer";
-//import axios from 'axios';
+import "../styles/cardRegistration.css";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -55,52 +54,51 @@ function ConsumeLogin(props) {
   const handleMemberRegister = () => {
     navigate("/Join");
   };
+
   return (
-    <div className="container con2">
-      <div className="title">
-        <h2 className="set">하루소비 로그인</h2>
-        <p>하루소비에 오신 것을 환영합니다. </p>
-        <p>아래 정보를 입력하여 로그인하세요.</p>
-      </div>
-      <div className="col-xl-6">
-        <div className="form-group mb-3 row">
-          <label className="col-lg-4 col-form-label" htmlFor="val-username">
-            아이디
-            <span className="text-danger">*</span>
-          </label>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              name="memberId"
-              className="form-control"
-              required
-              placeholder="Enter a User ID.."
-              onChange={handleChange}
-            />
-          </div>
+    <div className="app-container">
+      <div className="main-content">
+        <div className="card-registration">
+          <h2 className="cardRegtitle">하루소비</h2>
+
+          <form className="card-form">
+            <div className="form-group">
+              <label htmlFor="val-username">
+                아이디
+                <span className="required">*</span>
+              </label>
+              <input
+                type="text"
+                name="memberId"
+                className="pwStyle"
+                required
+                placeholder="Enter a User ID.."
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="val-password">
+                비밀번호
+                <span className="required">*</span>
+              </label>
+              <input
+                type="password"
+                name="memberPw"
+                //className="form-control"
+                className="pwStyle"
+                required
+                placeholder="Enter a User Password.."
+                onChange={handleChange}
+              />
+            </div>
+            <button className="submit-button" onClick={handleMemberLogin}>
+              로그인
+            </button>
+            <button className="submit-button" onClick={handleMemberRegister}>
+              회원가입
+            </button>
+          </form>
         </div>
-        <div className="form-group mb-3 row">
-          <label className="col-lg-4 col-form-label" htmlFor="val-password">
-            비밀번호
-            <span className="text-danger">*</span>
-          </label>
-          <div className="col-lg-6">
-            <input
-              type="password"
-              name="memberPw"
-              className="form-control"
-              required
-              placeholder="Enter a User Password.."
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <button className="select" onClick={handleMemberLogin}>
-          로그인
-        </button>
-        <button className="select" onClick={handleMemberRegister}>
-          회원가입
-        </button>
       </div>
       <Footer />
     </div>
