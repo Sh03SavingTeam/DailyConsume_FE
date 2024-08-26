@@ -104,10 +104,15 @@ function AmountListForDay({ initialDay }) {
 
   return (
     <div className="amount-list">
-      <div className="detail-item weekly-budget">
-        <strong>주간소비잔여금액:</strong>{" "}
-        {weeklyBudget ? `${weeklyBudget.잔여금액.toLocaleString()}원` : "Loading..."}
+      <div className="detail-item">
+        <div className="weekly-budget">
+          주간소비잔여금액 :{" "}
+          {weeklyBudget
+            ? `${weeklyBudget.잔여금액.toLocaleString()}원`
+            : "Loading..."}
+        </div>
       </div>
+      <hr />
       <div className="date-header">{formattedDay}</div>
       <ul>
         {orderList.length > 0 ? (

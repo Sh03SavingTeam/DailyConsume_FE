@@ -95,6 +95,30 @@
   align-self: center;
 }
 
+/* 월, 화, 수, 목, 금 스타일 (검은색) */
+.react-calendar__month-view__weekdays__weekday:nth-child(1),
+.react-calendar__month-view__weekdays__weekday:nth-child(2),
+.react-calendar__month-view__weekdays__weekday:nth-child(3),
+.react-calendar__month-view__weekdays__weekday:nth-child(4),
+.react-calendar__month-view__weekdays__weekday:nth-child(5) {
+  color: black;
+}
+
+/* 토요일 스타일, 일요일 스타일 (빨간색) */
+.react-calendar__month-view__weekdays__weekday:nth-child(6),
+.react-calendar__month-view__weekdays__weekday:nth-child(7) {
+  color: red;
+}
+
+/* .react-calendar button {
+  position: relative;
+}
+.react-calendar button img {
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
+
 .calendar-info {
   display: flex;
   flex-direction: column;
@@ -103,19 +127,38 @@
   position: relative;
 }
 
-.calendar-info img{
+.calendar-info img {
   z-index: 1;
   width: 200%;
   height: 200%;
   object-fit: cover;
   position: absolute;
-  top:-45%;
-  left:-45%;
+  top: -45%;
+  left: -45%;
 }
 
-.calendar-info span{
+.calendar-info span {
   z-index: 0;
   position: relative;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0; /* 상하 패딩을 추가하여 높이를 키웁니다 */
+}
+
+.react-calendar__navigation button {
+  min-width: 44px; /* 버튼 크기 증가 */
+  background: none;
+  font-size: 1.2rem; /* 버튼의 텍스트 크기를 증가 */
+  cursor: pointer;
+}
+
+.react-calendar__navigation__label {
+  font-size: 1.5rem; /* 월과 년도의 텍스트 크기 증가 */
+  font-weight: bold;
 }
 
 /* .calendar-info span {
@@ -136,12 +179,12 @@
   width: 100%;
   border: none;
   border-top: 2px solid #e0e0e0;
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
 .amount-list-half {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
 .amount-list-item {
