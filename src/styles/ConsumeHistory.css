@@ -37,10 +37,12 @@ display: none; /* Chrome, Safari, Opera*/
 .card {
     font-family: "OneShinhanBold";
     background-color: white;
-    border-radius:5%;
+    border-radius: 20px;
     box-shadow: 5px 5px 5px lightgray;
-    padding: auto;
     margin: 5%;
+    padding-top: 3%;
+    padding-bottom: 1%;
+    margin-bottom: 10px;
 }
 #test{
     height:auto;
@@ -50,11 +52,6 @@ display: none; /* Chrome, Safari, Opera*/
     font-family: "OneShinhanBold";
     color: whitesmoke;
     border-radius:20%;
-}
-.card {
-    padding-top: 3%;
-    padding-bottom: 3%;
-    margin-bottom: 20px;
 }
 
 .card-header {
@@ -69,11 +66,11 @@ display: none; /* Chrome, Safari, Opera*/
 }
 
 .savings {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: bold;
     color: whitesmoke;
     text-align: center;
-    height: 24px;
+    height: 20px;
     line-height: 24px;
 }
 
@@ -106,8 +103,12 @@ display: none; /* Chrome, Safari, Opera*/
     padding-right: 10%;
 }
 
+.p-num{
+    font-size: 13px;
+}
+
 .amount {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: bold;
     color: #303473;
     margin-top: 5px;
@@ -132,13 +133,11 @@ display: none; /* Chrome, Safari, Opera*/
 }
 
 h3 {
-    padding-top: 4%;
     text-align: center;
 }
 
 .set{
-    padding: 0%;
-    
+    font-size: large;
 }
 
 .p-set{
@@ -149,7 +148,7 @@ h3 {
     font-family: "OneShinhanBold";
     background: #fff;
     border-radius: 15px;
-    padding: 4%;
+    padding: 3%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: 5%;
     margin-bottom: 0%;
@@ -281,10 +280,13 @@ input.form-control {
     border: none;
     cursor: pointer;
     width: 50%;
-    margin: 0 auto;
+    margin-left: 125px;
+}
+
+.back-button2 {
     background-color: #303473;
-    font-family: "OneShinhanBold";
-    color: whitesmoke;
-    border-radius:5px;
-    padding: 5px;
+    color: white;
+    border-radius: 20px;
+    margin-left: 2%;
+    margin-top: 1%;
 }
