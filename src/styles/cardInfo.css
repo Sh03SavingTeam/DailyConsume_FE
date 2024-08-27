@@ -1,3 +1,23 @@
+@font-face {
+  font-family: "OneShinhanBold";
+  src: url("../assets/OneShinhanBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OneShinhanLight";
+  src: url("../assets/OneShinhanLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "OneShinhanMedium";
+  src: url("../assets/OneShinhanMedium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .card-container {
   background-color: #ffffff;
   padding: 20px;
@@ -49,10 +69,13 @@ h2 {
   right: -60px;
 }
 
-.button-container {
+.cardinfo-button-container {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* 수평 중앙 정렬 */
+
   margin-top: 20px;
+  gap: 10px;
 }
 .changecard-button {
   background-color: #333;
@@ -70,12 +93,15 @@ h2 {
   background-color: #303473;
   color: white;
   border: none;
-  padding: 10px 20px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
-  flex: 1;
-  margin: 0 5px;
+  font-family: "OneShinhanMedium", sans-serif;
 }
 
 .action-button:hover {

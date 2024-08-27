@@ -47,16 +47,27 @@ root.render(
       <Route path="/mypage" element={<MypageMain memberId='min'/>}></Route>
       <Route path="/mypage/addrlist" element={<AddressList />}></Route>
       <Route path="/mypage/addrregister" element={<AddressRegister />}></Route>
+
       <Route path="/mypage/consumehistory" element={<ConsumeHistory memberId='min'/> }></Route>
       <Route path="/mypage/consumecompare" element={<ConsumeCompare memberId='min'/> }></Route>
       <Route path="/mypage/consumeset" element={<ConsumeSet memberId="min"/> }></Route>
+
       <Route path="/Login" element={<ConsumeLogin />}></Route>
       <Route path="/Join" element={<ConsumeJoin />}></Route>
 
-      <Route path="/MyPage/DiscountInfo" element={<DiscountInfo memberId='jeongin'/>}></Route>
-      <Route path="/MyPage/Point" element={<Point memberId='jeongin'/>}></Route>
-      <Route path="/MyPage/Refund" element={<Refund memberId='jeongin'/>}></Route>
-      <Route path="/MyPage/Refund/Confirm" element={<Refundconfirm/>}></Route>
+      <Route
+        path="/MyPage/DiscountInfo"
+        element={<DiscountInfo memberId="jeongin" />}
+      ></Route>
+      <Route
+        path="/MyPage/Point"
+        element={<Point memberId="jeongin" />}
+      ></Route>
+      <Route
+        path="/MyPage/Refund"
+        element={<Refund memberId="jeongin" />}
+      ></Route>
+      <Route path="/MyPage/Refund/Confirm" element={<Refundconfirm />}></Route>
 
       <Route path="/rank/AddrList" element={<AddressList />}></Route>
       <Route path="/rank" element={<MyPage/>}></Route>
