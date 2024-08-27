@@ -16,7 +16,7 @@ const CustomCalendar = () => {
   const [amountList, setAmountList] = useState([]);
   const [weeklyAchievements, setWeeklyAchievements] = useState([]);
 
-  const getMemberId = () => "user01"; // 실제 로그인 상태에서 받아온 사용자 ID를 반환해야 함
+  const getMemberId = () => "m001"; // 실제 로그인 상태에서 받아온 사용자 ID를 반환해야 함
 
   const fetchAmountList = async (month, memberId) => {
     try {

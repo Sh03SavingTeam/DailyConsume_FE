@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/AmountDetail.css"; // 스타일 파일을 연결합니다.
+import bakery from "../assets/bakery.png";
+import meatRestaurant from "../assets/meatRestaurant.png";
+import wine from "../assets/wine.png";
+import coffee from "../assets/coffee.png";
+import japaneseFood from "../assets/japaneseFood.png";
+import pizza from "../assets/pizza.png";
+import diningRoom from "../assets/diningRoom.png";
 
 function AmountDetail({ item, onClose }) {
   const [detail, setDetail] = useState(null);
@@ -87,6 +94,98 @@ function AmountDetail({ item, onClose }) {
     window.location.href = "tel:1544-7200"; // 전화 걸기 기능
   };
 
+  // 카테고리에 따른 이미지 URL 매핑
+  const categoryIcons = {
+    육류: meatRestaurant,
+    고기요리: meatRestaurant,
+    돼지고기구이: meatRestaurant,
+    카페: coffee,
+    디저트: coffee,
+    와인바: wine,
+    술집: wine,
+    피자: pizza,
+    빵집: bakery,
+    횟집: japaneseFood,
+    일식집: japaneseFood,
+    음식점: diningRoom,
+    한식: diningRoom,
+    중국집: diningRoom,
+    종합분식: diningRoom,
+    포장마차: diningRoom,
+    게요리: diningRoom,
+    정보없음: diningRoom,
+    중식당: diningRoom,
+    양꼬치: diningRoom,
+    샌드위치: diningRoom,
+    장어: diningRoom,
+    스파게티: diningRoom,
+    카레: diningRoom,
+    오뎅: diningRoom,
+    아귀찜: diningRoom,
+    멕시코: diningRoom,
+    만두: diningRoom,
+    브런치: diningRoom,
+    칼국수: diningRoom,
+    이자카야: diningRoom,
+    곱창: diningRoom,
+    막국수: diningRoom,
+    스페인음식: diningRoom,
+    두부요리: diningRoom,
+    토스트: diningRoom,
+    기사식당: diningRoom,
+    주꾸미요리: diningRoom,
+    "바(BAR)": diningRoom,
+    이탈리아음식: diningRoom,
+    베트남음식: diningRoom,
+    도시락: diningRoom,
+    일식튀김: japaneseFood,
+    스테이크: diningRoom,
+    인도음식: diningRoom,
+    홍차전문점: diningRoom,
+    아이스크림: diningRoom,
+    찌개: diningRoom,
+    요리주점: diningRoom,
+    백반: diningRoom,
+    족발: diningRoom,
+    일식당: japaneseFood,
+    생선구이: japaneseFood,
+    브런치카페: coffee,
+    샤브샤브: diningRoom,
+    오리요리: diningRoom,
+    전: diningRoom,
+    찜닭: diningRoom,
+    햄버거: diningRoom,
+    감자탕: diningRoom,
+    다이어트: diningRoom,
+    국밥: diningRoom,
+    분식: diningRoom,
+    돈가스: diningRoom,
+    매운탕: diningRoom,
+    아시아음식: diningRoom,
+    베이커리: bakery,
+    일식: japaneseFood,
+    닭발: diningRoom,
+    해물: diningRoom,
+    우동: diningRoom,
+    닭갈비: diningRoom,
+    // 기타 카테고리
+    기타: diningRoom,
+  };
+  // 카테고리에 맞는 이미지 선택
+  const iconSrc =
+    categoryIcons[detail.consumeCategory] || categoryIcons["기타"];
+
+  const generateReceiptNumber = () => {
+    if (!detail) return "N/A";
+    const date = new Date(detail.payDate);
+    const YYMMDD = `${date.getFullYear().toString().slice(-2)}${(
+      date.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}${date.getDate().toString().padStart(2, "0")}`;
+    return `${YYMMDD}${detail.menuId || "000"}${detail.payId || "000"}`;
+  };
+
   // AmountDetail.jsx에서 데이터를 렌더링하는 부분
   return (
     <div className="amount-detail">
@@ -97,20 +196,13 @@ function AmountDetail({ item, onClose }) {
         <h2>{isNormal ? "상세 내역(정상)" : "상세 내역(이상)"}</h2>
         <div className="detail-header">
           <div className="icon">
-            <img
-              src={
-                isNormal
-                  ? "https://path-to-normal-icon.png"
-                  : "https://path-to-alert-icon.png"
-              }
-              alt="Icon"
-            />
+            <img src={iconSrc} alt="Category Icon" />
           </div>
           <div className="company-amount">
             <p>
               <strong>{detail.storeName}</strong> {detail.payAmount}원
             </p>
-            <p>결제 번호: {detail.receiptNumber || "N/A"}</p>
+            <p>결제 번호: {generateReceiptNumber() || "N/A"}</p>
           </div>
         </div>
         <div className="details">
