@@ -27,7 +27,7 @@ function AmountListForDay({ initialDay }) {
         "http://localhost:9999/api/calendar/payhistory/daily",
         {
           params: {
-            memberId: "user01",
+            memberId: "m001",
             day: dayOfMonth,
             month: month,
             year: year,
@@ -62,7 +62,7 @@ function AmountListForDay({ initialDay }) {
         "http://localhost:9999/api/calendar/payweekly",
         {
           params: {
-            memberId: "user01",
+            memberId: "m001",
             year: year,
             month: month,
             day: dayOfMonth,
@@ -90,7 +90,7 @@ function AmountListForDay({ initialDay }) {
   }, [initialDay]);
 
   const handleItemClick = (item) => {
-    setSelectedItem({ ...item, memberId: "user01" });
+    setSelectedItem({ ...item, memberId: "m001" });
     setIsDetailVisible(true);
   };
 
