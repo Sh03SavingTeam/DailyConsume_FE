@@ -3,6 +3,7 @@ import moment from "moment";
 import axios from "axios";
 import "../styles/AmountListForDay.css";
 import AmountDetail from "./AmountDetail"; // 상세보기 컴포넌트 추가
+import { checkJWT } from "services/checkJWT";
 
 function AmountListForDay({ initialDay }) {
   const [day, setDay] = useState(initialDay);
@@ -11,9 +12,21 @@ function AmountListForDay({ initialDay }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isDetailVisible, setIsDetailVisible] = useState(false);
   const [weeklyBudget, setWeeklyBudget] = useState(null);
+  //회원 객체
+  const [memberId, setMemberId] = useState("");
 
   useEffect(() => {
     setDay(initialDay);
+
+    checkJWT("/api/member/memberSession", "get", null)
+      .then((resopnse) => {
+        console.log("JWT 확인 결과" + resopnse.memberId);
+        const memberId = resopnse.memberId;
+        setMemberId(memberId);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
   }, [initialDay]);
 
   const fetchOrderList = async () => {
@@ -27,7 +40,7 @@ function AmountListForDay({ initialDay }) {
         "http://localhost:9999/api/calendar/payhistory/daily",
         {
           params: {
-            memberId: "m001",
+            memberId: memberId,
             day: dayOfMonth,
             month: month,
             year: year,
@@ -62,7 +75,7 @@ function AmountListForDay({ initialDay }) {
         "http://localhost:9999/api/calendar/payweekly",
         {
           params: {
-            memberId: "m001",
+            memberId: memberId,
             year: year,
             month: month,
             day: dayOfMonth,
