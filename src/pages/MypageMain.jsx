@@ -26,7 +26,7 @@ function MypageMain({memberId}){
             case 'analysis':
                 return <ConsumeHistory memberId={"min"}/>
             case 'point':
-                return <Point memberId='jeongin'/>;
+                return <Point memberId='min'/>;
             case 'rank':
                 return <MyPage memberId="min"/>;
             case 'address':
@@ -34,7 +34,7 @@ function MypageMain({memberId}){
             case 'consumeCompare':
                 return <ConsumeCompare memberId={"min"}/>;
             default:
-                return <ConsumeHistory />;
+                return <ConsumeHistory memberId={"min"}/>;
         }
     };
     useEffect(() => {

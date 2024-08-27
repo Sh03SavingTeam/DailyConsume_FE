@@ -4,23 +4,17 @@ import "../styles/DiscountInfo.css";
 import moreIcon from '../assets/more.png';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
 function DiscountInfo({ memberId }) {
-
     const navigate = useNavigate();
-
     const [discounts, setDiscounts] = useState([]);
     const [category, setCategory] = useState("");
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
-
     const now = new Date();
-
     const year = String(now.getFullYear()).slice(-2);
     const month = String(now.getMonth()+1).padStart(2,'0');
     const day = new Date(year, month, 0).getDate();
-
     // 데이터 불러오는 함수
     const fetchDiscountInfos = async (page) => {
         try {
@@ -39,17 +33,14 @@ function DiscountInfo({ memberId }) {
             console.error("할인 정보 내역이 없습니다.", error);
         }   
         };
-
     // 첫 번째 페이지를 불러오는 useEffect
     useEffect(() => {
         fetchDiscountInfos(page);
     }, [page]);
-
     // 더보기 버튼 클릭 시 다음 페이지로
     const loadMore = () => {
         setPage((prevPage) => prevPage + 1);
     };
-
     return (
         <div className="discount-container">
             <div className="discount-title">이번달은 <span>{category}</span>에 <br/>가장 많은 돈을 썼어요</div>
@@ -76,5 +67,4 @@ function DiscountInfo({ memberId }) {
         </div>
     );
 }
-
 export default DiscountInfo;
