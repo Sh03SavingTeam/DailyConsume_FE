@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import profileImg from "../assets/profileImg.png"
+import profileImg2 from "../assets/song4.png"
 import "../styles/MypageMain.css";
 import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -88,8 +89,8 @@ function MypageMain({memberId}){
         <div className="mymain-container">
             <div className="memberinfo">
                 {/* 이미지 추후 확인 필요 */}
-                <img src={profileImg} alt=""/>
-                <p className="info-name"><span className="info-name-big">{memberName}</span> 님</p>
+                <img src={profileImg2} alt=""/>
+                <p className="info-name"><span className="info-name-big">박민준</span> 님</p>
                 <p className="info-week">이번주 설정 금액 {weeklyMoney!=0?weeklyMoney.toLocaleString()+"원":"없음"}</p>
                 <div className="week-button">
                 {check && (

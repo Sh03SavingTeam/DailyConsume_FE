@@ -12,7 +12,7 @@ function RankInfo({ setIsVisable }) {
     const month = date.getMonth() + 1;
     const [rankInfo, setRankInfo] = useState(null);
     const [selectedRank, setSelectedRank] = useState(null);
-    const memberId = "tjdus0827";
+    const memberId = "m002";
 
     const clickPrevHandler = () => {
         setIsVisable(prevState => !prevState);
@@ -84,11 +84,12 @@ function RankInfo({ setIsVisable }) {
                     <span className='b-info-item1'>{rankInfo.memberName}님의</span>
                     <span className='b-info-item2'>{month}월 등급 {rankInfo.rankName}</span>
                 </div>
-                <div className="button-container">
+                {/* 
+                <div className="benefit-button-container">
                     <button className='benefit-btn'>
                         혜택 포인트 받기
                     </button>
-                </div>
+                </div>*/}
             </div>
             <div className="rankinfo-container">
                 <div 

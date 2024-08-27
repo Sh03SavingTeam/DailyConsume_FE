@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import "../styles/MyPage.css";
-import CharacterImage1 from '../assets/Character1.png';
-import CharacterImage2 from '../assets/Character2.png';
-import CharacterImage3 from '../assets/Character3.png';
-import CharacterImage4 from '../assets/Character4.png';
+import Character1 from '../assets/Character1.png';
+import Character2 from '../assets/Character2.png';
+import Character3 from '../assets/Character3.png';
+import Character4 from '../assets/Character4.png';
 import axios from 'axios';
 import RankInfo from './RankInfo';
 import RankerCalendar from './RankerCalendar'; 
@@ -20,15 +20,19 @@ function MyPage(props) {
     const [error, setError] = useState(null);
     const [isVisable, setIsVisable] = useState(false);
     const [selectedMemberId, setSelectedMemberId] = useState(null); 
-    const memberId = "tjdus0827";
+    const memberId = "m002";
     const viewRankClickHandler = () => {
         setIsVisable(prevState => !prevState);
     };
-
+    const handleBackClick = () => {
+        setSelectedMemberId(null); // 선택된 memberId 초기화하여 RankerCalendar 종료
+    };
+    
     useEffect(() => {
         axios.get(`http://localhost:9999/rank/${memberId}`)
             .then(response => {
                 setRankInfo(response.data); 
+                console.log(response.data);
             })
             .catch(error => {
                 console.error("Error fetching rank info:", error);
@@ -66,21 +70,28 @@ function MyPage(props) {
     }
 
     const totalAmount = rankInfo.amount + rankInfo.nextAmount;
-    const percent = (rankInfo.amount / totalAmount) * 100;
-
+    const percent = Math.round((rankInfo.amount / totalAmount) * 100);
+    
     const rankImages = {
-        1: CharacterImage1,
-        2: CharacterImage2,
-        3: CharacterImage3,
-        4: CharacterImage4,
+        "Character1": Character1,
+        "Character2": Character2,
+        "Character3": Character3,
+        "Character4": Character4,
+        1:Character1,
+        2:Character2,
+        3:Character3,
+        4:Character4,
     };
 
-    const getRankImage = (rankId) => {
-        return rankImages[rankId] || CharacterImage1;
+    const getRankImage = (rankImg) => {
+        return rankImages[rankImg] || Character1;
     };
-
+    const getRankingImage = (rankId) => {
+        return rankImages[rankId] || Character1;
+    };
     const renderRankImage = () => {
-        return <img src={getRankImage(rankInfo.rankId)} alt={`Rank ${rankInfo.rankId}`} className='rank-image' />;
+        console.log(rankInfo.rankImg); 
+        return <img src={getRankImage(rankInfo.rankImg)} alt={`Rank ${rankInfo.rankImg}`} className='rank-image' />;
     };
 
     // 소비패턴 보러가기를 클릭했을 때 처리하는 함수
@@ -89,7 +100,7 @@ function MyPage(props) {
     };
 
     return (
-        <div className='rank-main-container'>
+        <div className='rank-main-container not-center'>
             <div className='rank-container'>
                 <div className='character-container'>
                     <div className='character-image'>
@@ -124,7 +135,7 @@ function MyPage(props) {
                     </div>
                 </div>
             </div>
-            <div className={`list-container ${isVisable && 'isVisable'}`}>
+            <div className={`list-container ${isVisable && 'isVisable'} ${selectedMemberId &&  'isVisable'}`}>
                 <div className='text-wrap'>
                     전체 랭킹 
                 </div>
@@ -136,7 +147,7 @@ function MyPage(props) {
                     rankingList.map((item, index) => (
                         <div key={item.memberId} className="list-item">
                             <div className="item-image">
-                                <img src={getRankImage(item.rankId)} alt={`RankLv${index + 1}`} className="item-rank-image"/>
+                                <img src={getRankingImage(item.rankId)} alt={`RankLv${index + 1}`} className="item-rank-image"/>
                             </div>
                             <div className="item-info">
                                 <div className="item-info1">
@@ -168,7 +179,7 @@ function MyPage(props) {
                     arankingList.map((item) => (
                         <div key={item.memberId} className="list-item">
                             <div className="item-image">
-                                <img src={getRankImage(item.rankId)} alt={`RankLv${item.rankNum}`} className="item-rank-image"/>
+                                <img src={getRankingImage(item.rankId)} alt={`RankLv${item.rankNum}`} className="item-rank-image"/>
                             </div>
                             <div className="item-info">
                                 <div className="item-info1">
@@ -191,7 +202,8 @@ function MyPage(props) {
             </div>
             <Footer/>
             {isVisable && <RankInfo setIsVisable={setIsVisable} />}
-            {selectedMemberId && <RankerCalendar memberId={selectedMemberId} />} 
+            {selectedMemberId && <RankerCalendar memberId={selectedMemberId} onBack={handleBackClick} />} 
+
         </div>
     );
 }
