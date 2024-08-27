@@ -105,6 +105,10 @@ function MapPage() {
       });
   }
 
+  const getWeeklyConsumeStore = () => {
+    getRecommendStore();
+  }
+
   const getRecommendStore = () => {
     // const geocoder = new window.kakao.maps.services.Geocoder();
     currentGeo();
@@ -205,7 +209,6 @@ function MapPage() {
           maximumAge: 0,
         }
       );
-      getRecommendStore();
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
@@ -223,6 +226,10 @@ function MapPage() {
         level={3} // 지도의 확대 레벨
         onClick={mapClickHandler}
       >
+
+        <MapMarker
+        position={{lat: 37.55936310336185, lng: 126.92270138644199}}
+        />
 
         {stores.map((store, index) => (
           <MapMarker
@@ -249,7 +256,7 @@ function MapPage() {
       </div>
       <div className="right_btn_div">
         <div onClick={currentGeo}><img src={ScopeIcon} alt="currentGeoBtn"/></div>
-        <div><img src={WeeklyIcon} alt="weekConsumeBtn"/></div>
+        <div onClick={getWeeklyConsumeStore}><img src={WeeklyIcon} alt="weekConsumeBtn"/></div>
       </div>
       
       <MapStoreList stores = {stores}/>
