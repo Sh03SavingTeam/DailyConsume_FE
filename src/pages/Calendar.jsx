@@ -19,8 +19,6 @@ const CustomCalendar = () => {
   const [amountList, setAmountList] = useState([]);
   const [weeklyAchievements, setWeeklyAchievements] = useState([]);
 
-  const getMemberId = () => "m001"; // 실제 로그인 상태에서 받아온 사용자 ID를 반환해야 함
-
   const fetchAmountList = async (month, memberId) => {
     try {
       const response = await axios.get("/api/calendar/payhistory", {
@@ -53,6 +51,7 @@ const CustomCalendar = () => {
       .then((resopnse) => {
         console.log("JWT 확인 결과" + resopnse.memberId);
         const memberId = resopnse.memberId;
+        setMemberId(memberId);
 
         const month = moment().format("MM");
         fetchAmountList(month, memberId);
@@ -65,15 +64,14 @@ const CustomCalendar = () => {
 
   const handleDateChange = (date) => {
     setNowDate(moment(date).format("YYYY년 MM월 DD일"));
-    const memberId = getMemberId();
     const month = moment(date).format("MM");
     fetchAmountList(month, memberId);
     fetchWeeklyAchievements(month, memberId);
   };
+  
   const handleMonthChange = ({ activeStartDate }) => {
     const newMonth = moment(activeStartDate).format("MM");
     setCurrentMonth(moment(activeStartDate).format("M월"));
-    const memberId = getMemberId();
     fetchAmountList(newMonth, memberId);
     fetchWeeklyAchievements(newMonth, memberId);
   };
