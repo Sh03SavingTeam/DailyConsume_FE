@@ -18,10 +18,10 @@ function Point({ memberId }) {
   const [hasMore, setHasMore] = useState(true);
 
   // 데이터 불러오는 함수
-  const fetchPointHistories = async (page) => {
+  const fetchPointHistories = async (memberid, page) => {
     try {
       const response = await axios.get(
-        `http://localhost:9999/mypage/point/${memberID}?page=${page}`
+        `http://localhost:9999/mypage/point/${memberid}?page=${page}`
       );
       const data = response.data;
 
@@ -55,7 +55,7 @@ function Point({ memberId }) {
         setMemberID(memberID);
 
         // 2. 포인트 히스토리 불러오기
-        fetchPointHistories(page);
+        fetchPointHistories(memberID, page);
       } catch (error) {
         console.error("There was an error!", error);
       }
