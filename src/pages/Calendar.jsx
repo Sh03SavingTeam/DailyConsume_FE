@@ -10,13 +10,14 @@ import AmountListForDay from "../hooks/AmountListForDay";
 import RabbitCompleteImage from "../assets/RabbitComplete.png"; // 이미지 파일 import
 import RabbitFail from "../assets/RabbitFail.png";
 import RabbitEmpty from "../assets/RabbitEmpty.png";
+import { checkJWT } from "services/checkJWT";
 const CustomCalendar = () => {
+  //회원 객체
+  const [memberId, setMemberId] = useState("");
   const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일"));
   const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
   const [amountList, setAmountList] = useState([]);
   const [weeklyAchievements, setWeeklyAchievements] = useState([]);
-
-  const getMemberId = () => "m001"; // 실제 로그인 상태에서 받아온 사용자 ID를 반환해야 함
 
   const fetchAmountList = async (month, memberId) => {
     try {
@@ -44,23 +45,33 @@ const CustomCalendar = () => {
       setWeeklyAchievements([]); // 에러가 발생하면 빈 배열로 설정
     }
   };
+
   useEffect(() => {
-    const memberId = getMemberId();
-    const month = moment().format("MM");
-    fetchAmountList(month, memberId);
-    fetchWeeklyAchievements(month, memberId);
-  }, []);
+    checkJWT("/api/member/memberSession", "get", null)
+      .then((resopnse) => {
+        console.log("JWT 확인 결과" + resopnse.memberId);
+        const memberId = resopnse.memberId;
+        setMemberId(memberId);
+
+        const month = moment().format("MM");
+        fetchAmountList(month, memberId);
+        fetchWeeklyAchievements(month, memberId);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, [memberId]);
+
   const handleDateChange = (date) => {
     setNowDate(moment(date).format("YYYY년 MM월 DD일"));
-    const memberId = getMemberId();
     const month = moment(date).format("MM");
     fetchAmountList(month, memberId);
     fetchWeeklyAchievements(month, memberId);
   };
+  
   const handleMonthChange = ({ activeStartDate }) => {
     const newMonth = moment(activeStartDate).format("MM");
     setCurrentMonth(moment(activeStartDate).format("M월"));
-    const memberId = getMemberId();
     fetchAmountList(newMonth, memberId);
     fetchWeeklyAchievements(newMonth, memberId);
   };

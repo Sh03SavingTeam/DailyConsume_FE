@@ -39,7 +39,7 @@ function AddressRegister(props) {
       data: updatedDbAddress,
     });
 
-    navigate("/mypage/addrlist");
+    navigate("/mypage");
   };
 
   const extractDistrict = (fullAddress) => {
