@@ -30,7 +30,7 @@ function Refund({ memberId }) {
         setMemberID(memberID);
 
         // 2. 포인트 계정 데이터 불러오기
-        fetchPointAccount();
+        fetchPointAccount(memberID);
       } catch (error) {
         console.error("There was an error!", error);
       }
@@ -72,7 +72,7 @@ function Refund({ memberId }) {
   };
 
   // 데이터 불러오는 함수
-  const fetchPointAccount = async () => {
+  const fetchPointAccount = async (memberID) => {
     try {
       const response = await axios.get(
         `http://localhost:9999/mypage/refund/${memberID}`
