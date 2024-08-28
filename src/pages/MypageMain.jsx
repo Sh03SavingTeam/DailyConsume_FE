@@ -26,6 +26,11 @@ function MypageMain(props) {
   );
   console.log(selectedTab);
 
+  const handleMemberLogout = (e) => {
+    localStorage.removeItem("token");
+    window.location.href = "/Login";
+  };
+
   useEffect(() => {
     const checkAndFetchData = async () => {
       try {
@@ -202,6 +207,7 @@ function MypageMain(props) {
             </Link>
           )}
         </div>
+        <button onClick={handleMemberLogout}>로그아웃</button>
       </div>
       <div className="tabs">
         <button
