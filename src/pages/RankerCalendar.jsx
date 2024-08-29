@@ -7,8 +7,10 @@ import Footer from "../components/Footer";
 import "../App.css";
 import "../styles/Calendar.css";
 import AmountListForDay from "../hooks/AmountListForDay";
+import { checkJWT } from "services/checkJWT";
 
 const RankerCalendar = ({ memberId }) => {
+  const [memberID, setMemberID] = useState("");
   const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일"));
   const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
   const [amountList, setAmountList] = useState([]);
@@ -16,9 +18,12 @@ const RankerCalendar = ({ memberId }) => {
   // 서버에서 데이터를 가져오는 함수
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
-        params: { month, memberId },
-      });
+      const response = await axios.get(
+        "http://localhost:9999/api/calendar/payhistory",
+        {
+          params: { month, memberId },
+        }
+      );
       const fetchedData = response.data.map((item) => ({
         day: moment(item.payDate).format("YYYY/MM/DD"),
         amount: item.payAmount,
@@ -33,22 +38,57 @@ const RankerCalendar = ({ memberId }) => {
       }
     }
   };
-
   useEffect(() => {
-    const month = moment().format("MM");
-    fetchAmountList(month, memberId);
-  }, [memberId]);
+    const fetchData = async () => {
+      try {
+        // 1. JWT 확인
+        const jwtResponse = await checkJWT(
+          "/api/member/memberSession",
+          "get",
+          null
+        );
+        console.log("JWT 확인 결과: " + jwtResponse.memberId);
+        const memberID = jwtResponse.memberId;
+        setMemberID(memberID);
+
+        // 2. 현재 월 구하고 Amount 리스트 가져오기
+        const month = moment().format("MM");
+        fetchAmountList(month, memberID);
+      } catch (error) {
+        console.error("데이터를 불러오는 중 오류가 발생했습니다:", error);
+      }
+    };
+
+    // 데이터를 가져오는 함수 호출
+    fetchData();
+  }, []); // 초기 렌더링 시 한 번만 실행되도록 빈 배열 설정
+
+  // useEffect(() => {
+  //   checkJWT("/api/member/memberSession", "get", null)
+  //     .then((resopnse) => {
+  //       console.log("JWT 확인 결과" + resopnse.memberId);
+  //       const memberID = resopnse.memberId;
+  //       setMemberID(memberID);
+  //     })
+  //     .catch((error) => {
+  //       console.error("There was an error!", error);
+  //     });
+  // }, []);
+  // useEffect(() => {
+  //   const month = moment().format("MM");
+  //   fetchAmountList(month, memberID);
+  // }, [memberID]);
 
   const handleDateChange = (date) => {
     setNowDate(moment(date).format("YYYY년 MM월 DD일"));
     const month = moment(date).format("MM");
-    fetchAmountList(month, memberId);
+    fetchAmountList(month, memberID);
   };
 
   const handleMonthChange = ({ activeStartDate }) => {
     const newMonth = moment(activeStartDate).format("MM");
     setCurrentMonth(moment(activeStartDate).format("M월"));
-    fetchAmountList(newMonth, memberId);
+    fetchAmountList(newMonth, memberID);
   };
 
   const f_formatDay = (locale, date) => {
@@ -62,7 +102,11 @@ const RankerCalendar = ({ memberId }) => {
       );
       return (
         <div className="calendar-info">
-          <img src="/RabbitComplete.png" className="calanderRabbit-style" alt="Complete" />
+          <img
+            src="/RabbitComplete.png"
+            className="calanderRabbit-style"
+            alt="Complete"
+          />
           <span>{moment(date).format("D")}</span>
           <span className="calendar-count">{filterData.length}건</span>
           <span className="calendar-amount">

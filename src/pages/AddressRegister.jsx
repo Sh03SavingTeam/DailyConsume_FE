@@ -4,6 +4,7 @@ import "../styles/cardRegistration.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import { checkJWT } from "services/checkJWT";
 
 function AddressRegister(props) {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -18,7 +19,7 @@ function AddressRegister(props) {
   const [dbAddress, setDbaddress] = useState({
     addrName: "별명예시",
     addrDetail: "주소예시",
-    memberId: "abcd",
+    memberId: "",
     addrDefault: 0,
   });
 
@@ -38,7 +39,7 @@ function AddressRegister(props) {
       data: updatedDbAddress,
     });
 
-    navigate("/mypage/addrlist");
+    navigate("/mypage");
   };
 
   const extractDistrict = (fullAddress) => {
@@ -109,6 +110,19 @@ function AddressRegister(props) {
   useEffect(() => {
     console.log(nickname);
   }, [nickname]);
+
+  useEffect(() => {
+    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+      console.log("JWT 확인 결과" + response.memberId);
+      const fetchedMemberId = response.memberId;
+
+      // memberCard 상태 업데이트
+      setDbaddress((prevDBaddress) => ({
+        ...prevDBaddress,
+        memberId: fetchedMemberId,
+      }));
+    });
+  }, []);
 
   return (
     <div className="app-container">

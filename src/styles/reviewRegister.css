@@ -63,9 +63,8 @@ h2 {
   padding: 10px 20px;
   border-radius: 30px;
   cursor: pointer;
-  /* font-size: 16px;
-  font-weight: bold; */
-  font-family: "OneShinhanMedium", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .title {

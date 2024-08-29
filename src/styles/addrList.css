@@ -17,6 +17,13 @@ td {
   font-size: 10px;
 }
 
+.defaultSelectArea {
+  width: 91px;
+}
+.DeleteArea {
+  width: 40px;
+}
+
 .deleteButton {
   font-weight: bold;
   background-color: #f4feff;

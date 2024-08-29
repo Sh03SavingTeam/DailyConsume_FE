@@ -4,8 +4,11 @@ import CardDeltePopUp from "../components/CustomPopUp";
 import Header from "./../components/Header";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { checkJWT } from "services/checkJWT";
 
 function CardInfo(props) {
+  //회원 객체
+  const [memberId, setMemberId] = useState("");
   //카드목록
   const [cardList, setCardList] = useState([]);
 
@@ -22,33 +25,60 @@ function CardInfo(props) {
 
   const location = useLocation();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     console.log(location);
   }, [location]);
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "/api/card/memberCardList",
-      params: {
-        memberId: "abcd",
-      },
-    })
-      .then((response) => {
-        console.log(response.data);
+    // const token = localStorage.getItem("token"); // JWT 토큰 가져오기
 
-        // 카드 목록을 상태에 저장
-        const cardList = response.data;
-        setCardList(cardList);
+    // //JWT로 로그인한 사용자 정보 가져오기
+    // axios({
+    //   method: "get",
+    //   url: "/api/member/memberSession",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`, // JWT 토큰 포함
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log(response.data.memberId);
+    //     setMemberId(response.data.memberId);
 
-        // 첫 번째 항목을 기본값으로 설정
-        // if (cardList.length > 0) {
-        //   setSelectedCard(cardList[0].cardNum);
-        // }
+    checkJWT("/api/member/memberSession", "get", null)
+      .then((resopnse) => {
+        console.log("JWT 확인 결과" + resopnse.memberId);
+
+        // 카드 목록 정보 가지고 오는 axios
+        axios({
+          method: "get",
+          url: "/api/card/memberCardList",
+          params: {
+            memberId: resopnse.memberId,
+          },
+        })
+          .then((response) => {
+            console.log(response.data);
+
+            // 카드 목록을 상태에 저장
+            const cardList = response.data;
+            setCardList(cardList);
+
+            // 첫 번째 항목을 기본값으로 설정
+            // if (cardList.length > 0) {
+            //   setSelectedCard(cardList[0].cardNum);
+            // }
+          })
+          .catch((error) => {
+            console.error("There was an error!", error);
+          });
       })
       .catch((error) => {
-        console.error("There was an error!", error);
+        console.log(error);
       });
+
+    //memberId가 null이면 로그인페이지로 가게
   }, []);
 
   const handleChange = (event) => {
@@ -136,7 +166,6 @@ function CardInfo(props) {
     closePopUp();
   };
 
-  const navigate = useNavigate();
   const handleCardRegisterClick = () => {
     navigate("/home/cardregister");
   };
@@ -177,11 +206,11 @@ function CardInfo(props) {
           <div>카드를 선택해주세요...</div>
         )}
       </div>
-      <div class="button-container">
-        <button class="action-button" onClick={handleCardRegisterClick}>
+      <div className="cardinfo-button-container">
+        <button className="action-button" onClick={handleCardRegisterClick}>
           카드 등록
         </button>
-        <button class="action-button" onClick={openPopUp}>
+        <button className="action-button" onClick={openPopUp}>
           카드 삭제
         </button>
 

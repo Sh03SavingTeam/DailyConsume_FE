@@ -1,25 +1,25 @@
 /*font 정의*/
-@font-face{
-  font-family : "OneShinhanBold";
+@font-face {
+  font-family: "OneShinhanBold";
   font-weight: normal;
-  src:url("./assets/OneShinhanBold.ttf") format("truetype");
+  src: url("./assets/OneShinhanBold.ttf") format("truetype");
 }
-@font-face{
+@font-face {
   font-family: "OneShinhanLight";
   font-weight: normal;
-  src:url("./assets/OneShinhanLight.ttf") format("truetype");
+  src: url("./assets/OneShinhanLight.ttf") format("truetype");
 }
-@font-face{
+@font-face {
   font-family: "OneShinhanMedium";
   font-weight: normal;
-  src:url("./assets/OneShinhanMedium.ttf") format("truetype");
+  src: url("./assets/OneShinhanMedium.ttf") format("truetype");
 }
 /* 전체 페이지를 가운데 정렬하는 기본 설정 */
 .container {
   max-width: 414px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
   margin: 0 auto; /* 자동 마진을 사용하여 중앙에 배치합니다. */
   padding: 20px; /* 내부 패딩을 설정합니다. */
-  background-color: #F2F2F7; /* 배경 색상을 연한 회색으로 설정합니다. */
+  background-color: #f2f2f7; /* 배경 색상을 연한 회색으로 설정합니다. */
   min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정합니다. */
   position: relative;
   overflow: hidden;
@@ -42,7 +42,8 @@ body {
 h1 {
   text-align: center; /* 가운데 정렬 */
   margin-top: 20px; /* 상단 간격 */
-  font-size: 2.5rem; /* 글자 크기 */
+  font-size: 2rem; /* 글자 크기 */
+  margin-bottom: -10px;
 }
 
 .app-container {
@@ -71,6 +72,12 @@ h1 {
   padding: 20px;
   padding-bottom: 50%; /* Footer의 높이 + 여유 공간 */
   box-sizing: border-box; /* padding을 높이에 포함 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.main-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .footer-container {
