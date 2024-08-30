@@ -207,7 +207,7 @@ function MypageMain(props) {
             </Link>
           )}
         </div>
-        <button onClick={handleMemberLogout}>로그아웃</button>
+        <button className="mypage-logout" onClick={handleMemberLogout}>로그아웃</button>
       </div>
       <div className="tabs">
         <button

@@ -16,7 +16,6 @@
     overflow-y: auto;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
-    margin-bottom: 150px;
 }
 
 .discount-container::-webkit-scrollbar {
