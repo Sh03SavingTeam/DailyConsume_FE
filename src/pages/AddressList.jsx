@@ -8,6 +8,7 @@ import CardDeltePopUp from "../components/CustomPopUp";
 import DefaultAddrUpdatePopUp from "../components/CustomPopUp";
 import axios from "axios";
 import "../styles/addrList.css";
+import { checkJWT } from "services/checkJWT";
 
 const Title = styled.h2`
   margin-bottom: 20px;
@@ -43,6 +44,7 @@ function AddressList(props) {
   const [addrList, setAddrList] = useState([]);
 
   const [selectedAddrId, setSelectedAddrId] = useState(null);
+  const [memberId, setMemberId] = useState("");
 
   //삭제확인 팝업창 열기
   const openPopUp = (addrId) => {
@@ -67,6 +69,7 @@ function AddressList(props) {
   const handleConfirmDefaultAddrChange = () => {
     handleRadioChange(tempSelectedAddrId); // 기본 주소 변경
     closeDefaultAddrPopup(); // 팝업 닫기
+    window.location.reload();
   };
 
   //삭제버튼 클릭 시 삭제 수행
@@ -89,23 +92,49 @@ function AddressList(props) {
 
   //memberId가 'abcd'인 주소 데이터 조회
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "/api/address/addrList",
-      params: {
-        memberId: "abcd",
-      },
-    }).then((response) => {
-      console.log(response.data);
-      const addressList = response.data;
-      setAddrList(addressList);
+    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+      console.log("JWT 확인 결과" + response.memberId);
+      const fetchedMemberId = response.memberId;
+      setMemberId(fetchedMemberId);
 
-      // 기본 주소 설정: addr_default 값이 1인 항목
-      const defaultAddress = addressList.find((item) => item.addrDefault === 1);
-      if (defaultAddress) {
-        setSelectedAddrId(defaultAddress.addrId); // 기본 주소의 ID를 선택된 상태로 설정
-      }
+      axios({
+        method: "get",
+        url: "/api/address/addrList",
+        params: {
+          memberId: fetchedMemberId,
+        },
+      }).then((response) => {
+        console.log(response.data);
+        const addressList = response.data;
+        setAddrList(addressList);
+
+        // 기본 주소 설정: addr_default 값이 1인 항목
+        const defaultAddress = addressList.find(
+          (item) => item.addrDefault === 1
+        );
+        if (defaultAddress) {
+          setSelectedAddrId(defaultAddress.addrId); // 기본 주소의 ID를 선택된 상태로 설정
+        }
+      });
     });
+
+    // axios({
+    //   method: "get",
+    //   url: "/api/address/addrList",
+    //   params: {
+    //     memberId: "bih63879",
+    //   },
+    // }).then((response) => {
+    //   console.log(response.data);
+    //   const addressList = response.data;
+    //   setAddrList(addressList);
+
+    //   // 기본 주소 설정: addr_default 값이 1인 항목
+    //   const defaultAddress = addressList.find((item) => item.addrDefault === 1);
+    //   if (defaultAddress) {
+    //     setSelectedAddrId(defaultAddress.addrId); // 기본 주소의 ID를 선택된 상태로 설정
+    //   }
+    // });
   }, []);
 
   const handleDeleteAddr = () => {
@@ -124,6 +153,7 @@ function AddressList(props) {
         closePopUp();
       });
     }
+    window.location.reload();
   };
 
   // Radio 버튼 선택 처리
@@ -135,7 +165,7 @@ function AddressList(props) {
       method: "put",
       url: "/api/address/changeDefaultAddr",
       params: {
-        memberId: "abcd",
+        memberId: memberId,
         addrId: addrId,
       },
     })
@@ -162,14 +192,14 @@ function AddressList(props) {
     <div className="app-container">
       <div className="main-content">
         <div className="card-container">
-          <Title>주소 목록</Title>
+          {/* <Title>주소 목록</Title> */}
           <table>
             <thead>
               <tr>
-                <th></th>
+                <th className="defaultSelectArea"></th>
                 <th>별명</th>
                 <th>주소</th>
-                <th></th>
+                <th className="DeleteArea"></th>
               </tr>
             </thead>
             <tbody>

@@ -13,11 +13,19 @@
 .point-container {
     font-family: "OneShinhanBold";
     max-width: 375px;
-    margin: 0 auto;
-    padding: 0;
+    margin: 5%;
+    padding: 3%;
+    border-radius: 20px;
     background-color: white;
-    min-height: 100vh;
-    padding-bottom: 70px;
+    /* height: 61.5vh; */
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-bottom: 10px;
+}
+
+.point-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 
 .point-header {
@@ -56,6 +64,7 @@
     height: 40px;
     width: 80%;
     margin: 0 auto;
+    margin-top: 10px;
 }
 
 .balance p {
@@ -112,10 +121,14 @@
     padding: 15px 0;
 }
 
-.history-item .description {
+.history-item .description-cmt {
     flex-grow: 1;
-    font-size: 15px;
     color: #333;
+}
+
+.description-cmt {
+    width: 55%;
+    font-size: 14px;
 }
 
 .history-item-right {
@@ -140,8 +153,8 @@
 }
 
 .history-item .date {
-    font-size: 12px;
-    color: #999;
+    font-size: 11.5px;
+    color: #999999bf;
     margin-top: 5px;
 }
 
@@ -165,7 +178,7 @@
 }
 
 .footer-container {
-    /* max-width: 375px; */
+    max-width: 414px;
     margin: 0 auto;
     padding: 0;
     background-color: white;

@@ -27,7 +27,7 @@ const Footer = () => {
       case "/calendar":
         setSelectedButton("calendar");
         break;
-      case "/MyPage/AddrList":
+      case "/MyPage":
       case "/MyPage/AddrRegister":
         setSelectedButton("mypage");
         break;
@@ -80,7 +80,7 @@ const Footer = () => {
           캘린더
         </button>
         <button
-          onClick={() => handleButtonClick("mypage", "/MyPage/AddrList")}
+          onClick={() => handleButtonClick("mypage", "/MyPage")}
           className={selectedButton === "mypage" ? "selected" : ""}
         >
           <img src={getButtonImage("mypage")} alt="My Page" />

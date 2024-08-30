@@ -8,13 +8,28 @@ import AWS from "aws-sdk";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import OCRConfirmedPopUp from "../components/ReceiptOCRPopUp";
+import { checkJWT } from "services/checkJWT";
 
 function ReviewRegister(props) {
+  const [member, setMember] = useState("");
+
   const navigate = useNavigate(); // useNavigate 사용
 
   const location = useLocation();
-  const { storename, storebizNum } = location.state || {};
+  //const { storename, storebizNum } = location.state || {};
 
+  // 로컬 스토리지에서 ACCESS TOKEN 가져오기
+  const accessToken = localStorage.getItem("ACCESS_TOKEN");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+      console.log("JWT 확인 결과" + response.memberId);
+      const fetchedMemberId = response.memberId;
+      setMember(fetchedMemberId);
+    });
+  }, []);
+  
   //상호명
 
   //사업자등록번호
@@ -118,19 +133,22 @@ function ReviewRegister(props) {
       //-> 일치하면 리뷰 등록 버튼 활성화
 
       //지도 페이지에서 가져온 상호명
-      const str_name = storename;
-      console.log("선택한 상호명 : " + str_name);
-      //const str_name = "키토분식";
+      // const str_name = storename;
+      // console.log("선택한 상호명 : " + str_name);
+      const str_name = "키토분식";
       //지도 페이지에서 가져온 사업자등록번호
-      const str_bizNum = storebizNum;
-      console.log("선택한 사업자번호 : " + str_bizNum);
-      //const str_bizNum = "632-85-00430";
+      // const str_bizNum = storebizNum;
+      // console.log("선택한 사업자번호 : " + str_bizNum);
+      const str_bizNum = "632-85-00430";
 
       // 상호명과 사업자등록번호 비교
       if (name === str_name && bizNum === str_bizNum) {
         //일치(콘솔로만 띄워져있음. 팝업창으로도 띄워야 함)
         console.log("상호명과 사업자등록번호가 모두 일치합니다.");
         openPopUp("인증되었습니다", () => {
+          setReview({
+            storeRegNum: bizNum,
+          });
           setReviewButtonEnabled(true); // 리뷰 등록 버튼 활성화
           closePopUp(); // 팝업 닫기
         });
@@ -159,14 +177,23 @@ function ReviewRegister(props) {
 
     const updatedReview = {
       ...review,
-      storeRegNum: storebizNum,
       rating: rating,
     };
+
+    const point = {
+      memberId: member, 
+      comment: "리뷰 등록",
+      point: 500
+    }
 
     axios({
       method: "post",
       url: "/api/review/reviewRegister",
-      data: updatedReview,
+      data: JSON.stringify({"reviewDTO":updatedReview,
+                            "pointRegisterDTO":point}),
+      headers: {
+                "Content-Type": "application/json"
+               }
     })
       .then((res) => {
         console.log(res);
@@ -181,9 +208,7 @@ function ReviewRegister(props) {
   return (
     <div className="app-container">
       <div className="main-content">
-        {/* <p>가게 이름: {storename}</p>
-        <p>사업자 번호: {storebizNum}</p> */}
-        <h2 className="title">리뷰 등록</h2>
+        <h2 className="reviewRegtitle">리뷰 등록</h2>
         <div className="pictureContainer">
           {!image ? (
             <>

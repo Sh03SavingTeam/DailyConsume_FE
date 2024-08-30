@@ -1,127 +1,196 @@
 import "../App.css";
 import "../styles/ConsumeHistory.css";
 import Footer from "../components/Footer";
-import axios from 'axios';
+import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-
+import { Link, useNavigate } from "react-router-dom";
+import { checkJWT } from "services/checkJWT";
 
 function ConsumeCompare({ memberId }) {
+  const navigate = useNavigate();
+  const [memberID, setMemberID] = useState("");
+
   let [userList, setUserList] = useState([]);
   let [peerList, setPeerList] = useState([]);
-  let [age, setAge] = useState(0);
-  let [currentMonth, setCurrentMonth] = useState(0);
-  let [userPayment, setUserPayment] = useState(0);
-  let [peerPayment, setPeerPayment] = useState(0);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:9999/mypage/mycardHistory?memberId=${memberId}`) // 스프링 서버의 엔드포인트로 수정 필요
-      .then((response) => {
-        const payAmounts = response.data.map((item) => item.payAmount);
-        setUserList(payAmounts); // payAmount 값을 상태로 저장
+    const fetchData = async () => {
+      try {
+        // 1. JWT 확인
+        const jwtResponse = await checkJWT(
+          "/api/member/memberSession",
+          "get",
+          null
+        );
+        console.log("JWT 확인 결과: " + jwtResponse.memberId);
+        const memberID = jwtResponse.memberId;
+        setMemberID(memberID);
 
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []); // 빈 배열은 컴포넌트가 처음 렌더링될 때만 useEffect 실행을 의미
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:9999/mypage/peercardHistory?memberId=${memberId}`) // 스프링 서버의 엔드포인트로 수정 필요
-      .then((response) => {
-        const payAmounts = response.data.payHistories.map(
+        // 2. My Card History 가져오기
+        const myCardHistoryResponse = await axios.get(
+          `http://localhost:9999/mypage/mycardHistory?memberId=${memberID}`
+        );
+        const userPayAmounts = myCardHistoryResponse.data.map(
           (item) => item.payAmount
         );
-        setAge(response.data.age);
-        setCurrentMonth(response.data.currentMonth);
-        setPeerList(payAmounts); // payAmount 값을 상태로 저장
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+        setUserList(userPayAmounts);
 
-  // userList가 업데이트될 때마다 합계 계산
-  useEffect(() => {
-    const totalUserPayment = userList.reduce((acc, curr) => acc + curr, 0);
-    setUserPayment(totalUserPayment);
-  }, [userList]);
+        // 3. Peer Card History 가져오기
+        const peerCardHistoryResponse = await axios.get(
+          `http://localhost:9999/mypage/peercardHistory?memberId=${memberID}`
+        );
+        const peerPayAmounts = peerCardHistoryResponse.data.payHistories.map(
+          (item) => item.payAmount
+        );
+        setPeerList(peerPayAmounts);
+      } catch (error) {
+        console.error("데이터를 불러오는 중 오류가 발생했습니다:", error);
+      }
+    };
 
-  // peerList가 업데이트될 때마다 합계 계산
-  useEffect(() => {
-    const totalPeerPayment = peerList.reduce((acc, curr) => acc + curr, 0);
-    setPeerPayment(totalPeerPayment);
-  }, [peerList]);
+    // 데이터 가져오는 함수 호출
+    fetchData();
+  }, []); // 초기 렌더링 시 한 번만 실행되도록 의존성 배열은 빈 배열로 설정
+
+  // useEffect(() => {
+  //   checkJWT("/api/member/memberSession", "get", null)
+  //     .then((resopnse) => {
+  //       console.log("JWT 확인 결과" + resopnse.memberId);
+  //       const memberID = resopnse.memberId;
+  //       setMemberID(memberID);
+  //     })
+  //     .catch((error) => {
+  //       console.error("There was an error!", error);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:9999/mypage/mycardHistory?memberId=${memberID}`)
+  //     .then((response) => {
+  //       const payAmounts = response.data.map((item) => item.payAmount);
+  //       setUserList(payAmounts);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:9999/mypage/peercardHistory?memberId=${memberID}`)
+  //     .then((response) => {
+  //       const payAmounts = response.data.payHistories.map(
+  //         (item) => item.payAmount
+  //       );
+  //       setPeerList(payAmounts);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
+
+  const differenceList = peerList
+    .map((value, index) => {
+      const difference = value - userList[index];
+      return difference >= 0 ? difference : 0;
+    })
+    .filter((index) => index !== null);
 
   return (
     <div className="container con2">
-      <div className="title">
-        <h2 className="set">💎{memberId}님💎 또래보다 아껴 썼어요!</h2>
+      <div className="point-header2">
+        <Link to="/mypage" state={{ selectedTab: "analysis" }}>
+          <button className="back-button2">&lt;</button>
+        </Link>
       </div>
-      <hr />
-      <div className="card">
-        <div className="card-header">
-          <div className="savings">🍚 식비 25,231원 <span className="highlight">절약</span></div>
-        </div>
-        <div className="card-content">
-        <div className="my-expense">
-            <p>내 소비</p>
-            <p className="amount my">38,200원</p>
+      <div className="title">
+        <h3 className="set">또래보다 아껴 썼어요!</h3>
+      </div>
+      <div className="card-list">
+        {differenceList[0] > 0 && (
+          <div className="card">
+            <div className="card-header">
+              <div className="savings">
+                🍚 식비 {differenceList[0].toLocaleString()}원{" "}
+                <span className="highlight">절약</span>
+              </div>
+            </div>
+            <div className="card-content">
+              <div className="my-expense">
+                <p className="p-num">내 소비</p>
+                <p className="amount my">{userList[0].toLocaleString()}원</p>
+              </div>
+              <div className="peer-expense">
+                <p className="p-num">또래 소비</p>
+                <p className="amount">{peerList[0].toLocaleString()}원</p>
+              </div>
+            </div>
           </div>
-          <div className="peer-expense">
-            <p>또래 소비</p>
-            <p className="amount">155,500원</p>
+        )}
+        {differenceList[1] > 0 && (
+          <div className="card">
+            <div className="card-header">
+              <div className="savings">
+                🚌 교통비 {differenceList[1].toLocaleString()}원{" "}
+                <span className="highlight">절약</span>
+              </div>
+            </div>
+            <div className="card-content">
+              <div className="my-expense">
+                <p className="p-num">내 소비</p>
+                <p className="amount my">{userList[1].toLocaleString()}원</p>
+              </div>
+              <div className="peer-expense">
+                <p className="p-num">또래 소비</p>
+                <p className="amount">{peerList[1].toLocaleString()}원</p>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
+        {differenceList[2] > 0 && (
+          <div className="card">
+            <div className="card-header">
+              <div className="savings">
+                🛍️ 온라인쇼핑비 {differenceList[2].toLocaleString()}원{" "}
+                <span className="highlight">절약</span>
+              </div>
+            </div>
+            <div className="card-content">
+              <div className="my-expense">
+                <p className="p-num">내 소비</p>
+                <p className="amount my">{userList[2].toLocaleString()}원</p>
+              </div>
+              <div className="peer-expense">
+                <p className="p-num">또래 소비</p>
+                <p className="amount">{peerList[2].toLocaleString()}원</p>
+              </div>
+            </div>
+          </div>
+        )}
+        {differenceList[3] > 0 && (
+          <div className="card">
+            <div className="card-header">
+              <div className="savings">
+                🍿 문화/여가비 {differenceList[3].toLocaleString()}원{" "}
+                <span className="highlight">절약</span>
+              </div>
+            </div>
+            <div className="card-content">
+              <div className="my-expense">
+                <p className="p-num">내 소비</p>
+                <p className="amount my">{userList[3].toLocaleString()}원</p>
+              </div>
+              <div className="peer-expense">
+                <p className="p-num">또래 소비</p>
+                <p className="amount">{peerList[3].toLocaleString()}원</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      <div className="card">
-        <div className="card-header">
-          <div className="savings">🚌 교통비 25,231원 <span className="highlight">절약</span></div>
-        </div>
-        <div className="card-content">
-          <div className="my-expense">
-            <p>내 소비</p>
-            <p className="amount my">38,200원</p>
-          </div>
-          <div className="peer-expense">
-            <p>또래 소비</p>
-            <p className="amount">155,500원</p>
-          </div>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-header">
-          <div className="savings">🛍️ 온라인쇼핑비 25,231원 <span className="highlight">절약</span></div>
-        </div>
-        <div className="card-content">
-          <div className="my-expense">
-            <p>내 소비</p>
-            <p className="amount my">38,200원</p>
-          </div>
-          <div className="peer-expense">
-            <p>또래 소비</p>
-            <p className="amount">155,500원</p>
-          </div>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-header">
-          <div className="savings">🍿 문화/여가비 25,231원 <span className="highlight">절약</span></div>
-        </div>
-        <div className="card-content">
-          <div className="my-expense">
-            <p>내 소비</p>
-            <p className="amount my">38,200원</p>
-          </div>
-          <div className="peer-expense">
-            <p>또래 소비</p>
-            <p className="amount">155,500원</p>
-          </div>
-        </div>
-      </div>
       <Footer />
     </div>
   );

@@ -28,8 +28,7 @@
 }
 
 .card-registration h2 {
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 20px;
   color: #333;
 }
 
@@ -52,9 +51,8 @@
   padding: 10px 20px;
   border-radius: 30px;
   cursor: pointer;
-  /* font-size: 16px;
-  font-weight: bold; */
-  font-family: "OneShinhanMedium", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
   margin-top: 20px; /* 버튼 사이의 간격을 추가 */
 }
 
@@ -110,6 +108,14 @@ select {
   font-size: 14px;
 }
 
+.pwStyle {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
 .radio-group {
   margin-bottom: 10px;
   display: flex;
@@ -125,14 +131,14 @@ select {
   color: #fff;
   border: none;
   padding: 10px 20px;
+  margin-bottom: 10px;
   border-radius: 30px;
   cursor: pointer;
-  /* font-size: 16px;
-  font-weight: bold; */
-  font-family: "OneShinhanMedium", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-.title {
+.cardRegtitle {
   font-size: 32px;
   font-weight: bold;
 }

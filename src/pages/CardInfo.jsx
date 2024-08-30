@@ -4,8 +4,29 @@ import CardDeltePopUp from "../components/CustomPopUp";
 import Header from "./../components/Header";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { checkJWT, homeCheckJWT } from "services/checkJWT";
 
 function CardInfo(props) {
+
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    // 모든 카드 정보를 가져오는 API 호출
+    axios({
+      method: "get",
+      url: "/api/card/memberCardList", // 서버에서 모든 카드 데이터를 가져오는 API 엔드포인트
+    })
+      .then((response) => {
+        console.log(response.data);
+        setCards(response.data); // 가져온 카드 데이터를 상태에 저장
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the card data!", error);
+      });
+  }, []);
+
+  //회원 객체
+  const [memberId, setMemberId] = useState("");
   //카드목록
   const [cardList, setCardList] = useState([]);
 
@@ -22,33 +43,60 @@ function CardInfo(props) {
 
   const location = useLocation();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     console.log(location);
   }, [location]);
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "/api/card/memberCardList",
-      params: {
-        memberId: "abcd",
-      },
-    })
-      .then((response) => {
-        console.log(response.data);
+    // const token = localStorage.getItem("token"); // JWT 토큰 가져오기
 
-        // 카드 목록을 상태에 저장
-        const cardList = response.data;
-        setCardList(cardList);
+    // //JWT로 로그인한 사용자 정보 가져오기
+    // axios({
+    //   method: "get",
+    //   url: "/api/member/memberSession",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`, // JWT 토큰 포함
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log(response.data.memberId);
+    //     setMemberId(response.data.memberId);
 
-        // 첫 번째 항목을 기본값으로 설정
-        // if (cardList.length > 0) {
-        //   setSelectedCard(cardList[0].cardNum);
-        // }
+    homeCheckJWT("/api/member/memberSession", "get", null)
+      .then((resopnse) => {
+        console.log("JWT 확인 결과" + resopnse.memberId);
+
+        // 카드 목록 정보 가지고 오는 axios
+        axios({
+          method: "get",
+          url: "/api/card/memberCardList",
+          params: {
+            memberId: resopnse.memberId,
+          },
+        })
+          .then((response) => {
+            console.log(response.data);
+
+            // 카드 목록을 상태에 저장
+            const cardList = response.data;
+            setCardList(cardList);
+
+            // 첫 번째 항목을 기본값으로 설정
+            // if (cardList.length > 0) {
+            //   setSelectedCard(cardList[0].cardNum);
+            // }
+          })
+          .catch((error) => {
+            console.error("There was an error!", error);
+          });
       })
       .catch((error) => {
-        console.error("There was an error!", error);
+        console.log(error);
       });
+
+    //memberId가 null이면 로그인페이지로 가게
   }, []);
 
   const handleChange = (event) => {
@@ -102,6 +150,8 @@ function CardInfo(props) {
     });
   };
 
+  
+
   const handleDeleteCard = async () => {
     axios({
       method: "delete",
@@ -136,16 +186,18 @@ function CardInfo(props) {
     closePopUp();
   };
 
-  const navigate = useNavigate();
   const handleCardRegisterClick = () => {
     navigate("/home/cardregister");
   };
-
+  
   return (
-    <div class="card-container">
-      <h2>카드 목록 조회</h2>
+    <div class="">
+      {/* <div class="memberinfo">
+        <h3 class="set">카드 목록 조회</h3>
+      </div> */}
+      <div class="card-container">
       <select value={selectedCard} onChange={handleChange}>
-        <option value="">카드를 선택해주세요</option> {/* 기본 옵션 추가 */}
+        <option value="">카드를 선택해주세요</option>
         {cardList.map((card, index) => (
           <option key={index} value={card.cardNum}>
             {card.cardNum}
@@ -154,7 +206,7 @@ function CardInfo(props) {
       </select>
       {/* 카드명, 이미지 파일은 DB에서, 혜택들은 상세페이지 URL로 크롤링해서 가져온다. */}
       <h2>{cardName}</h2>
-      <div>{selectedCard}</div>
+      {/* <div>{selectedCard}</div> */}
       <div class="card-wrapper">
         <img
           src={
@@ -166,9 +218,30 @@ function CardInfo(props) {
           className="card-image"
         />
       </div>
+      {"   "}
+      {"   "}
+      <hr/>
+      <div className="card-wrapper">
+      {cards.length > 0 ? (
+        cards.map((card, index) => (
+          <div key={index} className="card-wrapper">
+            <img
+              src={cardImgUrl ? `https://www.shinhancard.com${cardImgUrl}`
+            : "/default-card-image.jpg"}
+              alt={cards.cardName}
+              className="card-image"
+              
+            />
+            <h3>{cards.cardName}</h3> {/* 카드 이름 표시 */}
+          </div>
+        ))
+      ) : (
+        <p>No cards available</p> // 카드가 없을 때 표시할 메시지
+      )}
+    </div>
 
       {/* 혜택 목록을 렌더링 */}
-      <div className="benefits-list">
+      {/* <div className="benefits-list">
         {benefits.length > 0 ? (
           benefits.map((benefit) => (
             <div key={benefit.benefitId}>{benefit.benefit}</div>
@@ -176,12 +249,12 @@ function CardInfo(props) {
         ) : (
           <div>카드를 선택해주세요...</div>
         )}
-      </div>
-      <div class="button-container">
-        <button class="action-button" onClick={handleCardRegisterClick}>
+      </div> */}
+      <div className="cardinfo-button-container">
+        <button className="action-button" onClick={handleCardRegisterClick}>
           카드 등록
         </button>
-        <button class="action-button" onClick={openPopUp}>
+        <button className="action-button" onClick={openPopUp}>
           카드 삭제
         </button>
 
@@ -192,6 +265,7 @@ function CardInfo(props) {
         >
           선택하신 카드를 삭제할까요?
         </CardDeltePopUp>
+      </div>
       </div>
     </div>
   );
