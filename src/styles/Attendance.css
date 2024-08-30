@@ -1,0 +1,55 @@
+
+.attendance-container{
+    max-width: 414px;
+  margin: 0 auto; 
+  padding: 20px; 
+  background-color: #F2F2F7; 
+  min-height: 100vh; 
+  position: relative;
+  overflow: hidden;
+}
+
+.attendance-box {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.ad-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.ad-info {
+    display: flex;
+}
+
+.ad-text1 {
+    color: black;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.ad-text2 {
+    color: #B6B6B6;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.ad-text-box {
+    padding: 10px;
+}
+
+.attendance-btn-box {
+    background-color: #94DBE0;
+    margin: 10px;
+    border-radius: 15px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+}

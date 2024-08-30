@@ -8,7 +8,7 @@
   overflow: hidden;
 }
 .rinfo-container{
-  max-width: 480px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
+  max-width: 413px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
   margin: 0 auto; /* 자동 마진을 사용하여 중앙에 배치합니다. */
   padding: 20px; /* 내부 패딩을 설정합니다. */
   background-color: #F2F2F7; /* 배경 색상을 연한 회색으로 설정합니다. */
@@ -177,6 +177,7 @@
   padding:10px;
   align-items: center;
   margin-bottom:20px;
+  margin-top: 20px;
 }
 .benefit-rank-info span{
   display: block;
@@ -185,7 +186,7 @@
 .benefit-rank-info{
   width:260px;
 }
-.button-container{
+.benefit-button-container{
   width:200px;
   text-align: right;
 }
@@ -291,10 +292,8 @@
 .footer-info{
   background-color: #EBEBEB;
   margin-top:20px;
-  width:440px;
-  height:440px;
   padding:20px;
-  font-size:10px;
+  font-size:8px;
 }
 .footer-title{
   display: grid !important;
@@ -318,5 +317,31 @@
   z-index: 210;
   position: absolute;
   top: 0;
-  left: 10px;
+  
+}
+.prev-btn2 {
+  z-index: 210;
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+.isVisable {
+  height: 0;
+  overflow: hidden;
+}
+
+.selectedMemberId {
+  height: 0;
+  overflow: hidden;
+}
+
+.not-center {
+  text-align: left !important;
+}
+.rankpage{
+  position: absolute !important;
+    top: 0;
+    left: 0;
+    max-width: 413px;
+    border:none;
 }
