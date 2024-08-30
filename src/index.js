@@ -24,6 +24,7 @@ import Refund from "./pages/Refund";
 import Refundconfirm from "./pages/RefundConfirm";
 import RankInfo from "./pages/RankInfo";
 import MypageMain from "pages/MypageMain";
+import MyPage from "pages/MyPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
