@@ -27,7 +27,7 @@ const Footer = () => {
       case "/calendar":
         setSelectedButton("calendar");
         break;
-      case "/MyPage/AddrList":
+      case "/MyPage":
       case "/MyPage/AddrRegister":
         setSelectedButton("mypage");
         break;
