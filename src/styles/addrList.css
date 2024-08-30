@@ -73,3 +73,60 @@ tr:last-child td {
   border-radius: 15%;
   padding: 5px;
 }
+
+/********************************/
+
+.address-book {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 5%;
+  margin: 5%;
+  text-align: center;
+}
+
+.address-book h1 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.address-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 3px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+.address-item:last-child {
+  border-bottom: none;
+}
+
+.default-button, .delete-button {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 14px;
+}
+
+.default-button.default {
+  background-color: #303473;
+  color: white;
+}
+
+.add-button {
+  background-color: #303473;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 2%;
+  width: 33%;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+}

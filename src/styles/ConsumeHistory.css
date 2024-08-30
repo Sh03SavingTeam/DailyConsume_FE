@@ -47,6 +47,10 @@ display: none; /* Chrome, Safari, Opera*/
 #test{
     height:auto;
 }
+div#test\ mine {
+    margin-bottom: 10%;
+}
+
 .plus {
     background-color: #303473;
     font-family: "OneShinhanBold";
@@ -136,7 +140,9 @@ h3 {
 }
 
 .set{
-    font-size: large;
+    font-size: 27px;
+    font-weight: bold;
+    margin-top: 20%;
 }
 
 .p-set{
@@ -223,9 +229,8 @@ h3 {
 
 .select {
     font-family: "OneShinhanBold";
-    margin-top: 5%; /* 드롭다운 메뉴와 버튼 사이에 여유 공간을 추가 */
-    padding: 1%;
-    font-size: 18px;
+    padding: 10px;
+    font-size: 16px;
     background-color: #303473; /* 버튼 배경색 설정 */
     color: white;
     border: none;
@@ -253,8 +258,8 @@ label{
     font-family: "OneShinhanBold";
 }
 input[type="password"]{
-    width: 95%;
-    padding: 8px;
+    width: 100%;
+    padding: 10px;
 }
 input.form-control {
     width: 95%;

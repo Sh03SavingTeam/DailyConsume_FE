@@ -72,7 +72,7 @@ function ConsumeLogin(props) {
                 name="memberId"
                 className="pwStyle"
                 required
-                placeholder="Enter a User ID.."
+                placeholder="이용자ID"
                 onChange={handleChange}
               />
             </div>
@@ -87,16 +87,18 @@ function ConsumeLogin(props) {
                 //className="form-control"
                 className="pwStyle"
                 required
-                placeholder="Enter a User Password.."
+                placeholder="비밀번호"
                 onChange={handleChange}
               />
             </div>
-            <button className="submit-button" onClick={handleMemberLogin}>
-              로그인
-            </button>
-            <button className="submit-button" onClick={handleMemberRegister}>
-              회원가입
-            </button>
+            <div className="submit-button-center">
+              <button className="submit-button" onClick={handleMemberLogin}>
+                로그인
+              </button>
+              <button className="submit-button" onClick={handleMemberRegister}>
+                회원가입
+              </button>
+            </div>
           </form>
         </div>
       </div>

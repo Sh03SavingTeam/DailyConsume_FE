@@ -197,6 +197,25 @@ function CardInfo(props) {
           ))}
         </div>
       </div>
+     
+      {/* <div className="card-wrapper">
+      {cards.length > 0 ? (
+        cards.map((card, index) => (
+          <div key={index} className="card-wrapper">
+            <img
+              src={cardImgUrl ? `https://www.shinhancard.com${cardImgUrl}`
+            : "/default-card-image.jpg"}
+              alt={cards.cardName}
+              className="card-image"
+              
+            />
+            <h3>{cards.cardName}</h3> 
+          </div>
+        ))
+      ) : (
+        <p>No cards available</p> 
+      )}
+    </div> */}
       <div>{selectedCardNum}</div>
       <h2>{cardName}</h2>
 

@@ -255,7 +255,7 @@ function ConsumeHistory({ memberId }) {
             }}
           />
         </div>
-        <div className="content-card card" id="test">
+        <div className="content-card card" id="test mine">
           <h3>나의 소비 별 통계</h3>
           <Link to="/MyPage/DiscountInfo">
             <button class="content-discount">
