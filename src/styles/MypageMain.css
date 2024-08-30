@@ -99,6 +99,7 @@
     height: 67.5vh;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
+    background: #f8f8fdbf;
 }
 
 .content::-webkit-scrollbar {
