@@ -30,7 +30,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}></Route>
+      <Route path="/" element={<Home />}></Route>
       <Route path="/Calendar" element={<Calendar />}></Route>
 
       {/* 홈 */}
