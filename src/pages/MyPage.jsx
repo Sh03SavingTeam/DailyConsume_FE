@@ -118,7 +118,7 @@ function MyPage(props) {
                         {month}월 등급 {rankInfo.rankName}
                     </div>
                     <div className='rank-info4'>
-                        누적 점수 <span className='rank-score'>{rankInfo.amount}</span>
+                        누적 당근 <span className='rank-score'>{rankInfo.amount}🥕</span>
                     </div>
                     <div className='rank-info3'>
                         다음 등급까지 <span className='highlight'>{rankInfo.nextAmount}</span> 남았어요
@@ -155,7 +155,7 @@ function MyPage(props) {
                                 </div>
                                 <div className="item-info2-wrap">
                                     <div className="item-info2">
-                                        누적점수 <span className='highlight2'>{item.totalAmount}점</span>
+                                        누적 당근 <span className='highlight2'>{item.totalAmount}🥕</span>
                                     </div>
                                     <div 
                                         className="info-link" 
@@ -187,7 +187,7 @@ function MyPage(props) {
                                 </div>
                                 <div className="item-info2-wrap">
                                     <div className="item-info2">
-                                        누적점수 <span className='highlight2'>{item.totalAmount}점</span>
+                                        누적 당근 <span className='highlight2'>{item.totalAmount}🥕</span>
                                     </div>
                                     <div 
                                         className="info-link" 

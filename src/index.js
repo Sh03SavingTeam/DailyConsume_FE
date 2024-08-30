@@ -25,6 +25,7 @@ import Refundconfirm from "./pages/RefundConfirm";
 import MyPage from "./pages/MyPage";
 import RankInfo from "./pages/RankInfo";
 import MypageMain from "pages/MypageMain";
+import Attendance from "components/Attendance";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -61,6 +62,7 @@ root.render(
       <Route path="/rank/AddrList" element={<AddressList />}></Route>
       <Route path="/rank" element={<MyPage/>}></Route>
       <Route path="/rank/benefits/:memberId" element={<RankInfo/>}></Route>
+      <Route path="/attendanceTest/:memberId" element={<Attendance/>}></Route>
     </Routes>
   </BrowserRouter>
 );
