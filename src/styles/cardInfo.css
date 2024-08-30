@@ -48,7 +48,7 @@ h2 {
   scroll-snap-type: x mandatory; /* 스크롤을 끝점에서 멈추게 설정 */
 }
 
-.card {
+.membercard {
   flex: 0 0 auto; /* 고정된 크기를 유지하면서 가로로 정렬 */
   text-align: center;
   scroll-snap-align: center; /* 카드가 스크롤 시 중앙에 위치하게 함 */
