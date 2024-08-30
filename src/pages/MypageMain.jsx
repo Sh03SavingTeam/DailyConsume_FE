@@ -26,23 +26,6 @@ function MypageMain(props) {
   );
   console.log(selectedTab);
 
-<<<<<<< HEAD
-    const renderContent = () => {
-        switch (selectedTab) {
-            case 'analysis':
-                return <ConsumeHistory memberId={"min"}/>
-            case 'point':
-                return <Point memberId='min'/>;
-            case 'rank':
-                return <MyPage memberId="min"/>;
-            case 'address':
-                return <AddressList />;
-            case 'consumeCompare':
-                return <ConsumeCompare memberId={"min"}/>;
-            default:
-                return <ConsumeHistory memberId={"min"}/>;
-        }
-=======
   const handleMemberLogout = (e) => {
     localStorage.removeItem("token");
     window.location.href = "/Login";
@@ -74,7 +57,6 @@ function MypageMain(props) {
       } catch (error) {
         console.error("데이터 처리 중 오류 발생!", error);
       }
->>>>>>> 5317f9baee597937bae04360413bdf69579c4277
     };
 
     const updateSelectedTabFromLocation = () => {

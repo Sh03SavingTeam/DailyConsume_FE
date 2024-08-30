@@ -6,9 +6,9 @@
   }
 
 .container {
-    height: 115vh;
+    height: 105vh;
     overflow-y: auto;
-    min-height: 115vh; /*115vh*/
+    min-height: 105vh; /*115vh*/
     background-color: #f8f8fdbf;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
@@ -18,9 +18,9 @@
 display: none; /* Chrome, Safari, Opera*/
 }
 .container2 {
-    height: 115vh;
+    /* height: 115vh; */
     overflow-y: auto;
-    min-height: 115vh; /*115vh*/
+    /* min-height: 115vh; */
     background-color: #f8f8fdbf;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
@@ -146,7 +146,7 @@ h3 {
 .total-payment, .title{
     font-family: "OneShinhanBold";
     background: #fff;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 3%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: 5%;
