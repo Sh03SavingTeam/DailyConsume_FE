@@ -4,7 +4,7 @@ import CardDeltePopUp from "../components/CustomPopUp";
 import Header from "./../components/Header";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { checkJWT, homeCheckJWT } from "services/checkJWT";
+import { checkJWT } from "services/checkJWT";
 
 function CardInfo(props) {
   const [memberId, setMemberId] = useState("");
@@ -139,8 +139,6 @@ function CardInfo(props) {
     });
   };
 
-  
-
   const handleDeleteCard = async () => {
     axios({
       method: "delete",
@@ -172,7 +170,7 @@ function CardInfo(props) {
   const handleCardRegisterClick = () => {
     navigate("/home/cardregister");
   };
-  
+
   return (
     <div className="card-container">
       <h2>카드 목록 조회</h2>
@@ -181,8 +179,7 @@ function CardInfo(props) {
           {cardList.map((card, index) => (
             <div
               key={card.cardNum}
-              id="selected"
-              className={`card ${
+              className={`membercard ${
                 selectedCardNum === card.cardNum ? "selected" : ""
               }`}
               data-cardnum={card.cardNum}
@@ -211,7 +208,7 @@ function CardInfo(props) {
         ) : (
           <div>카드를 선택해주세요...</div>
         )}
-      </div> */}
+      </div>
       <div className="cardinfo-button-container">
         <button className="action-button" onClick={handleCardRegisterClick}>
           카드 등록
@@ -227,7 +224,6 @@ function CardInfo(props) {
         >
           선택하신 카드를 삭제할까요?
         </CardDeltePopUp>
-      </div>
       </div>
     </div>
   );
