@@ -16,16 +16,18 @@ const Title = styled.h2`
 `;
 
 const AddButton = styled.button`
+  display: block;
   width: 100%;
-  padding: 10px;
-  background-color: #303473;
-  color: #ffffff;
-  border: none;
+  text-align: center;
+  padding: 10px 15px;
+  margin-top: 15px;
+  background-color: #3f51b5; /* Dark blue background for the button */
+  color: white;
+  border-radius: 15px;
   cursor: pointer;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  transition: background-color 0.3s;
   &:hover {
-    background-color: #a0d6cf;
+    background-color: #2c3a8a; /* Darker blue on hover */
   }
 `;
 
@@ -189,70 +191,54 @@ function AddressList(props) {
   };
 
   return (
-    <div className="app-container">
-      <div className="main-content">
-        <div class="address-book">
-        <div class="address-item">
-            <span class="workplace">근무지 1</span>
-            <span class="region">마포구</span>
-            <div>
-                <button class="default-button">기본 주소 선택</button>
-                <button class="delete-button">삭제</button>
-            </div>
-        </div>
-        <button class="add-button" onClick={handleAddrRegisterClick}>+ 주소 추가</button>
-    </div>
-
-{/*
-          <table>
-            <thead>
-              <tr>
-                <th className="defaultSelectArea"></th>
-                <th>별명</th>
-                <th>주소</th>
-                <th className="DeleteArea"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {addrList.map((item, index) => (
-                <tr key={index}>
-                  <td>
-                    <div class="form_radio_btn">
-                      <input
-                        id={`addrSelectRadio_${item.addrId}`}
-                        type="radio"
-                        name="selectedAddr"
-                        value={item.addrId}
-                        checked={selectedAddrId === item.addrId} // 선택된 항목인지 확인
-                        onChange={() => openDefaultAddrPopup(item.addrId)} // Radio 버튼 변경 처리
-                      />
-                      <label htmlFor={`addrSelectRadio_${item.addrId}`}>
-                        {selectedAddrId === item.addrId ? "기본주소" : "선택"}
-                      </label>
-                    </div>
-                  </td>
-                  <td>{item.addrName}</td>
-                  <td>{item.addrDetail}</td>
+    <div className="main-content">
+      <div className="card-container">
+        {/* <Title>주소 목록</Title> */}
+        <table>
+          <tbody>
+            {addrList.map((item, index) => (
+              <tr key={index}>
+                <td>{item.addrName}</td>
+                <td>{item.addrDetail}</td>
+                <td>
+                  <div class="form_radio_btn">
+                    <input
+                      id={`addrSelectRadio_${item.addrId}`}
+                      type="radio"
+                      name="selectedAddr"
+                      value={item.addrId}
+                      checked={selectedAddrId === item.addrId} // 선택된 항목인지 확인
+                      onChange={() => openDefaultAddrPopup(item.addrId)} // Radio 버튼 변경 처리
+                    />
+                    <label htmlFor={`addrSelectRadio_${item.addrId}`}>
+                      {selectedAddrId === item.addrId
+                        ? "기본 주소"
+                        : "기본 주소 선택"}
+                    </label>
+                  </div>
+                </td>
+                <td>
                   <button
                     className="deleteButton"
                     onClick={() => openPopUp(item.addrId)}
                   >
-                    ✕
+                    삭제
                   </button>
-                  <CardDeltePopUp
-                    open={popupOpen}
-                    close={closePopUp}
-                    onConfirm={handleConfirmDelete}
-                  >
-                    선택하신 주소를 삭제할까요?
-                  </CardDeltePopUp>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <AddButton onClick={handleAddrRegisterClick}>
-            신규 주소 등록
-          </AddButton>*/}
+                </td>
+                <CardDeltePopUp
+                  open={popupOpen}
+                  close={closePopUp}
+                  onConfirm={handleConfirmDelete}
+                >
+                  선택하신 주소를 삭제할까요?
+                </CardDeltePopUp>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <AddButton onClick={handleAddrRegisterClick}>
+          + 신규 주소 등록
+        </AddButton>
       </div>
       <Footer />
 
