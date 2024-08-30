@@ -20,12 +20,13 @@
 
 .card-container {
   background-color: #ffffff;
+
   padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
   text-align: center;
-  margin-left: 5%;
-  margin-right: 5%;
+  /* margin-left: 5%;
+  margin-right: 5%; */
 }
 
 h2 {
@@ -36,19 +37,41 @@ h2 {
   margin-top: 10px;
 }
 
+.card-list {
+  display: flex;
+  width: 200px;
+  height: 200px;
+  overflow-x: auto;
+  text-align: center;
+  margin-left: 30px;
+  margin-right: 30px;
+  scroll-snap-type: x mandatory; /* 스크롤을 끝점에서 멈추게 설정 */
+}
+
+.membercard {
+  flex: 0 0 auto; /* 고정된 크기를 유지하면서 가로로 정렬 */
+  text-align: center;
+  scroll-snap-align: center; /* 카드가 스크롤 시 중앙에 위치하게 함 */
+  /* Remove or override any existing shadow */
+  box-shadow: none;
+  transform: rotate(90deg); /* 이미지를 90도 회전시킴 */
+}
+
 .card-wrapper {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 0 auto; /* Center the wrapper horizontally */
+  padding: 20px 0; /* Add padding to avoid overlap */
+  width: 100%;
+  max-width: 300px; /* Ensure it doesn't get too wide */
+  position: relative;
 }
 
 .card-image {
   width: 100%;
   max-width: 200px;
-  border-radius: 10px;
-  z-index: 1;
+  height: auto; /* Ensure it maintains aspect ratio */
 }
 
 .background-gradient {
@@ -98,7 +121,7 @@ h2 {
   padding-right: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
   font-family: "OneShinhanMedium", sans-serif;

@@ -135,7 +135,7 @@ function CardRegister(props) {
 
   const getFileName = () => {
     const timestamp = Date.now();
-    return `cardimg_${timestamp}.jpg`;
+    return `cardimg_${memberId}_${timestamp}.jpg`;
   };
 
   const uploadToS3 = (filename, fileBlob) => {
@@ -175,10 +175,12 @@ function CardRegister(props) {
       console.log("Card Number:", number);
       console.log("Valid Thru:", validThru);
 
+      const result = number.replace(/(.{4})/g, "$1 ");
+
       // 상태 업데이트
       setMemberCard({
         ...memberCard,
-        cardNum: number,
+        cardNum: result,
         expirationDate: validThru,
       });
     } catch (error) {

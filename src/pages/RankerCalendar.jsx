@@ -7,124 +7,108 @@ import Footer from "../components/Footer";
 import "../App.css";
 import "../styles/Calendar.css";
 import AmountListForDay from "../hooks/AmountListForDay";
-import { checkJWT } from "services/checkJWT";
+import RabbitCompleteImage from "../assets/RabbitComplete.png";
+import RabbitFail from "../assets/RabbitFail.png";
 
-const RankerCalendar = ({ memberId }) => {
-  const [memberID, setMemberID] = useState("");
+const RankerCalendar = ({ memberId, onBack }) => { 
   const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일"));
   const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
   const [amountList, setAmountList] = useState([]);
+  const [weeklyAchievements, setWeeklyAchievements] = useState([]);
 
-  // 서버에서 데이터를 가져오는 함수
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get(
-        "http://localhost:9999/api/calendar/payhistory",
-        {
-          params: { month, memberId },
-        }
-      );
+      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
+        params: { month, memberId },
+      });
       const fetchedData = response.data.map((item) => ({
         day: moment(item.payDate).format("YYYY/MM/DD"),
         amount: item.payAmount,
       }));
       setAmountList(fetchedData);
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        console.log("No data found for this month");
-        setAmountList([]); // 데이터를 초기화하거나 에러 메시지 출력
-      } else {
-        console.error("Failed to fetch data from server", error);
-      }
+      console.error("Failed to fetch data from server", error);
+      setAmountList([]);
     }
   };
+
+  const fetchWeeklyAchievements = async (month, memberId) => {
+    try {
+      const response = await axios.get("http://localhost:9999/api/calendar/weeklyConsume/month", {
+        params: { month, memberId },
+      });
+      setWeeklyAchievements(response.data || []); // 데이터를 배열로 설정
+    } catch (error) {
+      console.error("Failed to fetch weekly achieve data from server", error);
+      setWeeklyAchievements([]); // 에러가 발생하면 빈 배열로 설정
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // 1. JWT 확인
-        const jwtResponse = await checkJWT(
-          "/api/member/memberSession",
-          "get",
-          null
-        );
-        console.log("JWT 확인 결과: " + jwtResponse.memberId);
-        const memberID = jwtResponse.memberId;
-        setMemberID(memberID);
-
-        // 2. 현재 월 구하고 Amount 리스트 가져오기
-        const month = moment().format("MM");
-        fetchAmountList(month, memberID);
-      } catch (error) {
-        console.error("데이터를 불러오는 중 오류가 발생했습니다:", error);
-      }
-    };
-
-    // 데이터를 가져오는 함수 호출
-    fetchData();
-  }, []); // 초기 렌더링 시 한 번만 실행되도록 빈 배열 설정
-
-  // useEffect(() => {
-  //   checkJWT("/api/member/memberSession", "get", null)
-  //     .then((resopnse) => {
-  //       console.log("JWT 확인 결과" + resopnse.memberId);
-  //       const memberID = resopnse.memberId;
-  //       setMemberID(memberID);
-  //     })
-  //     .catch((error) => {
-  //       console.error("There was an error!", error);
-  //     });
-  // }, []);
-  // useEffect(() => {
-  //   const month = moment().format("MM");
-  //   fetchAmountList(month, memberID);
-  // }, [memberID]);
+    const month = moment().format("MM");
+    fetchAmountList(month, memberId);
+    fetchWeeklyAchievements(month, memberId);
+  }, [memberId]);
 
   const handleDateChange = (date) => {
     setNowDate(moment(date).format("YYYY년 MM월 DD일"));
     const month = moment(date).format("MM");
-    fetchAmountList(month, memberID);
+    fetchAmountList(month, memberId);
+    fetchWeeklyAchievements(month, memberId);
   };
 
   const handleMonthChange = ({ activeStartDate }) => {
     const newMonth = moment(activeStartDate).format("MM");
     setCurrentMonth(moment(activeStartDate).format("M월"));
-    fetchAmountList(newMonth, memberID);
+    fetchAmountList(newMonth, memberId);
+    fetchWeeklyAchievements(newMonth, memberId);
   };
 
   const f_formatDay = (locale, date) => {
     const currentDay = moment(date).format("YYYY/MM/DD");
     const filterData = amountList.filter((data) => data.day === currentDay);
-
-    if (filterData.length > 0) {
-      const totalAmount = filterData.reduce(
-        (sum, item) => sum + item.amount,
-        0
-      );
-      return (
-        <div className="calendar-info">
-          <img
-            src="/RabbitComplete.png"
-            className="calanderRabbit-style"
-            alt="Complete"
-          />
-          <span>{moment(date).format("D")}</span>
-          <span className="calendar-count">{filterData.length}건</span>
-          <span className="calendar-amount">
-            {totalAmount.toLocaleString()}
-          </span>
-        </div>
-      );
-    } else {
-      return moment(date).format("D");
-    }
+    const achievementsForDay = (weeklyAchievements || []).filter(
+      (achievement) => {
+        return moment(achievement["종료일"]).format("YYYY/MM/DD") === currentDay;
+      }
+    );
+    return (
+      <div className="calendar-info">
+        <span>
+          {achievementsForDay.map((achievement, index) => (
+            <img
+              key={index}
+              src={
+                achievement["달성여부"] === "1"
+                  ? RabbitCompleteImage
+                  : RabbitFail
+              }
+              className="calanderRabbit-style"
+              alt="Weekly Achievement"
+            />
+          ))}
+          {moment(date).format("D")}
+        </span>
+        {filterData.length > 0 && (
+          <div>
+            <span className="calendar-count">{filterData.length}건</span>
+            <span className="calendar-amount">
+              {filterData
+                .reduce((sum, item) => sum + item.amount, 0)
+                .toLocaleString()}
+            </span>
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container rankpage">
+      <div className='prev-btn2' onClick={onBack}>&lt;</div> {/* 뒤로가기 버튼 수정 */}
       <h1> 소비 캘린더 </h1>
       <div className="main-content">
         <div className="calendar-container">
-          <h2 className="month-title">{currentMonth}</h2>
           <Calendar
             onChange={handleDateChange}
             value={moment(nowDate, "YYYY년 MM월 DD일").toDate()}
@@ -132,7 +116,7 @@ const RankerCalendar = ({ memberId }) => {
             onActiveStartDateChange={handleMonthChange}
           />
           <hr className="calendar-divider" />
-          <AmountListForDay initialDay={nowDate} />
+          <AmountListForDay initialDay={nowDate} memberId={memberId}/>
         </div>
       </div>
       <Footer />

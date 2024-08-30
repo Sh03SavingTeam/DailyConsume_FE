@@ -192,7 +192,7 @@ function AddressList(props) {
     <div className="app-container">
       <div className="main-content">
         <div className="card-container">
-          <Title>주소 목록</Title>
+          {/* <Title>주소 목록</Title> */}
           <table>
             <thead>
               <tr>

@@ -70,11 +70,12 @@ h1 {
 .main-content {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  /* padding: 20px; */
   padding-bottom: 50%; /* Footer의 높이 + 여유 공간 */
   box-sizing: border-box; /* padding을 높이에 포함 */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
+  background: #f8f8fdbf;
 }
 
 .main-content::-webkit-scrollbar {
