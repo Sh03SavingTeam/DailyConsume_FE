@@ -18,16 +18,24 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "SEBANGGothic";
+  src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 .capCardIMG {
   width: 100%;
   aspect-ratio: 4/3;
 }
 
 .card-registration {
+  font-family: "SEBANGGothic";
   text-align: center;
 }
 
 .card-registration h2 {
+  font-family: "SEBANGGothic";
   margin-bottom: 20px;
   color: #333;
 }
@@ -58,6 +66,7 @@
 
 .card-form {
   text-align: left;
+  padding: 10%;
 }
 
 .form-group {
@@ -109,6 +118,7 @@ select {
 }
 
 .pwStyle {
+  font-family: "SEBANGGothic";
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -126,19 +136,31 @@ select {
 }
 
 .submit-button {
-  width: 100%;
-  background-color: #3b4cca;
+  font-family: "SEBANGGothic";
+  width: 40%;
+  background-color: #303473;
   color: #fff;
   border: none;
   padding: 10px 20px;
-  margin-bottom: 10px;
-  border-radius: 30px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
+  margin-top: 10%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.submit-button:last-child {
+  margin-right: 0; /* 마지막 버튼은 오른쪽 마진을 제거 */
 }
 
 .cardRegtitle {
   font-size: 32px;
   font-weight: bold;
+  margin: 30%;
+}
+
+.col-xl-6 {
+  padding: 10%;
 }

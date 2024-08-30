@@ -218,9 +218,7 @@ function CardInfo(props) {
           className="card-image"
         />
       </div>
-      {"   "}
-      {"   "}
-      <hr/>
+     
       <div className="card-wrapper">
       {cards.length > 0 ? (
         cards.map((card, index) => (
