@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Footer from "../components/Footer";
-import profileImg from "../assets/profileImg.png"
-import profileImg2 from "../assets/song4.png"
-import "../styles/MypageMain.css";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { checkJWT } from "services/checkJWT";
+import profileImg2 from "../assets/song4.png";
+import Footer from "../components/Footer";
+import "../styles/MypageMain.css";
 import ConsumeHistory from "./ConsumeHistory";
 import Point from "./Point";
 import MyPage from "./MyPage";
 import AddressList from "./AddressList";
 import ConsumeCompare from "./ConsumeCompare";
-import { checkJWT } from "services/checkJWT";
 
 function MypageMain(props) {
   //회원 객체
@@ -30,6 +29,23 @@ function MypageMain(props) {
   const handleMemberLogout = (e) => {
     localStorage.removeItem("token");
     window.location.href = "/Login";
+  };
+
+  const renderContent = () => {
+    switch (selectedTab) {
+      case "analysis":
+        return <ConsumeHistory memberId={memberId} />;
+      case "point":
+        return <Point memberId={memberId} />;
+      case "rank":
+        return <MyPage memberId={memberId} />;
+      case "address":
+        return <AddressList />;
+      case "consumeCompare":
+        return <ConsumeCompare memberId={memberId} />;
+      default:
+        return <ConsumeHistory />;
+    }
   };
 
   useEffect(() => {
@@ -59,6 +75,8 @@ function MypageMain(props) {
         console.error("데이터 처리 중 오류 발생!", error);
       }
     };
+
+    
 
     const updateSelectedTabFromLocation = () => {
       if (location.state?.selectedTab) {

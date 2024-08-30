@@ -31,13 +31,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}></Route>
+      <Route path="/" element={<Home />}></Route>
       <Route path="/ConsumeHistory" element={<ConsumeHistory />}></Route>
 
       <Route path="/calendar" element={<Calendar />}></Route>
 
       {/* 홈 */}
-      <Route path="/home" element={<Home />}></Route>
       <Route path="/home/cardregister" element={<CardRegister />}></Route>
 
       {/* 지도 */}

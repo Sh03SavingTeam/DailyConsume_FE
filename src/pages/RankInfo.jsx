@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import Footer from "../components/Footer";
+import React, { useEffect, useState } from 'react';
+import Footer from '../components/Footer';
 import "../styles/MyPage.css";
-import CharacterImage1 from "../assets/Character1.png";
-import CharacterImage2 from "../assets/Character2.png";
-import CharacterImage3 from "../assets/Character3.png";
-import CharacterImage4 from "../assets/Character4.png";
-import axios from "axios";
-import { checkJWT } from "services/checkJWT";
+import CharacterImage1 from '../assets/Character1.png';
+import CharacterImage2 from '../assets/Character2.png';
+import CharacterImage3 from '../assets/Character3.png';
+import CharacterImage4 from '../assets/Character4.png';
+import axios from 'axios';
 
 function RankInfo({ setIsVisable }) {
     const date = new Date(); 
@@ -15,120 +14,67 @@ function RankInfo({ setIsVisable }) {
     const [selectedRank, setSelectedRank] = useState(null);
     const memberId = "m002";
 
-  const clickPrevHandler = () => {
-    setIsVisable((prevState) => !prevState);
-  };
+    const clickPrevHandler = () => {
+        setIsVisable(prevState => !prevState);
+    }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // 1. JWT 확인
-        const jwtResponse = await checkJWT(
-          "/api/member/memberSession",
-          "get",
-          null
-        );
-        console.log("JWT 확인 결과: " + jwtResponse.memberId);
-        const memberID = jwtResponse.memberId;
-        setMemberID(memberID);
+    useEffect(() => {
+        axios.get(`http://localhost:9999/rank/benefits/${memberId}`)
+            .then(response => {
+                setRankInfo(response.data); 
+                setSelectedRank(response.data.rankName);
+            })
+            .catch(error => {
+                console.error("Error fetching rank info:", error);
+            });
+    }, [memberId]);
 
-        // 2. Rank 정보 가져오기
-        const rankResponse = await axios.get(
-          `http://localhost:9999/rank/benefits/${memberID}`
-        );
-        setRankInfo(rankResponse.data);
-        setSelectedRank(rankResponse.data.rankName);
-      } catch (error) {
-        console.error("랭킹 데이터를 불러오는 중 오류가 발생했습니다:", error);
-      }
+    if (!rankInfo) {
+        return <div>Loading...</div>;
+    }
+
+    const handleRankClick = (rankName) => {
+        setSelectedRank(rankName);
     };
 
-    // 데이터를 가져오는 함수 호출
-    fetchData();
-  }, []); // 초기 렌더링 시 한 번만 실행되도록 빈 배열 설정
-
-  //   useEffect(() => {
-  //     checkJWT("/api/member/memberSession", "get", null)
-  //       .then((resopnse) => {
-  //         console.log("JWT 확인 결과" + resopnse.memberId);
-  //         const memberID = resopnse.memberId;
-  //         setMemberID(memberID);
-  //       })
-  //       .catch((error) => {
-  //         console.error("There was an error!", error);
-  //       });
-  //   }, []);
-
-  //   useEffect(() => {
-  //     axios
-  //       .get(`http://localhost:9999/rank/benefits/${memberID}`)
-  //       .then((response) => {
-  //         setRankInfo(response.data);
-  //         setSelectedRank(response.data.rankName);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error fetching rank info:", error);
-  //       });
-  //   }, [memberID]);
-
-  if (!rankInfo) {
-    return <div>Loading...</div>;
-  }
-
-  const handleRankClick = (rankName) => {
-    setSelectedRank(rankName);
-  };
-
-  const renderBenefitInfo = () => {
-    if (selectedRank === "거지토순이") {
-      return (
-        <>
-          <div className="rank-name"> 📌 거지토순이 등급</div>
-          <div className="rank-standard">
-            {" "}
-            기준 | 직전 1개월 등급 점수 0점 이상 20점 미만
-          </div>
-          <div className="rank-benefit-info"> 혜택 | 1,000 포인트 지급 </div>
-        </>
-      );
-    }
-    if (selectedRank === "새싹토순이") {
-      return (
-        <>
-          <div className="rank-name"> 📌 새싹토순이 등급</div>
-          <div className="rank-standard">
-            {" "}
-            기준 | 직전 1개월 등급 점수 20점 이상 40점 미만
-          </div>
-          <div className="rank-benefit-info"> 혜택 | 2,000 포인트 지급 </div>
-        </>
-      );
-    }
-    if (selectedRank === "당근토순이") {
-      return (
-        <>
-          <div className="rank-name"> 📌 당근토순이 등급</div>
-          <div className="rank-standard">
-            {" "}
-            기준 | 직전 1개월 등급 점수 40점 이상 60점 미만
-          </div>
-          <div className="rank-benefit-info"> 혜택 | 3,000 포인트 지급 </div>
-        </>
-      );
-    }
-    if (selectedRank === "부자토순이") {
-      return (
-        <>
-          <div className="rank-name"> 📌 부자토순이 등급</div>
-          <div className="rank-standard">
-            {" "}
-            기준 | 직전 1개월 등급 점수 60점 이상
-          </div>
-          <div className="rank-benefit-info"> 혜택 | 5,000 포인트 지급 </div>
-        </>
-      );
-    }
-  };
+    const renderBenefitInfo = () => {
+        if (selectedRank === '거지토순이') {
+            return (
+                <>
+                    <div className="rank-name"> 📌 거지토순이 등급</div>
+                    <div className="rank-standard"> 기준 | 직전 1개월 등급 점수 0점 이상 20점 미만</div>
+                    <div className="rank-benefit-info"> 혜택 | 1,000 포인트 지급 </div>
+                </>
+            );
+        }
+        if (selectedRank === '새싹토순이') {
+            return (
+                <>
+                    <div className="rank-name"> 📌 새싹토순이 등급</div>
+                    <div className="rank-standard"> 기준 | 직전 1개월 등급 점수 20점 이상 40점 미만</div>
+                    <div className="rank-benefit-info"> 혜택 | 2,000 포인트 지급 </div>
+                </>
+            );
+        }
+        if (selectedRank === '당근토순이') {
+            return (
+                <>
+                    <div className="rank-name"> 📌 당근토순이 등급</div>
+                    <div className="rank-standard"> 기준 | 직전 1개월 등급 점수 40점 이상 60점 미만</div>
+                    <div className="rank-benefit-info"> 혜택 | 3,000 포인트 지급 </div>
+                </>
+            );
+        }
+        if (selectedRank === '부자토순이') {
+            return (
+                <>
+                    <div className="rank-name"> 📌 부자토순이 등급</div>
+                    <div className="rank-standard"> 기준 | 직전 1개월 등급 점수 60점 이상</div>
+                    <div className="rank-benefit-info"> 혜택 | 5,000 포인트 지급 </div>
+                </>
+            );
+        }
+    };
 
     return (
         <div className="rinfo-container sec_container">

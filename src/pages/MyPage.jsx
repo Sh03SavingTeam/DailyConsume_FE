@@ -8,6 +8,7 @@ import Character4 from '../assets/Character4.png';
 import axios from 'axios';
 import RankInfo from './RankInfo';
 import RankerCalendar from './RankerCalendar'; 
+import { checkJWT } from "services/checkJWT";
 
 
 function MyPage(props) {
@@ -20,7 +21,7 @@ function MyPage(props) {
     const [error, setError] = useState(null);
     const [isVisable, setIsVisable] = useState(false);
     const [selectedMemberId, setSelectedMemberId] = useState(null); 
-    const memberId = "m002";
+    const [memberId, setMemberId] = useState("");
     const viewRankClickHandler = () => {
         setIsVisable(prevState => !prevState);
     };

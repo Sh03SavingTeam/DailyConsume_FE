@@ -4,7 +4,7 @@ import CardDeltePopUp from "../components/CustomPopUp";
 import Header from "./../components/Header";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { checkJWT } from "services/checkJWT";
+import { checkJWT, homeCheckJWT } from "services/checkJWT";
 
 function CardInfo(props) {
 
@@ -64,7 +64,7 @@ function CardInfo(props) {
     //     console.log(response.data.memberId);
     //     setMemberId(response.data.memberId);
 
-    checkJWT("/api/member/memberSession", "get", null)
+    homeCheckJWT("/api/member/memberSession", "get", null)
       .then((resopnse) => {
         console.log("JWT 확인 결과" + resopnse.memberId);
 

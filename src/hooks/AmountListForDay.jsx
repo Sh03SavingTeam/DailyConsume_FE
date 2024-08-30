@@ -5,7 +5,7 @@ import "../styles/AmountListForDay.css";
 import AmountDetail from "./AmountDetail"; // 상세보기 컴포넌트 추가
 import { checkJWT } from "services/checkJWT";
 
-function AmountListForDay({ initialDay, memberId}) {
+function AmountListForDay({ initialDay}) {
   const [day, setDay] = useState(initialDay);
   const [orderList, setOrderList] = useState([]);
   const [error, setError] = useState(null);

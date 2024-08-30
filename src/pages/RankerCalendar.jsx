@@ -18,24 +18,29 @@ const RankerCalendar = ({ memberId, onBack }) => {
 
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get(
-        "http://localhost:9999/api/calendar/payhistory",
-        {
-          params: { month, memberId },
-        }
-      );
+      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
+        params: { month, memberId },
+      });
       const fetchedData = response.data.map((item) => ({
         day: moment(item.payDate).format("YYYY/MM/DD"),
         amount: item.payAmount,
       }));
       setAmountList(fetchedData);
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        console.log("No data found for this month");
-        setAmountList([]); // 데이터를 초기화하거나 에러 메시지 출력
-      } else {
-        console.error("Failed to fetch data from server", error);
-      }
+      console.error("Failed to fetch data from server", error);
+      setAmountList([]);
+    }
+  };
+
+  const fetchWeeklyAchievements = async (month, memberId) => {
+    try {
+      const response = await axios.get("http://localhost:9999/api/calendar/weeklyConsume/month", {
+        params: { month, memberId },
+      });
+      setWeeklyAchievements(response.data || []); // 데이터를 배열로 설정
+    } catch (error) {
+      console.error("Failed to fetch weekly achieve data from server", error);
+      setWeeklyAchievements([]); // 에러가 발생하면 빈 배열로 설정
     }
   };
 
