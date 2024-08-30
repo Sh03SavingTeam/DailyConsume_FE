@@ -9,7 +9,7 @@
     max-width: 375px;
     margin: 0 auto;
     padding: 0;
-    background-color: white;
+    background-color: #f8f8fdbf;
     min-height: 100vh;
     max-width: 414px;
     padding-bottom: 70px;
@@ -18,28 +18,40 @@
     scrollbar-width: none;
 }
 
+.back-button2 {
+  background-color: #303473;
+  color: white;
+  border-radius: 20px;
+  margin-left: 2%;
+  margin-top: 1%;
+  text-align: left;
+}
+
 .discount-container::-webkit-scrollbar {
 display: none; /* Chrome, Safari, Opera*/
 }
 
 .discount-title {
-  font-size: 20px;
-  color: #333;
-  margin-top:40px;
-  margin-bottom: 40px;
-  margin-left: 40px;
-  text-align: left;
+  font-size: 15px;
+  font-family: "OneShinhanBold";
+  background: #303473;
+  color: white;
+  border-radius: 15px;
+  padding: 5%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 5%;
+  margin-bottom: 0%;
+  text-align: center;
 }
 
 .discount-body{
   margin-top: 20px;
-  background-color: #f2f2f7;
   width: 100%;
   margin: 0 auto;
 }
 
 .discount-title span {
-  color:#303473;
+  color: skyblue;
 }
 
 .discount-box {
@@ -54,11 +66,12 @@ display: none; /* Chrome, Safari, Opera*/
   display: flex;
   align-items: center;
   border-radius: 15px;
-  padding: 15px;
-  margin: 20px 30px 40px 30px;
+  padding: 5%;
+  margin: 5%;
+  margin-bottom: 0%;
   height: 120px;
   background-color: #fff;
-  box-shadow: #A4A4A4 1px 1px 2px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .discount-item img {

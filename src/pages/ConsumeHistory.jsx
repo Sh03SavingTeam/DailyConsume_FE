@@ -257,7 +257,7 @@ function ConsumeHistory({ memberId }) {
         </div>
         <div className="content-card card" id="test">
           <h3>나의 소비 별 통계</h3>
-          <Link to="/MyPage/DiscountInfo">
+          <Link to="/mypage" state={{ selectedTab: "discountInfo" }}>
             <button class="content-discount">
               나를 위한 할인 정보 보러가기
             </button>

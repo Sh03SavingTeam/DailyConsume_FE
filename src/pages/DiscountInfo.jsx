@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import "../styles/DiscountInfo.css";
 import moreIcon from "../assets/more.png";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { checkJWT } from "services/checkJWT";
 
 function DiscountInfo({ memberId }) {
@@ -32,7 +32,15 @@ function DiscountInfo({ memberId }) {
 
       setDiscounts((prev) => [...prev, ...data.discountingInfoList]); // 기존 내역에 새로 불러온 내역을 추가
       setCount(data.totalCount);
-      setCategory(data.category);
+      if (data.category === "식비") {
+        setCategory("🍚식비");
+      } else if (data.category === "교통비") {
+        setCategory("🚌교통비");
+      } else if (data.category === "쇼핑") {
+        setCategory("🛍️쇼핑");
+      } else if (data.category === "여가비") {
+        setCategory("🍿여가비");
+      }
 
       // 다음 페이지가 있는지 여부를 결정
       if (
@@ -46,6 +54,7 @@ function DiscountInfo({ memberId }) {
     }
   };
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         // 1. JWT 확인
@@ -59,7 +68,8 @@ function DiscountInfo({ memberId }) {
         setMemberID(memberID);
 
         // 2. 할인 정보 불러오기
-        fetchDiscountInfos(page);
+        const data = await fetchDiscountInfos(page);
+
       } catch (error) {
         console.error("There was an error!", error);
       }
@@ -92,12 +102,14 @@ function DiscountInfo({ memberId }) {
 
   return (
     <div className="discount-container">
+      <Link to="/mypage" state={{ selectedTab: "analysis" }}>
+          <button className="back-button2">&lt;</button>
+      </Link>
       <div className="discount-title">
-        이번달은 <span>{category}</span>에 <br />
-        가장 많은 돈을 썼어요
+        <div className="title-point">이번달은 <span>{category}</span>에 가장 많은 돈을 썼어요!</div>
       </div>
       <div className="discount-body">
-        <div className="discount-box">맞춤 할인 정보</div>
+        {/* <div className="discount-box">맞춤 할인 정보</div> */}
         {discounts.map((item, index) => (
           <div className="discount-item" key={index}>
             <img src={item.prodImg} alt={item.productName} />

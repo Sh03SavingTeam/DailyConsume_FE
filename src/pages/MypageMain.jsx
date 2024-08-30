@@ -10,6 +10,7 @@ import MyPage from "./MyPage";
 import AddressList from "./AddressList";
 import ConsumeCompare from "./ConsumeCompare";
 import { checkJWT } from "services/checkJWT";
+import DiscountInfo from "./DiscountInfo";
 
 function MypageMain(props) {
   //회원 객체
@@ -107,6 +108,8 @@ function MypageMain(props) {
         return <AddressList />;
       case "consumeCompare":
         return <ConsumeCompare memberId={memberId} />;
+      case "discountInfo":
+        return <DiscountInfo memberId={memberId} />;
       default:
         return <ConsumeHistory />;
     }
