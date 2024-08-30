@@ -191,8 +191,19 @@ function AddressList(props) {
   return (
     <div className="app-container">
       <div className="main-content">
-        <div className="card-container">
-          {/* <Title>주소 목록</Title> */}
+        <div class="address-book">
+        <div class="address-item">
+            <span class="workplace">근무지 1</span>
+            <span class="region">마포구</span>
+            <div>
+                <button class="default-button">기본 주소 선택</button>
+                <button class="delete-button">삭제</button>
+            </div>
+        </div>
+        <button class="add-button" onClick={handleAddrRegisterClick}>+ 주소 추가</button>
+    </div>
+
+{/*
           <table>
             <thead>
               <tr>
@@ -241,8 +252,7 @@ function AddressList(props) {
           </table>
           <AddButton onClick={handleAddrRegisterClick}>
             신규 주소 등록
-          </AddButton>
-        </div>
+          </AddButton>*/}
       </div>
       <Footer />
 

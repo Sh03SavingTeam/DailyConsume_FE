@@ -197,6 +197,25 @@ function CardInfo(props) {
           ))}
         </div>
       </div>
+     
+      <div className="card-wrapper">
+      {cards.length > 0 ? (
+        cards.map((card, index) => (
+          <div key={index} className="card-wrapper">
+            <img
+              src={cardImgUrl ? `https://www.shinhancard.com${cardImgUrl}`
+            : "/default-card-image.jpg"}
+              alt={cards.cardName}
+              className="card-image"
+              
+            />
+            <h3>{cards.cardName}</h3> {/* 카드 이름 표시 */}
+          </div>
+        ))
+      ) : (
+        <p>No cards available</p> // 카드가 없을 때 표시할 메시지
+      )}
+    </div>
       <div>{selectedCardNum}</div>
       <h2>{cardName}</h2>
 
