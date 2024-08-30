@@ -3,75 +3,129 @@ import moment from "moment";
 import axios from "axios";
 import "../styles/AmountListForDay.css";
 import AmountDetail from "./AmountDetail"; // 상세보기 컴포넌트 추가
+import { checkJWT } from "services/checkJWT";
 
 function AmountListForDay({ initialDay }) {
   const [day, setDay] = useState(initialDay);
   const [orderList, setOrderList] = useState([]);
   const [error, setError] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null); // 선택된 항목
-  const [isDetailVisible, setIsDetailVisible] = useState(false); // 상세보기 표시 상태
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isDetailVisible, setIsDetailVisible] = useState(false);
+  const [weeklyBudget, setWeeklyBudget] = useState(null);
+  //회원 객체
+  const [memberId, setMemberId] = useState("");
 
   useEffect(() => {
     setDay(initialDay);
+
+    checkJWT("/api/member/memberSession", "get", null)
+      .then((resopnse) => {
+        console.log("JWT 확인 결과" + resopnse.memberId);
+        const memberId = resopnse.memberId;
+        setMemberId(memberId);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
   }, [initialDay]);
 
+  const fetchOrderList = async () => {
+    try {
+      const formattedDate = moment(day, "YYYY년 MM월 DD일");
+      const year = formattedDate.format("YYYY");
+      const month = formattedDate.format("MM");
+      const dayOfMonth = formattedDate.format("DD");
+
+      const response = await axios.get(
+        "http://localhost:9999/api/calendar/payhistory/daily",
+        {
+          params: {
+            memberId: memberId,
+            day: dayOfMonth,
+            month: month,
+            year: year,
+          },
+        }
+      );
+
+      const fetchedData = response.data.map((item) => ({
+        id: item.payId,
+        time: moment(item.payDate).format("HH:mm:ss"),
+        amount: item.payAmount,
+        description: item.storeName || "Unknown Store",
+        myPayCheck: item.myPayCheck,
+        type: item.myPayCheck === 1 ? "normal" : "suspicious",
+      }));
+
+      setOrderList(fetchedData);
+    } catch (err) {
+      setError("Failed to fetch data from server");
+      console.error(err);
+    }
+  };
+
+  const fetchWeeklyBudget = async () => {
+    try {
+      const formattedDate = moment(day, "YYYY년 MM월 DD일");
+      const year = formattedDate.format("YYYY");
+      const month = formattedDate.format("MM");
+      const dayOfMonth = formattedDate.format("DD");
+
+      const response = await axios.get(
+        "http://localhost:9999/api/calendar/payweekly",
+        {
+          params: {
+            memberId: memberId,
+            year: year,
+            month: month,
+            day: dayOfMonth,
+          },
+        }
+      );
+
+      setWeeklyBudget(response.data);
+    } catch (err) {
+      setError("Failed to fetch weekly budget data");
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    const fetchOrderList = async () => {
-      try {
-        const formattedDate = moment(day, "YYYY년 MM월 DD일");
-        const year = formattedDate.format("YYYY");
-        const month = formattedDate.format("MM");
-        const dayOfMonth = formattedDate.format("DD");
-
-        const response = await axios.get(
-          "http://localhost:9999/api/calendar/payhistory/daily",
-          {
-            params: {
-              memberId: "user01", // 실제 로그인 사용자 ID로 변경
-              day: dayOfMonth,
-              month: month,
-              year: year,
-            },
-          }
-        );
-
-        const fetchedData = response.data.map((item) => ({
-          id: item.payId,
-          time: moment(item.payDate).format("HH:mm:ss"),
-          amount: item.payAmount,
-          description: item.storeName || "Unknown Store",
-          myPayCheck: item.myPayCheck, // 본인 결제 여부 추가
-          type: item.myPayCheck === 1 ? "normal" : "suspicious", // 정상/이상 결제 구분
-        }));
-
-        setOrderList(fetchedData);
-      } catch (err) {
-        setError("Failed to fetch data from server");
-        console.error(err);
-      }
-    };
-
     fetchOrderList();
+    fetchWeeklyBudget();
   }, [day]);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  const formattedDay = moment(day, "YYYY년 MM월 DD일").format("YY.MM.DD");
+  useEffect(() => {
+    return () => {
+      setOrderList([]);
+      setWeeklyBudget(null);
+    };
+  }, [initialDay]);
 
   const handleItemClick = (item) => {
-    setSelectedItem({ ...item, memberId: "user01" }); // memberId 추가
+    setSelectedItem({ ...item, memberId: "m001" });
     setIsDetailVisible(true);
   };
 
   const handleCloseDetail = () => {
     setIsDetailVisible(false);
     setSelectedItem(null);
+    fetchOrderList();
   };
+
+  const formattedDay = moment(day, "YYYY년 MM월 DD일").format("YY.MM.DD");
 
   return (
     <div className="amount-list">
+      <div className="detail-item">
+        <div className="weekly-budget">
+          주간소비잔여금액 :{" "}
+          {weeklyBudget
+            ? `${weeklyBudget.잔여금액.toLocaleString()}원`
+            : "Loading..."}
+        </div>
+      </div>
+      <hr />
       <div className="date-header">{formattedDay}</div>
       <ul>
         {orderList.length > 0 ? (
@@ -90,7 +144,7 @@ function AmountListForDay({ initialDay }) {
               </div>
               <div className="item-details">
                 <span className="time">{item.time}</span>
-                <span className="amount">{item.amount}원</span>
+                <span className="amount">{item.amount.toLocaleString()}원</span>
                 <span className="description">{item.description}</span>
               </div>
             </li>
@@ -103,9 +157,6 @@ function AmountListForDay({ initialDay }) {
         <AmountDetail item={selectedItem} onClose={handleCloseDetail} />
       )}
       <hr />
-      <div className="detail-item weekly-budget">
-        <strong>주간소비잔여금액:</strong>
-      </div>
     </div>
   );
 }
