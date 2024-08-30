@@ -12,15 +12,14 @@
 
 .point-container {
     font-family: "OneShinhanBold";
-    max-width: 375px;
     margin: 0 auto;
     padding: 0;
     background-color: white;
     height: 63.5vh;
+    max-width: 414px;
     overflow-y: auto;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
-    margin-bottom: 10px;
 }
 
 .point-container::-webkit-scrollbar {

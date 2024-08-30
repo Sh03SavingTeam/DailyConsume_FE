@@ -104,11 +104,11 @@ function Point({ memberId }) {
         <p>{totalPoint !== null ? totalPoint.toLocaleString() : "0"}P</p>
       </div>
 
-      <div className="history-title">
-        <span>포인트 지급 내역</span>
-        <button className="filter-button">
-          <img src={searchIcon} alt="Search Icon" className="search-icon" />
-          조회 조건 설정
+        <div className="history-title">
+            <span>포인트 내역</span>
+            <button className="filter-button">
+                <img src={searchIcon} alt="Search Icon" className="search-icon" />
+                조회 조건 설정
         </button>
       </div>
       <div className="history-list">

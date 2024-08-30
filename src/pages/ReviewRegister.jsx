@@ -8,13 +8,28 @@ import AWS from "aws-sdk";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import OCRConfirmedPopUp from "../components/ReceiptOCRPopUp";
+import { checkJWT } from "services/checkJWT";
 
 function ReviewRegister(props) {
+  const [member, setMember] = useState("");
+
   const navigate = useNavigate(); // useNavigate 사용
 
   const location = useLocation();
   //const { storename, storebizNum } = location.state || {};
 
+  // 로컬 스토리지에서 ACCESS TOKEN 가져오기
+  const accessToken = localStorage.getItem("ACCESS_TOKEN");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+      console.log("JWT 확인 결과" + response.memberId);
+      const fetchedMemberId = response.memberId;
+      setMember(fetchedMemberId);
+    });
+  }, []);
+  
   //상호명
 
   //사업자등록번호
@@ -165,10 +180,20 @@ function ReviewRegister(props) {
       rating: rating,
     };
 
+    const point = {
+      memberId: member, 
+      comment: "리뷰 등록",
+      point: 500
+    }
+
     axios({
       method: "post",
       url: "/api/review/reviewRegister",
-      data: updatedReview,
+      data: JSON.stringify({"reviewDTO":updatedReview,
+                            "pointRegisterDTO":point}),
+      headers: {
+                "Content-Type": "application/json"
+               }
     })
       .then((res) => {
         console.log(res);
