@@ -198,7 +198,7 @@ function CardInfo(props) {
         </div>
       </div>
      
-      <div className="card-wrapper">
+      {/* <div className="card-wrapper">
       {cards.length > 0 ? (
         cards.map((card, index) => (
           <div key={index} className="card-wrapper">
@@ -209,13 +209,13 @@ function CardInfo(props) {
               className="card-image"
               
             />
-            <h3>{cards.cardName}</h3> {/* 카드 이름 표시 */}
+            <h3>{cards.cardName}</h3> 
           </div>
         ))
       ) : (
-        <p>No cards available</p> // 카드가 없을 때 표시할 메시지
+        <p>No cards available</p> 
       )}
-    </div>
+    </div> */}
       <div>{selectedCardNum}</div>
       <h2>{cardName}</h2>
 
