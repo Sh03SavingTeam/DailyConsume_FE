@@ -4,6 +4,13 @@
     src: url("../fonts/OneShinhanBold.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: "OneShinhanMedium";
+    font-weight: normal;
+    src: url("../fonts/OneShinhanMedium.ttf") format("truetype");
+  }
+
+
 .mymain-container{
     font-family: "OneShinhanBold";
     font-size: 15px;
@@ -26,6 +33,7 @@
     margin-top: 10px;
     padding: 10px 30px 10px 30px;
     text-align: center;
+    position: relative;
 }
 
 .memberinfo img{
@@ -91,8 +99,22 @@
     height: 67.5vh;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
+    background: #f8f8fdbf;
 }
 
 .content::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
+}
+
+.mypage-logout{
+    font-family: "OneShinhanMedium";
+    border: 1px solid #D9D9D9;
+    border-radius: 20px;
+    color: #3E3E3E;
+    background-color: transparent;
+    padding: 3px 10px 3px 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 7%;
+    right: 5%;
 }

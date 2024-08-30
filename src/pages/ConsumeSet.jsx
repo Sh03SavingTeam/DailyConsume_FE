@@ -46,6 +46,7 @@ function ConsumeSet({ memberId }) {
         `http://localhost:9999/mypage/myweeklymoney?memberId=${memberID}&weeklyMoney=${amount}`
       );
       console.log(response.data);
+      window.location.href = '/mypage';
     } catch (error) {
       console.error("실패", error);
     }
