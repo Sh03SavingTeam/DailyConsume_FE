@@ -175,10 +175,12 @@ function CardRegister(props) {
       console.log("Card Number:", number);
       console.log("Valid Thru:", validThru);
 
+      const result = number.replace(/(.{4})/g, "$1 ");
+
       // 상태 업데이트
       setMemberCard({
         ...memberCard,
-        cardNum: number,
+        cardNum: result,
         expirationDate: validThru,
       });
     } catch (error) {
