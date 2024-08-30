@@ -26,7 +26,7 @@ function ConsumeLogin(props) {
 
     axios({
       method: "post",
-      url: "api/member/memberLogin",
+      url: "http://localhost:9999/api/member/memberLogin",
       data: {
         memberId: loginInfo.memberId,
         memberPw: loginInfo.memberPw,
@@ -41,7 +41,7 @@ function ConsumeLogin(props) {
           localStorage.setItem("token", res.data.token);
 
           // 이후 원하는 페이지로 이동
-          navigate("/home");
+          navigate("/");
         } else {
           setErrorMessage("로그인 실패. 아이디 또는 비밀번호를 확인하세요.");
         }

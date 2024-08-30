@@ -92,14 +92,14 @@ function AddressList(props) {
 
   //memberId가 'abcd'인 주소 데이터 조회
   useEffect(() => {
-    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+    checkJWT("http://localhost:9999/api/member/memberSession", "get", null).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
       setMemberId(fetchedMemberId);
 
       axios({
         method: "get",
-        url: "/api/address/addrList",
+        url: "http://localhost:9999/api/address/addrList",
         params: {
           memberId: fetchedMemberId,
         },
@@ -120,7 +120,7 @@ function AddressList(props) {
 
     // axios({
     //   method: "get",
-    //   url: "/api/address/addrList",
+    //   url: "http://localhost:9999/api/address/addrList",
     //   params: {
     //     memberId: "bih63879",
     //   },
@@ -141,7 +141,7 @@ function AddressList(props) {
     if (selectedAddrId) {
       axios({
         method: "delete",
-        url: "/api/address/addrDelete",
+        url: "http://localhost:9999/api/address/addrDelete",
         params: {
           addrId: selectedAddrId,
         },
@@ -163,7 +163,7 @@ function AddressList(props) {
 
     axios({
       method: "put",
-      url: "/api/address/changeDefaultAddr",
+      url: "http://localhost:9999/api/address/changeDefaultAddr",
       params: {
         memberId: memberId,
         addrId: addrId,

@@ -23,6 +23,8 @@ export function checkJWT(api, method, request) {
     options.body = JSON.stringify(request);
   }
 
+  console.log("======token: " + token);
+
   return fetch(options.url, options)
     .then((response) =>
       response.json().then((json) => {
@@ -37,7 +39,7 @@ export function checkJWT(api, method, request) {
     .catch((error) => {
       // 추가된 부분
       console.log(error.status);
-      if (error.status === undefined || error.status === 403) {
+      if (error.status === 403) {
         window.location.href = "/Login"; // redirect
         console.log(error);
       }

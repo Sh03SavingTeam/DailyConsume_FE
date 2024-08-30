@@ -21,7 +21,7 @@ const CustomCalendar = () => {
 
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get("/api/calendar/payhistory", {
+      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
         params: { month, memberId },
       });
       const fetchedData = response.data.map((item) => ({
@@ -36,7 +36,7 @@ const CustomCalendar = () => {
   };
   const fetchWeeklyAchievements = async (month, memberId) => {
     try {
-      const response = await axios.get("/api/calendar/weeklyConsume/month", {
+      const response = await axios.get("http://localhost:9999/api/calendar/weeklyConsume/month", {
         params: { month, memberId },
       });
       setWeeklyAchievements(response.data || []); // 데이터를 배열로 설정
@@ -47,7 +47,7 @@ const CustomCalendar = () => {
   };
 
   useEffect(() => {
-    checkJWT("/api/member/memberSession", "get", null)
+    checkJWT("http://localhost:9999/api/member/memberSession", "get", null)
       .then((resopnse) => {
         console.log("JWT 확인 결과" + resopnse.memberId);
         const memberId = resopnse.memberId;

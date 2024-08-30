@@ -14,7 +14,7 @@ function CardInfo(props) {
     // 모든 카드 정보를 가져오는 API 호출
     axios({
       method: "get",
-      url: "/api/card/memberCardList", // 서버에서 모든 카드 데이터를 가져오는 API 엔드포인트
+      url: "http://localhost:9999/api/card/memberCardList", // 서버에서 모든 카드 데이터를 가져오는 API 엔드포인트
     })
       .then((response) => {
         console.log(response.data);
@@ -55,7 +55,7 @@ function CardInfo(props) {
     // //JWT로 로그인한 사용자 정보 가져오기
     // axios({
     //   method: "get",
-    //   url: "/api/member/memberSession",
+    //   url: "http://localhost:9999/api/member/memberSession",
     //   headers: {
     //     Authorization: `Bearer ${token}`, // JWT 토큰 포함
     //   },
@@ -64,14 +64,14 @@ function CardInfo(props) {
     //     console.log(response.data.memberId);
     //     setMemberId(response.data.memberId);
 
-    homeCheckJWT("/api/member/memberSession", "get", null)
+    homeCheckJWT("http://localhost:9999/api/member/memberSession", "get", null)
       .then((resopnse) => {
         console.log("JWT 확인 결과" + resopnse.memberId);
 
         // 카드 목록 정보 가지고 오는 axios
         axios({
           method: "get",
-          url: "/api/card/memberCardList",
+          url: "http://localhost:9999/api/card/memberCardList",
           params: {
             memberId: resopnse.memberId,
           },
@@ -115,7 +115,7 @@ function CardInfo(props) {
     setSelectedCard(selectedCardNum); // 상태 업데이트
     axios({
       method: "get",
-      url: "/api/card/getCardInfo",
+      url: "http://localhost:9999/api/card/getCardInfo",
       params: {
         cardNum: selectedCardNum,
       },
@@ -139,7 +139,7 @@ function CardInfo(props) {
 
       axios({
         method: "get",
-        url: "/api/card/getCardBenefit",
+        url: "http://localhost:9999/api/card/getCardBenefit",
         params: {
           cardName: cardName,
         },
@@ -155,7 +155,7 @@ function CardInfo(props) {
   const handleDeleteCard = async () => {
     axios({
       method: "delete",
-      url: "/api/card/delete",
+      url: "http://localhost:9999/api/card/delete",
       params: {
         cardNum: selectedCard,
       },
