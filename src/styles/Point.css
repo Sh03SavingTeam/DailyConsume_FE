@@ -17,10 +17,11 @@
     padding: 3%;
     border-radius: 20px;
     background-color: white;
-    height: 61.5vh;
+    /* height: 61.5vh; */
     overflow-y: auto;
-    -ms-overflow-style: none; /* IE and Edge */
+    -ms-overflow-style: none;
     scrollbar-width: none;
+    margin-bottom: 10px;
 }
 
 .point-container::-webkit-scrollbar {
