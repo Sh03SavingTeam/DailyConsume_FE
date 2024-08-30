@@ -191,56 +191,54 @@ function AddressList(props) {
   };
 
   return (
-    <div className="app-container">
-      <div className="main-content">
-        <div className="card-container">
-          {/* <Title>주소 목록</Title> */}
-          <table>
-            <tbody>
-              {addrList.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.addrName}</td>
-                  <td>{item.addrDetail}</td>
-                  <td>
-                    <div class="form_radio_btn">
-                      <input
-                        id={`addrSelectRadio_${item.addrId}`}
-                        type="radio"
-                        name="selectedAddr"
-                        value={item.addrId}
-                        checked={selectedAddrId === item.addrId} // 선택된 항목인지 확인
-                        onChange={() => openDefaultAddrPopup(item.addrId)} // Radio 버튼 변경 처리
-                      />
-                      <label htmlFor={`addrSelectRadio_${item.addrId}`}>
-                        {selectedAddrId === item.addrId
-                          ? "기본 주소"
-                          : "기본 주소 선택"}
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    <button
-                      className="deleteButton"
-                      onClick={() => openPopUp(item.addrId)}
-                    >
-                      삭제
-                    </button>
-                  </td>
-                  <CardDeltePopUp
-                    open={popupOpen}
-                    close={closePopUp}
-                    onConfirm={handleConfirmDelete}
+    <div className="main-content">
+      <div className="card-container">
+        {/* <Title>주소 목록</Title> */}
+        <table>
+          <tbody>
+            {addrList.map((item, index) => (
+              <tr key={index}>
+                <td>{item.addrName}</td>
+                <td>{item.addrDetail}</td>
+                <td>
+                  <div class="form_radio_btn">
+                    <input
+                      id={`addrSelectRadio_${item.addrId}`}
+                      type="radio"
+                      name="selectedAddr"
+                      value={item.addrId}
+                      checked={selectedAddrId === item.addrId} // 선택된 항목인지 확인
+                      onChange={() => openDefaultAddrPopup(item.addrId)} // Radio 버튼 변경 처리
+                    />
+                    <label htmlFor={`addrSelectRadio_${item.addrId}`}>
+                      {selectedAddrId === item.addrId
+                        ? "기본 주소"
+                        : "기본 주소 선택"}
+                    </label>
+                  </div>
+                </td>
+                <td>
+                  <button
+                    className="deleteButton"
+                    onClick={() => openPopUp(item.addrId)}
                   >
-                    선택하신 주소를 삭제할까요?
-                  </CardDeltePopUp>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <AddButton onClick={handleAddrRegisterClick}>
-            + 신규 주소 등록
-          </AddButton>
-        </div>
+                    삭제
+                  </button>
+                </td>
+                <CardDeltePopUp
+                  open={popupOpen}
+                  close={closePopUp}
+                  onConfirm={handleConfirmDelete}
+                >
+                  선택하신 주소를 삭제할까요?
+                </CardDeltePopUp>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <AddButton onClick={handleAddrRegisterClick}>
+          + 신규 주소 등록
+        </AddButton>
       </div>
       <Footer />
 
