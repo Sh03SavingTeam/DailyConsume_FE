@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import profileImg from "../assets/profileImg.jpg";
 import "../styles/MypageMain.css";
@@ -22,6 +22,7 @@ function MypageMain(props) {
   const [sunday, setSunday] = useState("");
   const [endDate, setEndDate] = useState("");
   const location = useLocation();
+  const contentRef = useRef(null);
   const [selectedTab, setSelectedTab] = useState(
     location.state?.selectedTab || "analysis"
   );
@@ -35,7 +36,7 @@ function MypageMain(props) {
   const renderContent = () => {
     switch (selectedTab) {
       case "analysis":
-        return <ConsumeHistory memberId={memberId} />;
+        return <ConsumeHistory memberId={memberId} contentRef = {contentRef}/>;
       case "point":
         return <Point memberId={memberId} />;
       case "rank":
@@ -43,20 +44,21 @@ function MypageMain(props) {
       case "address":
         return <AddressList />;
       case "consumeCompare":
-        return <ConsumeCompare memberId={memberId} />;
+        return <ConsumeCompare memberId={memberId} contentRef = {contentRef}/>;
       case "discountInfo":
-        return <DiscountInfo memberId={memberId} />;
+        return <DiscountInfo memberId={memberId} contentRef = {contentRef}/>;
       default:
         return <ConsumeHistory />;
     }
   };
+  
 
   useEffect(() => {
     const checkAndFetchData = async () => {
       try {
         // JWT 확인
         const response = await checkJWT(
-          "/api/member/memberSession",
+          "http://localhost:9999/api/member/memberSession",
           "get",
           null
         );
@@ -75,7 +77,7 @@ function MypageMain(props) {
         setWeeklyMoney(data.weeklyMoney);
         setEndDate(data.endDate);
       } catch (error) {
-        console.error("데이터 처리 중 오류 발생!", error);
+        console.error("데이터 처리 중 오류 발생!" + error);
       }
     };
 
@@ -243,7 +245,7 @@ function MypageMain(props) {
           주소 목록
         </button>
       </div>
-      <div className="content">{renderContent()}</div>
+      <div className="content" ref = {contentRef}>{renderContent()}</div>
       <Footer />
     </div>
   );

@@ -23,7 +23,7 @@ function ConsumeHistory({ memberId }) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "/api/member/memberSession",
+          "http://localhost:9999/api/member/memberSession",
           "get",
           null
         );
@@ -68,7 +68,7 @@ function ConsumeHistory({ memberId }) {
         );
         setPeerPayment(totalPeerPayment);
       } catch (error) {
-        console.error("데이터를 불러오는 중 오류가 발생했습니다:", error);
+        console.error("데이터를 불러오는 중 오류가 발생했습니다:" + error);
       }
     };
 

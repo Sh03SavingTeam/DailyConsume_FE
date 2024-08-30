@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { checkJWT } from "services/checkJWT";
 
-function DiscountInfo({ memberId }) {
+function DiscountInfo({ memberId, contentRef }) {
   const navigate = useNavigate();
 
   const [memberID, setMemberID] = useState("");
@@ -54,12 +54,11 @@ function DiscountInfo({ memberId }) {
     }
   };
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "/api/member/memberSession",
+          "http://localhost:9999/api/member/memberSession",
           "get",
           null
         );
@@ -77,6 +76,8 @@ function DiscountInfo({ memberId }) {
 
     // 데이터를 가져오는 함수 호출
     fetchData();
+
+    scrollTopFunc();
   }, [page]); // page가 변경될 때마다 실행되도록 설정
 
   //   useEffect(() => {
@@ -99,6 +100,12 @@ function DiscountInfo({ memberId }) {
   const loadMore = () => {
     setPage((prevPage) => prevPage + 1);
   };
+
+  const scrollTopFunc = () => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = 0;
+    }
+  }
 
   return (
     <div className="discount-container">
