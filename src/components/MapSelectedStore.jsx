@@ -13,7 +13,7 @@ function MapSelectedStore(props) {
     console.log(storeRegNum);
 
     axios({
-      url: "/api/recommend/detail?storeRegNum=" + storeRegNum,
+      url: "http://localhost:9999/api/recommend/detail?storeRegNum=" + storeRegNum,
       method: "GET",
     })
       .then((res) => {
@@ -27,7 +27,7 @@ function MapSelectedStore(props) {
 
   const registerReview = (event, store) => {
     event.stopPropagation();
-    navigate("/map/reviewregister", {
+    navigate("http://localhost:9999/map/reviewregister", {
       state: {
         storename: store.storeName,
         storebizNum: store.storeRegNum,

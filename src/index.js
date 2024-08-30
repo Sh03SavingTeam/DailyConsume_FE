@@ -22,19 +22,21 @@ import DiscountInfo from "./pages/DiscountInfo";
 import Point from "./pages/Point";
 import Refund from "./pages/Refund";
 import Refundconfirm from "./pages/RefundConfirm";
-import MyPage from "./pages/MyPage";
 import RankInfo from "./pages/RankInfo";
 import MypageMain from "pages/MypageMain";
+import Attendance from "components/Attendance";
+import MyPage from "pages/MyPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}></Route>
-      <Route path="/Calendar" element={<Calendar />}></Route>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/ConsumeHistory" element={<ConsumeHistory />}></Route>
+
+      <Route path="/calendar" element={<Calendar />}></Route>
 
       {/* 홈 */}
-      <Route path="/home" element={<Home />}></Route>
       <Route path="/home/cardregister" element={<CardRegister />}></Route>
 
       {/* 지도 */}
@@ -44,32 +46,26 @@ root.render(
       <Route path="/map/payhistory" element={<PayHistoryMap />}></Route>
 
       {/* 마이페이지 */}
-      <Route path="/mypage" element={<MypageMain memberId='jeongin'/>}></Route>
+      <Route path="/mypage" element={<MypageMain memberId="min"/>}></Route>
       <Route path="/mypage/addrlist" element={<AddressList />}></Route>
       <Route path="/mypage/addrregister" element={<AddressRegister />}></Route>
-      <Route path="/mypage/consumehistory" element={<ConsumeHistory memberId='jeongin'/> }></Route>
-      <Route path="/mypage/consumecompare" element={<ConsumeCompare memberId='jeongin'/> }></Route>
-      <Route path="/mypage/consumeset" element={<ConsumeSet memberId="jeongin"/> }></Route>
+
+      <Route path="/mypage/consumehistory" element={<ConsumeHistory memberId="min"/> }></Route>
+      <Route path="/mypage/consumecompare" element={<ConsumeCompare memberId="min"/> }></Route>
+      <Route path="/mypage/consumeset" element={<ConsumeSet memberId="min"/> }></Route>
+
       <Route path="/Login" element={<ConsumeLogin />}></Route>
       <Route path="/Join" element={<ConsumeJoin />}></Route>
 
-      <Route
-        path="/MyPage/DiscountInfo"
-        element={<DiscountInfo memberId="jeongin" />}
-      ></Route>
-      <Route
-        path="/MyPage/Point"
-        element={<Point memberId="jeongin" />}
-      ></Route>
-      <Route
-        path="/MyPage/Refund"
-        element={<Refund memberId="jeongin" />}
-      ></Route>
+      <Route path="/MyPage/DiscountInfo" element={<DiscountInfo memberId="min" />}></Route>
+      <Route path="/MyPage/Point" element={<Point memberId="min" />}></Route>
+      <Route path="/MyPage/Refund" element={<Refund memberId="min" />}></Route>
       <Route path="/MyPage/Refund/Confirm" element={<Refundconfirm />}></Route>
 
       <Route path="/rank/AddrList" element={<AddressList />}></Route>
       <Route path="/rank" element={<MyPage/>}></Route>
       <Route path="/rank/benefits/:memberId" element={<RankInfo/>}></Route>
+      <Route path="/attendanceTest/:memberId" element={<Attendance/>}></Route>
     </Routes>
   </BrowserRouter>
 );

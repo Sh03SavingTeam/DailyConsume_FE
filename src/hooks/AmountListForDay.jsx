@@ -5,7 +5,7 @@ import "../styles/AmountListForDay.css";
 import AmountDetail from "./AmountDetail"; // 상세보기 컴포넌트 추가
 import { checkJWT } from "services/checkJWT";
 
-function AmountListForDay({ initialDay }) {
+function AmountListForDay({ initialDay}) {
   const [day, setDay] = useState(initialDay);
   const [orderList, setOrderList] = useState([]);
   const [error, setError] = useState(null);
@@ -103,7 +103,7 @@ function AmountListForDay({ initialDay }) {
   }, [initialDay]);
 
   const handleItemClick = (item) => {
-    setSelectedItem({ ...item, memberId: "m001" });
+    setSelectedItem({ ...item, memberId: memberId });
     setIsDetailVisible(true);
   };
 
@@ -122,7 +122,7 @@ function AmountListForDay({ initialDay }) {
           주간소비잔여금액 :{" "}
           {weeklyBudget
             ? `${weeklyBudget.잔여금액.toLocaleString()}원`
-            : "Loading..."}
+            : "설정 금액❌"}
         </div>
       </div>
       <hr />
@@ -150,7 +150,7 @@ function AmountListForDay({ initialDay }) {
             </li>
           ))
         ) : (
-          <li className="no-data">No data available for this date.</li>
+          <li className="no-data">결제내역이 없습니다</li>
         )}
       </ul>
       {isDetailVisible && selectedItem && (

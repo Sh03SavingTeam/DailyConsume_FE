@@ -118,7 +118,7 @@ function Point({ memberId }) {
           const amountSign = isPositive ? "+" : "-";
           return (
             <div className="history-item" key={index}>
-              <div className="description">{history.cmt}</div>
+              <div className="description-cmt">{history.cmt}</div>
               <div className="history-item-right">
                 <div className={`amount ${className}`}>
                   {amountSign}{" "}

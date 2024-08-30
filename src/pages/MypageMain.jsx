@@ -32,6 +32,25 @@ function MypageMain(props) {
     window.location.href = "/Login";
   };
 
+  const renderContent = () => {
+    switch (selectedTab) {
+      case "analysis":
+        return <ConsumeHistory memberId={memberId} />;
+      case "point":
+        return <Point memberId={memberId} />;
+      case "rank":
+        return <MyPage memberId={memberId} />;
+      case "address":
+        return <AddressList />;
+      case "consumeCompare":
+        return <ConsumeCompare memberId={memberId} />;
+      case "discountInfo":
+        return <DiscountInfo memberId={memberId} />;
+      default:
+        return <ConsumeHistory />;
+    }
+  };
+
   useEffect(() => {
     const checkAndFetchData = async () => {
       try {
@@ -96,24 +115,6 @@ function MypageMain(props) {
       setCheck(sunday !== endDate);
     }
   }, [location.state, endDate]); // 필요한 의존성 추가
-  const renderContent = () => {
-    switch (selectedTab) {
-      case "analysis":
-        return <ConsumeHistory memberId={memberId} />;
-      case "point":
-        return <Point memberId={memberId} />;
-      case "rank":
-        return <MyPage memberId={memberId} />;
-      case "address":
-        return <AddressList />;
-      case "consumeCompare":
-        return <ConsumeCompare memberId={memberId} />;
-      case "discountInfo":
-        return <DiscountInfo memberId={memberId} />;
-      default:
-        return <ConsumeHistory />;
-    }
-  };
 
   //   useEffect(() => {
   //     checkJWT("/api/member/memberSession", "get", null)
