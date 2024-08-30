@@ -9,7 +9,7 @@ function Home(props) {
   return (
     <div className="app-container">
       <div className="main-content">
-        <CardInfo />
+          <CardInfo />
       </div>
 
       <Footer />
