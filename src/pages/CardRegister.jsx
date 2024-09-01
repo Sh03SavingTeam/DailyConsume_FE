@@ -40,7 +40,7 @@ function CardRegister(props) {
 
     // axios({
     //   method: "get",
-    //   url: "/api/member/memberSession",
+    //   url: "http://localhost:9999/api/member/memberSession",
     //   headers: {
     //     Authorization: `Bearer ${token}`, // JWT 토큰 포함
     //   },
@@ -59,7 +59,7 @@ function CardRegister(props) {
     //     console.error("There was an error fetching the session data!", error);
     //   });
 
-    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+    checkJWT("http://localhost:9999/api/member/memberSession", "get", null).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
 
@@ -94,7 +94,7 @@ function CardRegister(props) {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`/api/card/${type}CardList`);
+      const response = await axios.get(`http://localhost:9999/api/card/${type}CardList`);
       setCards(response.data);
     } catch (err) {
       setError(err);
@@ -164,7 +164,7 @@ function CardRegister(props) {
 
       const response = await axios({
         method: "post",
-        url: "/api/card/cardOCR",
+        url: "http://localhost:9999/api/card/cardOCR",
         data: {
           fileName: fileName,
         },
@@ -202,7 +202,7 @@ function CardRegister(props) {
 
     axios({
       method: "post",
-      url: "/api/card/cardRegister",
+      url: "http://localhost:9999/api/card/cardRegister",
       data: memberCard,
     })
       .then((res) => {
