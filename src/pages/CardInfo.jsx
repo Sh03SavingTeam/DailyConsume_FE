@@ -207,7 +207,7 @@ function CardInfo(props) {
       {/* 카드명, 이미지 파일은 DB에서, 혜택들은 상세페이지 URL로 크롤링해서 가져온다. */}
       <h2>{cardName}</h2>
       {/* <div>{selectedCard}</div> */}
-      <div class="card-wrapper">
+      <div class="card-wrapper top_card_area">
         <img
           src={
             cardImgUrl

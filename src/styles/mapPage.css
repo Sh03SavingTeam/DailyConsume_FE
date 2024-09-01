@@ -41,7 +41,7 @@
   color: white;
   font-weight: bold;
   position: absolute;
-  bottom: 20%;
+  bottom: 2%;
   left: 39%;
   width: 20%;
   z-index: 10;
@@ -53,7 +53,7 @@
 
 .store_list_area {
   position: absolute;
-  bottom: 18%;
+  bottom: 0%;
   width: 100%;
   background-color: rgb(248, 248, 248);
   max-height: 55vh;
@@ -324,4 +324,44 @@
   font-size: 20px;
   margin-top: 10px;
   padding-left: 7px;
+}
+
+.marker_click_div {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.marker_click_div img {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+  object-fit: cover;
+  border-radius: 15px;
+  vertical-align: top;
+}
+
+.marker_store_info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  width: 72%;
+}
+
+.marker_store_info div:nth-child(1) {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.marker_store_info div:nth-child(2) {
+  color: rgb(147, 147, 147);
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.marker_store_info div:nth-child(3) {
+  color: rgb(88, 88, 88);
+  font-weight: bold;
+  font-size: 13px;
 }
