@@ -216,7 +216,7 @@ function CardInfo(props) {
             <div key={benefit.benefitId}>{benefit.benefit}</div>
           ))
         ) : (
-          <div>카드를 선택해주세요...</div>
+          <div>등록하신 카드가 없습니다</div>
         )}
       </div>
       <div className="cardinfo-button-container">
