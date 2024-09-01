@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { checkJWT } from "services/checkJWT";
 
-function ConsumeCompare({ memberId }) {
+function ConsumeCompare({ memberId, contentRef }) {
   const navigate = useNavigate();
   const [memberID, setMemberID] = useState("");
 
@@ -51,7 +51,15 @@ function ConsumeCompare({ memberId }) {
 
     // 데이터 가져오는 함수 호출
     fetchData();
+
+    scrollTopFunc();
   }, []); // 초기 렌더링 시 한 번만 실행되도록 의존성 배열은 빈 배열로 설정
+
+  const scrollTopFunc = () => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = 0;
+    }
+  }
 
   // useEffect(() => {
   //   checkJWT("/api/member/memberSession", "get", null)

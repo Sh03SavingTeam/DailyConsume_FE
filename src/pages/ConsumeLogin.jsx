@@ -26,7 +26,7 @@ function ConsumeLogin(props) {
 
     axios({
       method: "post",
-      url: "api/member/memberLogin",
+      url: "http://localhost:9999/api/member/memberLogin",
       data: {
         memberId: loginInfo.memberId,
         memberPw: loginInfo.memberPw,
