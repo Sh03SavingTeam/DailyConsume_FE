@@ -20,7 +20,7 @@ const Footer = () => {
       case "/":
         setSelectedButton("home");
         break;
-      case "/map":
+      case "/map/payhistory":
       case "/map/recommend":
         setSelectedButton("map");
         break;
@@ -66,7 +66,7 @@ const Footer = () => {
           <img src={getButtonImage("home")} alt="Home" />홈
         </button>
         <button
-          onClick={() => handleButtonClick("map", "/map")}
+          onClick={() => handleButtonClick("map", "/map/payhistory")}
           className={selectedButton === "map" ? "selected" : ""}
         >
           <img src={getButtonImage("map")} alt="Map" />

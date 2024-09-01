@@ -164,7 +164,7 @@ function PayHistoryMap() {
           )}
         </Map>
 
-        <MapTopSelector />
+        <MapTopSelector pageState = 'history'/>
       </div>
       <Footer />
     </div>
