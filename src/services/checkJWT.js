@@ -37,7 +37,7 @@ export function checkJWT(api, method, request) {
     .catch((error) => {
       // 추가된 부분
       console.log(error.status);
-      if (error.status === undefined || error.status === 403) {
+      if (error.status === 403) {
         window.location.href = "/Login"; // redirect
         console.log(error);
       }
@@ -82,7 +82,7 @@ export function homeCheckJWT(api, method, request) {
     .catch((error) => {
       // 추가된 부분
       console.log(error.status);
-      if (error.status === undefined || error.status === 403) {
+      if (error.status === 403) {
         console.log(error);
       }
       return Promise.reject(error);

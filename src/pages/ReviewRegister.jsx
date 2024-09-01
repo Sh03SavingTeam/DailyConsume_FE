@@ -183,7 +183,7 @@ function ReviewRegister(props) {
     const point = {
       memberId: member, 
       comment: "리뷰 등록",
-      point: 500
+      point: 50
     }
 
     axios({
