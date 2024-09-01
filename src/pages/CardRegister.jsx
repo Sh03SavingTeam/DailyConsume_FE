@@ -207,7 +207,7 @@ function CardRegister(props) {
     })
       .then((res) => {
         console.log(res);
-        navigate("/home");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
