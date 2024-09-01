@@ -107,7 +107,7 @@ function CardInfo(props) {
     };
 
     const container = cardListRef.current;
-    container.addEventListener("scroll", handleScroll);
+    // container.addEventListener("scroll", handleScroll);
 
     return () => {
       container.removeEventListener("scroll", handleScroll);
@@ -144,7 +144,7 @@ function CardInfo(props) {
       method: "delete",
       url: "/api/card/delete",
       params: {
-        cardNum: selectedCard,
+        cardNum: selectedCardNum,
       },
     }).then((response) => {
       setCardList((prevCards) =>
@@ -174,67 +174,80 @@ function CardInfo(props) {
   return (
     <div className="card-container">
       <h2>카드 목록 조회</h2>
-      <div className="card-list-wrapper">
-        <div className="card-list" ref={cardListRef}>
-          {cardList.map((card, index) => (
-            <div
-              key={card.cardNum}
-              className={`membercard ${
-                selectedCardNum === card.cardNum ? "selected" : ""
-              }`}
-              data-cardnum={card.cardNum}
-            >
-              <img
-                src={
-                  card.cardImgUrl
-                    ? `https://www.shinhancard.com${card.cardImgUrl}`
-                    : "/default-card-image.jpg"
-                }
-                alt="카드이미지"
-                className="card-image"
-              />
+      {cardList.length > 0 ? (
+        <>
+          <div className="card-list-wrapper">
+            <div className="card-list" ref={cardListRef}>
+              {cardList.map((card, index) => (
+                <div
+                  key={card.cardNum}
+                  className={`membercard ${
+                    selectedCardNum === card.cardNum ? "selected" : ""
+                  }`}
+                  data-cardnum={card.cardNum}
+                >
+                  <img
+                    src={
+                      card.cardImgUrl
+                        ? `https://www.shinhancard.com${card.cardImgUrl}`
+                        : "/default-card-image.jpg"
+                    }
+                    alt="카드이미지"
+                    className="card-image"
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
-     
-      {/* <div className="card-wrapper">
-      {cards.length > 0 ? (
-        cards.map((card, index) => (
-          <div key={index} className="card-wrapper">
-            <img
-              src={cardImgUrl ? `https://www.shinhancard.com${cardImgUrl}`
-            : "/default-card-image.jpg"}
-              alt={cards.cardName}
-              className="card-image"
-              
-            />
-            <h3>{cards.cardName}</h3> 
           </div>
-        ))
-      ) : (
-        <p>No cards available</p> 
-      )}
-    </div> */}
-      <div>{selectedCardNum}</div>
-      <h2>{cardName}</h2>
+          <div>{selectedCardNum}</div>
+          <h2>{cardName}</h2>
 
-      <div className="benefits-list">
-        {benefits.length > 0 ? (
-          benefits.map((benefit) => (
-            <div key={benefit.benefitId}>{benefit.benefit}</div>
-          ))
-        ) : (
-          <div>카드를 선택해주세요...</div>
-        )}
-      </div>
+          <div className="benefits-list">
+            {benefits.length > 0 ? (
+              benefits.map((benefit) => (
+                <div key={benefit.benefitId}>{benefit.benefit}</div>
+              ))
+            ) : (
+              <div>카드를 선택해주세요...</div>
+            )}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="card-list-wrapper">
+            <div className="card-list" ref={cardListRef}>
+              <div className="membercard">
+                <img
+                  src={"/default-card-image.jpg"}
+                  alt="카드이미지"
+                  className="card-image"
+                />
+              </div>
+            </div>
+          </div>
+          <div>{selectedCardNum}</div>
+          <h2>{cardName}</h2>
+
+          <div className="benefits-list">
+            {benefits.length > 0 ? (
+              benefits.map((benefit) => (
+                <div key={benefit.benefitId}>{benefit.benefit}</div>
+              ))
+            ) : (
+              <div>등록된 카드가 없습니다</div>
+            )}
+          </div>
+        </>
+      )}
       <div className="cardinfo-button-container">
         <button className="action-button" onClick={handleCardRegisterClick}>
           카드 등록
         </button>
-        <button className="action-button" onClick={openPopUp}>
-          카드 삭제
-        </button>
+        {cardList.length > 0 && (
+          <button className="action-button" onClick={openPopUp}>
+            카드 삭제
+          </button>
+        )}
 
         <CardDeltePopUp
           open={popupOpen}
