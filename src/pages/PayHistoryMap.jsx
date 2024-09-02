@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import Footer from "../components/Footer";
-import customMarker from "../assets/restaurant.png";
+import customMarker from "../assets/location_7.png";
 
 import axios from "axios";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
