@@ -4,7 +4,6 @@ import axios from "axios"; // HTTP 요청을 보내기 위한 라이브러리 im
 import "../styles/AmountListForDay.css"; // 스타일링을 위한 CSS 파일 import
 import AmountDetail from "./AmountDetail"; // 상세보기 컴포넌트 import
 import { checkJWT } from "services/checkJWT"; // JWT 토큰 확인을 위한 서비스 함수 import
-import XImage from "../assets/XImage.jpg"; // 데이터가 없을 때 표시할 이미지 import
 
 function AmountListForDay({ initialDay }) {
     // 상태(state) 선언
