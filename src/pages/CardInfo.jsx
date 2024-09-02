@@ -31,7 +31,7 @@ function CardInfo(props) {
         console.log("JWT 확인 결과" + response.memberId);
         axios({
           method: "get",
-          url: "/api/card/memberCardList",
+          url: "http://localhost:9999/api/card/memberCardList",
           params: {
             memberId: response.memberId,
           },
@@ -117,7 +117,7 @@ function CardInfo(props) {
   const handleCardSelection = (cardNum) => {
     axios({
       method: "get",
-      url: "/api/card/getCardInfo",
+      url: "http://localhost:9999/api/card/getCardInfo",
       params: {
         cardNum: cardNum,
       },
@@ -129,7 +129,7 @@ function CardInfo(props) {
 
       axios({
         method: "get",
-        url: "/api/card/getCardBenefit",
+        url: "http://localhost:9999/api/card/getCardBenefit",
         params: {
           cardName: cardName,
         },
@@ -142,7 +142,7 @@ function CardInfo(props) {
   const handleDeleteCard = async () => {
     axios({
       method: "delete",
-      url: "/api/card/delete",
+      url: "http://localhost:9999/api/card/delete",
       params: {
         cardNum: selectedCardNum,
       },
