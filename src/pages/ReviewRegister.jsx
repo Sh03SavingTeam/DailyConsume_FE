@@ -16,7 +16,7 @@ function ReviewRegister(props) {
   const navigate = useNavigate(); // useNavigate 사용
 
   const location = useLocation();
-  //const { storename, storebizNum } = location.state || {};
+  const { storename, storebizNum } = location.state || {};
 
   // 로컬 스토리지에서 ACCESS TOKEN 가져오기
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
@@ -29,7 +29,7 @@ function ReviewRegister(props) {
       setMember(fetchedMemberId);
     });
   }, []);
-  
+
   //상호명
 
   //사업자등록번호
@@ -133,13 +133,14 @@ function ReviewRegister(props) {
       //-> 일치하면 리뷰 등록 버튼 활성화
 
       //지도 페이지에서 가져온 상호명
-      // const str_name = storename;
-      // console.log("선택한 상호명 : " + str_name);
-      const str_name = "키토분식";
+      const str_name = storename;
+      console.log("선택한 상호명 : " + str_name);
+      //const str_name = "키토분식";
+
       //지도 페이지에서 가져온 사업자등록번호
-      // const str_bizNum = storebizNum;
-      // console.log("선택한 사업자번호 : " + str_bizNum);
-      const str_bizNum = "632-85-00430";
+      const str_bizNum = storebizNum;
+      console.log("선택한 사업자번호 : " + str_bizNum);
+      //const str_bizNum = "632-85-00430";
 
       // 상호명과 사업자등록번호 비교
       if (name === str_name && bizNum === str_bizNum) {
@@ -181,19 +182,21 @@ function ReviewRegister(props) {
     };
 
     const point = {
-      memberId: member, 
+      memberId: member,
       comment: "리뷰 등록",
-      point: 50
-    }
+      point: 50,
+    };
 
     axios({
       method: "post",
       url: "/api/review/reviewRegister",
-      data: JSON.stringify({"reviewDTO":updatedReview,
-                            "pointRegisterDTO":point}),
+      data: JSON.stringify({
+        reviewDTO: updatedReview,
+        pointRegisterDTO: point,
+      }),
       headers: {
-                "Content-Type": "application/json"
-               }
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => {
         console.log(res);
