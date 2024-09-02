@@ -1,17 +1,19 @@
 @font-face {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
+    src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
     font-weight: normal;
-    src: url("../fonts/OneShinhanBold.ttf") format("truetype");
+    font-style: normal;
   }
 
   @font-face {
-    font-family: "OneShinhanMedium";
+    font-family: "SEBANGGothicBold";
+    src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
     font-weight: normal;
-    src: url("../fonts/OneShinhanMedium.ttf") format("truetype");
+    font-style: normal;
   }
 
 .point-container {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     max-width: 375px;
     margin: 5%;
     padding: 3%;
@@ -76,7 +78,7 @@
 }
 
 .balance button{
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     border-radius: 10px;
     border: 1px solid #FFF;
     background-color: transparent;
@@ -102,7 +104,7 @@
     background-color: #EAEAEA;
     border-radius: 5px;
     cursor: pointer;
-    font-family: "OneShinhanMedium";
+    font-family: "SEBANGGothic";
 }
 
 .filter-button img {
@@ -174,7 +176,7 @@
     background-color: #EAEAEA;
     border-radius: 5px;
     cursor: pointer;
-    font-family: "OneShinhanMedium";
+    font-family: "SEBANGGothic";
 }
 
 .footer-container {

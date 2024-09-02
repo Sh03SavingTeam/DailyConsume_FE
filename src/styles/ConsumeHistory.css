@@ -1,8 +1,15 @@
-
 @font-face {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
+    src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
     font-weight: normal;
-    src: url("../fonts/OneShinhanBold.ttf") format("truetype");
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "SEBANGGothicBold";
+    src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
   }
 
 .container {
@@ -35,7 +42,7 @@ display: none; /* Chrome, Safari, Opera*/
 }
 
 .card {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     background-color: white;
     border-radius: 20px;
     box-shadow: 5px 5px 5px lightgray;
@@ -53,7 +60,7 @@ div#test\ mine {
 
 .plus {
     background-color: #303473;
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     color: whitesmoke;
     border-radius:20%;
     cursor: pointer;
@@ -151,7 +158,7 @@ h3 {
 }
 
 .total-payment, .title{
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     background: #fff;
     border-radius: 20px;
     padding: 3%;
@@ -161,7 +168,7 @@ h3 {
 }
 
 .title-compare {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     background: #fff;
     border-radius: 20px;
     padding: 2%;
@@ -182,7 +189,7 @@ h3 {
 }
 
 .amounts {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     display: flex;
     justify-content: space-between;
 }
@@ -192,7 +199,7 @@ h3 {
 }
 /* ************************************************* */
 .dropdown {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     position: relative;
     margin: 0 auto;
     text-align: center;
@@ -200,7 +207,7 @@ h3 {
 }
 
 .dropbtn {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     background-color: #a7d9db;
     color: #42456d;
     padding: 15px;
@@ -242,7 +249,7 @@ h3 {
 }
 
 .select {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     padding: 10px;
     font-size: 16px;
     background-color: #303473; /* 버튼 배경색 설정 */
@@ -269,7 +276,7 @@ label{
     text-align: left;
 } */
 .form-control {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
 }
 input[type="password"]{
     width: 100%;
@@ -282,13 +289,13 @@ input.form-control {
     color: red;
 }
 .form-group mb-3 row{
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     position: relative;
     text-align: center;
     margin: 0 auto;
 }
 .col-form-label{
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
 }
 
 .content-card{
@@ -301,7 +308,7 @@ input.form-control {
     width: 50%;
     margin: 0 auto;
     background-color: #303473;
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     color: whitesmoke;
     border-radius:5px;
     padding: 5px;
