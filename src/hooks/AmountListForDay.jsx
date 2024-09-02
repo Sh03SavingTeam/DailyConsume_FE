@@ -120,7 +120,7 @@ function AmountListForDay({ initialDay }) {
 
     // 결제 내역 리스트의 아이템을 클릭했을 때 호출되는 함수
     const handleItemClick = (item) => {
-        setSelectedItem({ ...item, memberId: "m001" }); // 선택된 아이템의 상세 정보를 상태로 저장
+        setSelectedItem({ ...item, memberId: memberId }); // 선택된 아이템의 상세 정보를 상태로 저장
         setIsDetailVisible(true); // 상세보기 가시성 상태를 true로 설정
     };
 
@@ -139,19 +139,21 @@ function AmountListForDay({ initialDay }) {
             <div className="detail-item">
                 <div className="weekly-budget">
                     {/* 주간 소비 금액과 잔여 금액을 화면에 표시 */}
-                    <p>주간소비금액 : {" "}
+                    <p>주간소비금액 :{" "}
                         {weeklyBudget
-                            ? `${weeklyBudget.설정금액.toLocaleString()}원` // 주간 소비 금액이 있으면 표시
+                            ? `${weeklyBudget.설정금액.toLocaleString()}원`
                             : ""}
                     </p>
                     <p>주간소비잔여금액 :{" "}
                         {weeklyBudget
-                            ? `${weeklyBudget.잔여금액.toLocaleString()}원` // 주간 소비 잔여 금액이 있으면 표시
+                            ? (weeklyBudget.잔여금액 < 0
+                                ? "❌"  // 잔여금액이 마이너스일 경우 X 이모지만 표시
+                                : `${weeklyBudget.잔여금액.toLocaleString()}원`) // 잔여금액이 양수일 경우 금액을 표시
                             : ""}
                     </p>
                 </div>
             </div>
-            <hr className="calendar-divider" />
+            <hr className="calendar-divider"/>
             {/* 현재 선택된 날짜를 화면에 표시 */}
             <div className="date-header">{formattedDay}</div>
             {/* 결제 내역이 있을 경우 리스트로 표시, 없으면 "No data available" 메시지 표시 */}

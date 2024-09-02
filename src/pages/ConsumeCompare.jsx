@@ -19,7 +19,7 @@ function ConsumeCompare({ memberId, contentRef }) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "/api/member/memberSession",
+          "http://localhost:9999/api/member/memberSession",
           "get",
           null
         );
@@ -113,10 +113,10 @@ function ConsumeCompare({ memberId, contentRef }) {
           <button className="back-button2">&lt;</button>
         </Link>
       </div>
-      <div className="title">
-        <h3 className="set">또래보다 아껴 썼어요!</h3>
+      <div className="title-compare">
+        <h3 className="t">또래보다 아껴 썼어요!</h3>
       </div>
-      <div className="card-list">
+      <div className="cardList">
         {differenceList[0] > 0 && (
           <div className="card">
             <div className="card-header">
