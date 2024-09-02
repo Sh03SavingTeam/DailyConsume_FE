@@ -105,10 +105,10 @@ function ConsumeCompare({ memberId }) {
           <button className="back-button2">&lt;</button>
         </Link>
       </div>
-      <div className="title">
-        <h3 className="set">또래보다 아껴 썼어요!</h3>
+      <div className="title-compare">
+        <h3 className="t">또래보다 아껴 썼어요!</h3>
       </div>
-      <div className="card-list">
+      <div className="cardList">
         {differenceList[0] > 0 && (
           <div className="card">
             <div className="card-header">
