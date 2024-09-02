@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import Footer from "../components/Footer";
-import customMarker from "../assets/restaurant.png";
+import customMarker from "../assets/location_7.png";
 
 import axios from "axios";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
@@ -29,7 +29,7 @@ function PayHistoryMap() {
   const getRecommendStore = () => {
     // const geocoder = new window.kakao.maps.services.Geocoder();
     axios({
-      url: "/api/recommend/store",
+      url: "http://localhost:9999/api/recommend/store",
       method: "GET",
     })
       .then((res) => {
@@ -164,7 +164,7 @@ function PayHistoryMap() {
           )}
         </Map>
 
-        <MapTopSelector />
+        <MapTopSelector pageState = 'history'/>
       </div>
       <Footer />
     </div>

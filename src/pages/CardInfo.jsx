@@ -31,7 +31,7 @@ function CardInfo(props) {
         console.log("JWT 확인 결과" + response.memberId);
         axios({
           method: "get",
-          url: "/api/card/memberCardList",
+          url: "http://localhost:9999/api/card/memberCardList",
           params: {
             memberId: response.memberId,
           },

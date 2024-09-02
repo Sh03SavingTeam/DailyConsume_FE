@@ -23,6 +23,8 @@ export function checkJWT(api, method, request) {
     options.body = JSON.stringify(request);
   }
 
+  console.log("======token: " + token);
+
   return fetch(options.url, options)
     .then((response) =>
       response.json().then((json) => {
