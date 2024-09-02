@@ -1,10 +1,18 @@
 @font-face {
-  font-family: "OneShinhanBold";
+  font-family: "SEBANGGothic";
+  src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
   font-weight: normal;
-  src: url("../fonts/OneShinhanBold.ttf") format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SEBANGGothicBold";
+  src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 .discount-container {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     max-width: 375px;
     margin: 0 auto;
     padding: 0;
@@ -31,7 +39,7 @@ display: none; /* Chrome, Safari, Opera*/
 }
 .discount-title {
   font-size: 15px;
-  font-family: "OneShinhanBold";
+  font-family: "SEBANGGothic";
   background: #303473;
   color: white;
   border-radius: 15px;
@@ -105,5 +113,5 @@ border: none;
 background-color: white;
 border-radius: 5px;
 cursor: pointer;
-font-family: "OneShinhanMedium";
+font-family: "SEBANGGothic";
 }
