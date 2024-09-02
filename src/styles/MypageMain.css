@@ -10,6 +10,13 @@
     src: url("../fonts/OneShinhanMedium.ttf") format("truetype");
   }
 
+  @font-face {
+    font-family: "SEBANGGothic";
+    src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
 
 .mymain-container{
     font-family: "OneShinhanBold";
