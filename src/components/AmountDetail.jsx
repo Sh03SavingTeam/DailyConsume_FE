@@ -197,9 +197,6 @@ function AmountDetail({ item, onClose }) {
             <img src={iconSrc} alt="Category Icon" />
           </div>
           <div className="company-amount">
-            {/*<p>*/}
-            {/*  <strong>{detail.storeName}</strong> {detail.payAmount}원*/}
-            {/*</p>*/}
             <p>결제 번호: {generateReceiptNumber() || "N/A"}</p>
           </div>
         </div>
@@ -213,9 +210,6 @@ function AmountDetail({ item, onClose }) {
           <div className="detail-item important">
             <strong>결제 일자:</strong> {formattedDateTime}
           </div>
-          {/*<div className="detail-item">*/}
-          {/*  <strong>결제 상품:</strong> {detail.menuName || "N/A"}*/}
-          {/*</div>*/}
           <div className="detail-item">
             <strong>결제 장소:</strong> {detail.storeName || "N/A"}
           </div>
