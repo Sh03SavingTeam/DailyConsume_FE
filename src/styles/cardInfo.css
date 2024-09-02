@@ -1,19 +1,13 @@
 @font-face {
-  font-family: "OneShinhanBold";
-  src: url("../assets/OneShinhanBold.ttf") format("truetype");
+  font-family: "SEBANGGothic";
+  src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "OneShinhanLight";
-  src: url("../assets/OneShinhanLight.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "OneShinhanMedium";
-  src: url("../assets/OneShinhanMedium.ttf") format("truetype");
+  font-family: "SEBANGGothicBold";
+  src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -124,7 +118,7 @@ h2 {
   border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
-  font-family: "OneShinhanMedium", sans-serif;
+  font-family: "SEBANGGothic", sans-serif;
 }
 
 .action-button:hover {

@@ -26,7 +26,7 @@ function CardInfo(props) {
   }, [location]);
 
   useEffect(() => {
-    checkJWT("/api/member/memberSession", "get", null)
+    checkJWT("http://localhost:9999/api/member/memberSession", "get", null)
       .then((response) => {
         console.log("JWT 확인 결과" + response.memberId);
         axios({
@@ -39,7 +39,7 @@ function CardInfo(props) {
           .then((response) => {
             const userCards = response.data;
 
-            axios.get("/api/card/getAllCardInfo").then((res) => {
+            axios.get("http://localhost:9999/api/card/getAllCardInfo").then((res) => {
               const allCards = res.data;
 
               const mergedList = userCards.map((userCard) => {
