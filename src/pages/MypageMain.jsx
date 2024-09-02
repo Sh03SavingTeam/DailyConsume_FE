@@ -36,7 +36,7 @@ function MypageMain(props) {
   const renderContent = () => {
     switch (selectedTab) {
       case "analysis":
-        return <ConsumeHistory memberId={memberId} contentRef = {contentRef}/>;
+        return <ConsumeHistory memberId={memberId} contentRef={contentRef} />;
       case "point":
         return <Point memberId={memberId} />;
       case "rank":
@@ -44,14 +44,13 @@ function MypageMain(props) {
       case "address":
         return <AddressList />;
       case "consumeCompare":
-        return <ConsumeCompare memberId={memberId} contentRef = {contentRef}/>;
+        return <ConsumeCompare memberId={memberId} contentRef={contentRef} />;
       case "discountInfo":
-        return <DiscountInfo memberId={memberId} contentRef = {contentRef}/>;
+        return <DiscountInfo memberId={memberId} contentRef={contentRef} />;
       default:
         return <ConsumeHistory />;
     }
   };
-  
 
   useEffect(() => {
     const checkAndFetchData = async () => {
@@ -117,6 +116,9 @@ function MypageMain(props) {
       setCheck(sunday !== endDate);
     }
   }, [location.state, endDate]); // 필요한 의존성 추가
+
+  // S3 이미지 URL 생성
+  const s3ImageUrl = `https://shinhands3rd-project2.s3.ap-southeast-2.amazonaws.com/MemberIMG/${memberImg}`;
 
   //   useEffect(() => {
   //     checkJWT("/api/member/memberSession", "get", null)
@@ -198,7 +200,7 @@ function MypageMain(props) {
     <div className="mymain-container">
       <div className="memberinfo">
         {/* 이미지 추후 확인 필요 */}
-        <img src={profileImg} alt="" />
+        <img src={s3ImageUrl} alt="Profile" />
         <p className="info-name">
           <span className="info-name-big">{memberName}</span> 님
         </p>
@@ -213,7 +215,9 @@ function MypageMain(props) {
             </Link>
           )}
         </div>
-        <button className="mypage-logout" onClick={handleMemberLogout}>로그아웃</button>
+        <button className="mypage-logout" onClick={handleMemberLogout}>
+          로그아웃
+        </button>
       </div>
       <div className="tabs">
         <button
@@ -245,7 +249,9 @@ function MypageMain(props) {
           주소 목록
         </button>
       </div>
-      <div className="content" ref = {contentRef}>{renderContent()}</div>
+      <div className="content" ref={contentRef}>
+        {renderContent()}
+      </div>
       <Footer />
     </div>
   );
