@@ -11,10 +11,11 @@ function Home(props) {
   return (
     <div className="app-container">
       <div className="main-content">
+
         <CardInfo />
         <PaymentHistory />
-         
           <Attendance/>
+
       </div>
 
       <Footer />
