@@ -59,7 +59,7 @@ function ConsumeCompare({ memberId, contentRef }) {
     if (contentRef.current) {
       contentRef.current.scrollTop = 0;
     }
-  }
+  };
 
   // useEffect(() => {
   //   checkJWT("/api/member/memberSession", "get", null)
