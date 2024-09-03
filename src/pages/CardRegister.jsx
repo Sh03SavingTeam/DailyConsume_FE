@@ -40,7 +40,7 @@ function CardRegister(props) {
 
     // axios({
     //   method: "get",
-    //   url: "/api/member/memberSession",
+    //   url: "http://localhost:9999/api/member/memberSession",
     //   headers: {
     //     Authorization: `Bearer ${token}`, // JWT 토큰 포함
     //   },
@@ -59,7 +59,11 @@ function CardRegister(props) {
     //     console.error("There was an error fetching the session data!", error);
     //   });
 
-    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+    checkJWT(
+      "http://localhost:9999/api/member/memberSession",
+      "get",
+      null
+    ).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
 
@@ -68,6 +72,7 @@ function CardRegister(props) {
         ...prevMemberCard,
         memberId: fetchedMemberId,
       }));
+      setMemberId(fetchedMemberId);
     });
   }, []);
 
@@ -94,7 +99,9 @@ function CardRegister(props) {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`/api/card/${type}CardList`);
+      const response = await axios.get(
+        `http://localhost:9999/api/card/${type}CardList`
+      );
       setCards(response.data);
     } catch (err) {
       setError(err);
@@ -153,18 +160,20 @@ function CardRegister(props) {
         Body: fileBlob,
       },
     });
-    upload.promise().then(console.log("업로드"));
+    // promise()를 반환하여 호출부에서 await를 사용할 수 있게 합니다.
+    return upload.promise();
   };
 
   const handleTakePhoto = async () => {
     try {
       const photoBlob = takePicture();
       const fileName = getFileName();
-      uploadToS3(fileName, photoBlob);
+      // 업로드가 완료될 때까지 기다립니다.
+      await uploadToS3(fileName, photoBlob);
 
       const response = await axios({
         method: "post",
-        url: "/api/card/cardOCR",
+        url: "http://localhost:9999/api/card/cardOCR",
         data: {
           fileName: fileName,
         },
@@ -202,7 +211,7 @@ function CardRegister(props) {
 
     axios({
       method: "post",
-      url: "/api/card/cardRegister",
+      url: "http://localhost:9999/api/card/cardRegister",
       data: memberCard,
     })
       .then((res) => {
@@ -325,14 +334,15 @@ function CardRegister(props) {
                 )}
               </select>
             </div>
-
-            <button
-              type="submit"
-              className="submit-button"
-              onClick={handleRegisterCard}
-            >
-              등록하기
-            </button>
+            <div className="submitdiv">
+              <button
+                type="submit"
+                className="submit-button"
+                onClick={handleRegisterCard}
+              >
+                등록하기
+              </button>
+            </div>
           </form>
         </div>
       </div>

@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import Footer from "../components/Footer";
-import customMarker from "../assets/location_7.png"
+import customMarker from "../assets/location_7.png";
 
 import axios from "axios";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import MapTopSelector from "../components/MapTopSelector";
 import useKakaoLoader from "../services/useKakaoLoader";
 import MapStoreList from "components/MapStoreList";
-import calendarIcon from"../assets/calendar.png"
-import consumptionIcon from"../assets/consumption.png"
-import robotIcon from"../assets/robot.png"
-import happyIcon from"../assets/happy.png"
+import calendarIcon from "../assets/calendar.png";
+import consumptionIcon from "../assets/consumption.png";
+import robotIcon from "../assets/robot.png";
+import happyIcon from "../assets/happy.png";
 import Loading from "components/Loading";
-import ScopeIcon from "../assets/scope.png"
-import WeeklyIcon from "../assets/receive-money.png"
+import ScopeIcon from "../assets/scope.png";
+import WeeklyIcon from "../assets/receive-money.png";
 
 function MapPage() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -24,8 +24,8 @@ function MapPage() {
     lng: Number,
   });
 
-
   const [stores, setStores] = useState([]);
+  const [selectedStore, setSelectedStore] = useState(null);
 
   const currentGeo = () => {
     if (navigator.geolocation) {
@@ -38,7 +38,7 @@ function MapPage() {
           console.log(location);
         },
         (error) => {
-          console.log(error)
+          console.log(error);
         },
         {
           enableHighAccuracy: true,
@@ -49,13 +49,17 @@ function MapPage() {
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
-  }
+  };
 
   const clickPeerRecommend = () => {
     setLoading(true);
     currentGeo();
     axios({
-      url: "http://localhost:9999/api/recommend/peer?lon="+location.latitude + "&lat="+location.longitude,
+      url:
+        "http://localhost:9999/api/recommend/peer?lon=" +
+        location.latitude +
+        "&lat=" +
+        location.longitude,
       method: "GET",
     })
       .then((res) => {
@@ -67,13 +71,61 @@ function MapPage() {
         console.log("에러: " + error);
         setLoading(false);
       });
-  }
+  };
 
   const clickDaypatternRecommend = () => {
     setLoading(true);
     currentGeo();
     axios({
-      url: "http://localhost:9999/api/recommend/daypattern?lon="+location.latitude + "&lat="+location.longitude,
+      url:
+        "http://localhost:9999/api/recommend/daypattern?lon=" +
+        location.latitude +
+        "&lat=" +
+        location.longitude,
+      method: "GET",
+    })
+      .then((res) => {
+        console.log(res.data);
+        setStores(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("에러: " + error);
+        setLoading(false);
+      });
+  };
+
+  const clickConsumeRecommend = () => {
+    setLoading(true);
+    currentGeo();
+    axios({
+      url:
+        "http://localhost:9999/api/recommend/consume?lon=" +
+        location.latitude +
+        "&lat=" +
+        location.longitude,
+      method: "GET",
+    })
+      .then((res) => {
+        console.log(res.data);
+        setStores(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("에러: " + error);
+        setLoading(false);
+      });
+  };
+
+  const clickAllpatternRecommend = () => {
+    setLoading(true);
+    currentGeo();
+    axios({
+      url:
+        "http://localhost:9999/api/recommend/all?lon=" +
+        location.latitude +
+        "&lat=" +
+        location.longitude,
       method: "GET",
     })
       .then((res) => {
@@ -87,23 +139,23 @@ function MapPage() {
       });
   }
 
-  const clickConsumeRecommend = () => {
-    setLoading(true);
-    currentGeo();
+  const getWeeklyConsumeStore = () => {
+    weeklyConsume();
+  };
+
+  const weeklyConsume = () => {
     axios({
-      url: "http://localhost:9999/api/recommend/consume?lon="+location.latitude + "&lat="+location.longitude,
+      url: "http://localhost:9999/api/recommend/weekly?memId=m049",
       method: "GET",
     })
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
-        setLoading(false);
       })
       .catch((error) => {
         console.log("에러: " + error);
-        setLoading(false);
       });
-  }
+  };
 
   const getRecommendStore = () => {
     // const geocoder = new window.kakao.maps.services.Geocoder();
@@ -132,7 +184,6 @@ function MapPage() {
         // };
 
         // processStores(res.data);
-        
       })
       .catch((error) => {
         console.log("에러: " + error);
@@ -152,10 +203,13 @@ function MapPage() {
   //     })
   // }
 
-
   const markerClickHandler = (store, e) => {
     console.log(store);
-  }
+    if(selectedStore != null)
+      setSelectedStore(null)
+    else
+      setSelectedStore(store);
+  };
 
   const searchDetailAddr = (lat, lng) => {
     const geocoder = new window.kakao.maps.services.Geocoder();
@@ -205,17 +259,17 @@ function MapPage() {
           maximumAge: 0,
         }
       );
-      getRecommendStore();
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
   }, []);
 
+
   useKakaoLoader();
 
   return (
-    <div className="container">
-      {loading ? <Loading/>: null}
+    <div className="container" style={{ height: "94vh", minHeight: "94vh" }}>
+      {loading ? <Loading /> : null}
       <Map
         id="map"
         center={{ lat: 37.55936310336185, lng: 126.92270138644199 }}
@@ -223,6 +277,9 @@ function MapPage() {
         level={3} // 지도의 확대 레벨
         onClick={mapClickHandler}
       >
+        <MapMarker
+          position={{ lat: 37.55936310336185, lng: 126.92270138644199 }}
+        />
 
         {stores.map((store, index) => (
           <MapMarker
@@ -236,24 +293,47 @@ function MapPage() {
               },
             }}
             title={store.storeName}
-            onClick={ () => markerClickHandler(store) }
-          />
+            onClick={() => markerClickHandler(store)}
+          >
+            {selectedStore && selectedStore.storeRegNum === store.storeRegNum && (
+              <div  className="marker_click_div" style={{ padding: "5px", color: "#000" }}>
+                <img src={store.storeImg}/>
+                <div className="marker_store_info">
+                  <div>{store.storeName}</div>
+                  <div>{store.cate}</div>
+                  <div>{store.storeAddr}</div>
+                </div>
+              </div>
+            )}
+          </MapMarker>
         ))}
       </Map>
-      <MapTopSelector />
+      <MapTopSelector pageState="recommend" />
       <div className="marker_category_div">
-        <div onClick={clickConsumeRecommend}><img src={consumptionIcon} alt="calendarIcon"/> 소비 패턴</div>
-        <div onClick={clickPeerRecommend}><img src={happyIcon} alt="calendarIcon"/> 또래 추천</div>
-        <div onClick={clickDaypatternRecommend}><img src={calendarIcon} alt="calendarIcon"/> 요일 소비</div>
-        <div><img src={robotIcon} alt="calendarIcon"/> 통합 추천</div>
+        <div onClick={clickConsumeRecommend}>
+          <img src={consumptionIcon} alt="calendarIcon" /> 소비 패턴
+        </div>
+        <div onClick={clickPeerRecommend}>
+          <img src={happyIcon} alt="calendarIcon" /> 또래 추천
+        </div>
+        <div onClick={clickDaypatternRecommend}>
+          <img src={calendarIcon} alt="calendarIcon" /> 요일 소비
+        </div>
+        <div onClick={clickAllpatternRecommend}>
+          <img src={robotIcon} alt="calendarIcon" /> 통합 추천
+        </div>
       </div>
       <div className="right_btn_div">
-        <div onClick={currentGeo}><img src={ScopeIcon} alt="currentGeoBtn"/></div>
-        <div><img src={WeeklyIcon} alt="weekConsumeBtn"/></div>
+        <div onClick={currentGeo}>
+          <img src={ScopeIcon} alt="currentGeoBtn" />
+        </div>
+        <div onClick={getWeeklyConsumeStore}>
+          <img src={WeeklyIcon} alt="weekConsumeBtn" />
+        </div>
       </div>
-      
-      <MapStoreList stores = {stores}/>
-      
+
+      <MapStoreList stores={stores} />
+
       <Footer />
     </div>
   );

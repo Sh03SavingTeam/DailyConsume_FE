@@ -1,0 +1,45 @@
+.pay_history_area {
+    background-color: #ffffff;
+    padding: 4%;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px lightgray;
+    margin: 5%;
+}
+
+.ph_top {
+    font-size: 17px;
+}
+
+.history_info {
+    border-bottom: 1px solid lightgray;
+    padding: 10px 0; 
+}
+
+.history_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+
+.history_bottom {
+    color: lightgray;
+}
+
+.history_bottom > p {
+    margin-top: 0;
+    font-size: 13px;
+    font-family: 'SEBANGGothic';
+}
+
+.history_bottom > p > span:nth-child(1) {
+    color: black;
+    margin-right: 5px;
+}
+
+.more_btn {
+    text-align: center;
+    font-size: 14px;
+    padding: 7px;
+    color: gray;
+}

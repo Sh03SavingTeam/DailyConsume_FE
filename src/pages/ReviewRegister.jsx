@@ -11,6 +11,8 @@ import OCRConfirmedPopUp from "../components/ReceiptOCRPopUp";
 import { checkJWT } from "services/checkJWT";
 
 function ReviewRegister(props) {
+  //회원 객체
+  const [memberId, setMemberId] = useState("");
   const [member, setMember] = useState("");
 
   const navigate = useNavigate(); // useNavigate 사용
@@ -27,6 +29,7 @@ function ReviewRegister(props) {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
       setMember(fetchedMemberId);
+      setMemberId(fetchedMemberId);
     });
   }, []);
 
@@ -86,7 +89,7 @@ function ReviewRegister(props) {
 
   const getFileName = () => {
     const timestamp = Date.now();
-    return `receiptimg_${timestamp}.jpg`;
+    return `receiptimg_${memberId}_${timestamp}.jpg`;
   };
 
   const uploadToS3 = (filename, fileBlob) => {
@@ -104,14 +107,16 @@ function ReviewRegister(props) {
         Body: fileBlob,
       },
     });
-    upload.promise().then(console.log("업로드"));
+    // promise()를 반환하여 호출부에서 await를 사용할 수 있게 합니다.
+    return upload.promise();
   };
 
   const handleTakePhoto = async () => {
     try {
       const photoBlob = takePicture();
       const fileName = getFileName();
-      uploadToS3(fileName, photoBlob);
+      // 업로드가 완료될 때까지 기다립니다.
+      await uploadToS3(fileName, photoBlob);
 
       const response = await axios({
         method: "post",
