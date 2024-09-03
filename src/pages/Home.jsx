@@ -13,8 +13,9 @@ function Home(props) {
       <div className="main-content">
 
         <CardInfo />
+        <Attendance/>
         <PaymentHistory />
-          <Attendance/>
+        
 
       </div>
 
