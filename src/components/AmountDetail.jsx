@@ -16,7 +16,7 @@ function AmountDetail({ item, onClose }) {
 
   useEffect(() => {
     //const fetchDetail = async () => {
-        console.log("Requesting payment details for:", item.memberId, item.id); // 로그 추가
+      console.log("Requesting payment details for:", item.memberId, item.id); // 로그 추가
       axios.get(
             "/api/calendar/payhistory/detail",
             {
@@ -32,7 +32,10 @@ function AmountDetail({ item, onClose }) {
           setIsNormal(response.data.myPayCheck === 1);
         }).catch((error) => {
 
-        });
+        setDetail(response.data);
+        setIsNormal(response.data.myPayCheck === 1);
+      })
+      .catch((error) => {});
 
     //fetchDetail();
   }, [item]);

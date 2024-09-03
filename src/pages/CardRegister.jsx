@@ -335,13 +335,13 @@ function CardRegister(props) {
               </select>
             </div>
             <div className="submit-button2-center">
-            <button
-              type="submit"
-              className="submit-button"
-              onClick={handleRegisterCard}
-            >
-              등록하기
-            </button>
+              <button
+                type="submit"
+                className="submit-button"
+                onClick={handleRegisterCard}
+              >
+                등록하기
+              </button>
             </div>
           </form>
         </div>

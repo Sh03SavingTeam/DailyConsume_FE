@@ -194,7 +194,51 @@ function AmountListForDay({ initialDay }) {
             )}
             <hr className="calendar-divider"/>
         </div>
-    );
+      </div>
+      <hr className="calendar-divider" />
+      {/* 현재 선택된 날짜를 화면에 표시 */}
+      <div className="date-header">{formattedDay}</div>
+      {/* 결제 내역이 있을 경우 리스트로 표시, 없으면 "No data available" 메시지 표시 */}
+      <ul>
+        {orderList.length > 0 ? (
+          orderList.map((item, index) => (
+            <li
+              key={index}
+              className="amount-list-item"
+              onClick={() => handleItemClick(item)} // 리스트 아이템 클릭 시 상세보기 열기
+            >
+              <div
+                className={`icon ${
+                  item.type === "normal" ? "check-icon" : "warning-icon"
+                }`}
+              >
+                {item.type === "normal" ? "✔" : "!"}
+              </div>
+              <div className="item-details">
+                <div className="left-section">
+                  <span className="amount">
+                    {item.amount.toLocaleString()}원
+                  </span>
+                  <div className="description-time-container">
+                    <span className="description">{item.description}</span>
+                    <span className="time">{item.time}</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))
+        ) : (
+          <li className="no-data"></li>
+        )}
+      </ul>
+
+      {/* 상세보기 컴포넌트가 활성화된 경우 렌더링 */}
+      {isDetailVisible && selectedItem && (
+        <AmountDetail item={selectedItem} onClose={handleCloseDetail} />
+      )}
+      <hr className="calendar-divider" />
+    </div>
+  );
 }
 
 export default AmountListForDay; // AmountListForDay 컴포넌트 export

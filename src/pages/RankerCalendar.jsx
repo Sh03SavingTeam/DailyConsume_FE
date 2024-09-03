@@ -142,7 +142,6 @@ const RankerCalendar = ({ memberId, onBack }) => {
   return (
     <div className="app-container">
       <div className="prev-btn2" onClick={onBack}>&lt;</div> {/* onBack 사용 */}
-
       <div className="main-content">
         <div className="calendar-container">
           <Calendar
