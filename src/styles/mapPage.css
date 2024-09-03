@@ -255,14 +255,14 @@
 
 .marker_category_div {
   position: absolute;
-  top: 8svh;
+  top: 9svh;
   z-index: 20;
   /* left: 0%; */
   width: 100%;
   padding: 0 3%;
   overflow: scroll;
   white-space: nowrap;
-  min-height: 4%;
+  min-height: 6svh;
 }
 
 .marker_category_div::-webkit-scrollbar {
