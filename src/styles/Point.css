@@ -90,6 +90,7 @@
 }
 
 .history-title {
+    font-family: "SEBANGGothicBold";
     display: flex;
     justify-content: space-between;
     padding: 20px;

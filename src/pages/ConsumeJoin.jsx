@@ -137,7 +137,11 @@ function ConsumeJoin(props) {
               프로필사진<span className="text-danger">*</span>
             </label>
             <div className="col-lg-6">
+            <label htmlFor="profileImgUpload" className="img-upload">
+            🧷업로드
+            </label>
               <input
+                id="profileImgUpload"
                 type="file"
                 accept="image/*"
                 name="memberImg"
@@ -145,11 +149,13 @@ function ConsumeJoin(props) {
                 onChange={handleImageChange}
               />
             </div>
-            <img
-              src={previewUrl}
-              alt="이미지 미리보기"
-              style={{ width: "100px", height: "auto" }}
-            />
+            {previewUrl && (
+              <img
+                src={previewUrl}
+                alt="이미지 미리보기"
+                style={{ width: "100px", height: "auto", marginTop: "10px" }}
+              />
+            )}
           </div>
           <div className="form-group mb-3 row">
             <label className="col-lg-4 col-form-label" htmlFor="val-username">
@@ -217,7 +223,7 @@ function ConsumeJoin(props) {
             </label>
             <div name="memberBirth" className="col-lg-6">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker />
+                <DatePicker className="datepicker-custom"/>
               </LocalizationProvider>
             </div>
           </div>
