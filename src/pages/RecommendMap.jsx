@@ -63,7 +63,7 @@ function MapPage() {
     currentGeo();
     axios({
       url:
-        "http://localhost:9999/api/recommend/peer?lon=" +
+        "/api/recommend/peer?lon=" +
         location.latitude +
         "&lat=" +
         location.longitude,
@@ -86,7 +86,7 @@ function MapPage() {
     currentGeo();
     axios({
       url:
-        "http://localhost:9999/api/recommend/daypattern?lon=" +
+        "/api/recommend/daypattern?lon=" +
         location.latitude +
         "&lat=" +
         location.longitude,
@@ -109,7 +109,7 @@ function MapPage() {
     currentGeo();
     axios({
       url:
-        "http://localhost:9999/api/recommend/consume?lon=" +
+        "/api/recommend/consume?lon=" +
         location.latitude +
         "&lat=" +
         location.longitude,
@@ -132,7 +132,7 @@ function MapPage() {
     currentGeo();
     axios({
       url:
-        "http://localhost:9999/api/recommend/all?lon=" +
+        "/api/recommend/all?lon=" +
         location.latitude +
         "&lat=" +
         location.longitude,
@@ -155,7 +155,7 @@ function MapPage() {
 
   const weeklyConsume = () => {
     axios({
-      url: "http://localhost:9999/api/recommend/weekly?memId=m049",
+      url: "/api/recommend/weekly?memId=m049",
       method: "GET",
     })
       .then((res) => {
@@ -171,7 +171,7 @@ function MapPage() {
     // const geocoder = new window.kakao.maps.services.Geocoder();
     currentGeo();
     axios({
-      url: "http://localhost:9999/api/recommend/store",
+      url: "/api/recommend/store",
       method: "GET",
     })
       .then((res) => {

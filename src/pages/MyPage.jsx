@@ -30,7 +30,7 @@ function MyPage(props) {
     };
     
     useEffect(() => {
-        axios.get(`http://localhost:9999/rank/${memberId}`)
+        axios.get(`/rank/${memberId}`)
             .then(response => {
                 setRankInfo(response.data); 
                 console.log(response.data);
@@ -45,7 +45,7 @@ function MyPage(props) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "http://localhost:9999/api/member/memberSession",
+          "/api/member/memberSession",
           "get",
           null
         );
@@ -55,19 +55,19 @@ function MyPage(props) {
 
         // 2. 회원별 Rank 정보 가져오기
         const rankResponse = await axios.get(
-          `http://localhost:9999/rank/${memberID}`
+          `/rank/${memberID}`
         );
         setRankInfo(rankResponse.data);
 
         // 3. 전체 Ranking 리스트 가져오기
         const rankingResponse = await axios.get(
-          `http://localhost:9999/rank/ranking`
+          `/rank/ranking`
         );
         setRankingList(rankingResponse.data);
 
         // 4. A Ranking 리스트 가져오기
         const arankingResponse = await axios.get(
-          `http://localhost:9999/rank/aranking/${memberID}`
+          `/rank/aranking/${memberID}`
         );
         setArankingList(arankingResponse.data);
 
