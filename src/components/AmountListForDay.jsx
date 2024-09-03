@@ -157,7 +157,6 @@ function AmountListForDay({ initialDay }) {
             <div className="date-header">{formattedDay}</div>
             {/* 결제 내역이 있을 경우 리스트로 표시, 없으면 "No data available" 메시지 표시 */}
             <ul>
-
                 {orderList.length > 0 ? (
                     orderList.map((item, index) => (
                         <li
@@ -170,25 +169,30 @@ function AmountListForDay({ initialDay }) {
                                     item.type === "normal" ? "check-icon" : "warning-icon"
                                 }`}
                             >
-                                {item.type === "normal" ? "✔️" : "!"}
+                                {item.type === "normal" ? "✔" : "!"}
                             </div>
                             <div className="item-details">
-                                <span className="time">{item.time}</span>
-                                <span className="amount">{item.amount.toLocaleString()}원</span>
-                                <span className="description">{item.description}</span>
+                                <div className="left-section">
+                                    <span className="amount">{item.amount.toLocaleString()}원</span>
+                                    <div className="description-time-container">
+                                        <span className="description">{item.description}</span>
+                                        <span className="time">{item.time}</span>
+                                    </div>
+                                </div>
                             </div>
                         </li>
                     ))
                 ) : (
                     <li className="no-data"></li>
-                    //<li className="no-data">No data available for this date.</li>
                 )}
             </ul>
+
+
             {/* 상세보기 컴포넌트가 활성화된 경우 렌더링 */}
             {isDetailVisible && selectedItem && (
-                <AmountDetail item={selectedItem} onClose={handleCloseDetail} />
+                <AmountDetail item={selectedItem} onClose={handleCloseDetail}/>
             )}
-            <hr  className="calendar-divider" />
+            <hr className="calendar-divider"/>
         </div>
     );
 }
