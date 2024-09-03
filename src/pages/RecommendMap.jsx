@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import Footer from "../components/Footer";
 import customMarker from "../assets/location_7.png";
+import consumeMarker from "../assets/consumeMarker.png";
+import peerMarker from "../assets/peerMarker.png";
+import dayMarker from "../assets/dayMarker.png";
+import fullMarker from "../assets/fullMarker.png";
 
 import axios from "axios";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
@@ -26,6 +30,8 @@ function MapPage() {
 
   const [stores, setStores] = useState([]);
   const [selectedStore, setSelectedStore] = useState(null);
+
+  const [isClicked, setIsClicked] = useState("");
 
   const currentGeo = () => {
     if (navigator.geolocation) {
@@ -52,6 +58,7 @@ function MapPage() {
   };
 
   const clickPeerRecommend = () => {
+    setIsClicked("peer");
     setLoading(true);
     currentGeo();
     axios({
@@ -74,6 +81,7 @@ function MapPage() {
   };
 
   const clickDaypatternRecommend = () => {
+    setIsClicked("day");
     setLoading(true);
     currentGeo();
     axios({
@@ -96,6 +104,7 @@ function MapPage() {
   };
 
   const clickConsumeRecommend = () => {
+    setIsClicked("consume");
     setLoading(true);
     currentGeo();
     axios({
@@ -118,6 +127,7 @@ function MapPage() {
   };
 
   const clickAllpatternRecommend = () => {
+    setIsClicked("full");
     setLoading(true);
     currentGeo();
     axios({
@@ -286,7 +296,12 @@ function MapPage() {
             key={index}
             position={{ lat: store.storeLatX, lng: store.storeLonY }}
             image={{
-              src: customMarker,
+              src:
+                isClicked === "consume" ? consumeMarker :
+                isClicked === "peer" ? peerMarker :
+                isClicked === "day" ? dayMarker :
+                isClicked === "full" ? fullMarker :
+                customMarker,
               size: {
                 width: 30,
                 height: 30,
@@ -310,16 +325,16 @@ function MapPage() {
       </Map>
       <MapTopSelector pageState="recommend" />
       <div className="marker_category_div">
-        <div onClick={clickConsumeRecommend}>
+        <div className={`consume-pattern ${isClicked === "consume" ? "consume" : ""}`} onClick={clickConsumeRecommend}>
           <img src={consumptionIcon} alt="calendarIcon" /> 소비 패턴
         </div>
-        <div onClick={clickPeerRecommend}>
+        <div className={`peer-recommend ${isClicked === "peer" ? "peer" : ""}`} onClick={clickPeerRecommend}>
           <img src={happyIcon} alt="calendarIcon" /> 또래 추천
         </div>
-        <div onClick={clickDaypatternRecommend}>
+        <div className={`day-consumption ${isClicked === "day" ? "day" : ""}`} onClick={clickDaypatternRecommend}>
           <img src={calendarIcon} alt="calendarIcon" /> 요일 소비
         </div>
-        <div onClick={clickAllpatternRecommend}>
+        <div className={`full-recommend ${isClicked === "full" ? "full" : ""}`} onClick={clickAllpatternRecommend}>
           <img src={robotIcon} alt="calendarIcon" /> 통합 추천
         </div>
       </div>
