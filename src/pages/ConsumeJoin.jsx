@@ -157,10 +157,6 @@ function ConsumeJoin(props) {
                 onChange={handleImageChange}
                 ref={inputFileRef} // ref 연결
               />
-              <button onClick={handleButtonClick} className="profileimgselect">
-                사진 등록
-              </button>{" "}
-              {/* 사용자 정의 버튼 */}
             </div>
             {previewUrl && (
               <img
