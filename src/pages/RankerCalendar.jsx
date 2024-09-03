@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import moment from "moment";
-import axios from "axios";
-import Footer from "../components/Footer";
-import "../App.css";
-import "../styles/Calendar.css";
-import AmountListForDay from "../components/AmountListForDay";
-import RabbitCompleteImage from "../assets/RabbitComplete.png";
-import RabbitFail from "../assets/RabbitFail.png";
+import Calendar from "react-calendar";  
+import "react-calendar/dist/Calendar.css";  
+import moment from "moment";  
+import axios from "axios";  
+import Footer from "../components/Footer";  
+import "../App.css";  
+import "../styles/Calendar.css";  
+import AmountListForDay from "../components/AmountListForDay";  
+import RabbitCompleteImage from "../assets/RabbitComplete.png";  
+import RabbitFail from "../assets/RabbitFail.png";  
+import { checkJWT } from "services/checkJWT";  
 
-const RankerCalendar = ({ memberId, onBack }) => {
+const RankerCalendar = ({ memberId, onBack }) => { 
+  const [memberId2, setMemberId2] = useState("");
   const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일"));
   const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
   const [amountList, setAmountList] = useState([]);
@@ -37,12 +39,27 @@ const RankerCalendar = ({ memberId, onBack }) => {
       const response = await axios.get("/api/calendar/weeklyConsume/month", {
         params: { month, memberId },
       });
-      setWeeklyAchievements(response.data || []); // 데이터를 배열로 설정
+      setWeeklyAchievements(response.data || []);
     } catch (error) {
       console.error("Failed to fetch weekly achieve data from server", error);
-      setWeeklyAchievements([]); // 에러가 발생하면 빈 배열로 설정
+      setWeeklyAchievements([]);
     }
   };
+  useEffect(() => {
+    checkJWT("/api/member/memberSession", "get", null)
+      .then((resopnse) => {
+        console.log("JWT 확인 결과" + resopnse.memberId);
+        const memberId2 = resopnse.memberId;
+        setMemberId2(memberId2);
+
+          const month = moment().format("MM");
+          fetchAmountList(month, memberId);
+          fetchWeeklyAchievements(month, memberId);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+  }, [memberId2]);
 
   useEffect(() => {
     const month = moment().format("MM");
@@ -64,15 +81,23 @@ const RankerCalendar = ({ memberId, onBack }) => {
     fetchWeeklyAchievements(newMonth, memberId);
   };
 
+  const tileClassName = ({ date, view }) => {
+    if (view === "month") {
+      if (date.getDay() === 0) { // 일요일
+        return "sunday-tile";
+      }
+      if (date.getDay() === 6) { // 토요일
+        return "saturday-tile";
+      }
+    }
+    return null;
+  };
+
   const f_formatDay = (locale, date) => {
     const currentDay = moment(date).format("YYYY/MM/DD");
     const filterData = amountList.filter((data) => data.day === currentDay);
     const achievementsForDay = (weeklyAchievements || []).filter(
-      (achievement) => {
-        return (
-          moment(achievement["종료일"]).format("YYYY/MM/DD") === currentDay
-        );
-      }
+      (achievement) => moment(achievement["종료일"]).format("YYYY/MM/DD") === currentDay
     );
     return (
       <div className="calendar-info">
@@ -105,13 +130,18 @@ const RankerCalendar = ({ memberId, onBack }) => {
     );
   };
 
+  const formatShortWeekday = (locale, date) => {
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    return days[date.getDay() === 0 ? 6 : date.getDay() - 1];
+  };
+
+  const formatMonthYear = (locale, date) => {
+    return moment(date).format("YYYY. MM");
+  };
+
   return (
-    <div className="app-container rankpage">
-      <div className="prev-btn2" onClick={onBack}>
-        &lt;
-      </div>{" "}
-      {/* 뒤로가기 버튼 수정 */}
-      <h1> 소비 캘린더 </h1>
+    <div className="app-container">
+      <div className="prev-btn2" onClick={onBack}>&lt;</div> {/* onBack 사용 */}
       <div className="main-content">
         <div className="calendar-container">
           <Calendar
@@ -119,6 +149,10 @@ const RankerCalendar = ({ memberId, onBack }) => {
             value={moment(nowDate, "YYYY년 MM월 DD일").toDate()}
             formatDay={f_formatDay}
             onActiveStartDateChange={handleMonthChange}
+            tileClassName={tileClassName}
+            locale="en-GB"
+            formatShortWeekday={formatShortWeekday}
+            formatMonthYear={formatMonthYear}
           />
           <hr className="calendar-divider" />
           <AmountListForDay initialDay={nowDate} memberId={memberId} />

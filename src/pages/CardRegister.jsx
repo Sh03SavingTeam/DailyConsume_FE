@@ -59,7 +59,11 @@ function CardRegister(props) {
     //     console.error("There was an error fetching the session data!", error);
     //   });
 
-    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+    checkJWT(
+      "/api/member/memberSession",
+      "get",
+      null
+    ).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
 
@@ -95,7 +99,9 @@ function CardRegister(props) {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`/api/card/${type}CardList`);
+      const response = await axios.get(
+        `/api/card/${type}CardList`
+      );
       setCards(response.data);
     } catch (err) {
       setError(err);

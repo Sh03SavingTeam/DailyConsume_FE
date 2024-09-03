@@ -11,34 +11,33 @@ import RankerCalendar from "./RankerCalendar";
 import { checkJWT } from "services/checkJWT";
 
 function MyPage(props) {
-  const date = new Date();
-  const month = date.getMonth() + 1;
-  const [rankInfo, setRankInfo] = useState(null);
-  const [rankingList, setRankingList] = useState([]);
-  const [arankingList, setArankingList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isVisable, setIsVisable] = useState(false);
-  const [selectedMemberId, setSelectedMemberId] = useState(null);
-  const [memberId, setMemberId] = useState("");
-  const viewRankClickHandler = () => {
-    setIsVisable((prevState) => !prevState);
-  };
-  const handleBackClick = () => {
-    setSelectedMemberId(null); // 선택된 memberId 초기화하여 RankerCalendar 종료
-  };
-
-  useEffect(() => {
-    axios
-      .get(`/rank/${memberId}`)
-      .then((response) => {
-        setRankInfo(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching rank info:", error);
-      });
-  }, [memberId]);
+    const date = new Date(); 
+    const month = date.getMonth() + 1;
+    const [rankInfo, setRankInfo] = useState(null);
+    const [rankingList, setRankingList] = useState([]);
+    const [arankingList, setArankingList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [isVisable, setIsVisable] = useState(false);
+    const [selectedMemberId, setSelectedMemberId] = useState(null); 
+    const [memberId, setMemberId] = useState("");
+    const viewRankClickHandler = () => {
+        setIsVisable(prevState => !prevState);
+    };
+    const handleBackClick = () => {
+        setSelectedMemberId(null); // 선택된 memberId 초기화하여 RankerCalendar 종료
+    };
+    
+    useEffect(() => {
+        axios.get(`/rank/${memberId}`)
+            .then(response => {
+                setRankInfo(response.data); 
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error("Error fetching rank info:", error);
+            });
+    }, [memberId]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,15 +53,21 @@ function MyPage(props) {
         setMemberId(memberID);
 
         // 2. 회원별 Rank 정보 가져오기
-        const rankResponse = await axios.get(`/rank/${memberID}`);
+        const rankResponse = await axios.get(
+          `/rank/${memberID}`
+        );
         setRankInfo(rankResponse.data);
 
         // 3. 전체 Ranking 리스트 가져오기
-        const rankingResponse = await axios.get(`/rank/ranking`);
+        const rankingResponse = await axios.get(
+          `/rank/ranking`
+        );
         setRankingList(rankingResponse.data);
 
         // 4. A Ranking 리스트 가져오기
-        const arankingResponse = await axios.get(`/rank/aranking/${memberID}`);
+        const arankingResponse = await axios.get(
+          `/rank/aranking/${memberID}`
+        );
         setArankingList(arankingResponse.data);
 
         // 모든 요청이 성공하면 로딩 상태 해제

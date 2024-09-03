@@ -38,9 +38,10 @@ function CardInfo(props) {
         })
           .then((response) => {
             const userCards = response.data;
-
-            axios.get("/api/card/getAllCardInfo").then((res) => {
-              const allCards = res.data;
+            axios
+              .get("/api/card/getAllCardInfo")
+              .then((res) => {
+                const allCards = res.data;
 
               const mergedList = userCards.map((userCard) => {
                 const matchedCard = allCards.find(

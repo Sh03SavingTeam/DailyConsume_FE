@@ -18,17 +18,16 @@ function RankInfo({ setIsVisable }) {
     setIsVisable((prevState) => !prevState);
   };
 
-  useEffect(() => {
-    axios
-      .get(`/rank/benefits/${memberId}`)
-      .then((response) => {
-        setRankInfo(response.data);
-        setSelectedRank(response.data.rankName);
-      })
-      .catch((error) => {
-        console.error("Error fetching rank info:", error);
-      });
-  }, [memberId]);
+    useEffect(() => {
+        axios.get(`/rank/benefits/${memberId}`)
+            .then(response => {
+                setRankInfo(response.data); 
+                setSelectedRank(response.data.rankName);
+            })
+            .catch(error => {
+                console.error("Error fetching rank info:", error);
+            });
+    }, [memberId]);
 
   if (!rankInfo) {
     return <div>Loading...</div>;

@@ -112,7 +112,11 @@ function AddressRegister(props) {
   }, [nickname]);
 
   useEffect(() => {
-    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+    checkJWT(
+      "/api/member/memberSession",
+      "get",
+      null
+    ).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
 

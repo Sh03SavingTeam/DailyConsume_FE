@@ -74,7 +74,9 @@ function Refund({ memberId }) {
   // 데이터 불러오는 함수
   const fetchPointAccount = async (memberID) => {
     try {
-      const response = await axios.get(`/mypage/refund/${memberID}`);
+      const response = await axios.get(
+        `/mypage/refund/${memberID}`
+      );
       const data = response.data;
 
       setPoint(data.point);

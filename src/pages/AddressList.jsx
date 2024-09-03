@@ -95,7 +95,11 @@ function AddressList(props) {
 
   //memberId가 'abcd'인 주소 데이터 조회
   useEffect(() => {
-    checkJWT("/api/member/memberSession", "get", null).then((response) => {
+    checkJWT(
+      "/api/member/memberSession",
+      "get",
+      null
+    ).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
       setMemberId(fetchedMemberId);

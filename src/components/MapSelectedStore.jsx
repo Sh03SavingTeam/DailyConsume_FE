@@ -13,7 +13,9 @@ function MapSelectedStore(props) {
     console.log(storeRegNum);
 
     axios({
-      url: "/api/recommend/detail?storeRegNum=" + storeRegNum,
+      url:
+        "/api/recommend/detail?storeRegNum=" + storeRegNum,
+
       method: "GET",
     })
       .then((res) => {

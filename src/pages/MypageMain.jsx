@@ -67,7 +67,9 @@ function MypageMain(props) {
 
         // 회원 정보 불러오기
         console.log("memberID: " + memberID);
-        const memberResponse = await axios.get(`/mypage/${memberID}`);
+        const memberResponse = await axios.get(
+          `/mypage/${memberID}`
+        );
         const data = memberResponse.data;
         setMemberImg(data.memberImg);
         setMemberName(data.memberName);
