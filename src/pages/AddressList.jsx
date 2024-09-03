@@ -9,6 +9,7 @@ import DefaultAddrUpdatePopUp from "../components/CustomPopUp";
 import axios from "axios";
 import "../styles/addrList.css";
 import { checkJWT } from "services/checkJWT";
+import { Button } from "react-bootstrap";
 
 const Title = styled.h2`
   margin-bottom: 20px;
@@ -191,16 +192,16 @@ function AddressList(props) {
   };
 
   return (
-    <div className="main-content">
-      <div className="card-container">
+    <div className="main-content1">
+      <div className="card-container1">
         {/* <Title>주소 목록</Title> */}
         <table>
           <tbody>
             {addrList.map((item, index) => (
               <tr key={index}>
-                <td>{item.addrName}</td>
-                <td>{item.addrDetail}</td>
-                <td>
+                <td className="address-contents">{item.addrName}</td>
+                <td className="address-contents">{item.addrDetail}</td>
+                <td className="address-contents">
                   <div class="form_radio_btn">
                     <input
                       id={`addrSelectRadio_${item.addrId}`}
@@ -217,9 +218,9 @@ function AddressList(props) {
                     </label>
                   </div>
                 </td>
-                <td>
+                <td className="address-contents">
                   <button
-                    className="deleteButton"
+                    className="delete-button"
                     onClick={() => openPopUp(item.addrId)}
                   >
                     삭제
@@ -236,9 +237,9 @@ function AddressList(props) {
             ))}
           </tbody>
         </table>
-        <AddButton onClick={handleAddrRegisterClick}>
+        <Button onClick={handleAddrRegisterClick} className="newAddressButton">
           + 신규 주소 등록
-        </AddButton>
+        </Button>
       </div>
       <Footer />
 
