@@ -178,14 +178,14 @@ function AddressRegister(props) {
                 onChange={(e) => setNickname(e.target.value)}
               />
             </div>
-            <div className="submitdiv">
-              <button
-                type="submit"
-                className="submit-button"
-                onClick={handleRegisterAddr}
-              >
-                등록하기
-              </button>
+            <div className="submit-button2-center">
+            <button
+              type="submit"
+              className="submit-button2"
+              onClick={handleRegisterAddr}
+            >
+              등록하기
+            </button>
             </div>
           </form>
         </div>

@@ -22,6 +22,15 @@
   margin: 5%;
 }
 
+.card-container1 {
+  background-color: #ffffff;
+  text-align: center;
+  padding: 3%;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 5%;
+}
+
 h2 {
   margin-bottom: 20px;
   font-size: 18px;
@@ -35,8 +44,8 @@ h2 {
   width: 200px;
   overflow-x: auto;
   text-align: center;
-  margin-left: 15px;
-  margin-right: 15px;
+  /* margin-left: 15px;
+  margin-right: 15px; */
   scroll-snap-type: x mandatory; /* 스크롤을 끝점에서 멈추게 설정 */
 }
 
@@ -46,6 +55,7 @@ h2 {
   scroll-snap-align: center; /* 카드가 스크롤 시 중앙에 위치하게 함 */
   /* Remove or override any existing shadow */
   box-shadow: none;
+  height: 200px;
 }
 
 .card-list-wrapper {
@@ -60,9 +70,11 @@ h2 {
 }
 
 .card-image {
+  transform: rotate(90deg); /* If no rotation is needed, set to 0deg */
   width: 100%;
   max-width: 200px;
   height: auto; /* Ensure it maintains aspect ratio */
+  margin-top: 35px;
 }
 
 .background-gradient {
@@ -132,4 +144,18 @@ h2 {
 
 .top_card_area {
   height: 300px;
+}
+
+.newAddressButton{
+  background-color: #303473;
+  color: white;
+  margin: 5%;
+  padding: 3%;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'SEBANGGothicBold';
+}
+
+.bold-sebang {
+  font-family: "SEBANGGothicBold", sans-serif;
 }

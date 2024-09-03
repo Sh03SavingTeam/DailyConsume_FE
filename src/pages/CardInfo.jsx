@@ -39,33 +39,35 @@ function CardInfo(props) {
           .then((response) => {
             const userCards = response.data;
 
-            axios.get("http://localhost:9999/api/card/getAllCardInfo").then((res) => {
-              const allCards = res.data;
+            axios
+              .get("http://localhost:9999/api/card/getAllCardInfo")
+              .then((res) => {
+                const allCards = res.data;
 
-              const mergedList = userCards.map((userCard) => {
-                const matchedCard = allCards.find(
-                  (card) => card.cardName === userCard.cardName
-                );
-                return {
-                  ...userCard,
-                  cardImgUrl: matchedCard
-                    ? matchedCard.cardImgUrl
-                    : "/default-card-image.jpg",
-                  cardType: matchedCard ? matchedCard.cardType : "Unknown",
-                  cardPageUrl: matchedCard ? matchedCard.cardPageUrl : "#",
-                };
+                const mergedList = userCards.map((userCard) => {
+                  const matchedCard = allCards.find(
+                    (card) => card.cardName === userCard.cardName
+                  );
+                  return {
+                    ...userCard,
+                    cardImgUrl: matchedCard
+                      ? matchedCard.cardImgUrl
+                      : "/default-card-image.jpg",
+                    cardType: matchedCard ? matchedCard.cardType : "Unknown",
+                    cardPageUrl: matchedCard ? matchedCard.cardPageUrl : "#",
+                  };
+                });
+                setCardList(mergedList);
+
+                // Automatically select the first card if available
+                if (mergedList.length > 0) {
+                  const firstCardNum = mergedList[0].cardNum;
+                  setSelectedCardNum(firstCardNum);
+                  handleCardSelection(firstCardNum);
+                }
+
+                console.log(mergedList);
               });
-              setCardList(mergedList);
-
-              // Automatically select the first card if available
-              if (mergedList.length > 0) {
-                const firstCardNum = mergedList[0].cardNum;
-                setSelectedCardNum(firstCardNum);
-                handleCardSelection(firstCardNum);
-              }
-
-              console.log(mergedList);
-            });
           })
           .catch((error) => {
             console.error("카드 목록 가져오기 실패", error);
@@ -121,22 +123,45 @@ function CardInfo(props) {
       params: {
         cardNum: cardNum,
       },
-    }).then((response) => {
-      const { cardName, cardImgUrl } = response.data;
-      setCardName(cardName);
-      setCardImgurl(cardImgUrl);
-      setCardInfo(response.data);
+    })
+      .then((response) => {
+        console.log(response.data);
+        // 데이터 유효성 검사 추가
+        if (!response.data || Object.keys(response.data).length === 0) {
+          console.error("No card data available");
+          // 필요하다면 여기에 사용자에게 알리는 로직을 추가할 수 있습니다.
+          return; // 데이터가 없으므로 여기서 함수 종료
+        }
+        const { cardName, cardImgUrl } = response.data;
+        setCardName(cardName);
+        setCardImgurl(cardImgUrl);
+        setCardInfo(response.data);
 
-      axios({
-        method: "get",
-        url: "http://localhost:9999/api/card/getCardBenefit",
-        params: {
-          cardName: cardName,
-        },
-      }).then((response) => {
-        setBenefits(response.data);
+        axios({
+          method: "get",
+          url: "http://localhost:9999/api/card/getCardBenefit",
+          params: {
+            cardName: cardName,
+          },
+        })
+          .then((response) => {
+            // 카드 혜택 데이터에 대한 유효성 검사
+            if (!response.data || Object.keys(response.data).length === 0) {
+              console.error("No benefits data available");
+              // 필요하다면 여기에 사용자에게 알리는 로직을 추가할 수 있습니다.
+              return; // 데이터가 없으므로 여기서 함수 종료
+            }
+            setBenefits(response.data);
+          })
+          .catch((error) => {
+            // 혜택 데이터 요청 실패 시 처리
+            console.error("Error fetching card benefits:", error);
+          });
+      })
+      .catch((error) => {
+        // 카드 정보 요청 실패 시 처리
+        console.error("Error fetching card information:", error);
       });
-    });
   };
 
   const handleDeleteCard = async () => {
@@ -173,7 +198,7 @@ function CardInfo(props) {
 
   return (
     <div className="card-container">
-      <h2>카드 목록 조회</h2>
+      <h2 className="bold-sebang">카드 목록 조회</h2>
       <div className="card-list-wrapper">
         <div className="card-list" ref={cardListRef}>
           {cardList.length > 0 ? (

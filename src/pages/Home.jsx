@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import CardInfo from "./CardInfo";
 import { useNavigate } from "react-router-dom";
 import PaymentHistory from "components/PaymentHistory";
+import Attendance from "components/Attendance";
 
 function Home(props) {
   const navigate = useNavigate();
@@ -10,8 +11,12 @@ function Home(props) {
   return (
     <div className="app-container">
       <div className="main-content">
+
         <CardInfo />
+        <Attendance/>
         <PaymentHistory />
+        
+
       </div>
 
       <Footer />
