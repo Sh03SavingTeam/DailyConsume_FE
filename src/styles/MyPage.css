@@ -167,7 +167,10 @@
   align-items: center; /* 수직 가운데 정렬 */
   width: 100%;
 }
-
+.rank-null-message{
+  margin:6px;
+  color:#B6B6B6;
+}
 
 /*등급별 혜택-RankInfo부분*/
 .benefit-container{

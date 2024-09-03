@@ -45,7 +45,7 @@ function MyPage(props) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "/api/member/memberSession",
+          "http://localhost:9999/api/member/memberSession",
           "get",
           null
         );
@@ -162,6 +162,10 @@ function MyPage(props) {
                     <div>Loading rankings...</div>
                 ) : error ? (
                     <div>Error loading rankings: {error.message}</div>
+                ) : rankingList.length === 0 ? (
+                    <div  className="list-item">
+                        <div className="rank-null-message">현재 랭커가 없습니다</div>
+                    </div>
                 ) : (
                     rankingList.map((item, index) => (
                         <div key={item.memberId} className="list-item">
@@ -194,6 +198,10 @@ function MyPage(props) {
                     <div>Loading rankings...</div>
                 ) : error ? (
                     <div>Error loading address rankings: {error.message}</div>
+                ) : arankingList.length === 0 ? (
+                    <div  className="list-item">
+                        <div className="rank-null-message">현재 주변 랭커가 없습니다</div>
+                    </div>
                 ) : (
                     arankingList.map((item) => (
                         <div key={item.memberId} className="list-item">

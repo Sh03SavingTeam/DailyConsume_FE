@@ -122,20 +122,42 @@ select {
   margin-right: 10px;
 }
 
+.submitdiv {
+  text-align: center;
+}
+
 .submit-button {
   font-family: "SEBANGGothic";
   width: 40%;
   background-color: #303473;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  text-align: center;
   border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  margin-top: 10%;
-  margin-right: 5%;
-  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.consumeLogin-button {
+  font-family: "SEBANGGothic";
+  width: 40%;
+  background-color: #303473;
+  color: #fff;
+  border: none;
+  text-align: center;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5%;
+  height: 40px;
+}
+
+.submit-button-center {
+  text-align: center;
+  height: 100px;
 }
 
 .submit-button:last-child {

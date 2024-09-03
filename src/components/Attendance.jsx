@@ -56,7 +56,7 @@ function Attendance(props) {
         : '출석체크 하면 당근 한개를 드려요 !';
 
     return (
-        <div className="attendance-container">
+        
             <div className="attendance-box">
                 <div className="ad-title">
                     하루소비 출석체크
@@ -79,7 +79,7 @@ function Attendance(props) {
                     </div>
                 </div>
             </div>            
-        </div>
+        
     );
 }
 

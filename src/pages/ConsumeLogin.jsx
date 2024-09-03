@@ -92,10 +92,16 @@ function ConsumeLogin(props) {
               />
             </div>
             <div className="submit-button-center">
-              <button className="submit-button" onClick={handleMemberLogin}>
+              <button
+                className="consumeLogin-button"
+                onClick={handleMemberLogin}
+              >
                 로그인
               </button>
-              <button className="submit-button" onClick={handleMemberRegister}>
+              <button
+                className="consumeLogin-button"
+                onClick={handleMemberRegister}
+              >
                 회원가입
               </button>
             </div>
