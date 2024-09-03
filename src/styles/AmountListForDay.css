@@ -56,25 +56,44 @@ ul {
 
 .item-details {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between; /* 각 요소 사이의 공간을 최대화 */
+  align-items: center; /* 요소들을 수직 가운데 정렬 */
   width: 100%;
 }
 
-.time {
-  font-size: 0.8rem;
-  color: #888;
-  margin-bottom: 5px;
+.left-section {
+  display: flex;
+  flex-direction: column; /* amount와 description을 수직으로 배치 */
+  flex-grow: 1;
 }
 
 .amount {
   font-weight: bold;
   color: #333;
+  margin-bottom: 5px;
+}
+
+.description-time-container {
+  display: flex;
+  justify-content: space-between; /* description과 time 사이의 공간을 최대화 */
+  align-items: center;
+  width: 100%;
 }
 
 .description {
   font-size: 0.9rem;
   color: #555;
+  flex-grow: 1; /* description이 가능한 모든 공간을 차지 */
 }
+
+.time {
+  font-size: 0.8rem;
+  color: #888;
+  white-space: nowrap; /* 시간 텍스트가 줄 바꿈되지 않도록 설정 */
+  margin-left: 10px; /* description과 time 사이에 여백 추가 */
+}
+
+
 
 .no-data {
   color: #888;
