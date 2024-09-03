@@ -65,7 +65,7 @@ h2 {
   width: 100%;
   max-width: 200px;
   height: auto; /* Ensure it maintains aspect ratio */
-  margin-top: 40px;
+  margin-top: 35px;
 }
 
 .background-gradient {
