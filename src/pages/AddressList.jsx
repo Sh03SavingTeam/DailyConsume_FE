@@ -95,7 +95,11 @@ function AddressList(props) {
 
   //memberId가 'abcd'인 주소 데이터 조회
   useEffect(() => {
-    checkJWT("http://localhost:9999/api/member/memberSession", "get", null).then((response) => {
+    checkJWT(
+      "http://localhost:9999/api/member/memberSession",
+      "get",
+      null
+    ).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
       setMemberId(fetchedMemberId);
@@ -214,7 +218,7 @@ function AddressList(props) {
                     <label htmlFor={`addrSelectRadio_${item.addrId}`}>
                       {selectedAddrId === item.addrId
                         ? "기본 주소"
-                        : "기본 주소 선택"}
+                        : "주소 선택"}
                     </label>
                   </div>
                 </td>

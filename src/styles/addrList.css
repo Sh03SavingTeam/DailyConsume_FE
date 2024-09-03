@@ -107,7 +107,8 @@ tr:last-child td {
   border-bottom: none;
 }
 
-.default-button, .delete-button {
+.default-button,
+.delete-button {
   background-color: transparent;
   border: 1px solid #ddd;
   border-radius: 15px;
