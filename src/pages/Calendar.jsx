@@ -6,7 +6,7 @@ import axios from "axios";  // HTTP 요청을 위한 axios 라이브러리 impor
 import Footer from "../components/Footer";  // Footer 컴포넌트 import
 import "../App.css";  // 전체 애플리케이션 스타일 import
 import "../styles/Calendar.css";  // Calendar 관련 커스텀 스타일 import
-import AmountListForDay from "../hooks/AmountListForDay";  // 특정 날짜에 대한 금액 리스트 컴포넌트 import
+import AmountListForDay from "../components/AmountListForDay";  // 특정 날짜에 대한 금액 리스트 컴포넌트 import
 import RabbitCompleteImage from "../assets/RabbitComplete.png";  // 달성한 경우의 이미지 import
 import RabbitFail from "../assets/RabbitFail.png";  // 실패한 경우의 이미지 import
 import { checkJWT } from "services/checkJWT";  // JWT 체크를 위한 서비스 함수 import
@@ -22,7 +22,7 @@ const CustomCalendar = () => {
   // 특정 월에 대한 금액 리스트 데이터를 서버에서 가져오는 함수
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get("/api/calendar/payhistory", {
+      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
         params: { month, memberId },
       });
       const fetchedData = response.data.map((item) => ({
@@ -39,7 +39,7 @@ const CustomCalendar = () => {
   // 특정 월에 대한 주간 달성 데이터를 서버에서 가져오는 함수
   const fetchWeeklyAchievements = async (month, memberId) => {
     try {
-      const response = await axios.get("/api/calendar/weeklyConsume/month", {
+      const response = await axios.get("http://localhost:9999/api/calendar/weeklyConsume/month", {
         params: { month, memberId },
       });
       setWeeklyAchievements(response.data || []);
@@ -51,11 +51,11 @@ const CustomCalendar = () => {
 
   // 컴포넌트가 처음 마운트될 때 JWT를 확인하고, 데이터를 가져오는 useEffect
   useEffect(() => {
-    checkJWT("/api/member/memberSession", "get", null)
-        .then((response) => {
-          console.log("JWT 확인 결과" + response.memberId);
-          const memberId = response.memberId;
-          setMemberId(memberId);
+    checkJWT("http://localhost:9999/api/member/memberSession", "get", null)
+      .then((resopnse) => {
+        console.log("JWT 확인 결과" + resopnse.memberId);
+        const memberId = resopnse.memberId;
+        setMemberId(memberId);
 
           const month = moment().format("MM");
           fetchAmountList(month, memberId);
