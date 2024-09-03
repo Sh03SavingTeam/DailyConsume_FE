@@ -45,7 +45,7 @@ function MyPage(props) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "/api/member/memberSession",
+          "http://localhost:9999/api/member/memberSession",
           "get",
           null
         );
