@@ -30,7 +30,7 @@ function MypageMain(props) {
 
   const handleMemberLogout = (e) => {
     localStorage.removeItem("token");
-    window.location.href = "/Login";
+    window.location.href = "/login";
   };
 
   const renderContent = () => {
