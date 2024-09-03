@@ -334,7 +334,7 @@ function CardRegister(props) {
                 )}
               </select>
             </div>
-
+            <div className="submit-button2-center">
             <button
               type="submit"
               className="submit-button"
@@ -342,6 +342,7 @@ function CardRegister(props) {
             >
               등록하기
             </button>
+            </div>
           </form>
         </div>
       </div>
