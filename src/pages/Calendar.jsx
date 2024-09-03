@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Calendar from "react-calendar";  // React-Calendar 라이브러리 import
-import "react-calendar/dist/Calendar.css";  // React-Calendar의 기본 스타일 import
-import moment from "moment";  // 날짜/시간 관리 라이브러리인 moment.js import
-import axios from "axios";  // HTTP 요청을 위한 axios 라이브러리 import
-import Footer from "../components/Footer";  // Footer 컴포넌트 import
-import "../App.css";  // 전체 애플리케이션 스타일 import
-import "../styles/Calendar.css";  // Calendar 관련 커스텀 스타일 import
-import AmountListForDay from "../components/AmountListForDay";  // 특정 날짜에 대한 금액 리스트 컴포넌트 import
-import RabbitCompleteImage from "../assets/RabbitComplete.png";  // 달성한 경우의 이미지 import
-import RabbitFail from "../assets/RabbitFail.png";  // 실패한 경우의 이미지 import
-import { checkJWT } from "services/checkJWT";  // JWT 체크를 위한 서비스 함수 import
+import Calendar from "react-calendar"; // React-Calendar 라이브러리 import
+import "react-calendar/dist/Calendar.css"; // React-Calendar의 기본 스타일 import
+import moment from "moment"; // 날짜/시간 관리 라이브러리인 moment.js import
+import axios from "axios"; // HTTP 요청을 위한 axios 라이브러리 import
+import Footer from "../components/Footer"; // Footer 컴포넌트 import
+import "../App.css"; // 전체 애플리케이션 스타일 import
+import "../styles/Calendar.css"; // Calendar 관련 커스텀 스타일 import
+import AmountListForDay from "../components/AmountListForDay"; // 특정 날짜에 대한 금액 리스트 컴포넌트 import
+import RabbitCompleteImage from "../assets/RabbitComplete.png"; // 달성한 경우의 이미지 import
+import RabbitFail from "../assets/RabbitFail.png"; // 실패한 경우의 이미지 import
+import { checkJWT } from "services/checkJWT"; // JWT 체크를 위한 서비스 함수 import
 
 const CustomCalendar = () => {
   // 상태 선언: memberId, 현재 날짜(nowDate), 현재 월(currentMonth), 금액 리스트(amountList), 주간 달성률(weeklyAchievements)
@@ -22,7 +22,7 @@ const CustomCalendar = () => {
   // 특정 월에 대한 금액 리스트 데이터를 서버에서 가져오는 함수
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
+      const response = await axios.get("/api/calendar/payhistory", {
         params: { month, memberId },
       });
       const fetchedData = response.data.map((item) => ({
@@ -39,7 +39,7 @@ const CustomCalendar = () => {
   // 특정 월에 대한 주간 달성 데이터를 서버에서 가져오는 함수
   const fetchWeeklyAchievements = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/weeklyConsume/month", {
+      const response = await axios.get("/api/calendar/weeklyConsume/month", {
         params: { month, memberId },
       });
       setWeeklyAchievements(response.data || []);
@@ -51,20 +51,20 @@ const CustomCalendar = () => {
 
   // 컴포넌트가 처음 마운트될 때 JWT를 확인하고, 데이터를 가져오는 useEffect
   useEffect(() => {
-    checkJWT("http://localhost:9999/api/member/memberSession", "get", null)
+    checkJWT("/api/member/memberSession", "get", null)
       .then((resopnse) => {
         console.log("JWT 확인 결과" + resopnse.memberId);
         const memberId = resopnse.memberId;
         setMemberId(memberId);
 
-          const month = moment().format("MM");
-          fetchAmountList(month, memberId);
-          fetchWeeklyAchievements(month, memberId);
-        })
-        .catch((error) => {
-          console.error("There was an error!", error);
-        });
-  }, [memberId]);  // memberId가 변경될 때마다 실행
+        const month = moment().format("MM");
+        fetchAmountList(month, memberId);
+        fetchWeeklyAchievements(month, memberId);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, [memberId]); // memberId가 변경될 때마다 실행
 
   // 날짜가 변경될 때 호출되는 함수, 해당 날짜의 데이터를 가져옴
   const handleDateChange = (date) => {
@@ -84,12 +84,14 @@ const CustomCalendar = () => {
 
   // 달력의 특정 날짜 타일에 클래스 이름을 추가하여 스타일을 변경하기 위한 함수
   const tileClassName = ({ date, view }) => {
-    if (view === 'month') {
-      if (date.getDay() === 0) { // 일요일
-        return 'sunday-tile';
+    if (view === "month") {
+      if (date.getDay() === 0) {
+        // 일요일
+        return "sunday-tile";
       }
-      if (date.getDay() === 6) { // 토요일
-        return 'saturday-tile';
+      if (date.getDay() === 6) {
+        // 토요일
+        return "saturday-tile";
       }
     }
     return null;
@@ -100,40 +102,40 @@ const CustomCalendar = () => {
     const currentDay = moment(date).format("YYYY/MM/DD");
     const filterData = amountList.filter((data) => data.day === currentDay);
     const achievementsForDay = (weeklyAchievements || []).filter(
-        (achievement) => {
-          return (
-              moment(achievement["종료일"]).format("YYYY/MM/DD") === currentDay
-          );
-        }
+      (achievement) => {
+        return (
+          moment(achievement["종료일"]).format("YYYY/MM/DD") === currentDay
+        );
+      }
     );
     return (
-        <div className="calendar-info">
+      <div className="calendar-info">
         <span>
           {achievementsForDay.map((achievement, index) => (
-              <img
-                  key={index}
-                  src={
-                    achievement["달성여부"] === "1"
-                        ? RabbitCompleteImage
-                        : RabbitFail
-                  }
-                  className="calanderRabbit-style"
-                  alt="Weekly Achievement"
-              />
+            <img
+              key={index}
+              src={
+                achievement["달성여부"] === "1"
+                  ? RabbitCompleteImage
+                  : RabbitFail
+              }
+              className="calanderRabbit-style"
+              alt="Weekly Achievement"
+            />
           ))}
           {moment(date).format("D")}
         </span>
-          {filterData.length > 0 && (
-              <div>
-                <span className="calendar-count">{filterData.length}건</span>
-                <span className="calendar-amount">
+        {filterData.length > 0 && (
+          <div>
+            <span className="calendar-count">{filterData.length}건</span>
+            <span className="calendar-amount">
               {filterData
-                  .reduce((sum, item) => sum + item.amount, 0)
-                  .toLocaleString()}
+                .reduce((sum, item) => sum + item.amount, 0)
+                .toLocaleString()}
             </span>
-              </div>
-          )}
-        </div>
+          </div>
+        )}
+      </div>
     );
   };
 
@@ -145,33 +147,33 @@ const CustomCalendar = () => {
 
   // 달력의 월과 년도를 "YYYY. MM" 형식으로 표시하기 위한 함수
   const formatMonthYear = (locale, date) => {
-    return moment(date).format("YYYY. MM");  // YYYY. MM 형식으로 변환
+    return moment(date).format("YYYY. MM"); // YYYY. MM 형식으로 변환
   };
 
   // 메인 렌더링 부분: 달력과 주간 소비 내역을 보여줌
   return (
-      <div className="app-container">
-        <div className="main-content">
-          <div className="calendar-container">
-            <Calendar
-                onChange={handleDateChange}  // 날짜 변경 핸들러
-                value={moment(nowDate, "YYYY년 MM월 DD일").toDate()}  // 현재 날짜 설정
-                formatDay={f_formatDay}  // 날짜 커스터마이징 핸들러
-                onActiveStartDateChange={handleMonthChange}  // 월 변경 핸들러
-                tileClassName={tileClassName}  // 타일 클래스 이름 지정
-                locale="en-GB"  // 주를 월요일부터 시작하게 설정
-                formatShortWeekday={formatShortWeekday} // 요일 이름 커스터마이징
-                formatMonthYear={formatMonthYear}  // 월과 년도 형식 커스터마이징
-            />
-            <hr className="calendar-divider" />
-            {/* 해당 날짜의 금액 리스트 표시*/}
-            <AmountListForDay initialDay={nowDate} />
-          </div>
+    <div className="app-container">
+      <div className="main-content">
+        <div className="calendar-container">
+          <Calendar
+            onChange={handleDateChange} // 날짜 변경 핸들러
+            value={moment(nowDate, "YYYY년 MM월 DD일").toDate()} // 현재 날짜 설정
+            formatDay={f_formatDay} // 날짜 커스터마이징 핸들러
+            onActiveStartDateChange={handleMonthChange} // 월 변경 핸들러
+            tileClassName={tileClassName} // 타일 클래스 이름 지정
+            locale="en-GB" // 주를 월요일부터 시작하게 설정
+            formatShortWeekday={formatShortWeekday} // 요일 이름 커스터마이징
+            formatMonthYear={formatMonthYear} // 월과 년도 형식 커스터마이징
+          />
+          <hr className="calendar-divider" />
+          {/* 해당 날짜의 금액 리스트 표시*/}
+          <AmountListForDay initialDay={nowDate} />
         </div>
-        {/*하단의 Footer 컴포넌트*/}
-        <Footer />
       </div>
+      {/*하단의 Footer 컴포넌트*/}
+      <Footer />
+    </div>
   );
 };
 
-export default CustomCalendar;  // CustomCalendar 컴포넌트를 export
+export default CustomCalendar; // CustomCalendar 컴포넌트를 export

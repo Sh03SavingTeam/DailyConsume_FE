@@ -35,7 +35,7 @@ function AddressRegister(props) {
 
     axios({
       method: "post",
-      url: "http://localhost:9999/api/address/addrRegister",
+      url: "/api/address/addrRegister",
       data: updatedDbAddress,
     });
 
@@ -112,11 +112,7 @@ function AddressRegister(props) {
   }, [nickname]);
 
   useEffect(() => {
-    checkJWT(
-      "http://localhost:9999/api/member/memberSession",
-      "get",
-      null
-    ).then((response) => {
+    checkJWT("/api/member/memberSession", "get", null).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
 
@@ -179,13 +175,13 @@ function AddressRegister(props) {
               />
             </div>
             <div className="submit-button2-center">
-            <button
-              type="submit"
-              className="submit-button2"
-              onClick={handleRegisterAddr}
-            >
-              등록하기
-            </button>
+              <button
+                type="submit"
+                className="submit-button2"
+                onClick={handleRegisterAddr}
+              >
+                등록하기
+              </button>
             </div>
           </form>
         </div>

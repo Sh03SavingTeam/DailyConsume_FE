@@ -26,7 +26,7 @@ function DiscountInfo({ memberId, contentRef }) {
   const fetchDiscountInfos = async (page) => {
     try {
       const response = await axios.get(
-        `http://localhost:9999/mypage/discountinginfo/${memberId}?page=${page}`
+        `/mypage/discountinginfo/${memberId}?page=${page}`
       );
       const data = response.data;
 
@@ -58,7 +58,7 @@ function DiscountInfo({ memberId, contentRef }) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "http://localhost:9999/api/member/memberSession",
+          "/api/member/memberSession",
           "get",
           null
         );
@@ -68,7 +68,6 @@ function DiscountInfo({ memberId, contentRef }) {
 
         // 2. 할인 정보 불러오기
         const data = await fetchDiscountInfos(page);
-
       } catch (error) {
         console.error("There was an error!", error);
       }
@@ -105,15 +104,17 @@ function DiscountInfo({ memberId, contentRef }) {
     if (contentRef.current) {
       contentRef.current.scrollTop = 0;
     }
-  }
+  };
 
   return (
     <div className="discount-container">
       <Link to="/mypage" state={{ selectedTab: "analysis" }}>
-          <button className="back-button2">&lt;</button>
+        <button className="back-button2">&lt;</button>
       </Link>
       <div className="discount-title">
-        <div className="title-point">이번달은 <span>{category}</span>에 가장 많은 돈을 썼어요!</div>
+        <div className="title-point">
+          이번달은 <span>{category}</span>에 가장 많은 돈을 썼어요!
+        </div>
       </div>
       <div className="discount-body">
         {/* <div className="discount-box">맞춤 할인 정보</div> */}

@@ -95,18 +95,14 @@ function AddressList(props) {
 
   //memberId가 'abcd'인 주소 데이터 조회
   useEffect(() => {
-    checkJWT(
-      "http://localhost:9999/api/member/memberSession",
-      "get",
-      null
-    ).then((response) => {
+    checkJWT("/api/member/memberSession", "get", null).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
       setMemberId(fetchedMemberId);
 
       axios({
         method: "get",
-        url: "http://localhost:9999/api/address/addrList",
+        url: "/api/address/addrList",
         params: {
           memberId: fetchedMemberId,
         },
@@ -127,7 +123,7 @@ function AddressList(props) {
 
     // axios({
     //   method: "get",
-    //   url: "http://localhost:9999/api/address/addrList",
+    //   url: "/api/address/addrList",
     //   params: {
     //     memberId: "bih63879",
     //   },
@@ -148,7 +144,7 @@ function AddressList(props) {
     if (selectedAddrId) {
       axios({
         method: "delete",
-        url: "http://localhost:9999/api/address/addrDelete",
+        url: "/api/address/addrDelete",
         params: {
           addrId: selectedAddrId,
         },
@@ -170,7 +166,7 @@ function AddressList(props) {
 
     axios({
       method: "put",
-      url: "http://localhost:9999/api/address/changeDefaultAddr",
+      url: "/api/address/changeDefaultAddr",
       params: {
         memberId: memberId,
         addrId: addrId,
@@ -215,7 +211,10 @@ function AddressList(props) {
                       checked={selectedAddrId === item.addrId} // 선택된 항목인지 확인
                       onChange={() => openDefaultAddrPopup(item.addrId)} // Radio 버튼 변경 처리
                     />
-                    <label htmlFor={`addrSelectRadio_${item.addrId}`}>
+                    <label
+                      className="addrSelectLabel"
+                      htmlFor={`addrSelectRadio_${item.addrId}`}
+                    >
                       {selectedAddrId === item.addrId
                         ? "기본 주소"
                         : "주소 선택"}

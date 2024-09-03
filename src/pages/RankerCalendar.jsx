@@ -10,7 +10,7 @@ import AmountListForDay from "../components/AmountListForDay";
 import RabbitCompleteImage from "../assets/RabbitComplete.png";
 import RabbitFail from "../assets/RabbitFail.png";
 
-const RankerCalendar = ({ memberId, onBack }) => { 
+const RankerCalendar = ({ memberId, onBack }) => {
   const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일"));
   const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
   const [amountList, setAmountList] = useState([]);
@@ -18,7 +18,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
 
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
+      const response = await axios.get("/api/calendar/payhistory", {
         params: { month, memberId },
       });
       const fetchedData = response.data.map((item) => ({
@@ -34,7 +34,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
 
   const fetchWeeklyAchievements = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/weeklyConsume/month", {
+      const response = await axios.get("/api/calendar/weeklyConsume/month", {
         params: { month, memberId },
       });
       setWeeklyAchievements(response.data || []); // 데이터를 배열로 설정
@@ -69,7 +69,9 @@ const RankerCalendar = ({ memberId, onBack }) => {
     const filterData = amountList.filter((data) => data.day === currentDay);
     const achievementsForDay = (weeklyAchievements || []).filter(
       (achievement) => {
-        return moment(achievement["종료일"]).format("YYYY/MM/DD") === currentDay;
+        return (
+          moment(achievement["종료일"]).format("YYYY/MM/DD") === currentDay
+        );
       }
     );
     return (
@@ -105,7 +107,10 @@ const RankerCalendar = ({ memberId, onBack }) => {
 
   return (
     <div className="app-container rankpage">
-      <div className='prev-btn2' onClick={onBack}>&lt;</div> {/* 뒤로가기 버튼 수정 */}
+      <div className="prev-btn2" onClick={onBack}>
+        &lt;
+      </div>{" "}
+      {/* 뒤로가기 버튼 수정 */}
       <h1> 소비 캘린더 </h1>
       <div className="main-content">
         <div className="calendar-container">
@@ -116,7 +121,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
             onActiveStartDateChange={handleMonthChange}
           />
           <hr className="calendar-divider" />
-          <AmountListForDay initialDay={nowDate} memberId={memberId}/>
+          <AmountListForDay initialDay={nowDate} memberId={memberId} />
         </div>
       </div>
       <Footer />

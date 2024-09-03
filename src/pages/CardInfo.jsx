@@ -26,12 +26,12 @@ function CardInfo(props) {
   }, [location]);
 
   useEffect(() => {
-    checkJWT("http://localhost:9999/api/member/memberSession", "get", null)
+    checkJWT("/api/member/memberSession", "get", null)
       .then((response) => {
         console.log("JWT 확인 결과" + response.memberId);
         axios({
           method: "get",
-          url: "http://localhost:9999/api/card/memberCardList",
+          url: "/api/card/memberCardList",
           params: {
             memberId: response.memberId,
           },
@@ -39,35 +39,33 @@ function CardInfo(props) {
           .then((response) => {
             const userCards = response.data;
 
-            axios
-              .get("http://localhost:9999/api/card/getAllCardInfo")
-              .then((res) => {
-                const allCards = res.data;
+            axios.get("/api/card/getAllCardInfo").then((res) => {
+              const allCards = res.data;
 
-                const mergedList = userCards.map((userCard) => {
-                  const matchedCard = allCards.find(
-                    (card) => card.cardName === userCard.cardName
-                  );
-                  return {
-                    ...userCard,
-                    cardImgUrl: matchedCard
-                      ? matchedCard.cardImgUrl
-                      : "/default-card-image.jpg",
-                    cardType: matchedCard ? matchedCard.cardType : "Unknown",
-                    cardPageUrl: matchedCard ? matchedCard.cardPageUrl : "#",
-                  };
-                });
-                setCardList(mergedList);
-
-                // Automatically select the first card if available
-                if (mergedList.length > 0) {
-                  const firstCardNum = mergedList[0].cardNum;
-                  setSelectedCardNum(firstCardNum);
-                  handleCardSelection(firstCardNum);
-                }
-
-                console.log(mergedList);
+              const mergedList = userCards.map((userCard) => {
+                const matchedCard = allCards.find(
+                  (card) => card.cardName === userCard.cardName
+                );
+                return {
+                  ...userCard,
+                  cardImgUrl: matchedCard
+                    ? matchedCard.cardImgUrl
+                    : "/default-card-image.jpg",
+                  cardType: matchedCard ? matchedCard.cardType : "Unknown",
+                  cardPageUrl: matchedCard ? matchedCard.cardPageUrl : "#",
+                };
               });
+              setCardList(mergedList);
+
+              // Automatically select the first card if available
+              if (mergedList.length > 0) {
+                const firstCardNum = mergedList[0].cardNum;
+                setSelectedCardNum(firstCardNum);
+                handleCardSelection(firstCardNum);
+              }
+
+              console.log(mergedList);
+            });
           })
           .catch((error) => {
             console.error("카드 목록 가져오기 실패", error);
@@ -119,7 +117,7 @@ function CardInfo(props) {
   const handleCardSelection = (cardNum) => {
     axios({
       method: "get",
-      url: "http://localhost:9999/api/card/getCardInfo",
+      url: "/api/card/getCardInfo",
       params: {
         cardNum: cardNum,
       },
@@ -139,7 +137,7 @@ function CardInfo(props) {
 
         axios({
           method: "get",
-          url: "http://localhost:9999/api/card/getCardBenefit",
+          url: "/api/card/getCardBenefit",
           params: {
             cardName: cardName,
           },
@@ -167,7 +165,7 @@ function CardInfo(props) {
   const handleDeleteCard = async () => {
     axios({
       method: "delete",
-      url: "http://localhost:9999/api/card/delete",
+      url: "/api/card/delete",
       params: {
         cardNum: selectedCardNum,
       },

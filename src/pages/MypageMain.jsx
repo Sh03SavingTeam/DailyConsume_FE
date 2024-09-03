@@ -57,7 +57,7 @@ function MypageMain(props) {
       try {
         // JWT 확인
         const response = await checkJWT(
-          "http://localhost:9999/api/member/memberSession",
+          "/api/member/memberSession",
           "get",
           null
         );
@@ -67,9 +67,7 @@ function MypageMain(props) {
 
         // 회원 정보 불러오기
         console.log("memberID: " + memberID);
-        const memberResponse = await axios.get(
-          `http://localhost:9999/mypage/${memberID}`
-        );
+        const memberResponse = await axios.get(`/mypage/${memberID}`);
         const data = memberResponse.data;
         setMemberImg(data.memberImg);
         setMemberName(data.memberName);
@@ -184,7 +182,7 @@ function MypageMain(props) {
   //     console.log("memberID:"+memberId);
   //     try {
   //       const response = await axios.get(
-  //         `http://localhost:9999/mypage/${memberId}`
+  //         `/mypage/${memberId}`
   //       );
   //       const data = response.data;
   //       setMemberImg(data.memberImg);

@@ -19,7 +19,7 @@ function ConsumeCompare({ memberId, contentRef }) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "http://localhost:9999/api/member/memberSession",
+          "/api/member/memberSession",
           "get",
           null
         );
@@ -29,7 +29,7 @@ function ConsumeCompare({ memberId, contentRef }) {
 
         // 2. My Card History 가져오기
         const myCardHistoryResponse = await axios.get(
-          `http://localhost:9999/mypage/mycardHistory?memberId=${memberID}`
+          `/mypage/mycardHistory?memberId=${memberID}`
         );
         const userPayAmounts = myCardHistoryResponse.data.map(
           (item) => item.payAmount
@@ -38,7 +38,7 @@ function ConsumeCompare({ memberId, contentRef }) {
 
         // 3. Peer Card History 가져오기
         const peerCardHistoryResponse = await axios.get(
-          `http://localhost:9999/mypage/peercardHistory?memberId=${memberID}`
+          `/mypage/peercardHistory?memberId=${memberID}`
         );
         const peerPayAmounts = peerCardHistoryResponse.data.payHistories.map(
           (item) => item.payAmount
@@ -59,7 +59,7 @@ function ConsumeCompare({ memberId, contentRef }) {
     if (contentRef.current) {
       contentRef.current.scrollTop = 0;
     }
-  }
+  };
 
   // useEffect(() => {
   //   checkJWT("/api/member/memberSession", "get", null)
@@ -75,7 +75,7 @@ function ConsumeCompare({ memberId, contentRef }) {
 
   // useEffect(() => {
   //   axios
-  //     .get(`http://localhost:9999/mypage/mycardHistory?memberId=${memberID}`)
+  //     .get(`/mypage/mycardHistory?memberId=${memberID}`)
   //     .then((response) => {
   //       const payAmounts = response.data.map((item) => item.payAmount);
   //       setUserList(payAmounts);
@@ -87,7 +87,7 @@ function ConsumeCompare({ memberId, contentRef }) {
 
   // useEffect(() => {
   //   axios
-  //     .get(`http://localhost:9999/mypage/peercardHistory?memberId=${memberID}`)
+  //     .get(`/mypage/peercardHistory?memberId=${memberID}`)
   //     .then((response) => {
   //       const payAmounts = response.data.payHistories.map(
   //         (item) => item.payAmount
