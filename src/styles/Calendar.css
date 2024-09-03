@@ -202,9 +202,10 @@ body, .calendar-container, .react-calendar, .react-calendar * {
 .react-calendar__navigation button {
   min-width: 44px; /* 네비게이션 버튼의 최소 너비 */
   background: none; /* 버튼 배경 제거 */
-  font-size: 1.2rem; /* 버튼 텍스트 크기 */
+  /*font-size: 1.2rem; !* 버튼 텍스트 크기 *!*/
   cursor: pointer; /* 버튼 클릭 커서 */
-  font-family: "SEBANGGothic", sans-serif; /* 기본 폰트 적용 */
+  font-weight: bold !important; /* 월과 년도 라벨의 텍스트 굵기 */
+  font-family: "SEBANGGothicBold", sans-serif !important; /* 기본 폰트 적용 */
 }
 
 .react-calendar__navigation__label {
