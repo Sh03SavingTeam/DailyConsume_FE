@@ -14,6 +14,13 @@
   font-weight: normal;
   src: url("./assets/OneShinhanMedium.ttf") format("truetype");
 }
+@font-face {
+  font-family: "SEBANGGothic";
+  src: url("./assets/fonts/SEBANGGothic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 전체 페이지를 가운데 정렬하는 기본 설정 */
 .container {
   max-width: 414px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
@@ -35,7 +42,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "OneShinhanBold", sans-serif; /* 사용자 정의 폰트 */
+  font-family: "SEBANGGothic", sans-serif; /* 사용자 정의 폰트 */
   /*overflow: hidden;  불필요한 스크롤 제거 */
 }
 

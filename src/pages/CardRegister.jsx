@@ -135,7 +135,7 @@ function CardRegister(props) {
 
   const getFileName = () => {
     const timestamp = Date.now();
-    return `cardimg_${timestamp}.jpg`;
+    return `cardimg_${memberId}_${timestamp}.jpg`;
   };
 
   const uploadToS3 = (filename, fileBlob) => {
@@ -207,7 +207,7 @@ function CardRegister(props) {
     })
       .then((res) => {
         console.log(res);
-        navigate("/home");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);

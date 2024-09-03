@@ -17,13 +17,45 @@ function ConsumeHistory({ memberId }) {
   let [userPayment, setUserPayment] = useState(0);
   let [peerPayment, setPeerPayment] = useState(0);
   const [memberID, setMemberID] = useState("");
-
+  const donutData = {
+    series: userPercentList,
+    options: {
+      chart: { type: "donut" },
+      legend: {
+        position: "bottom", // 범례
+        horizontalAlign: "center",
+        fontFamily: "OneShinhanBold, sans-serif",
+        fontSize: "11px",
+        fontWeight: "light",
+        colors: ["#303473"],
+      },
+      responsive: [{ breakpoint: 300 }],
+      plotOptions: {
+        pie: {
+          donut: {
+            size: "45%", // 도넛의 두께를 넓히기 위해 size 값을 조정 (기본은 65%)
+          },
+        },
+      },
+      labels: ["식비", "교통비", "온라인쇼핑", "문화/여가"],
+      colors: ["#2CD6BE", "#94DBE0", "#F0C0D8", "#E962AE"],
+      dataLabels: {
+        enabled: true,
+        style: {
+          fontFamily: "OneShinhanBold, sans-serif", // 도넛 안의 수치 글꼴
+          fontSize: "12px",
+          fontWeight: "bold",
+          colors: ["#FFFFFF"],
+        },
+      },
+    },
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "/api/member/memberSession",
+          "http://localhost:9999/api/member/memberSession",
           "get",
           null
         );
@@ -68,7 +100,7 @@ function ConsumeHistory({ memberId }) {
         );
         setPeerPayment(totalPeerPayment);
       } catch (error) {
-        console.error("데이터를 불러오는 중 오류가 발생했습니다:", error);
+        console.error("데이터를 불러오는 중 오류가 발생했습니다:" + error);
       }
     };
 
@@ -127,39 +159,6 @@ function ConsumeHistory({ memberId }) {
   //   setPeerPayment(totalPeerPayment);
   // }, [peerList]);
 
-  const donutData = {
-    series: userPercentList,
-    options: {
-      chart: { type: "donut" },
-      legend: {
-        position: "bottom", // 범례
-        horizontalAlign: "center",
-        fontFamily: "OneShinhanBold, sans-serif",
-        fontSize: "11px",
-        fontWeight: "light",
-        colors: ["#303473"],
-      },
-      responsive: [{ breakpoint: 300 }],
-      plotOptions: {
-        pie: {
-          donut: {
-            size: "45%", // 도넛의 두께를 넓히기 위해 size 값을 조정 (기본은 65%)
-          },
-        },
-      },
-      labels: ["식비", "교통비", "온라인쇼핑", "문화/여가"],
-      colors: ["#2CD6BE", "#94DBE0", "#F0C0D8", "#E962AE"],
-      dataLabels: {
-        enabled: true,
-        style: {
-          fontFamily: "OneShinhanBold, sans-serif", // 도넛 안의 수치 글꼴
-          fontSize: "12px",
-          fontWeight: "bold",
-          colors: ["#FFFFFF"],
-        },
-      },
-    },
-  };
   const navigate = useNavigate();
   return (
     <div className="container">
@@ -255,9 +254,9 @@ function ConsumeHistory({ memberId }) {
             }}
           />
         </div>
-        <div className="content-card card" id="test">
+        <div className="content-card card" id="test mine">
           <h3>나의 소비 별 통계</h3>
-          <Link to="/MyPage/DiscountInfo">
+          <Link to="/mypage" state={{ selectedTab: "discountInfo" }}>
             <button class="content-discount">
               나를 위한 할인 정보 보러가기
             </button>

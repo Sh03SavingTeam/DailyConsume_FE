@@ -13,7 +13,8 @@ function MapSelectedStore(props) {
     console.log(storeRegNum);
 
     axios({
-      url: "http://localhost:9999/api/recommend/detail?storeRegNum=" + storeRegNum,
+      url:
+        "http://localhost:9999/api/recommend/detail?storeRegNum=" + storeRegNum,
       method: "GET",
     })
       .then((res) => {
@@ -27,7 +28,7 @@ function MapSelectedStore(props) {
 
   const registerReview = (event, store) => {
     event.stopPropagation();
-    navigate("http://localhost:9999/map/reviewregister", {
+    navigate("/map/reviewregister", {
       state: {
         storename: store.storeName,
         storebizNum: store.storeRegNum,
@@ -46,7 +47,10 @@ function MapSelectedStore(props) {
         <div>{store.storeName}</div>
         <div>음식점 &gt; 한식</div>
         <div>{store.storeAddr}</div>
-        <button className="goto_review_register" onClick={(event) => registerReview(event, store)}>
+        <button
+          className="goto_review_register"
+          onClick={(event) => registerReview(event, store)}
+        >
           리뷰 작성하기
         </button>
       </div>

@@ -15,29 +15,26 @@ function AmountDetail({ item, onClose }) {
   const [showContactModal, setShowContactModal] = useState(false); // 연락처 모달 표시 상태
 
   useEffect(() => {
-    const fetchDetail = async () => {
-      try {
+    //const fetchDetail = async () => {
         console.log("Requesting payment details for:", item.memberId, item.id); // 로그 추가
-        const response = await axios.get(
-          "http://localhost:9999/api/calendar/payhistory/detail",
-          {
-            params: {
-              memberId: item.memberId, // item 객체에 memberId 포함
-              payId: item.id,
-            },
-          }
-        );
+      axios.get(
+            "http://localhost:9999/api/calendar/payhistory/detail",
+            {
+              params: {
+                memberId: item.memberId, // item 객체에 memberId 포함
+                payId: item.id,
+              },
+            }
+        ).then((response) => {
+          console.log("Response data:", response.data); // 응답 데이터를 로그에 출력
 
-        console.log("Response data:", response.data); // 응답 데이터를 로그에 출력
+          setDetail(response.data);
+          setIsNormal(response.data.myPayCheck === 1);
+        }).catch((error) => {
 
-        setDetail(response.data);
-        setIsNormal(response.data.myPayCheck === 1);
-      } catch (error) {
-        console.error("Failed to fetch payment details", error);
-      }
-    };
+        });
 
-    fetchDetail();
+    //fetchDetail();
   }, [item]);
 
   const handleReportClick = () => {
@@ -171,6 +168,7 @@ function AmountDetail({ item, onClose }) {
     // 기타 카테고리
     기타: diningRoom,
   };
+
   // 카테고리에 맞는 이미지 선택
   const iconSrc =
     categoryIcons[detail.consumeCategory] || categoryIcons["기타"];
@@ -199,9 +197,9 @@ function AmountDetail({ item, onClose }) {
             <img src={iconSrc} alt="Category Icon" />
           </div>
           <div className="company-amount">
-            <p>
-              <strong>{detail.storeName}</strong> {detail.payAmount}원
-            </p>
+            {/*<p>*/}
+            {/*  <strong>{detail.storeName}</strong> {detail.payAmount}원*/}
+            {/*</p>*/}
             <p>결제 번호: {generateReceiptNumber() || "N/A"}</p>
           </div>
         </div>
@@ -215,15 +213,15 @@ function AmountDetail({ item, onClose }) {
           <div className="detail-item important">
             <strong>결제 일자:</strong> {formattedDateTime}
           </div>
-          <div className="detail-item">
-            <strong>결제 상품:</strong> {detail.menuName || "N/A"}
-          </div>
+          {/*<div className="detail-item">*/}
+          {/*  <strong>결제 상품:</strong> {detail.menuName || "N/A"}*/}
+          {/*</div>*/}
           <div className="detail-item">
             <strong>결제 장소:</strong> {detail.storeName || "N/A"}
           </div>
           <div className="detail-item total-amount">
             <strong>결제 금액:</strong> 총{" "}
-            {detail.payAmount.toLocaleString() || "N/A"}원
+            {detail.payAmount?.toLocaleString() || "N/A"}원
           </div>
 
           {!isNormal && (

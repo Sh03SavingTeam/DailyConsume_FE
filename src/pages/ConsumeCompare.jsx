@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { checkJWT } from "services/checkJWT";
 
-function ConsumeCompare({ memberId }) {
+function ConsumeCompare({ memberId, contentRef }) {
   const navigate = useNavigate();
   const [memberID, setMemberID] = useState("");
 
@@ -51,7 +51,15 @@ function ConsumeCompare({ memberId }) {
 
     // 데이터 가져오는 함수 호출
     fetchData();
+
+    scrollTopFunc();
   }, []); // 초기 렌더링 시 한 번만 실행되도록 의존성 배열은 빈 배열로 설정
+
+  const scrollTopFunc = () => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = 0;
+    }
+  }
 
   // useEffect(() => {
   //   checkJWT("/api/member/memberSession", "get", null)
@@ -105,10 +113,10 @@ function ConsumeCompare({ memberId }) {
           <button className="back-button2">&lt;</button>
         </Link>
       </div>
-      <div className="title">
-        <h3 className="set">또래보다 아껴 썼어요!</h3>
+      <div className="title-compare">
+        <h3 className="t">또래보다 아껴 썼어요!</h3>
       </div>
-      <div className="card-list">
+      <div className="cardList">
         {differenceList[0] > 0 && (
           <div className="card">
             <div className="card-header">

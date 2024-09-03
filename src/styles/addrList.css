@@ -1,10 +1,7 @@
 table {
   width: 100%;
-  background-color: #f4feff;
-  align-items: centers;
-  border-spacing: 3px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Adds space between rows */
 }
 
 th {
@@ -13,8 +10,13 @@ th {
   font-size: 15px;
 }
 td {
-  height: 40px;
-  font-size: 10px;
+  padding: 5px 5px 5px 5px;
+  vertical-align: middle;
+  font-size: 11px;
+  border-bottom: 1px solid #e0e0e0; /* Light gray bottom border */
+}
+tr:last-child td {
+  border-bottom: none; /* Remove the bottom border for the last row */
 }
 
 .defaultSelectArea {
@@ -25,10 +27,12 @@ td {
 }
 
 .deleteButton {
-  font-weight: bold;
-  background-color: #f4feff;
-  border: none; /* Removes the border */
-  outline: none; /* Removes the outline when focused */
+  background-color: transparent;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  font-size: 11px;
+  transition: color 0.3s;
   &:hover {
     color: red;
   }
@@ -38,10 +42,23 @@ td {
   display: none;
 }
 
+.form_radio_btn label {
+  display: inline-block; /* Ensure the label respects the width */
+  width: 80px; /* Set the fixed width */
+  text-align: center; /* Center the text within the label */
+  background-color: #e0e0e0; /* Grey background for unselected */
+  color: #555;
+  padding: 5px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
 /* Checked */
 .form_radio_btn input[type="radio"]:checked + label {
   background: #184da0;
   color: #fff;
+  width: 80px;
 }
 
 /* Hover */
@@ -55,4 +72,61 @@ td {
   color: #666;
   border-radius: 15%;
   padding: 5px;
+}
+
+/********************************/
+
+.address-book {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 5%;
+  margin: 5%;
+  text-align: center;
+}
+
+.address-book h1 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.address-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 3px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+.address-item:last-child {
+  border-bottom: none;
+}
+
+.default-button, .delete-button {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 14px;
+}
+
+.default-button.default {
+  background-color: #303473;
+  color: white;
+}
+
+.add-button {
+  background-color: #303473;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 2%;
+  width: 33%;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
 }
