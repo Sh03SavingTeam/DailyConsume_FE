@@ -50,7 +50,7 @@ function PaymentHistory(props) {
   return (
     <div className="pay_history_area">
       <div className="ph_top">
-        <span>최근이용내역</span>
+        <span className="bold-sebang"> 최근이용내역</span>
       </div>
       <div className="ph_list_area">
         {payHistoryList.length > 0 ? (

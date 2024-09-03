@@ -22,8 +22,8 @@
 }
 
 .card-registration h2 {
-  font-family: "SEBANGGothic";
-  margin-bottom: 20px;
+  margin-top: 50%;
+  font-family: "SEBANGGothicBold";
   color: #333;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .capture-button {
-  background-color: #3b4cca;
+  background-color: #303473;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -163,11 +163,25 @@ select {
 .submit-button:last-child {
   margin-right: 0; /* 마지막 버튼은 오른쪽 마진을 제거 */
 }
-
+.submit-button2-center {
+  text-align: center;
+}
+.submit-button2 {
+  font-family: "SEBANGGothic";
+  width: 40%;
+  background-color: #303473;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10%;
+}
 .cardRegtitle {
   font-size: 32px;
   font-weight: bold;
-  margin: 30%;
 }
 
 .col-xl-6 {
