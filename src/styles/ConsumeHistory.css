@@ -150,7 +150,7 @@ h3 {
 .set{
     font-size: 27px;
     font-weight: bold;
-    margin-top: 20%;
+    /* margin-top: 20%; */
 }
 
 .p-set{
