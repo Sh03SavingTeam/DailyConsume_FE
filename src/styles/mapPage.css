@@ -33,7 +33,7 @@
 }
 
 #map {
-  height: 93.3vh;
+  height: 91.3svh;
 }
 
 .show_store_btn {
@@ -58,7 +58,7 @@
   background-color: rgb(248, 248, 248);
   max-height: 55vh;
   transition: height 1s ease;
-  z-index: 5;
+  z-index: 9;
   padding-top: 10px;
   border-radius: 20px 20px 0px 0px;
   overflow: scroll;
@@ -109,25 +109,26 @@
 }
 
 .store_info div:nth-child(1) {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
 
 .store_info div:nth-child(2) {
   color: rgb(147, 147, 147);
   font-weight: bold;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .store_info div:nth-child(3) {
   color: rgb(88, 88, 88);
   font-weight: bold;
+  font-size: 12px;
 }
 
 .store_detail_div {
   position: absolute;
   width: 100%;
-  height: 93.5vh;
+  height: 93.5svh;
   z-index: 50;
   top: 0;
   background: white;
@@ -209,6 +210,7 @@
   height: 110px;
   object-fit: cover;
   border-radius: 15px;
+  vertical-align: top;
 }
 
 .detail_menu_area ul {
@@ -234,10 +236,8 @@
 
 .menu_info_area {
   display: inline-block;
-  width: 72%;
-  position: absolute;
-  top: 10%;
-  left: 27%;
+    width: 64svw;
+    padding: 5px 7px;
 }
 
 .menu_info_area > div:nth-child(1) {
@@ -253,7 +253,7 @@
 
 .marker_category_div {
   position: absolute;
-  top: 7%;
+  top: 8svh;
   z-index: 20;
   /* left: 0%; */
   width: 100%;
@@ -300,7 +300,7 @@
 .right_btn_div > div {
   position: absolute;
   right: 10px;
-  z-index: 20;
+  z-index: 5;
   background: white;
   padding: 5px;
   border: 1px solid lightgray;
