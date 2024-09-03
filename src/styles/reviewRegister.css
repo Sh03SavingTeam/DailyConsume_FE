@@ -54,11 +54,12 @@ h2 {
   background-color: #3b4cca;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   border-radius: 30px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: bold;
+  height: 40px;
 }
 
 .title {
