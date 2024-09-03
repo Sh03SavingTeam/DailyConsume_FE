@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "../styles/Home.css";
+import moreIcon from "../assets/more.png";
 
 function PaymentHistory(props) {
   const [payHistoryList, setPayHistoryList] = useState([]);
@@ -71,9 +72,13 @@ function PaymentHistory(props) {
         ) : (
           <div>최근 이용내역이 존재하지 않습니다.</div>
         )}
+        <div className="more-button">
         {visibleCount < payHistoryList.length && (
-          <div className="more_btn" onClick={handleShowMore}>더보기 &darr;</div>
+          <button onClick={handleShowMore}>
+          더보기 <img src={moreIcon} alt="more Icon" className="more-icon" />
+        </button>
         )}
+        </div>
       </div>
     </div>
   );
