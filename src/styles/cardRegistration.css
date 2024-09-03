@@ -1,26 +1,13 @@
 @font-face {
-  font-family: "OneShinhanBold";
-  src: url("../assets/OneShinhanBold.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "OneShinhanLight";
-  src: url("../assets/OneShinhanLight.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "OneShinhanMedium";
-  src: url("../assets/OneShinhanMedium.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: "SEBANGGothic";
   src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SEBANGGothicBold";
+  src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -35,8 +22,8 @@
 }
 
 .card-registration h2 {
-  font-family: "SEBANGGothic";
-  margin-bottom: 20px;
+  margin-top: 20%;
+  font-family: "SEBANGGothicBold";
   color: #333;
 }
 
@@ -53,7 +40,7 @@
 }
 
 .capture-button {
-  background-color: #3b4cca;
+  background-color: #303473;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -135,7 +122,51 @@ select {
   margin-right: 10px;
 }
 
+.submitdiv {
+  text-align: center;
+}
+
 .submit-button {
+  font-family: "SEBANGGothic";
+  width: 40%;
+  background-color: #303473;
+  color: #fff;
+  border: none;
+  text-align: center;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5%;
+}
+
+.consumeLogin-button {
+  font-family: "SEBANGGothic";
+  width: 40%;
+  background-color: #303473;
+  color: #fff;
+  border: none;
+  text-align: center;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5%;
+  height: 40px;
+}
+
+.submit-button-center {
+  text-align: center;
+  height: 100px;
+}
+
+.submit-button:last-child {
+  margin-right: 0; /* 마지막 버튼은 오른쪽 마진을 제거 */
+}
+.submit-button2-center {
+  text-align: center;
+}
+.submit-button2 {
   font-family: "SEBANGGothic";
   width: 40%;
   background-color: #303473;
@@ -147,18 +178,10 @@ select {
   font-size: 16px;
   font-weight: bold;
   margin-top: 10%;
-  margin-right: 5%;
-  margin-left: 5%;
 }
-
-.submit-button:last-child {
-  margin-right: 0; /* 마지막 버튼은 오른쪽 마진을 제거 */
-}
-
 .cardRegtitle {
   font-size: 32px;
   font-weight: bold;
-  margin: 30%;
 }
 
 .col-xl-6 {

@@ -6,7 +6,7 @@ import axios from "axios";
 import Footer from "../components/Footer";
 import "../App.css";
 import "../styles/Calendar.css";
-import AmountListForDay from "../hooks/AmountListForDay";
+import AmountListForDay from "../components/AmountListForDay";
 import RabbitCompleteImage from "../assets/RabbitComplete.png";
 import RabbitFail from "../assets/RabbitFail.png";
 

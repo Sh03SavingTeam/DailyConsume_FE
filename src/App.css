@@ -1,22 +1,15 @@
 /*font 정의*/
-@font-face {
-  font-family: "OneShinhanBold";
-  font-weight: normal;
-  src: url("./assets/OneShinhanBold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "OneShinhanLight";
-  font-weight: normal;
-  src: url("./assets/OneShinhanLight.ttf") format("truetype");
-}
-@font-face {
-  font-family: "OneShinhanMedium";
-  font-weight: normal;
-  src: url("./assets/OneShinhanMedium.ttf") format("truetype");
-}
+
 @font-face {
   font-family: "SEBANGGothic";
   src: url("./assets/fonts/SEBANGGothic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SEBANGGothic";
+  src: url("./assets/fonts/SEBANGGothicBold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -76,7 +69,7 @@ h1 {
 .main-content {
   flex: 1;
   overflow-y: auto;
-  /* padding: 20px; */
+  padding: 20px;
   padding-bottom: 50%; /* Footer의 높이 + 여유 공간 */
   box-sizing: border-box; /* padding을 높이에 포함 */
   -ms-overflow-style: none; /* IE and Edge */
@@ -140,11 +133,11 @@ h1 {
 }
 
 td {
-  font-family: "OneShinhanMedium", sans-serif;
+  font-family: "SEBANGGothic", sans-serif;
 }
 
 button {
-  font-family: "OneShinhanMedium", sans-serif;
+  font-family: "SEBANGGothic", sans-serif;
 }
 /*!* 전체 페이지를 가운데 정렬하는 기본 설정 *!*/
 /*.app-container {*/

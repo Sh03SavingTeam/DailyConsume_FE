@@ -9,12 +9,14 @@ th {
   height: 30px;
   font-size: 15px;
 }
-td {
-  padding: 5px 5px 5px 5px;
+
+.address-contents {
+  padding: 10px 5px 10px 10px;
   vertical-align: middle;
-  font-size: 11px;
-  border-bottom: 1px solid #e0e0e0; /* Light gray bottom border */
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
 }
+
 tr:last-child td {
   border-bottom: none; /* Remove the bottom border for the last row */
 }
@@ -56,9 +58,9 @@ tr:last-child td {
 
 /* Checked */
 .form_radio_btn input[type="radio"]:checked + label {
-  background: #184da0;
+  background: #303473;
   color: #fff;
-  width: 80px;
+  width: 90%;
 }
 
 /* Hover */
@@ -68,10 +70,11 @@ tr:last-child td {
 
 /* Disabled */
 .form_radio_btn input[type="radio"] + label {
-  /* background: #f9fafc; */
+  background: #f9fafc;
   color: #666;
-  border-radius: 15%;
-  padding: 5px;
+  border-radius: 20px;
+  padding: 6%;
+  width: 90%;
 }
 
 /********************************/
@@ -104,14 +107,15 @@ tr:last-child td {
   border-bottom: none;
 }
 
-.default-button, .delete-button {
+.default-button,
+.delete-button {
   background-color: transparent;
   border: 1px solid #ddd;
   border-radius: 15px;
   padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
-  margin-left: 14px;
+  /* margin-left: 14px; */
 }
 
 .default-button.default {

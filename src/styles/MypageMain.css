@@ -1,18 +1,20 @@
 @font-face {
-    font-family: "OneShinhanBold";
-    font-weight: bold;
-    src: url("../fonts/OneShinhanBold.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "OneShinhanMedium";
+    font-family: "SEBANGGothic";
+    src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
     font-weight: normal;
-    src: url("../fonts/OneShinhanMedium.ttf") format("truetype");
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "SEBANGGothicBold";
+    src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
   }
 
 
 .mymain-container{
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothicBold";
     font-size: 15px;
     width: 414px;
     margin: 0 auto;
@@ -60,7 +62,7 @@
 }
 
 .week-button button{
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothicBold";
     font-size: 15px;
     border: 1px solid #D9D9D9;
     background-color: transparent;
@@ -85,7 +87,7 @@
 }
 
 .tabs button.active {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothicBold";
     border: none;
     border-bottom: 2px solid black;
     color: black;
@@ -96,7 +98,7 @@
 
 .content{
     overflow-y: auto;
-    height: 65.5vh;
+    height: 68.5vh;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
     background: #f8f8fdbf;
@@ -107,7 +109,7 @@
 }
 
 .mypage-logout{
-    font-family: "OneShinhanMedium";
+    font-family: "SEBANGGothicBold";
     border: 1px solid #D9D9D9;
     border-radius: 20px;
     color: #3E3E3E;

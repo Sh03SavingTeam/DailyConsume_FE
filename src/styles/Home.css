@@ -23,13 +23,13 @@
 }
 
 .history_bottom {
-    color: lightgray;
+    color: #999999bf;
 }
 
 .history_bottom > p {
     margin-top: 0;
     font-size: 13px;
-    font-family: 'OneShinhanMedium';
+    font-family: 'SEBANGGothic';
 }
 
 .history_bottom > p > span:nth-child(1) {

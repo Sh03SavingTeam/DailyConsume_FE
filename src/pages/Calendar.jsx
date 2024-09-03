@@ -6,7 +6,7 @@ import axios from "axios";  // HTTP 요청을 위한 axios 라이브러리 impor
 import Footer from "../components/Footer";  // Footer 컴포넌트 import
 import "../App.css";  // 전체 애플리케이션 스타일 import
 import "../styles/Calendar.css";  // Calendar 관련 커스텀 스타일 import
-import AmountListForDay from "../hooks/AmountListForDay";  // 특정 날짜에 대한 금액 리스트 컴포넌트 import
+import AmountListForDay from "../components/AmountListForDay";  // 특정 날짜에 대한 금액 리스트 컴포넌트 import
 import RabbitCompleteImage from "../assets/RabbitComplete.png";  // 달성한 경우의 이미지 import
 import RabbitFail from "../assets/RabbitFail.png";  // 실패한 경우의 이미지 import
 import { checkJWT } from "services/checkJWT";  // JWT 체크를 위한 서비스 함수 import
