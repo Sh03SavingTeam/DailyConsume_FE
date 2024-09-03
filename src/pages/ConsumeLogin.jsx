@@ -52,7 +52,7 @@ function ConsumeLogin(props) {
   };
 
   const handleMemberRegister = () => {
-    navigate("/Join");
+    navigate("/join");
   };
 
   return (
