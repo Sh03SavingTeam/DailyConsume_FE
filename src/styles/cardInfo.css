@@ -33,7 +33,6 @@ h2 {
 .card-list {
   display: flex;
   width: 200px;
-  height: 200px;
   overflow-x: auto;
   text-align: center;
   margin-left: 15px;
@@ -47,15 +46,14 @@ h2 {
   scroll-snap-align: center; /* 카드가 스크롤 시 중앙에 위치하게 함 */
   /* Remove or override any existing shadow */
   box-shadow: none;
-  transform: rotate(90deg); /* 이미지를 90도 회전시킴 */
 }
 
-.card-wrapper {
+.card-list-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto; /* Center the wrapper horizontally */
-  padding: 20px 0; /* Add padding to avoid overlap */
+
   width: 100%;
   max-width: 300px; /* Ensure it doesn't get too wide */
   position: relative;
