@@ -24,7 +24,7 @@ function ConsumeHistory({ memberId }) {
       legend: {
         position: "bottom", // 범례
         horizontalAlign: "center",
-        fontFamily: "OneShinhanBold, sans-serif",
+        fontFamily: "SEBANGGothic, sans-serif",
         fontSize: "11px",
         fontWeight: "light",
         colors: ["#303473"],
@@ -42,7 +42,7 @@ function ConsumeHistory({ memberId }) {
       dataLabels: {
         enabled: true,
         style: {
-          fontFamily: "OneShinhanBold, sans-serif", // 도넛 안의 수치 글꼴
+          fontFamily: "SEBANGGothic, sans-serif", // 도넛 안의 수치 글꼴
           fontSize: "12px",
           fontWeight: "bold",
           colors: ["#FFFFFF"],
@@ -198,7 +198,7 @@ function ConsumeHistory({ memberId }) {
                 categories: ["식비", "교통비", "온라인쇼핑", "문화/여가"],
                 labels: {
                   style: {
-                    fontFamily: "OneShinhanBold, sans-serif",
+                    fontFamily: "SEBANGGothic, sans-serif",
                     fontSize: "10px",
                     fontWeight: "light", // Optional: 'bold', 'normal', 'light', etc.
                     colors: "#000000",
@@ -223,7 +223,7 @@ function ConsumeHistory({ memberId }) {
                 },
                 offsetY: -20, // 막대 위로 올리기 위한 y축 오프셋
                 style: {
-                  fontFamily: "OneShinhanBold, sans-serif",
+                  fontFamily: "SEBANGGothic, sans-serif",
                   fontSize: "7px",
                   fontWeight: "bold",
                   colors: ["#303473"],
@@ -246,7 +246,7 @@ function ConsumeHistory({ memberId }) {
                 show: true,
                 position: "bottom", // 범례
                 horizontalAlign: "center",
-                fontFamily: "OneShinhanBold, sans-serif",
+                fontFamily: "SEBANGGothic, sans-serif",
                 fontSize: "11px",
                 fontWeight: "normal",
                 colors: ["#303473"],
