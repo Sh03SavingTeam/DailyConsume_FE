@@ -26,12 +26,12 @@ function CardInfo(props) {
   }, [location]);
 
   useEffect(() => {
-    checkJWT("http://localhost:9999/api/member/memberSession", "get", null)
+    checkJWT("/api/member/memberSession", "get", null)
       .then((response) => {
         console.log("JWT 확인 결과" + response.memberId);
         axios({
           method: "get",
-          url: "http://localhost:9999/api/card/memberCardList",
+          url: "/api/card/memberCardList",
           params: {
             memberId: response.memberId,
           },
@@ -40,7 +40,7 @@ function CardInfo(props) {
             const userCards = response.data;
 
             axios
-              .get("http://localhost:9999/api/card/getAllCardInfo")
+              .get("/api/card/getAllCardInfo")
               .then((res) => {
                 const allCards = res.data;
 
@@ -119,7 +119,7 @@ function CardInfo(props) {
   const handleCardSelection = (cardNum) => {
     axios({
       method: "get",
-      url: "http://localhost:9999/api/card/getCardInfo",
+      url: "/api/card/getCardInfo",
       params: {
         cardNum: cardNum,
       },
@@ -139,7 +139,7 @@ function CardInfo(props) {
 
         axios({
           method: "get",
-          url: "http://localhost:9999/api/card/getCardBenefit",
+          url: "/api/card/getCardBenefit",
           params: {
             cardName: cardName,
           },
@@ -167,7 +167,7 @@ function CardInfo(props) {
   const handleDeleteCard = async () => {
     axios({
       method: "delete",
-      url: "http://localhost:9999/api/card/delete",
+      url: "/api/card/delete",
       params: {
         cardNum: selectedCardNum,
       },

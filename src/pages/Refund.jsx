@@ -75,7 +75,7 @@ function Refund({ memberId }) {
   const fetchPointAccount = async (memberID) => {
     try {
       const response = await axios.get(
-        `http://localhost:9999/mypage/refund/${memberID}`
+        `/mypage/refund/${memberID}`
       );
       const data = response.data;
 
@@ -90,7 +90,7 @@ function Refund({ memberId }) {
   const refundPoint = async (point) => {
     try {
       const response = await axios.put(
-        `http://localhost:9999/mypage/refund/${memberID}?point=${point}`
+        `/mypage/refund/${memberID}?point=${point}`
       );
       console.log("환급 성공: ", response.data);
     } catch (error) {
