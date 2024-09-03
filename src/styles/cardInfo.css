@@ -35,8 +35,8 @@ h2 {
   width: 200px;
   overflow-x: auto;
   text-align: center;
-  margin-left: 15px;
-  margin-right: 15px;
+  /* margin-left: 15px;
+  margin-right: 15px; */
   scroll-snap-type: x mandatory; /* 스크롤을 끝점에서 멈추게 설정 */
 }
 
@@ -46,6 +46,7 @@ h2 {
   scroll-snap-align: center; /* 카드가 스크롤 시 중앙에 위치하게 함 */
   /* Remove or override any existing shadow */
   box-shadow: none;
+  height: 200px;
 }
 
 .card-list-wrapper {
@@ -60,9 +61,11 @@ h2 {
 }
 
 .card-image {
+  transform: rotate(90deg); /* If no rotation is needed, set to 0deg */
   width: 100%;
   max-width: 200px;
   height: auto; /* Ensure it maintains aspect ratio */
+  margin-top: 40px;
 }
 
 .background-gradient {
