@@ -14,7 +14,7 @@ function MapSelectedStore(props) {
 
     axios({
       url:
-        "http://localhost:9999/api/recommend/detail?storeRegNum=" + storeRegNum,
+        "/api/recommend/detail?storeRegNum=" + storeRegNum,
       method: "GET",
     })
       .then((res) => {

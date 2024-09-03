@@ -35,7 +35,7 @@ function AddressRegister(props) {
 
     axios({
       method: "post",
-      url: "http://localhost:9999/api/address/addrRegister",
+      url: "/api/address/addrRegister",
       data: updatedDbAddress,
     });
 
@@ -113,7 +113,7 @@ function AddressRegister(props) {
 
   useEffect(() => {
     checkJWT(
-      "http://localhost:9999/api/member/memberSession",
+      "/api/member/memberSession",
       "get",
       null
     ).then((response) => {

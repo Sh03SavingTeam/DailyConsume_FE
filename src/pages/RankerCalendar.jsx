@@ -20,7 +20,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
 
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
+      const response = await axios.get("/api/calendar/payhistory", {
         params: { month, memberId },
       });
       const fetchedData = response.data.map((item) => ({
@@ -36,7 +36,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
 
   const fetchWeeklyAchievements = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/weeklyConsume/month", {
+      const response = await axios.get("/api/calendar/weeklyConsume/month", {
         params: { month, memberId },
       });
       setWeeklyAchievements(response.data || []);
@@ -46,15 +46,15 @@ const RankerCalendar = ({ memberId, onBack }) => {
     }
   };
   useEffect(() => {
-    checkJWT("http://localhost:9999/api/member/memberSession", "get", null)
+    checkJWT("/api/member/memberSession", "get", null)
       .then((resopnse) => {
         console.log("JWT 확인 결과" + resopnse.memberId);
         const memberId2 = resopnse.memberId;
         setMemberId2(memberId2);
 
           const month = moment().format("MM");
-          fetchAmountList(month, memberId2);
-          fetchWeeklyAchievements(month, memberId2);
+          fetchAmountList(month, memberId);
+          fetchWeeklyAchievements(month, memberId);
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -142,7 +142,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
   return (
     <div className="app-container">
       <div className="prev-btn2" onClick={onBack}>&lt;</div> {/* onBack 사용 */}
-      <h1> 소비 캘린더 </h1>
+
       <div className="main-content">
         <div className="calendar-container">
           <Calendar

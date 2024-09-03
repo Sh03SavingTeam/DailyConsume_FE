@@ -22,7 +22,7 @@ const CustomCalendar = () => {
   // 특정 월에 대한 금액 리스트 데이터를 서버에서 가져오는 함수
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
+      const response = await axios.get("/api/calendar/payhistory", {
         params: { month, memberId },
       });
       const fetchedData = response.data.map((item) => ({
@@ -39,7 +39,7 @@ const CustomCalendar = () => {
   // 특정 월에 대한 주간 달성 데이터를 서버에서 가져오는 함수
   const fetchWeeklyAchievements = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/weeklyConsume/month", {
+      const response = await axios.get("/api/calendar/weeklyConsume/month", {
         params: { month, memberId },
       });
       setWeeklyAchievements(response.data || []);
@@ -51,7 +51,7 @@ const CustomCalendar = () => {
 
   // 컴포넌트가 처음 마운트될 때 JWT를 확인하고, 데이터를 가져오는 useEffect
   useEffect(() => {
-    checkJWT("http://localhost:9999/api/member/memberSession", "get", null)
+    checkJWT("/api/member/memberSession", "get", null)
       .then((resopnse) => {
         console.log("JWT 확인 결과" + resopnse.memberId);
         const memberId = resopnse.memberId;

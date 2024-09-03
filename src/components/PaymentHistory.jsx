@@ -12,7 +12,7 @@ function PaymentHistory(props) {
 
   const getPayHistory = () => {
     axios({
-      url: "http://localhost:9999/api/home/payhistory?memId=m002",
+      url: "/api/home/payhistory?memId=m002",
       method: "GET",
     })
       .then((res) => {

@@ -21,7 +21,7 @@ function Point({ memberId }) {
   const fetchPointHistories = async (memberid, page) => {
     try {
       const response = await axios.get(
-        `http://localhost:9999/mypage/point/${memberid}?page=${page}`
+        `/mypage/point/${memberid}?page=${page}`
       );
       const data = response.data;
 
@@ -46,7 +46,7 @@ function Point({ memberId }) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "http://localhost:9999/api/member/memberSession",
+          "/api/member/memberSession",
           "get",
           null
         );

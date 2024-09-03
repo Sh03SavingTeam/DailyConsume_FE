@@ -2,13 +2,30 @@ import React, { useEffect, useState } from 'react';
 import '../styles/Attendance.css';
 import Carrot from '../assets/Carrot.png';
 import axios from 'axios';
+import { checkJWT } from 'services/checkJWT';
 
 function Attendance(props) {
-    const [memberId, setMemberId] = useState("m004");
+    const [memberId, setMemberId] = useState("");
     const [attendanceData, setAttendanceData] = useState(null);
 
+    const fetchData = async () => {
+        try {
+          // 1. JWT 확인
+          const jwtResponse = await checkJWT(
+            "/api/member/memberSession",
+            "get",
+            null
+          );
+          console.log("JWT 확인 결과: " + jwtResponse.memberId);
+          const memberID = jwtResponse.memberId;
+          setMemberId(memberID);
+        } catch (error) {
+          console.error("데이터를 불러오는 중 오류가 발생했습니다:", error);
+        }
+      };
+
     const fetchAttendanceData = () => {
-        axios.get(`http://localhost:9999/rank/attendance/${memberId}`)
+        axios.get(`/rank/attendance/${memberId}`)
             .then(response => {
                 setAttendanceData(response.data); // 응답 데이터를 상태에 저장
             })
@@ -19,6 +36,7 @@ function Attendance(props) {
 
     useEffect(() => {
         fetchAttendanceData(); // memberId가 바뀌거나 컴포넌트가 처음 렌더링될 때 호출
+        fetchData();
     }, [memberId]);
 
     const handleAttendanceClick = () => {
@@ -30,7 +48,7 @@ function Attendance(props) {
             score: 1,
         };
 
-        axios.post('http://localhost:9999/rank/scoreInsert', data)
+        axios.post('/rank/scoreInsert', data)
             .then(response => {
                 console.log('출석체크 완료:', response.data);
                 fetchAttendanceData(); // 출석체크 후 데이터를 다시 가져옴
