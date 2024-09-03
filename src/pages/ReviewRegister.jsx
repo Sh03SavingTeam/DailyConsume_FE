@@ -84,7 +84,8 @@ function ReviewRegister(props) {
   const takePicture = () => {
     const photo = cameraRef.current.takePhoto();
     setImage(photo);
-    return photo;
+    const blob = dataURLtoBlob(photo);
+    return blob;
   };
 
   const getFileName = () => {
@@ -127,7 +128,7 @@ function ReviewRegister(props) {
       });
       console.log("영수증OCR:" + response.data);
 
-      const { name, bizNum, price } = response.data;
+      const { name, bizNum } = response.data;
       console.log("상호명 : ", name);
       console.log("사업자등록번호 : ", bizNum);
       setBizNum(bizNum);
@@ -272,6 +273,21 @@ function ReviewRegister(props) {
       <Footer />
     </div>
   );
+}
+
+// 데이터 URL을 Blob으로 변환하는 유틸리티 함수
+function dataURLtoBlob(dataURL) {
+  const arr = dataURL.split(",");
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new Blob([u8arr], { type: mime });
 }
 
 export default ReviewRegister;
