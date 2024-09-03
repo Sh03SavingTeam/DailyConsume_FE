@@ -9,6 +9,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import AWS from "aws-sdk";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import defaultProfileImg from "../assets/defaultProfile.jpg";
 
 function ConsumeJoin(props) {
   const location = useLocation();
@@ -30,6 +31,13 @@ function ConsumeJoin(props) {
   // 이미지 파일 및 미리보기 URL 상태 관리
   const [selectedImage, setSelectedImage] = useState(null); // 실제 파일을 저장할 상태
   const [previewUrl, setPreviewUrl] = useState(null); // 미리보기 URL 저장 상태
+
+  const inputFileRef = React.useRef(null); // 파일 입력을 위한 ref 생성
+
+  // 사용자 정의 버튼 클릭 시 파일 입력 활성화
+  const handleButtonClick = () => {
+    inputFileRef.current.click(); // 숨겨진 파일 입력을 클릭
+  };
 
   // 파일 변경 처리 함수
   const handleImageChange = (e) => {
@@ -141,12 +149,17 @@ function ConsumeJoin(props) {
                 type="file"
                 accept="image/*"
                 name="memberImg"
-                className="profileRegImg"
+                className="profileRegImg hidden"
                 onChange={handleImageChange}
+                ref={inputFileRef} // ref 연결
               />
+              <button onClick={handleButtonClick} className="profileimgselect">
+                사진 등록
+              </button>{" "}
+              {/* 사용자 정의 버튼 */}
             </div>
             <img
-              src={previewUrl}
+              src={previewUrl || defaultProfileImg}
               alt="이미지 미리보기"
               style={{ width: "100px", height: "auto" }}
             />
