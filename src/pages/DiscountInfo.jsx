@@ -124,7 +124,7 @@ function DiscountInfo({ memberId }) {
             <div className="info">
               <p className="storeName">{item.storeName}</p>
               <p className="productName">{item.productName}</p>
-              <p className="amount">
+              <p className="p-amount">
                 {item.amount} ({item.productContent})
               </p>
               <p className="expiry">
