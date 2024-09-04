@@ -72,6 +72,7 @@ function AddressList(props) {
   const handleConfirmDefaultAddrChange = () => {
     handleRadioChange(tempSelectedAddrId); // 기본 주소 변경
     closeDefaultAddrPopup(); // 팝업 닫기
+    navigate("/mypage", { state: { selectedTab: "address" } });
     window.location.reload();
   };
 
@@ -160,6 +161,7 @@ function AddressList(props) {
         closePopUp();
       });
     }
+    navigate("/mypage", { state: { selectedTab: "address" } });
     window.location.reload();
   };
 
