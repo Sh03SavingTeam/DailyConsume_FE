@@ -19,7 +19,7 @@ function RankInfo({ setIsVisable }) {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:9999/rank/benefits/${memberId}`)
+        axios.get(`/rank/benefits/${memberId}`)
             .then(response => {
                 setRankInfo(response.data); 
                 setSelectedRank(response.data.rankName);

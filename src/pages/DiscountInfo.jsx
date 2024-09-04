@@ -26,7 +26,7 @@ function DiscountInfo({ memberId, contentRef }) {
   const fetchDiscountInfos = async (page) => {
     try {
       const response = await axios.get(
-        `http://localhost:9999/mypage/discountinginfo/${memberId}?page=${page}`
+        `/mypage/discountinginfo/${memberId}?page=${page}`
       );
       const data = response.data;
 
@@ -58,7 +58,7 @@ function DiscountInfo({ memberId, contentRef }) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "http://localhost:9999/api/member/memberSession",
+          "/api/member/memberSession",
           "get",
           null
         );

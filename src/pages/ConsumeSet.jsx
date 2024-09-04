@@ -43,7 +43,7 @@ function ConsumeSet({ memberId }) {
     try {
       const amount = selectedAmount.replace(/,/g, "").replace("원", "");
       const response = await axios.post(
-        `http://localhost:9999/mypage/myweeklymoney?memberId=${memberID}&weeklyMoney=${amount}`
+        `/mypage/myweeklymoney?memberId=${memberID}&weeklyMoney=${amount}`
       );
       console.log(response.data);
       window.location.href = '/mypage';
@@ -73,7 +73,6 @@ function ConsumeSet({ memberId }) {
           설정
         </button>
       </Link>
-
       <Footer />
     </div>
   );

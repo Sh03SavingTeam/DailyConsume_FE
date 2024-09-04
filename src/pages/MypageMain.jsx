@@ -57,7 +57,7 @@ function MypageMain(props) {
       try {
         // JWT 확인
         const response = await checkJWT(
-          "http://localhost:9999/api/member/memberSession",
+          "/api/member/memberSession",
           "get",
           null
         );
@@ -68,15 +68,19 @@ function MypageMain(props) {
         // 회원 정보 불러오기
         console.log("memberID: " + memberID);
         const memberResponse = await axios.get(
-          `http://localhost:9999/mypage/${memberID}`
+          `/mypage/${memberID}`
         );
         const data = memberResponse.data;
         setMemberImg(data.memberImg);
         setMemberName(data.memberName);
         setWeeklyMoney(data.weeklyMoney);
         setEndDate(data.endDate);
-      } catch (error) {
-        console.error("데이터 처리 중 오류 발생!" + error);
+     // 주간소비 금액이 설정되었는지 체크
+     if (data.weeklyMoney > 0 && data.endDate === getSunday()) {
+      setCheck(false);  // 금액 설정이 완료된 상태
+    }
+  } catch (error) {
+    console.error("데이터 처리 중 오류 발생!" + error);
       }
     };
 
@@ -184,7 +188,7 @@ function MypageMain(props) {
   //     console.log("memberID:"+memberId);
   //     try {
   //       const response = await axios.get(
-  //         `http://localhost:9999/mypage/${memberId}`
+  //         `/mypage/${memberId}`
   //       );
   //       const data = response.data;
   //       setMemberImg(data.memberImg);
@@ -209,11 +213,11 @@ function MypageMain(props) {
           {weeklyMoney != 0 ? weeklyMoney.toLocaleString() + "원" : "없음"}
         </p>
         <div className="week-button">
-          {check && (
+          {check ? (
             <Link to="/mypage/ConsumeSet">
               <button>주간소비금액 설정</button>
             </Link>
-          )}
+          ) : ( <button disabled>주간소비 금액 설정 완료</button>)}
         </div>
         <button className="mypage-logout" onClick={handleMemberLogout}>
           로그아웃

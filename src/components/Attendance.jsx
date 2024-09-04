@@ -8,7 +8,7 @@ function Attendance(props) {
     const [attendanceData, setAttendanceData] = useState(null);
 
     const fetchAttendanceData = () => {
-        axios.get(`http://localhost:9999/rank/attendance/${memberId}`)
+        axios.get(`/rank/attendance/${memberId}`)
             .then(response => {
                 setAttendanceData(response.data); // 응답 데이터를 상태에 저장
             })
@@ -30,7 +30,7 @@ function Attendance(props) {
             score: 1,
         };
 
-        axios.post('http://localhost:9999/rank/scoreInsert', data)
+        axios.post('/rank/scoreInsert', data)
             .then(response => {
                 console.log('출석체크 완료:', response.data);
                 fetchAttendanceData(); // 출석체크 후 데이터를 다시 가져옴

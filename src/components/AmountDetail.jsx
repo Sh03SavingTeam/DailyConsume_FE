@@ -18,7 +18,7 @@ function AmountDetail({ item, onClose }) {
     //const fetchDetail = async () => {
         console.log("Requesting payment details for:", item.memberId, item.id); // 로그 추가
       axios.get(
-            "http://localhost:9999/api/calendar/payhistory/detail",
+            "/api/calendar/payhistory/detail",
             {
               params: {
                 memberId: item.memberId, // item 객체에 memberId 포함
@@ -49,7 +49,7 @@ function AmountDetail({ item, onClose }) {
     try {
       // 서버에 myPayCheck 값을 1로 업데이트 요청 (PUT 요청)
       const response = await axios.put(
-        "http://localhost:9999/api/calendar/payhistory/update",
+        "/api/calendar/payhistory/update",
         {
           memberId: item.memberId,
           payId: item.id,

@@ -45,7 +45,7 @@ function AmountListForDay({ initialDay }) {
 
             // 서버에 GET 요청을 보내 결제 내역 데이터를 가져옴
             const response = await axios.get(
-                "http://localhost:9999/api/calendar/payhistory/daily",
+                "/api/calendar/payhistory/daily",
                 {
                     params: {
                         memberId: memberId, // 요청 파라미터로 사용자 ID를 보냄
@@ -84,7 +84,7 @@ function AmountListForDay({ initialDay }) {
 
             // 서버에 GET 요청을 보내 주간 소비 예산 데이터를 가져옴
             const response = await axios.get(
-                "http://localhost:9999/api/calendar/payweekly",
+                "/api/calendar/payweekly",
                 {
                     params: {
                         memberId: memberId, // 요청 파라미터로 사용자 ID를 보냄

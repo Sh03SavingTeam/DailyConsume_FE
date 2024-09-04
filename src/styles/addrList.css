@@ -11,9 +11,9 @@ th {
 }
 
 .address-contents {
-  padding: 10px 5px 10px 10px;
+  padding: 5px 2px 5px 2px;
   vertical-align: middle;
-  font-size: 14px;
+  font-size: 13px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -107,13 +107,12 @@ tr:last-child td {
   border-bottom: none;
 }
 
-.default-button,
-.delete-button {
+.default-button, .delete-button {
   background-color: transparent;
   border: 1px solid #ddd;
   border-radius: 15px;
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 10px;
   cursor: pointer;
   /* margin-left: 14px; */
 }

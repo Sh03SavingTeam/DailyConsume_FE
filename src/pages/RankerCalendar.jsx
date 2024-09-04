@@ -18,7 +18,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
 
   const fetchAmountList = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/payhistory", {
+      const response = await axios.get("/api/calendar/payhistory", {
         params: { month, memberId },
       });
       const fetchedData = response.data.map((item) => ({
@@ -34,7 +34,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
 
   const fetchWeeklyAchievements = async (month, memberId) => {
     try {
-      const response = await axios.get("http://localhost:9999/api/calendar/weeklyConsume/month", {
+      const response = await axios.get("/api/calendar/weeklyConsume/month", {
         params: { month, memberId },
       });
       setWeeklyAchievements(response.data || []); // 데이터를 배열로 설정

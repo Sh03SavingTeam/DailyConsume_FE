@@ -13,9 +13,9 @@
 }
 
 .container {
-  height: 105vh;
+  height: 61.5vh;
   overflow-y: auto;
-  min-height: 105vh; /*115vh*/
+  min-height: 61.5vh;
   background-color: #f8f8fdbf;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
@@ -148,10 +148,9 @@ h3 {
 }
 
 .set {
-  font-size: 27px;
-  font-weight: bold;
-  margin-top: 20%;
-}
+    font-size: 27px;
+    font-weight: bold;
+  }
 
 .p-set {
   font-size: 16px;
@@ -204,6 +203,7 @@ h3 {
   position: relative;
   margin: 0 auto;
   text-align: center;
+  margin-top: 10%;
 }
 
 .dropbtn {
@@ -273,6 +273,7 @@ h3 {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10%;
 }
 /* ************************************* */
 .val-password,
@@ -280,13 +281,7 @@ h3 {
   font-size: 20px;
   padding: 8px;
 }
-/* .col-xl-6 {
-    margin: 0 auto;
-    text-align: center;
-}
-label{
-    text-align: left;
-} */
+
 .form-control {
   font-family: "SEBANGGothic";
 }
@@ -317,7 +312,7 @@ input.form-control {
 .content-discount {
   border: none;
   cursor: pointer;
-  width: 50%;
+  width: 55%;
   margin: 0 auto;
   background-color: #303473;
   font-family: "SEBANGGothic";
