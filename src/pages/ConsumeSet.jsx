@@ -73,7 +73,6 @@ function ConsumeSet({ memberId }) {
           설정
         </button>
       </Link>
-
       <Footer />
     </div>
   );

@@ -120,10 +120,7 @@ function ConsumeCompare({ memberId, contentRef }) {
         {differenceList[0] > 0 && (
           <div className="card">
             <div className="card-header">
-              <div className="savings">
-                🍚 식비 {differenceList[0].toLocaleString()}원{" "}
-                <span className="highlight">절약</span>
-              </div>
+              <div className="savings">🍚 식비 {differenceList[0].toLocaleString()}원{" "}<span className="highlight">절약</span></div>
             </div>
             <div className="card-content">
               <div className="my-expense">
@@ -140,10 +137,7 @@ function ConsumeCompare({ memberId, contentRef }) {
         {differenceList[1] > 0 && (
           <div className="card">
             <div className="card-header">
-              <div className="savings">
-                🚌 교통비 {differenceList[1].toLocaleString()}원{" "}
-                <span className="highlight">절약</span>
-              </div>
+              <div className="savings">🚌 교통비 {differenceList[1].toLocaleString()}원{" "}<span className="highlight">절약</span></div>
             </div>
             <div className="card-content">
               <div className="my-expense">
@@ -160,10 +154,7 @@ function ConsumeCompare({ memberId, contentRef }) {
         {differenceList[2] > 0 && (
           <div className="card">
             <div className="card-header">
-              <div className="savings">
-                🛍️ 온라인쇼핑비 {differenceList[2].toLocaleString()}원{" "}
-                <span className="highlight">절약</span>
-              </div>
+              <div className="savings">🛍️ 온라인쇼핑비 {differenceList[2].toLocaleString()}원{" "}<span className="highlight">절약</span></div>
             </div>
             <div className="card-content">
               <div className="my-expense">
@@ -180,10 +171,7 @@ function ConsumeCompare({ memberId, contentRef }) {
         {differenceList[3] > 0 && (
           <div className="card">
             <div className="card-header">
-              <div className="savings">
-                🍿 문화/여가비 {differenceList[3].toLocaleString()}원{" "}
-                <span className="highlight">절약</span>
-              </div>
+              <div className="savings">🍿 문화/여가비 {differenceList[3].toLocaleString()}원{" "}<span className="highlight">절약</span></div>
             </div>
             <div className="card-content">
               <div className="my-expense">
@@ -198,7 +186,6 @@ function ConsumeCompare({ memberId, contentRef }) {
           </div>
         )}
       </div>
-
       <Footer />
     </div>
   );

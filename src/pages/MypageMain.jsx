@@ -46,7 +46,7 @@ function MypageMain(props) {
       case "consumeCompare":
         return <ConsumeCompare memberId={memberId} contentRef={contentRef} />;
       case "discountInfo":
-        return <DiscountInfo memberId={memberId} contentRef={contentRef} />;
+        return <DiscountInfo memberId={memberId} />;
       default:
         return <ConsumeHistory />;
     }
@@ -71,12 +71,16 @@ function MypageMain(props) {
           `/mypage/${memberID}`
         );
         const data = memberResponse.data;
-        setMemberImg(data.memberImg);
+        setMemberImg(data.memberImg ? `https://shinhands3rd-project2.s3.ap-southeast-2.amazonaws.com/MemberIMG/${memberImg}` : profileImg);
         setMemberName(data.memberName);
         setWeeklyMoney(data.weeklyMoney);
         setEndDate(data.endDate);
-      } catch (error) {
-        console.error("데이터 처리 중 오류 발생!" + error);
+     // 주간소비 금액이 설정되었는지 체크
+     if (data.weeklyMoney > 0 && data.endDate === getSunday()) {
+      setCheck(false);  // 금액 설정이 완료된 상태
+    }
+  } catch (error) {
+    console.error("데이터 처리 중 오류 발생!" + error);
       }
     };
 
@@ -118,7 +122,7 @@ function MypageMain(props) {
   }, [location.state, endDate]); // 필요한 의존성 추가
 
   // S3 이미지 URL 생성
-  const s3ImageUrl = `https://shinhands3rd-project2.s3.ap-southeast-2.amazonaws.com/MemberIMG/${memberImg}`;
+  //const s3ImageUrl = `https://shinhands3rd-project2.s3.ap-southeast-2.amazonaws.com/MemberIMG/${memberImg}`;
 
   //   useEffect(() => {
   //     checkJWT("/api/member/memberSession", "get", null)
@@ -200,7 +204,7 @@ function MypageMain(props) {
     <div className="mymain-container">
       <div className="memberinfo">
         {/* 이미지 추후 확인 필요 */}
-        <img src={s3ImageUrl} alt="Profile" />
+        <img src={memberImg} alt="Profile" />
         <p className="info-name">
           <span className="info-name-big">{memberName}</span> 님
         </p>
@@ -209,11 +213,11 @@ function MypageMain(props) {
           {weeklyMoney != 0 ? weeklyMoney.toLocaleString() + "원" : "없음"}
         </p>
         <div className="week-button">
-          {check && (
+          {check ? (
             <Link to="/mypage/ConsumeSet">
               <button>주간소비금액 설정</button>
             </Link>
-          )}
+          ) : ( <button disabled>주간소비 금액 설정 완료</button>)}
         </div>
         <button className="mypage-logout" onClick={handleMemberLogout}>
           로그아웃
