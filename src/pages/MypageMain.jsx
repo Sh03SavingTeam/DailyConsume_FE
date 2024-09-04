@@ -71,7 +71,7 @@ function MypageMain(props) {
           `/mypage/${memberID}`
         );
         const data = memberResponse.data;
-        setMemberImg(data.memberImg);
+        setMemberImg(data.memberImg ? `https://shinhands3rd-project2.s3.ap-southeast-2.amazonaws.com/MemberIMG/${memberImg}` : profileImg);
         setMemberName(data.memberName);
         setWeeklyMoney(data.weeklyMoney);
         setEndDate(data.endDate);
@@ -118,7 +118,7 @@ function MypageMain(props) {
   }, [location.state, endDate]); // 필요한 의존성 추가
 
   // S3 이미지 URL 생성
-  const s3ImageUrl = `https://shinhands3rd-project2.s3.ap-southeast-2.amazonaws.com/MemberIMG/${memberImg}`;
+  //const s3ImageUrl = `https://shinhands3rd-project2.s3.ap-southeast-2.amazonaws.com/MemberIMG/${memberImg}`;
 
   //   useEffect(() => {
   //     checkJWT("/api/member/memberSession", "get", null)
@@ -200,7 +200,7 @@ function MypageMain(props) {
     <div className="mymain-container">
       <div className="memberinfo">
         {/* 이미지 추후 확인 필요 */}
-        <img src={s3ImageUrl} alt="Profile" />
+        <img src={memberImg} alt="Profile" />
         <p className="info-name">
           <span className="info-name-big">{memberName}</span> 님
         </p>

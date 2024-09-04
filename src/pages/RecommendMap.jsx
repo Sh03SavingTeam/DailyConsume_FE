@@ -58,7 +58,6 @@ function MapPage() {
   };
 
   const clickPeerRecommend = () => {
-    setIsClicked("peer");
     setLoading(true);
     currentGeo();
     axios({
@@ -72,6 +71,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("peer");
         setLoading(false);
       })
       .catch((error) => {
@@ -81,7 +81,6 @@ function MapPage() {
   };
 
   const clickDaypatternRecommend = () => {
-    setIsClicked("day");
     setLoading(true);
     currentGeo();
     axios({
@@ -95,6 +94,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("day");
         setLoading(false);
       })
       .catch((error) => {
@@ -104,7 +104,6 @@ function MapPage() {
   };
 
   const clickConsumeRecommend = () => {
-    setIsClicked("consume");
     setLoading(true);
     currentGeo();
     axios({
@@ -118,6 +117,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("consume");
         setLoading(false);
       })
       .catch((error) => {
@@ -127,7 +127,7 @@ function MapPage() {
   };
 
   const clickAllpatternRecommend = () => {
-    setIsClicked("full");
+    
     setLoading(true);
     currentGeo();
     axios({
@@ -141,6 +141,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("full");
         setLoading(false);
       })
       .catch((error) => {

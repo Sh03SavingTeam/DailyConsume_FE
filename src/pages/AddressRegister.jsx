@@ -39,7 +39,8 @@ function AddressRegister(props) {
       data: updatedDbAddress,
     });
 
-    navigate("/mypage");
+    navigate("/mypage", { state: { selectedTab: "address" } });
+    window.location.reload();
   };
 
   const extractDistrict = (fullAddress) => {
