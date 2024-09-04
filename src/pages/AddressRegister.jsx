@@ -35,11 +35,12 @@ function AddressRegister(props) {
 
     axios({
       method: "post",
-      url: "http://localhost:9999/api/address/addrRegister",
+      url: "/api/address/addrRegister",
       data: updatedDbAddress,
     });
 
-    navigate("/mypage");
+    navigate("/mypage", { state: { selectedTab: "address" } });
+    window.location.reload();
   };
 
   const extractDistrict = (fullAddress) => {
@@ -113,7 +114,7 @@ function AddressRegister(props) {
 
   useEffect(() => {
     checkJWT(
-      "http://localhost:9999/api/member/memberSession",
+      "/api/member/memberSession",
       "get",
       null
     ).then((response) => {

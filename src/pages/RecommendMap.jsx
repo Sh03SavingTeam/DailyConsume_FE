@@ -58,12 +58,11 @@ function MapPage() {
   };
 
   const clickPeerRecommend = () => {
-    setIsClicked("peer");
     setLoading(true);
     currentGeo();
     axios({
       url:
-        "http://localhost:9999/api/recommend/peer?lon=" +
+        "/api/recommend/peer?lon=" +
         location.latitude +
         "&lat=" +
         location.longitude,
@@ -72,6 +71,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("peer");
         setLoading(false);
       })
       .catch((error) => {
@@ -81,12 +81,11 @@ function MapPage() {
   };
 
   const clickDaypatternRecommend = () => {
-    setIsClicked("day");
     setLoading(true);
     currentGeo();
     axios({
       url:
-        "http://localhost:9999/api/recommend/daypattern?lon=" +
+        "/api/recommend/daypattern?lon=" +
         location.latitude +
         "&lat=" +
         location.longitude,
@@ -95,6 +94,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("day");
         setLoading(false);
       })
       .catch((error) => {
@@ -104,12 +104,11 @@ function MapPage() {
   };
 
   const clickConsumeRecommend = () => {
-    setIsClicked("consume");
     setLoading(true);
     currentGeo();
     axios({
       url:
-        "http://localhost:9999/api/recommend/consume?lon=" +
+        "/api/recommend/consume?lon=" +
         location.latitude +
         "&lat=" +
         location.longitude,
@@ -118,6 +117,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("consume");
         setLoading(false);
       })
       .catch((error) => {
@@ -127,12 +127,12 @@ function MapPage() {
   };
 
   const clickAllpatternRecommend = () => {
-    setIsClicked("full");
+    
     setLoading(true);
     currentGeo();
     axios({
       url:
-        "http://localhost:9999/api/recommend/all?lon=" +
+        "/api/recommend/all?lon=" +
         location.latitude +
         "&lat=" +
         location.longitude,
@@ -141,6 +141,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("full");
         setLoading(false);
       })
       .catch((error) => {
@@ -155,7 +156,7 @@ function MapPage() {
 
   const weeklyConsume = () => {
     axios({
-      url: "http://localhost:9999/api/recommend/weekly?memId=m049",
+      url: "/api/recommend/weekly?memId=m049",
       method: "GET",
     })
       .then((res) => {
@@ -171,7 +172,7 @@ function MapPage() {
     // const geocoder = new window.kakao.maps.services.Geocoder();
     currentGeo();
     axios({
-      url: "http://localhost:9999/api/recommend/store",
+      url: "/api/recommend/store",
       method: "GET",
     })
       .then((res) => {
@@ -311,7 +312,7 @@ function MapPage() {
             onClick={() => markerClickHandler(store)}
           >
             {selectedStore && selectedStore.storeRegNum === store.storeRegNum && (
-              <div  className="marker_click_div" style={{ padding: "5px", color: "#000" }}>
+              <div className="marker_click_div" >
                 <img src={store.storeImg}/>
                 <div className="marker_store_info">
                   <div>{store.storeName}</div>

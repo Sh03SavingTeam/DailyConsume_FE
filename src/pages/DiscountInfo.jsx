@@ -36,10 +36,10 @@ function DiscountInfo({ memberId, contentRef }) {
         setCategory("🍚식비");
       } else if (data.category === "교통비") {
         setCategory("🚌교통비");
-      } else if (data.category === "쇼핑") {
-        setCategory("🛍️쇼핑");
-      } else if (data.category === "여가비") {
-        setCategory("🍿여가비");
+      } else if (data.category === "온라인쇼핑") {
+        setCategory("🛍️온라인쇼핑");
+      } else if (data.category === "문화/여가") {
+        setCategory("🍿문화/여가");
       }
 
       // 다음 페이지가 있는지 여부를 결정
@@ -58,7 +58,7 @@ function DiscountInfo({ memberId, contentRef }) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "http://localhost:9999/api/member/memberSession",
+          "/api/member/memberSession",
           "get",
           null
         );
