@@ -43,20 +43,6 @@ function AmountListForDay({ initialDay }) {
       const month = formattedDate.format("MM");
       const dayOfMonth = formattedDate.format("DD");
 
-<<<<<<< HEAD
-            // 서버에 GET 요청을 보내 결제 내역 데이터를 가져옴
-            const response = await axios.get(
-                "/api/calendar/payhistory/daily",
-                {
-                    params: {
-                        memberId: memberId, // 요청 파라미터로 사용자 ID를 보냄
-                        day: dayOfMonth, // 요청 파라미터로 선택된 날짜의 일을 보냄
-                        month: month, // 요청 파라미터로 선택된 날짜의 월을 보냄
-                        year: year, // 요청 파라미터로 선택된 날짜의 년도를 보냄
-                    },
-                }
-            );
-=======
       // 서버에 GET 요청을 보내 결제 내역 데이터를 가져옴
       const response = await axios.get("/api/calendar/payhistory/daily", {
         params: {
@@ -66,7 +52,6 @@ function AmountListForDay({ initialDay }) {
           year: year, // 요청 파라미터로 선택된 날짜의 년도를 보냄
         },
       });
->>>>>>> 492bd937ef83942b79004fab3c01150123a294b5
 
       // 서버로부터 받은 데이터를 사용하기 편하게 가공
       const fetchedData = response.data.map((item) => ({
@@ -132,27 +117,12 @@ function AmountListForDay({ initialDay }) {
     setIsDetailVisible(true); // 상세보기 가시성 상태를 true로 설정
   };
 
-<<<<<<< HEAD
-            // 서버에 GET 요청을 보내 주간 소비 예산 데이터를 가져옴
-            const response = await axios.get(
-                "/api/calendar/payweekly",
-                {
-                    params: {
-                        memberId: memberId, // 요청 파라미터로 사용자 ID를 보냄
-                        year: year, // 요청 파라미터로 선택된 날짜의 년도를 보냄
-                        month: month, // 요청 파라미터로 선택된 날짜의 월을 보냄
-                        day: dayOfMonth, // 요청 파라미터로 선택된 날짜의 일을 보냄
-                    },
-                }
-            );
-=======
   // 상세보기 창을 닫을 때 호출되는 함수
   const handleCloseDetail = () => {
     setIsDetailVisible(false); // 상세보기 가시성 상태를 false로 설정
     setSelectedItem(null); // 선택된 아이템 상태 초기화
     fetchOrderList(); // 결제 내역 리스트를 다시 가져옴
   };
->>>>>>> 492bd937ef83942b79004fab3c01150123a294b5
 
   // 현재 선택된 날짜를 "YY.MM.DD" 형식으로 변환
   const formattedDay = moment(day, "YYYY년 MM월 DD일").format("YY.MM.DD");
