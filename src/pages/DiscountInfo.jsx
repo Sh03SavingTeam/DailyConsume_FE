@@ -36,10 +36,10 @@ function DiscountInfo({ memberId, contentRef }) {
         setCategory("🍚식비");
       } else if (data.category === "교통비") {
         setCategory("🚌교통비");
-      } else if (data.category === "쇼핑") {
-        setCategory("🛍️쇼핑");
-      } else if (data.category === "여가비") {
-        setCategory("🍿여가비");
+      } else if (data.category === "온라인쇼핑") {
+        setCategory("🛍️온라인쇼핑");
+      } else if (data.category === "문화/여가") {
+        setCategory("🍿문화/여가");
       }
 
       // 다음 페이지가 있는지 여부를 결정
@@ -68,7 +68,6 @@ function DiscountInfo({ memberId, contentRef }) {
 
         // 2. 할인 정보 불러오기
         const data = await fetchDiscountInfos(page);
-
       } catch (error) {
         console.error("There was an error!", error);
       }
@@ -105,15 +104,17 @@ function DiscountInfo({ memberId, contentRef }) {
     if (contentRef.current) {
       contentRef.current.scrollTop = 0;
     }
-  }
+  };
 
   return (
     <div className="discount-container">
       <Link to="/mypage" state={{ selectedTab: "analysis" }}>
-          <button className="back-button2">&lt;</button>
+        <button className="back-button2">&lt;</button>
       </Link>
       <div className="discount-title">
-        <div className="title-point">이번달은 <span>{category}</span>에 가장 많은 돈을 썼어요!</div>
+        <div className="title-point">
+          이번달은 <span>{category}</span>에 가장 많은 돈을 썼어요!
+        </div>
       </div>
       <div className="discount-body">
         {/* <div className="discount-box">맞춤 할인 정보</div> */}

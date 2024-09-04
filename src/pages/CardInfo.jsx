@@ -38,36 +38,35 @@ function CardInfo(props) {
         })
           .then((response) => {
             const userCards = response.data;
-
             axios
               .get("/api/card/getAllCardInfo")
               .then((res) => {
                 const allCards = res.data;
 
-                const mergedList = userCards.map((userCard) => {
-                  const matchedCard = allCards.find(
-                    (card) => card.cardName === userCard.cardName
-                  );
-                  return {
-                    ...userCard,
-                    cardImgUrl: matchedCard
-                      ? matchedCard.cardImgUrl
-                      : "/default-card-image.jpg",
-                    cardType: matchedCard ? matchedCard.cardType : "Unknown",
-                    cardPageUrl: matchedCard ? matchedCard.cardPageUrl : "#",
-                  };
-                });
-                setCardList(mergedList);
-
-                // Automatically select the first card if available
-                if (mergedList.length > 0) {
-                  const firstCardNum = mergedList[0].cardNum;
-                  setSelectedCardNum(firstCardNum);
-                  handleCardSelection(firstCardNum);
-                }
-
-                console.log(mergedList);
+              const mergedList = userCards.map((userCard) => {
+                const matchedCard = allCards.find(
+                  (card) => card.cardName === userCard.cardName
+                );
+                return {
+                  ...userCard,
+                  cardImgUrl: matchedCard
+                    ? matchedCard.cardImgUrl
+                    : "/default-card-image.jpg",
+                  cardType: matchedCard ? matchedCard.cardType : "Unknown",
+                  cardPageUrl: matchedCard ? matchedCard.cardPageUrl : "#",
+                };
               });
+              setCardList(mergedList);
+
+              // Automatically select the first card if available
+              if (mergedList.length > 0) {
+                const firstCardNum = mergedList[0].cardNum;
+                setSelectedCardNum(firstCardNum);
+                handleCardSelection(firstCardNum);
+              }
+
+              console.log(mergedList);
+            });
           })
           .catch((error) => {
             console.error("카드 목록 가져오기 실패", error);

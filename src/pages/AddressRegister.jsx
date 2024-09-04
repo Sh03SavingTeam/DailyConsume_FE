@@ -39,7 +39,8 @@ function AddressRegister(props) {
       data: updatedDbAddress,
     });
 
-    navigate("/mypage");
+    navigate("/mypage", { state: { selectedTab: "address" } });
+    window.location.reload();
   };
 
   const extractDistrict = (fullAddress) => {
@@ -179,13 +180,13 @@ function AddressRegister(props) {
               />
             </div>
             <div className="submit-button2-center">
-            <button
-              type="submit"
-              className="submit-button2"
-              onClick={handleRegisterAddr}
-            >
-              등록하기
-            </button>
+              <button
+                type="submit"
+                className="submit-button2"
+                onClick={handleRegisterAddr}
+              >
+                등록하기
+              </button>
             </div>
           </form>
         </div>

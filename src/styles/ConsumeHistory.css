@@ -323,15 +323,43 @@ input.form-control {
 }
 
 .back-button2 {
-  background-color: #303473;
-  cursor: pointer;
-  color: white;
-  border-radius: 20px;
-  margin-left: 2%;
-  margin-top: 1%;
-  text-align: left;
+    background-color: #303473;
+    cursor: pointer;
+    color: white;
+    border-radius: 20px;
+    margin-left: 2%;
+    margin-top: 1%;
+    text-align: left;
 }
 
-.hidden {
-  display: none;
+.img-upload{
+    color: white !important;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 12px;
+    background-color: #303473;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 28%;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.img-upload:hover{
+    background-color: #94DBE0;
+}
+
+input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.datepicker-custom{
+    width: 95%;
 }

@@ -72,6 +72,7 @@ function AddressList(props) {
   const handleConfirmDefaultAddrChange = () => {
     handleRadioChange(tempSelectedAddrId); // 기본 주소 변경
     closeDefaultAddrPopup(); // 팝업 닫기
+    navigate("/mypage", { state: { selectedTab: "address" } });
     window.location.reload();
   };
 
@@ -160,6 +161,7 @@ function AddressList(props) {
         closePopUp();
       });
     }
+    navigate("/mypage", { state: { selectedTab: "address" } });
     window.location.reload();
   };
 
@@ -215,7 +217,10 @@ function AddressList(props) {
                       checked={selectedAddrId === item.addrId} // 선택된 항목인지 확인
                       onChange={() => openDefaultAddrPopup(item.addrId)} // Radio 버튼 변경 처리
                     />
-                    <label htmlFor={`addrSelectRadio_${item.addrId}`}>
+                    <label
+                      className="addrSelectLabel"
+                      htmlFor={`addrSelectRadio_${item.addrId}`}
+                    >
                       {selectedAddrId === item.addrId
                         ? "기본 주소"
                         : "주소 선택"}

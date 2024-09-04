@@ -50,7 +50,9 @@ function MapStoreList(props) {
           </div>
         ))}
       </div>
-      {selectedStore && <StoreDetail store={selectedStore} setStore = {setSelectedStore}/> }
+      {selectedStore && (
+        <StoreDetail store={selectedStore} setStore={setSelectedStore} />
+      )}
     </div>
   );
 }
