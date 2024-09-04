@@ -67,20 +67,22 @@ function MypageMain(props) {
 
         // 회원 정보 불러오기
         console.log("memberID: " + memberID);
-        const memberResponse = await axios.get(
-          `/mypage/${memberID}`
-        );
+        const memberResponse = await axios.get(`/mypage/${memberID}`);
         const data = memberResponse.data;
-        setMemberImg(data.memberImg ? `https://shinhands3rd-project2.s3.ap-southeast-2.amazonaws.com/MemberIMG/${memberImg}` : profileImg);
+        setMemberImg(
+          data.memberImg
+            ? `https://shinhands3rd-project2.s3.ap-southeast-2.amazonaws.com/MemberIMG/memberimg_${memberID}.jpg`
+            : profileImg
+        );
         setMemberName(data.memberName);
         setWeeklyMoney(data.weeklyMoney);
         setEndDate(data.endDate);
-     // 주간소비 금액이 설정되었는지 체크
-     if (data.weeklyMoney > 0 && data.endDate === getSunday()) {
-      setCheck(false);  // 금액 설정이 완료된 상태
-    }
-  } catch (error) {
-    console.error("데이터 처리 중 오류 발생!" + error);
+        // 주간소비 금액이 설정되었는지 체크
+        if (data.weeklyMoney > 0 && data.endDate === getSunday()) {
+          setCheck(false); // 금액 설정이 완료된 상태
+        }
+      } catch (error) {
+        console.error("데이터 처리 중 오류 발생!" + error);
       }
     };
 
@@ -217,7 +219,9 @@ function MypageMain(props) {
             <Link to="/mypage/ConsumeSet">
               <button>주간소비금액 설정</button>
             </Link>
-          ) : ( <button disabled>주간소비 금액 설정 완료</button>)}
+          ) : (
+            <button disabled>주간소비 금액 설정 완료</button>
+          )}
         </div>
         <button className="mypage-logout" onClick={handleMemberLogout}>
           로그아웃
