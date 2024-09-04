@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { checkJWT } from "services/checkJWT";
 
-function DiscountInfo({ memberId, contentRef }) {
+function DiscountInfo({ memberId }) {
   const navigate = useNavigate();
 
   const [memberID, setMemberID] = useState("");
@@ -76,7 +76,7 @@ function DiscountInfo({ memberId, contentRef }) {
     // 데이터를 가져오는 함수 호출
     fetchData();
 
-    scrollTopFunc();
+    //scrollTopFunc();
   }, [page]); // page가 변경될 때마다 실행되도록 설정
 
   //   useEffect(() => {
@@ -100,11 +100,11 @@ function DiscountInfo({ memberId, contentRef }) {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const scrollTopFunc = () => {
-    if (contentRef.current) {
-      contentRef.current.scrollTop = 0;
-    }
-  };
+  // const scrollTopFunc = () => {
+  //   if (contentRef.current) {
+  //     contentRef.current.scrollTop = 0;
+  //   }
+  // };
 
   return (
     <div className="discount-container">

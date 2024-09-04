@@ -46,7 +46,7 @@ function MypageMain(props) {
       case "consumeCompare":
         return <ConsumeCompare memberId={memberId} contentRef={contentRef} />;
       case "discountInfo":
-        return <DiscountInfo memberId={memberId} contentRef={contentRef} />;
+        return <DiscountInfo memberId={memberId} />;
       default:
         return <ConsumeHistory />;
     }
