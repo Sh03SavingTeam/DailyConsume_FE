@@ -16,6 +16,7 @@ function AmountDetail({ item, onClose }) {
 
   useEffect(() => {
     //const fetchDetail = async () => {
+<<<<<<< HEAD
         console.log("Requesting payment details for:", item.memberId, item.id); // 로그 추가
       axios.get(
             "/api/calendar/payhistory/detail",
@@ -33,7 +34,23 @@ function AmountDetail({ item, onClose }) {
         }).catch((error) => {
 
         });
+=======
+    console.log("Requesting payment details for:", item.memberId, item.id); // 로그 추가
+    axios
+      .get("/api/calendar/payhistory/detail", {
+        params: {
+          memberId: item.memberId, // item 객체에 memberId 포함
+          payId: item.id,
+        },
+      })
+      .then((response) => {
+        console.log("Response data:", response.data); // 응답 데이터를 로그에 출력
+>>>>>>> 492bd937ef83942b79004fab3c01150123a294b5
 
+        setDetail(response.data);
+        setIsNormal(response.data.myPayCheck === 1);
+      })
+      .catch((error) => {});
     //fetchDetail();
   }, [item]);
 
@@ -48,6 +65,7 @@ function AmountDetail({ item, onClose }) {
   const handleNormalButtonClick = async () => {
     try {
       // 서버에 myPayCheck 값을 1로 업데이트 요청 (PUT 요청)
+<<<<<<< HEAD
       const response = await axios.put(
         "/api/calendar/payhistory/update",
         {
@@ -56,6 +74,13 @@ function AmountDetail({ item, onClose }) {
           myPayCheck: 1,
         }
       );
+=======
+      const response = await axios.put("/api/calendar/payhistory/update", {
+        memberId: item.memberId,
+        payId: item.id,
+        myPayCheck: 1,
+      });
+>>>>>>> 492bd937ef83942b79004fab3c01150123a294b5
 
       // 상태를 정상으로 업데이트
       setIsNormal(true);
