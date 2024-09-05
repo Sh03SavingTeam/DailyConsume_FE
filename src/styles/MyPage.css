@@ -18,12 +18,11 @@
 }
 /*상단 랭크부분*/
 .rank-container {
-    background-color: white;
-    border-radius: 10px;
+   background-color: white;
+    border-radius: 20px;
     display: flex;
-    padding:10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
+    padding: 3%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 .character-container{
     padding-right: 10px;
@@ -44,9 +43,8 @@
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;  */
-    padding: 10px; 
-   
-    
+    padding: 10px;
+    font-weight: bold;
 }
 
 .rank-info3 {
@@ -118,6 +116,7 @@
 .text-wrap {
   margin : 6px;
   font-weight: bold;
+  font-family: "SEBANGGothicBold";
 }
 .list-container{
   margin-top:10px;
