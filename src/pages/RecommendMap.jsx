@@ -19,6 +19,7 @@ import happyIcon from "../assets/happy.png";
 import Loading from "components/Loading";
 import ScopeIcon from "../assets/scope.png";
 import WeeklyIcon from "../assets/receive-money.png";
+import { checkJWT } from "services/checkJWT";
 
 function MapPage() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -32,6 +33,8 @@ function MapPage() {
   const [selectedStore, setSelectedStore] = useState(null);
 
   const [isClicked, setIsClicked] = useState("");
+
+  const [memberId, setMemberId] = useState(null);
 
   const currentGeo = () => {
     if (navigator.geolocation) {
@@ -156,7 +159,7 @@ function MapPage() {
 
   const weeklyConsume = () => {
     axios({
-      url: "/api/recommend/weekly?memId=m049",
+      url: "/api/recommend/weekly?memId=" + memberId,
       method: "GET",
     })
       .then((res) => {
@@ -271,12 +274,33 @@ function MapPage() {
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
+
+    checkAndFetchData();
   }, []);
 
   useKakaoLoader();
 
+  const checkAndFetchData = async () => {
+    try {
+      const response = await checkJWT(
+        "/api/member/memberSession",
+        "get",
+        null
+      );
+      console.log("JWT 확인 결과: " + response.memberId);
+      const memId = response.memberId;
+      setMemberId(memId);
+    } catch (error) {
+      console.error("데이터 처리 중 오류 발생!" + error);
+    }
+
+    //결제 내역 가맹점 불러오기
+    
+
+  };
+
   return (
-    <div className="container" style={{ height: "94vh", minHeight: "94vh" }}>
+    <div className="container" style={{ height: "91svh", minHeight: "91svh" }}>
       {loading ? <Loading /> : null}
       <Map
         id="map"
