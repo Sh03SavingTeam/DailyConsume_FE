@@ -35,11 +35,12 @@ function AddressRegister(props) {
 
     axios({
       method: "post",
-      url: "http://localhost:9999/api/address/addrRegister",
+      url: "/api/address/addrRegister",
       data: updatedDbAddress,
     });
 
-    navigate("/mypage");
+    navigate("/mypage", { state: { selectedTab: "address" } });
+    window.location.reload();
   };
 
   const extractDistrict = (fullAddress) => {
@@ -112,7 +113,11 @@ function AddressRegister(props) {
   }, [nickname]);
 
   useEffect(() => {
-    checkJWT("http://localhost:9999/api/member/memberSession", "get", null).then((response) => {
+    checkJWT(
+      "/api/member/memberSession",
+      "get",
+      null
+    ).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
 
@@ -174,13 +179,15 @@ function AddressRegister(props) {
                 onChange={(e) => setNickname(e.target.value)}
               />
             </div>
-            <button
-              type="submit"
-              className="submit-button"
-              onClick={handleRegisterAddr}
-            >
-              등록하기
-            </button>
+            <div className="submit-button2-center">
+              <button
+                type="submit"
+                className="submit-button2"
+                onClick={handleRegisterAddr}
+              >
+                등록하기
+              </button>
+            </div>
           </form>
         </div>
 

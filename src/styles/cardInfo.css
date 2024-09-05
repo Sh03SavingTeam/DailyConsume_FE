@@ -1,32 +1,34 @@
 @font-face {
-  font-family: "OneShinhanBold";
-  src: url("../assets/OneShinhanBold.ttf") format("truetype");
+  font-family: "SEBANGGothic";
+  src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "OneShinhanLight";
-  src: url("../assets/OneShinhanLight.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "OneShinhanMedium";
-  src: url("../assets/OneShinhanMedium.ttf") format("truetype");
+  font-family: "SEBANGGothicBold";
+  src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 .card-container {
   background-color: #ffffff;
-
-  padding: 20px;
-  /* border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
   text-align: center;
-  /* margin-left: 5%;
-  margin-right: 5%; */
+
+  padding: 4%;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px lightgray;
+  margin: 5%;
+}
+
+.card-container1 {
+  background-color: #ffffff;
+  text-align: center;
+  padding: 3%;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 5%;
 }
 
 h2 {
@@ -40,11 +42,10 @@ h2 {
 .card-list {
   display: flex;
   width: 200px;
-  height: 200px;
   overflow-x: auto;
   text-align: center;
-  margin-left: 30px;
-  margin-right: 30px;
+  /* margin-left: 15px;
+  margin-right: 15px; */
   scroll-snap-type: x mandatory; /* 스크롤을 끝점에서 멈추게 설정 */
 }
 
@@ -54,24 +55,26 @@ h2 {
   scroll-snap-align: center; /* 카드가 스크롤 시 중앙에 위치하게 함 */
   /* Remove or override any existing shadow */
   box-shadow: none;
-  transform: rotate(90deg); /* 이미지를 90도 회전시킴 */
+  height: 200px;
 }
 
-.card-wrapper {
+.card-list-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto; /* Center the wrapper horizontally */
-  padding: 20px 0; /* Add padding to avoid overlap */
+
   width: 100%;
   max-width: 300px; /* Ensure it doesn't get too wide */
   position: relative;
 }
 
 .card-image {
+  transform: rotate(90deg); /* If no rotation is needed, set to 0deg */
   width: 100%;
   max-width: 200px;
   height: auto; /* Ensure it maintains aspect ratio */
+  margin-top: 35px;
 }
 
 .background-gradient {
@@ -124,7 +127,7 @@ h2 {
   border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
-  font-family: "OneShinhanMedium", sans-serif;
+  font-family: "SEBANGGothic", sans-serif;
 }
 
 .action-button:hover {
@@ -141,4 +144,19 @@ h2 {
 
 .top_card_area {
   height: 300px;
+}
+
+.newAddressButton{
+  background-color: #303473;
+  color: white;
+  margin: 5%;
+  padding: 1.5%;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'SEBANGGothic';
+  font-weight: bold;
+}
+
+.bold-sebang {
+  font-family: "SEBANGGothicBold", sans-serif;
 }

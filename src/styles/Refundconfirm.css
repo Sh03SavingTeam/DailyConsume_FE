@@ -1,17 +1,19 @@
 @font-face {
-    font-family: "OneShinhanBold";
-    font-weight: bold;
-    src: url("../fonts/OneShinhanBold.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "OneShinhanMedium";
+    font-family: "SEBANGGothic";
+    src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
     font-weight: normal;
-    src: url("../fonts/OneShinhanMedium.ttf") format("truetype");
-}
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "SEBANGGothicBold";
+    src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
 
 .confirm-container{
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     margin: 0 auto;
     padding: 0;
     background-color: #f2f2f7;
@@ -98,7 +100,7 @@ hr {
 
 .confirm-button button{
     width:100%;
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     font-size: 15px;
     background-color: #303473;
     border: none;

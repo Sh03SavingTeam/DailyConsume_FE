@@ -26,7 +26,7 @@ function ConsumeLogin(props) {
 
     axios({
       method: "post",
-      url: "http://localhost:9999/api/member/memberLogin",
+      url: "/api/member/memberLogin",
       data: {
         memberId: loginInfo.memberId,
         memberPw: loginInfo.memberPw,
@@ -52,7 +52,7 @@ function ConsumeLogin(props) {
   };
 
   const handleMemberRegister = () => {
-    navigate("/Join");
+    navigate("/join");
   };
 
   return (
@@ -92,10 +92,16 @@ function ConsumeLogin(props) {
               />
             </div>
             <div className="submit-button-center">
-              <button className="submit-button" onClick={handleMemberLogin}>
+              <button
+                className="consumeLogin-button"
+                onClick={handleMemberLogin}
+              >
                 로그인
               </button>
-              <button className="submit-button" onClick={handleMemberRegister}>
+              <button
+                className="consumeLogin-button"
+                onClick={handleMemberRegister}
+              >
                 회원가입
               </button>
             </div>

@@ -1,10 +1,18 @@
 @font-face {
-  font-family: "OneShinhanBold";
+  font-family: "SEBANGGothic";
+  src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
   font-weight: normal;
-  src: url("../fonts/OneShinhanBold.ttf") format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SEBANGGothicBold";
+  src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 .discount-container {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     max-width: 375px;
     margin: 0 auto;
     padding: 0;
@@ -27,11 +35,12 @@
 }
 
 .discount-container::-webkit-scrollbar {
-display: none; /* Chrome, Safari, Opera*/
+  display: none; /* Chrome, Safari, Opera*/
 }
+
 .discount-title {
-  font-size: 15px;
-  font-family: "OneShinhanBold";
+  font-size: 13px;
+  font-family: "SEBANGGothicBold";
   background: #303473;
   color: white;
   border-radius: 15px;
@@ -41,20 +50,25 @@ display: none; /* Chrome, Safari, Opera*/
   margin-bottom: 0%;
   text-align: center;
 }
+
 .discount-body{
   margin-top: 20px;
   width: 100%;
   margin: 0 auto;
 }
+
 .discount-title span {
   color: skyblue;
+  font-size: 15px;
 }
+
 .discount-box {
-color: #333;
-padding: 10px 20px 0px 20px;
-font-size: 15px;
-margin-left:23px;
+  color: #333;
+  padding: 10px 20px 0px 20px;
+  font-size: 15px;
+  margin-left:23px;
 }
+
 .discount-item {
   position: relative;
   display: flex;
@@ -67,43 +81,59 @@ margin-left:23px;
   background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
+.discount-item p {
+  margin: 4px;
+}
+
 .discount-item img {
-width: 100px;
-height: auto;
-border-radius: 8px;
-margin-right: 15px;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  margin-right: 15px;
 }
+
 .info {
-display: flex;
-flex-direction: column;
-font-size: 15px;
-line-height: 0.1;
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  line-height: 1.1;
 }
+
 .storeName, .expiry {
-color: #A4A4A4;
+  color: #A4A4A4;
 }
+
 .productName {
-color: #333;
-white-space: nowrap; 
-text-overflow: ellipsis;
-word-break: break-all;
+  font-family: "SEBANGGothicBold";
+  color: #333;
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
+  word-break: break-all;
+  width: 215px;
+  height: auto;
 }
-.amount {
-color: #333;
+
+.p-amount {
+  font-family: "SEBANGGothicBold";
+  color: #333;
 }
+
 .discount-button {
-text-align: center;
-padding: 15px 0;
+  text-align: center;
+  padding: 15px 0;
 }
+
 .discount-button img{
-margin-left:5px;
+  margin-left:5px;
 }
+
 .discount-button button {
-font-size: 12px;
-padding: 5px 10px;
-border: none;
-background-color: white;
-border-radius: 5px;
-cursor: pointer;
-font-family: "OneShinhanMedium";
+  font-size: 12px;
+  padding: 5px 10px;
+  border: none;
+  background-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "SEBANGGothic";
 }

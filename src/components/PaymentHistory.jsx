@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "../styles/Home.css";
+import moreIcon from "../assets/more.png";
 
 function PaymentHistory(props) {
   const [payHistoryList, setPayHistoryList] = useState([]);
@@ -12,7 +13,7 @@ function PaymentHistory(props) {
 
   const getPayHistory = () => {
     axios({
-      url: "http://localhost:9999/api/home/payhistory?memId=m002",
+      url: "/api/home/payhistory?memId=m002",
       method: "GET",
     })
       .then((res) => {
@@ -40,8 +41,8 @@ function PaymentHistory(props) {
   };
 
   const formatAmout = (amount) => {
-    return new Intl.NumberFormat('ko-KR').format(amount);
-};
+    return new Intl.NumberFormat("ko-KR").format(amount);
+  };
 
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
@@ -50,7 +51,7 @@ function PaymentHistory(props) {
   return (
     <div className="pay_history_area">
       <div className="ph_top">
-        <span>최근이용내역</span>
+        <span className="bold-sebang"> 최근이용내역</span>
       </div>
       <div className="ph_list_area">
         {payHistoryList.length > 0 ? (
@@ -62,7 +63,7 @@ function PaymentHistory(props) {
               </div>
               <div className="history_bottom">
                 <p>
-                  <span>{formatPayDate(payHistory.payDate)}</span> 
+                  <span>{formatPayDate(payHistory.payDate)}</span>
                   <span>{formatPayTime(payHistory.payDate)}</span> | 일시불
                 </p>
               </div>
@@ -71,9 +72,14 @@ function PaymentHistory(props) {
         ) : (
           <div>최근 이용내역이 존재하지 않습니다.</div>
         )}
-        {visibleCount < payHistoryList.length && (
-          <div className="more_btn" onClick={handleShowMore}>더보기 &darr;</div>
-        )}
+        <div className="more-button">
+          {visibleCount < payHistoryList.length && (
+            <button onClick={handleShowMore}>
+              더보기{" "}
+              <img src={moreIcon} alt="more Icon" className="more-icon" />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

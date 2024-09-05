@@ -1,17 +1,19 @@
 @font-face {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
+    src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
     font-weight: normal;
-    src: url("../fonts/OneShinhanBold.ttf") format("truetype");
+    font-style: normal;
   }
 
   @font-face {
-    font-family: "OneShinhanMedium";
+    font-family: "SEBANGGothicBold";
+    src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
     font-weight: normal;
-    src: url("../fonts/OneShinhanMedium.ttf") format("truetype");
+    font-style: normal;
   }
 
 .point-container {
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     max-width: 375px;
     margin: 5%;
     padding: 3%;
@@ -22,6 +24,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .point-container::-webkit-scrollbar {
@@ -59,7 +62,7 @@
     background: linear-gradient(90deg, #303473 0%, #5B62D9 50%, #757BDE 100%);
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
-    padding: 30px 20px;
+    padding: 25px 20px;
     text-align: right;
     height: 40px;
     width: 80%;
@@ -76,7 +79,7 @@
 }
 
 .balance button{
-    font-family: "OneShinhanBold";
+    font-family: "SEBANGGothic";
     border-radius: 10px;
     border: 1px solid #FFF;
     background-color: transparent;
@@ -88,6 +91,7 @@
 }
 
 .history-title {
+    font-family: "SEBANGGothicBold";
     display: flex;
     justify-content: space-between;
     padding: 20px;
@@ -102,7 +106,7 @@
     background-color: #EAEAEA;
     border-radius: 5px;
     cursor: pointer;
-    font-family: "OneShinhanMedium";
+    font-family: "SEBANGGothic";
 }
 
 .filter-button img {
@@ -174,7 +178,7 @@
     background-color: #EAEAEA;
     border-radius: 5px;
     cursor: pointer;
-    font-family: "OneShinhanMedium";
+    font-family: "SEBANGGothic";
 }
 
 .footer-container {

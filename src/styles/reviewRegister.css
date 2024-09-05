@@ -1,19 +1,13 @@
 @font-face {
-  font-family: "OneShinhanBold";
-  src: url("../assets/OneShinhanBold.ttf") format("truetype");
+  font-family: "SEBANGGothic";
+  src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "OneShinhanLight";
-  src: url("../assets/OneShinhanLight.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "OneShinhanMedium";
-  src: url("../assets/OneShinhanMedium.ttf") format("truetype");
+  font-family: "SEBANGGothicBold";
+  src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -51,7 +45,7 @@ h2 {
   border-radius: 30px;
   /* font-size: 16px;
   font-weight: bold; */
-  font-family: "OneShinhanMedium", sans-serif;
+  font-family: "SEBANGGothic", sans-serif;
   width: 60%;
 }
 
@@ -60,11 +54,12 @@ h2 {
   background-color: #3b4cca;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   border-radius: 30px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: bold;
+  height: 40px;
 }
 
 .title {

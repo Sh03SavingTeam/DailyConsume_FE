@@ -9,10 +9,11 @@ import MapTopSelector from "../components/MapTopSelector";
 import useKakaoLoader from "../services/useKakaoLoader";
 import MapStoreList from "components/MapStoreList";
 import MapSelectedStore from "components/MapSelectedStore";
+import Loading from "components/Loading";
 
 function PayHistoryMap() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
-
+  const [loading, setLoading] = useState(false);
   const center = {
     lat: 33.450701,
     lng: 126.570667,
@@ -29,7 +30,7 @@ function PayHistoryMap() {
   const getRecommendStore = () => {
     // const geocoder = new window.kakao.maps.services.Geocoder();
     axios({
-      url: "http://localhost:9999/api/recommend/store",
+      url: "/api/recommend/store",
       method: "GET",
     })
       .then((res) => {
@@ -133,39 +134,44 @@ function PayHistoryMap() {
   useKakaoLoader();
 
   return (
-    <div className="app-container">
-      <div className="main-content">
-        <Map
-          id="map"
-          center={{ lat: location.latitude, lng: location.longitude }}
-          style={{ width: "100%", aspectRatio: 9 / 16 }}
-          level={3} // 지도의 확대 레벨
-          onClick={mapClickHandler}
-        >
-          {stores.map((store, index) => (
-            <MapMarker
-              key={index}
-              position={{ lat: store.storeLatX, lng: store.storeLonY }}
-              image={{
-                src: customMarker,
-                size: {
-                  width: 30,
-                  height: 30,
-                },
-              }}
-              title={store.storeName}
-              onClick={() => markerClickHandler(store)}
-            />
-          ))}
-          {store && (
-            <div className="map-selected-store-container">
-              <MapSelectedStore store={store} />
-            </div>
-          )}
-        </Map>
+    <div className="container" style={{ height: "94vh", minHeight: "94vh" }}>
+      {loading ? <Loading /> : null}
+      <Map
+        id="map"
+        center={{ lat: location.latitude, lng: location.longitude }}
+        style={{ width: "100%", aspectRatio: 9 / 16 }}
+        level={3} // 지도의 확대 레벨
+        onClick={mapClickHandler}
+      >
+        {/* 사용자 현재 위치 표시. PC 경우 다소 부정확함 */}
+        <MapMarker
+          position={{ lat: location.latitude, lng: location.longitude }}
+        />
 
-        <MapTopSelector pageState = 'history'/>
-      </div>
+        {stores.map((store, index) => (
+          <MapMarker
+            key={index}
+            position={{ lat: store.storeLatX, lng: store.storeLonY }}
+            image={{
+              src: customMarker,
+              size: {
+                width: 30,
+                height: 30,
+              },
+            }}
+            title={store.storeName}
+            onClick={() => markerClickHandler(store)}
+          />
+        ))}
+        {store && (
+          <div className="map-selected-store-container">
+            <MapSelectedStore store={store} />
+          </div>
+        )}
+      </Map>
+
+      <MapTopSelector pageState="history" />
+
       <Footer />
     </div>
   );

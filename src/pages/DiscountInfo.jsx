@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { checkJWT } from "services/checkJWT";
 
-function DiscountInfo({ memberId, contentRef }) {
+function DiscountInfo({ memberId }) {
   const navigate = useNavigate();
 
   const [memberID, setMemberID] = useState("");
@@ -26,7 +26,7 @@ function DiscountInfo({ memberId, contentRef }) {
   const fetchDiscountInfos = async (page) => {
     try {
       const response = await axios.get(
-        `http://localhost:9999/mypage/discountinginfo/${memberId}?page=${page}`
+        `/mypage/discountinginfo/${memberId}?page=${page}`
       );
       const data = response.data;
 
@@ -36,10 +36,10 @@ function DiscountInfo({ memberId, contentRef }) {
         setCategory("🍚식비");
       } else if (data.category === "교통비") {
         setCategory("🚌교통비");
-      } else if (data.category === "쇼핑") {
-        setCategory("🛍️쇼핑");
-      } else if (data.category === "여가비") {
-        setCategory("🍿여가비");
+      } else if (data.category === "온라인쇼핑") {
+        setCategory("🛍️온라인쇼핑");
+      } else if (data.category === "문화/여가") {
+        setCategory("🍿문화/여가");
       }
 
       // 다음 페이지가 있는지 여부를 결정
@@ -58,7 +58,7 @@ function DiscountInfo({ memberId, contentRef }) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "http://localhost:9999/api/member/memberSession",
+          "/api/member/memberSession",
           "get",
           null
         );
@@ -68,7 +68,6 @@ function DiscountInfo({ memberId, contentRef }) {
 
         // 2. 할인 정보 불러오기
         const data = await fetchDiscountInfos(page);
-
       } catch (error) {
         console.error("There was an error!", error);
       }
@@ -77,7 +76,7 @@ function DiscountInfo({ memberId, contentRef }) {
     // 데이터를 가져오는 함수 호출
     fetchData();
 
-    scrollTopFunc();
+    //scrollTopFunc();
   }, [page]); // page가 변경될 때마다 실행되도록 설정
 
   //   useEffect(() => {
@@ -101,19 +100,21 @@ function DiscountInfo({ memberId, contentRef }) {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const scrollTopFunc = () => {
-    if (contentRef.current) {
-      contentRef.current.scrollTop = 0;
-    }
-  }
+  // const scrollTopFunc = () => {
+  //   if (contentRef.current) {
+  //     contentRef.current.scrollTop = 0;
+  //   }
+  // };
 
   return (
     <div className="discount-container">
       <Link to="/mypage" state={{ selectedTab: "analysis" }}>
-          <button className="back-button2">&lt;</button>
+        <button className="back-button2">&lt;</button>
       </Link>
       <div className="discount-title">
-        <div className="title-point">이번달은 <span>{category}</span>에 가장 많은 돈을 썼어요!</div>
+        <div className="title-point">
+          이번달은 <span>{category}</span>에 가장 많은 돈을 썼어요!
+        </div>
       </div>
       <div className="discount-body">
         {/* <div className="discount-box">맞춤 할인 정보</div> */}
@@ -123,7 +124,7 @@ function DiscountInfo({ memberId, contentRef }) {
             <div className="info">
               <p className="storeName">{item.storeName}</p>
               <p className="productName">{item.productName}</p>
-              <p className="amount">
+              <p className="p-amount">
                 {item.amount} ({item.productContent})
               </p>
               <p className="expiry">

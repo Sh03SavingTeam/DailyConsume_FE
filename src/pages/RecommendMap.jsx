@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import Footer from "../components/Footer";
 import customMarker from "../assets/location_7.png";
+import consumeMarker from "../assets/consumeMarker.png";
+import peerMarker from "../assets/peerMarker.png";
+import dayMarker from "../assets/dayMarker.png";
+import fullMarker from "../assets/fullMarker.png";
 
 import axios from "axios";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
@@ -26,6 +30,8 @@ function MapPage() {
 
   const [stores, setStores] = useState([]);
   const [selectedStore, setSelectedStore] = useState(null);
+
+  const [isClicked, setIsClicked] = useState("");
 
   const currentGeo = () => {
     if (navigator.geolocation) {
@@ -65,6 +71,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("peer");
         setLoading(false);
       })
       .catch((error) => {
@@ -87,6 +94,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("day");
         setLoading(false);
       })
       .catch((error) => {
@@ -109,6 +117,7 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("consume");
         setLoading(false);
       })
       .catch((error) => {
@@ -118,6 +127,7 @@ function MapPage() {
   };
 
   const clickAllpatternRecommend = () => {
+    
     setLoading(true);
     currentGeo();
     axios({
@@ -131,13 +141,14 @@ function MapPage() {
       .then((res) => {
         console.log(res.data);
         setStores(res.data);
+        setIsClicked("full");
         setLoading(false);
       })
       .catch((error) => {
         console.log("에러: " + error);
         setLoading(false);
       });
-  }
+  };
 
   const getWeeklyConsumeStore = () => {
     weeklyConsume();
@@ -205,10 +216,8 @@ function MapPage() {
 
   const markerClickHandler = (store, e) => {
     console.log(store);
-    if(selectedStore != null)
-      setSelectedStore(null)
-    else
-      setSelectedStore(store);
+    if (selectedStore != null) setSelectedStore(null);
+    else setSelectedStore(store);
   };
 
   const searchDetailAddr = (lat, lng) => {
@@ -264,7 +273,6 @@ function MapPage() {
     }
   }, []);
 
-
   useKakaoLoader();
 
   return (
@@ -286,7 +294,16 @@ function MapPage() {
             key={index}
             position={{ lat: store.storeLatX, lng: store.storeLonY }}
             image={{
-              src: customMarker,
+              src:
+                isClicked === "consume"
+                  ? consumeMarker
+                  : isClicked === "peer"
+                  ? peerMarker
+                  : isClicked === "day"
+                  ? dayMarker
+                  : isClicked === "full"
+                  ? fullMarker
+                  : customMarker,
               size: {
                 width: 30,
                 height: 30,
@@ -295,31 +312,49 @@ function MapPage() {
             title={store.storeName}
             onClick={() => markerClickHandler(store)}
           >
-            {selectedStore && selectedStore.storeRegNum === store.storeRegNum && (
-              <div  className="marker_click_div" style={{ padding: "5px", color: "#000" }}>
-                <img src={store.storeImg}/>
-                <div className="marker_store_info">
-                  <div>{store.storeName}</div>
-                  <div>{store.cate}</div>
-                  <div>{store.storeAddr}</div>
+            {selectedStore &&
+              selectedStore.storeRegNum === store.storeRegNum && (
+                <div
+                  className="marker_click_div"
+                  style={{ padding: "5px", color: "#000" }}
+                >
+                  <img src={store.storeImg} />
+                  <div className="marker_store_info">
+                    <div>{store.storeName}</div>
+                    <div>{store.cate}</div>
+                    <div>{store.storeAddr}</div>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
           </MapMarker>
         ))}
       </Map>
       <MapTopSelector pageState="recommend" />
       <div className="marker_category_div">
-        <div onClick={clickConsumeRecommend}>
+        <div
+          className={`consume-pattern ${
+            isClicked === "consume" ? "consume" : ""
+          }`}
+          onClick={clickConsumeRecommend}
+        >
           <img src={consumptionIcon} alt="calendarIcon" /> 소비 패턴
         </div>
-        <div onClick={clickPeerRecommend}>
+        <div
+          className={`peer-recommend ${isClicked === "peer" ? "peer" : ""}`}
+          onClick={clickPeerRecommend}
+        >
           <img src={happyIcon} alt="calendarIcon" /> 또래 추천
         </div>
-        <div onClick={clickDaypatternRecommend}>
+        <div
+          className={`day-consumption ${isClicked === "day" ? "day" : ""}`}
+          onClick={clickDaypatternRecommend}
+        >
           <img src={calendarIcon} alt="calendarIcon" /> 요일 소비
         </div>
-        <div onClick={clickAllpatternRecommend}>
+        <div
+          className={`full-recommend ${isClicked === "full" ? "full" : ""}`}
+          onClick={clickAllpatternRecommend}
+        >
           <img src={robotIcon} alt="calendarIcon" /> 통합 추천
         </div>
       </div>

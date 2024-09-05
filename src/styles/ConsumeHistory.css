@@ -1,311 +1,325 @@
+@font-face {
+  font-family: "SEBANGGothic";
+  src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
-    font-family: "OneShinhanBold";
-    font-weight: normal;
-    src: url("../fonts/OneShinhanBold.ttf") format("truetype");
-  }
+  font-family: "SEBANGGothicBold";
+  src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 .container {
-    height: 105vh;
-    overflow-y: auto;
-    min-height: 105vh; /*115vh*/
-    background-color: #f8f8fdbf;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none;
+  height: 61.5vh;
+  overflow-y: auto;
+  min-height: 61.5vh;
+  background-color: #f8f8fdbf;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
 }
 
 .container::-webkit-scrollbar {
-display: none; /* Chrome, Safari, Opera*/
+  display: none; /* Chrome, Safari, Opera*/
 }
 .container2 {
-    /* height: 115vh; */
-    overflow-y: auto;
-    /* min-height: 115vh; */
-    background-color: #f8f8fdbf;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none;
+  /* height: 115vh; */
+  overflow-y: auto;
+  /* min-height: 115vh; */
+  background-color: #f8f8fdbf;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
 }
 .container2::-webkit-scrollbar {
-display: none; /* Chrome, Safari, Opera*/
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .con2 {
-    min-height: 120vh;
-    overflow-y: auto;
+  min-height: 120vh;
+  overflow-y: auto;
 }
 
 .card {
-    font-family: "OneShinhanBold";
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 5px 5px 5px lightgray;
-    margin: 5%;
-    padding-top: 3%;
-    padding-bottom: 1%;
-    margin-bottom: 10px;
+  font-family: "SEBANGGothic";
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px lightgray;
+  margin: 5%;
+  padding-top: 3%;
+  padding-bottom: 1%;
+  margin-bottom: 10px;
 }
-#test{
-    height:auto;
+#test {
+  height: auto;
 }
 div#test\ mine {
-    margin-bottom: 10%;
+  margin-bottom: 10%;
 }
 
 .plus {
-    background-color: #303473;
-    font-family: "OneShinhanBold";
-    color: whitesmoke;
-    border-radius:20%;
-    cursor: pointer;
+  background-color: #303473;
+  font-family: "SEBANGGothic";
+  color: whitesmoke;
+  border-radius: 20%;
+  cursor: pointer;
 }
 
 .card-header {
-    height: fit-content;
-    line-height: 24px;
-    background-color: #303473;
-    border-radius:20px;
-    margin: auto;
-    width: 70%;
-    padding: 2%;
-    
+  height: fit-content;
+  line-height: 24px;
+  background-color: #303473;
+  border-radius: 20px;
+  margin: auto;
+  width: 70%;
+  padding: 2%;
 }
 
 .savings {
-    font-size: 13px;
-    font-weight: bold;
-    color: whitesmoke;
-    text-align: center;
-    height: 20px;
-    line-height: 24px;
+  font-size: 13px;
+  font-weight: bold;
+  color: whitesmoke;
+  text-align: center;
+  height: 20px;
+  line-height: 24px;
 }
 
 .highlight {
-    color: skyblue; /* "절약" 부분을 하늘색으로 설정 */
+  color: skyblue; /* "절약" 부분을 하늘색으로 설정 */
 }
 
 .card-content {
-    overflow: hidden;
-    padding-top: 10px;
+  overflow: hidden;
+  padding-top: 10px;
 }
 
-.my-expense, .peer-expense {
-    width: 50%;
-    float: left;
+.my-expense,
+.peer-expense {
+  width: 50%;
+  float: left;
 }
 
-.my-expense p, .peer-expense p {
-    margin: 5px 0; /* 문단 사이의 여백 최소화 */
+.my-expense p,
+.peer-expense p {
+  margin: 5px 0; /* 문단 사이의 여백 최소화 */
 }
 
 .my-expense {
-    text-align: left;
-    padding-left: 10%;
+  text-align: left;
+  padding-left: 10%;
 }
 
 .peer-expense {
-    text-align: right;
-    padding-right: 10%;
+  text-align: right;
+  padding-right: 10%;
 }
 
-.p-num{
-    font-size: 13px;
+.p-num {
+  font-size: 13px;
 }
 
 .amount {
-    font-size: 13px;
-    font-weight: bold;
-    color: #303473;
-    margin-top: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #303473;
+  margin-top: 5px;
 }
 
 .my {
-    position: relative;
-    display: inline-block;
-    z-index: 1; /* 텍스트를 앞으로 보이도록 설정 */
+  position: relative;
+  display: inline-block;
+  z-index: 1; /* 텍스트를 앞으로 보이도록 설정 */
 }
 
 .my::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 4.5px; /* 밑줄의 두께 */
-    background-color: skyblue; /* 밑줄의 색상 */
-    z-index: -1; /* 밑줄을 텍스트 뒤로 보내도록 설정 */
-    
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4.5px; /* 밑줄의 두께 */
+  background-color: skyblue; /* 밑줄의 색상 */
+  z-index: -1; /* 밑줄을 텍스트 뒤로 보내도록 설정 */
 }
 
 h3 {
-    text-align: center;
+  text-align: center;
 }
 
-.set{
+.set {
     font-size: 27px;
     font-weight: bold;
-    margin-top: 20%;
+  }
+
+.p-set {
+  font-size: 16px;
 }
 
-.p-set{
-    font-size: 16px;
-}
-
-.total-payment, .title{
-    font-family: "OneShinhanBold";
-    background: #fff;
-    border-radius: 20px;
-    padding: 3%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 5%;
-    margin-bottom: 0%;
+.total-payment,
+.title {
+  font-family: "SEBANGGothic";
+  background: #fff;
+  border-radius: 20px;
+  padding: 3%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 5%;
+  margin-bottom: 0%;
 }
 
 .title-compare {
-    font-family: "OneShinhanBold";
-    background: #fff;
-    border-radius: 20px;
-    padding: 2%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 5%;
-    margin-bottom: 3%;
-    font-size: 16px;
-    font-weight: bold;
+  font-family: "SEBANGGothic";
+  background: #fff;
+  border-radius: 20px;
+  padding: 2%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 5%;
+  margin-bottom: 3%;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-.center{
-    text-align: center;
+.center {
+  text-align: center;
 }
 .header {
-    font-weight: bold;
-    padding: 0px;
-    font-size: large;
+  font-weight: bold;
+  padding: 0px;
+  font-size: large;
 }
 
 .amounts {
-    font-family: "OneShinhanBold";
-    display: flex;
-    justify-content: space-between;
+  font-family: "SEBANGGothic";
+  display: flex;
+  justify-content: space-between;
 }
 
 .amounts div {
-    font-size: 14px;
+  font-size: 14px;
 }
 /* ************************************************* */
 .dropdown {
-    font-family: "OneShinhanBold";
-    position: relative;
-    margin: 0 auto;
-    text-align: center;
-   
+  font-family: "SEBANGGothic";
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10%;
 }
 
 .dropbtn {
-    font-family: "OneShinhanBold";
-    background-color: #a7d9db;
-    color: #42456d;
-    padding: 15px;
-    font-size: 15px;
-    border: none;
-    cursor: pointer;
-    width: 60%;
-    text-align: center;
-    margin-top: 5%;
-    border-radius: 15px;
+  font-family: "SEBANGGothic";
+  background-color: #a7d9db;
+  color: #42456d;
+  padding: 15px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  width: 60%;
+  text-align: center;
+  margin-top: 5%;
+  border-radius: 15px;
 }
 
-
 .dropdown-content {
-    display: block;
-    position: relative;
-    background-color: #F4FEFF;
-    width: 65%;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 15px;
-    text-align: center;
-    margin: 0 auto;
+  display: block;
+  position: relative;
+  background-color: #f4feff;
+  width: 65%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 15px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .dropdown-content p {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    font-size: 16px;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  font-size: 16px;
 }
 
 .dropdown-content p:hover {
-    background-color: #a7d9db; 
-    /* f1f1f1 */
-    
+  background-color: #a7d9db;
+  /* f1f1f1 */
+}
+
+.profileimgselect {
+  font-family: "SEBANGGothic";
+  padding: 8px;
+  font-size: 12px;
+  background-color: #2936ec; /* 버튼 배경색 설정 */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .select {
-    font-family: "OneShinhanBold";
-    padding: 10px;
-    font-size: 16px;
-    background-color: #303473; /* 버튼 배경색 설정 */
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    width: 30%;
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  font-family: "SEBANGGothic";
+  padding: 10px;
+  font-size: 16px;
+  background-color: #303473; /* 버튼 배경색 설정 */
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 30%;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
 }
 /* ************************************* */
-.val-password, .val-username{
-    font-size: 20px;
-    padding: 8px;
+.val-password,
+.val-username {
+  font-size: 20px;
+  padding: 8px;
 }
-/* .col-xl-6 {
-    margin: 0 auto;
-    text-align: center;
-}
-label{
-    text-align: left;
-} */
+
 .form-control {
-    font-family: "OneShinhanBold";
+  font-family: "SEBANGGothic";
 }
-input[type="password"]{
-    width: 100%;
-    padding: 10px;
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
 }
 input.form-control {
-    width: 95%;
+  width: 95%;
 }
-.text-danger{
-    color: red;
+.text-danger {
+  color: red;
 }
-.form-group mb-3 row{
-    font-family: "OneShinhanBold";
-    position: relative;
-    text-align: center;
-    margin: 0 auto;
+.form-group mb-3 row {
+  font-family: "SEBANGGothic";
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
 }
-.col-form-label{
-    font-family: "OneShinhanBold";
-}
-
-.content-card{
-    text-align: center;
+.col-form-label {
+  font-family: "SEBANGGothic";
 }
 
-.content-discount{
-    border: none;
-    cursor: pointer;
-    width: 50%;
-    margin: 0 auto;
-    background-color: #303473;
-    font-family: "OneShinhanBold";
-    color: whitesmoke;
-    border-radius:5px;
-    padding: 5px;
-    text-align: center;
+.content-card {
+  text-align: center;
+}
+
+.content-discount {
+  border: none;
+  cursor: pointer;
+  width: 55%;
+  margin: 0 auto;
+  background-color: #303473;
+  font-family: "SEBANGGothic";
+  color: whitesmoke;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
 }
 
 .back-button2 {
@@ -316,4 +330,36 @@ input.form-control {
     margin-left: 2%;
     margin-top: 1%;
     text-align: left;
+}
+
+.img-upload{
+    color: white !important;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 12px;
+    background-color: #303473;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 28%;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.img-upload:hover{
+    background-color: #94DBE0;
+}
+
+input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.datepicker-custom{
+    width: 95%;
 }

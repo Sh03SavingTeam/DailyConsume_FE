@@ -23,13 +23,13 @@
 }
 
 .history_bottom {
-    color: lightgray;
+    color: #999999bf;
 }
 
 .history_bottom > p {
     margin-top: 0;
     font-size: 13px;
-    font-family: 'OneShinhanMedium';
+    font-family: 'SEBANGGothic';
 }
 
 .history_bottom > p > span:nth-child(1) {
@@ -37,9 +37,28 @@
     margin-right: 5px;
 }
 
-.more_btn {
+/* .more_btn {
     text-align: center;
     font-size: 14px;
     padding: 7px;
     color: gray;
+} */
+
+.more-button {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.more-button img{
+    margin-left:5px;
+}
+
+.more-button button {
+    font-size: 12px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #EAEAEA;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "SEBANGGothic";
 }

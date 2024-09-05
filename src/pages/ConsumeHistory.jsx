@@ -17,6 +17,7 @@ function ConsumeHistory({ memberId }) {
   let [userPayment, setUserPayment] = useState(0);
   let [peerPayment, setPeerPayment] = useState(0);
   const [memberID, setMemberID] = useState("");
+  const navigate = useNavigate();
   const donutData = {
     series: userPercentList,
     options: {
@@ -24,7 +25,7 @@ function ConsumeHistory({ memberId }) {
       legend: {
         position: "bottom", // 범례
         horizontalAlign: "center",
-        fontFamily: "OneShinhanBold, sans-serif",
+        fontFamily: "SEBANGGothic, sans-serif",
         fontSize: "11px",
         fontWeight: "light",
         colors: ["#303473"],
@@ -42,7 +43,7 @@ function ConsumeHistory({ memberId }) {
       dataLabels: {
         enabled: true,
         style: {
-          fontFamily: "OneShinhanBold, sans-serif", // 도넛 안의 수치 글꼴
+          fontFamily: "SEBANGGothic, sans-serif", // 도넛 안의 수치 글꼴
           fontSize: "12px",
           fontWeight: "bold",
           colors: ["#FFFFFF"],
@@ -55,7 +56,7 @@ function ConsumeHistory({ memberId }) {
       try {
         // 1. JWT 확인
         const jwtResponse = await checkJWT(
-          "http://localhost:9999/api/member/memberSession",
+          "/api/member/memberSession",
           "get",
           null
         );
@@ -65,7 +66,7 @@ function ConsumeHistory({ memberId }) {
 
         // 2. My Card History 가져오기
         const myCardHistoryResponse = await axios.get(
-          `http://localhost:9999/mypage/mycardHistory?memberId=${memberID}`
+          `/mypage/mycardHistory?memberId=${memberID}`
         );
         const userPayAmounts = myCardHistoryResponse.data.map(
           (item) => item.payAmount
@@ -78,7 +79,7 @@ function ConsumeHistory({ memberId }) {
 
         // 3. Peer Card History 가져오기
         const peerCardHistoryResponse = await axios.get(
-          `http://localhost:9999/mypage/peercardHistory?memberId=${memberID}`
+          `/mypage/peercardHistory?memberId=${memberID}`
         );
         const peerPayAmounts = peerCardHistoryResponse.data.payHistories.map(
           (item) => item.payAmount
@@ -121,7 +122,7 @@ function ConsumeHistory({ memberId }) {
 
   // useEffect(() => {
   //   axios
-  //     .get(`http://localhost:9999/mypage/mycardHistory?memberId=${memberID}`)
+  //     .get(`/mypage/mycardHistory?memberId=${memberID}`)
   //     .then((response) => {
   //       const payAmounts = response.data.map((item) => item.payAmount);
   //       const percentage = response.data.map((item) => item.percentage);
@@ -135,7 +136,7 @@ function ConsumeHistory({ memberId }) {
 
   // useEffect(() => {
   //   axios
-  //     .get(`http://localhost:9999/mypage/peercardHistory?memberId=${memberID}`)
+  //     .get(`/mypage/peercardHistory?memberId=${memberID}`)
   //     .then((response) => {
   //       const payAmounts = response.data.payHistories.map(
   //         (item) => item.payAmount
@@ -159,7 +160,7 @@ function ConsumeHistory({ memberId }) {
   //   setPeerPayment(totalPeerPayment);
   // }, [peerList]);
 
-  const navigate = useNavigate();
+
   return (
     <div className="container">
       <div className="total-payment">
@@ -175,7 +176,7 @@ function ConsumeHistory({ memberId }) {
           </div>
         </div>
       </div>
-      <div className="container2">
+      {/* <div className="container2"> */}
         <div className="content-card card" id="test">
           <h3>
             카테고리별 소비 비교{" "}
@@ -198,32 +199,24 @@ function ConsumeHistory({ memberId }) {
                 categories: ["식비", "교통비", "온라인쇼핑", "문화/여가"],
                 labels: {
                   style: {
-                    fontFamily: "OneShinhanBold, sans-serif",
+                    fontFamily: "SEBANGGothic, sans-serif",
                     fontSize: "10px",
-                    fontWeight: "light", // Optional: 'bold', 'normal', 'light', etc.
+                    fontWeight: "light",
                     colors: "#000000",
                   },
                 },
               },
               yaxis: {
-                axisBorder: {
-                  show: false, // y축의 선 숨기기
-                },
-                axisTicks: {
-                  show: false, // y축의 눈금 숨기기
-                },
-                labels: {
-                  show: false, // y축 레이블 숨기기
-                },
+                axisBorder: { show: false, },
+                axisTicks: { show: false, },
+                labels: { show: false, },
               },
               dataLabels: {
                 enabled: true,
-                formatter: function (val) {
-                  return `${val.toLocaleString()}원`;
-                },
+                formatter: function (val) { return `${val.toLocaleString()}원`; },
                 offsetY: -20, // 막대 위로 올리기 위한 y축 오프셋
                 style: {
-                  fontFamily: "OneShinhanBold, sans-serif",
+                  fontFamily: "SEBANGGothic, sans-serif",
                   fontSize: "7px",
                   fontWeight: "bold",
                   colors: ["#303473"],
@@ -233,20 +226,16 @@ function ConsumeHistory({ memberId }) {
                 bar: {
                   borderRadius: 10,
                   columnWidth: "85%",
-                  dataLabels: {
-                    position: "top",
-                  },
+                  dataLabels: { position: "top", },
                 },
               },
-              grid: {
-                show: false,
-              },
+              grid: { show: false, },
               colors: ["#F9C3D6", "#C1C7E2"],
               legend: {
                 show: true,
                 position: "bottom", // 범례
                 horizontalAlign: "center",
-                fontFamily: "OneShinhanBold, sans-serif",
+                fontFamily: "SEBANGGothic, sans-serif",
                 fontSize: "11px",
                 fontWeight: "normal",
                 colors: ["#303473"],
@@ -257,18 +246,11 @@ function ConsumeHistory({ memberId }) {
         <div className="content-card card" id="test mine">
           <h3>나의 소비 별 통계</h3>
           <Link to="/mypage" state={{ selectedTab: "discountInfo" }}>
-            <button class="content-discount">
-              나를 위한 할인 정보 보러가기
-            </button>
+            <button class="content-discount">나를 위한 할인 정보 보러가기</button>
           </Link>
-          <ApexCharts
-            options={donutData.options}
-            series={donutData.series}
-            type="donut"
-            width="100%"
-          />
+          <ApexCharts options={donutData.options} series={donutData.series} type="donut" width="100%"/>
         </div>
-      </div>
+      {/* </div> */}
       <Footer />
     </div>
   );

@@ -11,6 +11,8 @@ import OCRConfirmedPopUp from "../components/ReceiptOCRPopUp";
 import { checkJWT } from "services/checkJWT";
 
 function ReviewRegister(props) {
+  //회원 객체
+  const [memberId, setMemberId] = useState("");
   const [member, setMember] = useState("");
 
   const navigate = useNavigate(); // useNavigate 사용
@@ -27,6 +29,7 @@ function ReviewRegister(props) {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
       setMember(fetchedMemberId);
+      setMemberId(fetchedMemberId);
     });
   }, []);
 
@@ -81,12 +84,13 @@ function ReviewRegister(props) {
   const takePicture = () => {
     const photo = cameraRef.current.takePhoto();
     setImage(photo);
-    return photo;
+    const blob = dataURLtoBlob(photo);
+    return blob;
   };
 
   const getFileName = () => {
     const timestamp = Date.now();
-    return `receiptimg_${timestamp}.jpg`;
+    return `receiptimg_${memberId}_${timestamp}.jpg`;
   };
 
   const uploadToS3 = (filename, fileBlob) => {
@@ -104,14 +108,16 @@ function ReviewRegister(props) {
         Body: fileBlob,
       },
     });
-    upload.promise().then(console.log("업로드"));
+    // promise()를 반환하여 호출부에서 await를 사용할 수 있게 합니다.
+    return upload.promise();
   };
 
   const handleTakePhoto = async () => {
     try {
       const photoBlob = takePicture();
       const fileName = getFileName();
-      uploadToS3(fileName, photoBlob);
+      // 업로드가 완료될 때까지 기다립니다.
+      await uploadToS3(fileName, photoBlob);
 
       const response = await axios({
         method: "post",
@@ -122,7 +128,7 @@ function ReviewRegister(props) {
       });
       console.log("영수증OCR:" + response.data);
 
-      const { name, bizNum, price } = response.data;
+      const { name, bizNum } = response.data;
       console.log("상호명 : ", name);
       console.log("사업자등록번호 : ", bizNum);
       setBizNum(bizNum);
@@ -267,6 +273,21 @@ function ReviewRegister(props) {
       <Footer />
     </div>
   );
+}
+
+// 데이터 URL을 Blob으로 변환하는 유틸리티 함수
+function dataURLtoBlob(dataURL) {
+  const arr = dataURL.split(",");
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new Blob([u8arr], { type: mime });
 }
 
 export default ReviewRegister;

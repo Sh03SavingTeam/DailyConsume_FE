@@ -31,16 +31,17 @@ function CardInfo(props) {
         console.log("JWT 확인 결과" + response.memberId);
         axios({
           method: "get",
-          url: "http://localhost:9999/api/card/memberCardList",
+          url: "/api/card/memberCardList",
           params: {
             memberId: response.memberId,
           },
         })
           .then((response) => {
             const userCards = response.data;
-
-            axios.get("/api/card/getAllCardInfo").then((res) => {
-              const allCards = res.data;
+            axios
+              .get("/api/card/getAllCardInfo")
+              .then((res) => {
+                const allCards = res.data;
 
               const mergedList = userCards.map((userCard) => {
                 const matchedCard = allCards.find(
@@ -117,32 +118,55 @@ function CardInfo(props) {
   const handleCardSelection = (cardNum) => {
     axios({
       method: "get",
-      url: "http://localhost:9999/api/card/getCardInfo",
+      url: "/api/card/getCardInfo",
       params: {
         cardNum: cardNum,
       },
-    }).then((response) => {
-      const { cardName, cardImgUrl } = response.data;
-      setCardName(cardName);
-      setCardImgurl(cardImgUrl);
-      setCardInfo(response.data);
+    })
+      .then((response) => {
+        console.log(response.data);
+        // 데이터 유효성 검사 추가
+        if (!response.data || Object.keys(response.data).length === 0) {
+          console.error("No card data available");
+          // 필요하다면 여기에 사용자에게 알리는 로직을 추가할 수 있습니다.
+          return; // 데이터가 없으므로 여기서 함수 종료
+        }
+        const { cardName, cardImgUrl } = response.data;
+        setCardName(cardName);
+        setCardImgurl(cardImgUrl);
+        setCardInfo(response.data);
 
-      axios({
-        method: "get",
-        url: "http://localhost:9999/api/card/getCardBenefit",
-        params: {
-          cardName: cardName,
-        },
-      }).then((response) => {
-        setBenefits(response.data);
+        axios({
+          method: "get",
+          url: "/api/card/getCardBenefit",
+          params: {
+            cardName: cardName,
+          },
+        })
+          .then((response) => {
+            // 카드 혜택 데이터에 대한 유효성 검사
+            if (!response.data || Object.keys(response.data).length === 0) {
+              console.error("No benefits data available");
+              // 필요하다면 여기에 사용자에게 알리는 로직을 추가할 수 있습니다.
+              return; // 데이터가 없으므로 여기서 함수 종료
+            }
+            setBenefits(response.data);
+          })
+          .catch((error) => {
+            // 혜택 데이터 요청 실패 시 처리
+            console.error("Error fetching card benefits:", error);
+          });
+      })
+      .catch((error) => {
+        // 카드 정보 요청 실패 시 처리
+        console.error("Error fetching card information:", error);
       });
-    });
   };
 
   const handleDeleteCard = async () => {
     axios({
       method: "delete",
-      url: "http://localhost:9999/api/card/delete",
+      url: "/api/card/delete",
       params: {
         cardNum: selectedCardNum,
       },
@@ -173,7 +197,7 @@ function CardInfo(props) {
 
   return (
     <div className="card-container">
-      <h2>카드 목록 조회</h2>
+      <h2 className="bold-sebang">카드 목록 조회</h2>
       <div className="card-list-wrapper">
         <div className="card-list" ref={cardListRef}>
           {cardList.length > 0 ? (
