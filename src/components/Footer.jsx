@@ -8,11 +8,23 @@ import CalendarOff from "../assets/CalendarOff.png";
 import CalendarOn from "../assets/CalendarOn.png";
 import MyPageOff from "../assets/MyPageOff.png";
 import MyPageOn from "../assets/MyPageOn.png";
+import "../styles/Toast.css"
 
 const Footer = () => {
   const [selectedButton, setSelectedButton] = useState("home");
   const navi = useNavigate();
   const location = useLocation(); // 현재 위치를 가져오기 위해 useLocation 사용
+
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  const handleShowToast = (message) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
 
   // 현재 URL 경로에 따라 상태 업데이트
   useEffect(() => {
@@ -87,6 +99,7 @@ const Footer = () => {
           마이페이지
         </button>
       </div>
+      {showToast && <div className="toast">{toastMessage}</div>}
     </footer>
   );
 };

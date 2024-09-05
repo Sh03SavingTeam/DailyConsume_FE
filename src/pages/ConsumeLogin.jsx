@@ -4,6 +4,7 @@ import "../styles/cardRegistration.css";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { showToast } from "services/toast";
 
 function ConsumeLogin(props) {
   const location = useLocation();
@@ -48,6 +49,7 @@ function ConsumeLogin(props) {
       })
       .catch((error) => {
         console.error("로그인 중 오류 발생:", error);
+        showToast("로그인 실패.");
       });
   };
 

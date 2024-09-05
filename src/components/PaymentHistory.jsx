@@ -2,18 +2,41 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "../styles/Home.css";
 import moreIcon from "../assets/more.png";
+import { checkJWT } from "services/checkJWT";
 
 function PaymentHistory(props) {
   const [payHistoryList, setPayHistoryList] = useState([]);
   const [visibleCount, setVisibleCount] = useState(5);
+  const [memberId, setMemberId] = useState(null);
+
+
+  const checkAndFetchData = async () => {
+    try {
+      const response = await checkJWT(
+        "/api/member/memberSession",
+        "get",
+        null
+      );
+      console.log("JWT 확인 결과: " + response.memberId);
+      const memId = response.memberId;
+      setMemberId(memId);
+      getPayHistory(memId);
+    } catch (error) {
+      console.error("데이터 처리 중 오류 발생!" + error);
+    }
+
+    //결제 내역 가맹점 불러오기
+    
+
+  };
 
   useEffect(() => {
-    getPayHistory();
+    checkAndFetchData();
   }, []);
 
-  const getPayHistory = () => {
+  const getPayHistory = (memberId) => {
     axios({
-      url: "/api/home/payhistory?memId=m002",
+      url: "/api/home/payhistory?memId=" + memberId,
       method: "GET",
     })
       .then((res) => {

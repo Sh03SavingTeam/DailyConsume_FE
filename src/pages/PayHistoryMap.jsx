@@ -127,9 +127,6 @@ function PayHistoryMap() {
       console.error("데이터 처리 중 오류 발생!" + error);
     }
 
-    //결제 내역 가맹점 불러오기
-    
-
   };
 
   useEffect(() => {
