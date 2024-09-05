@@ -197,7 +197,7 @@ function CardInfo(props) {
 
   return (
     <div className="card-container">
-      <h2 className="bold-sebang">카드 목록 조회</h2>
+      <h2 className="bold-sebang card-title-size">카드 목록 조회</h2>
       <div className="card-list-wrapper">
         <div className="card-list" ref={cardListRef}>
           {cardList.length > 0 ? (
@@ -231,8 +231,8 @@ function CardInfo(props) {
           )}
         </div>
       </div>
-      <div>{selectedCardNum}</div>
-      <h2>{cardName}</h2>
+      <div className="card-number-size">{selectedCardNum}</div>
+      <h2 className="card-title-name">{cardName}</h2>
 
       <div className="benefits-list">
         {benefits.length > 0 ? (
