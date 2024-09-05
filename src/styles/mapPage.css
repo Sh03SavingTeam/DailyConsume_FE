@@ -34,7 +34,7 @@
 }
 
 #map {
-  height: 93.3vh;
+  height: 91.3svh;
 }
 
 .show_store_btn {
@@ -60,7 +60,7 @@
   background-color: rgb(248, 248, 248);
   max-height: 55vh;
   transition: height 1s ease;
-  z-index: 5;
+  z-index: 9;
   padding-top: 10px;
   border-radius: 20px 20px 0px 0px;
   overflow: scroll;
@@ -111,25 +111,26 @@
 }
 
 .store_info div:nth-child(1) {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
 
 .store_info div:nth-child(2) {
   color: rgb(147, 147, 147);
   font-weight: bold;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .store_info div:nth-child(3) {
   color: rgb(88, 88, 88);
   font-weight: bold;
+  font-size: 12px;
 }
 
 .store_detail_div {
   position: absolute;
   width: 100%;
-  height: 93.5vh;
+  height: 93.5svh;
   z-index: 50;
   top: 0;
   background: white;
@@ -163,15 +164,25 @@
   padding-left: 15px;
 }
 
+.detail_info>div {
+  margin-bottom: 7px;
+}
+
+.detail_info>div:nth-child(2) span {
+  font-size: 14px;
+}
+
 .detail_info div:nth-child(1) span:nth-child(1) {
-  font-size: 30px;
+  font-size: 23px;
   font-weight: 600;
 }
 
 .detail_info div:nth-child(1) span:nth-child(2) {
-  font-size: 15px;
+  font-size: 14px;
   color: #949494;
   font-weight: 600;
+  margin-left: 7px;
+
 }
 
 .detail_info div:nth-child(2) span:nth-child(1) {
@@ -184,7 +195,7 @@
 
 .detail_info > div:nth-child(3) {
   margin-top: 5px;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
   color: gray;
 }
@@ -194,13 +205,9 @@
   bottom: 0%;
   /* left: 0; */
   width: 100%;
-  /* margin-bottom: 60px; */
-  background-color: #fff;
-  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  box-sizing: border-box;
-  z-index: 5;
-  background-color: rgb(248, 248, 248);
+  margin-bottom: 60px;
+  background: none; /* 배경색 조정 가능 */
+  z-index: 1000; /* 지도 위에 표시되도록 설정 */
 }
 
 .detail_menu_area {
@@ -208,10 +215,11 @@
 }
 
 .detail_menu_area ul li > img {
-  width: 100px;
-  height: 110px;
+  width: 90px;
+  height: 100px;
   object-fit: cover;
   border-radius: 15px;
+  vertical-align: top;
 }
 
 .detail_menu_area ul {
@@ -237,33 +245,31 @@
 
 .menu_info_area {
   display: inline-block;
-  width: 72%;
-  position: absolute;
-  top: 10%;
-  left: 27%;
+    width: 64svw;
+    padding: 5px 7px;
 }
 
 .menu_info_area > div:nth-child(1) {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
 }
 
 .menu_info_area > div:nth-child(2) {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .marker_category_div {
   position: absolute;
-  top: 8%;
+  top: 9svh;
   z-index: 20;
   /* left: 0%; */
   width: 100%;
   padding: 0 3%;
   overflow: scroll;
   white-space: nowrap;
-  min-height: 4%;
+  min-height: 6svh;
 }
 
 .marker_category_div::-webkit-scrollbar {
@@ -320,7 +326,7 @@
 .right_btn_div > div {
   position: absolute;
   right: 10px;
-  z-index: 20;
+  z-index: 5;
   background: white;
   padding: 5px;
   border: 1px solid lightgray;
@@ -341,7 +347,7 @@
 }
 
 .detail_menu_area>div:nth-child(1) {
-  font-size: 20px;
+  font-size: 22px;
   margin-top: 10px;
   padding-left: 7px;
 }

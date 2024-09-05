@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import Footer from "../components/Footer";
 import customMarker from "../assets/location_7.png";
+import redMarker from "../assets/dayMarker.png";
 
 import axios from "axios";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
@@ -10,10 +11,13 @@ import useKakaoLoader from "../services/useKakaoLoader";
 import MapStoreList from "components/MapStoreList";
 import MapSelectedStore from "components/MapSelectedStore";
 import Loading from "components/Loading";
+import { checkJWT } from "services/checkJWT";
+import ScopeIcon from "../assets/scope.png";
 
 function PayHistoryMap() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [loading, setLoading] = useState(false);
+  const [memberId, setMemberId] = useState(null);
   const center = {
     lat: 33.450701,
     lng: 126.570667,
@@ -27,14 +31,15 @@ function PayHistoryMap() {
   const [stores, setStores] = useState([]);
   const [store, setStore] = useState(null);
 
-  const getRecommendStore = () => {
+  const getPaidStore = (memId) => {
     // const geocoder = new window.kakao.maps.services.Geocoder();
+    console.log(memberId);
     axios({
-      url: "/api/recommend/store",
+      url: "/api/recommend/history?memId=" + memId,
       method: "GET",
     })
       .then((res) => {
-        console.log(res.data);
+        console.log("목록:", res.data);
         setStores(res.data);
         // 딜레이를 생성하는 함수
         // const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -71,6 +76,29 @@ function PayHistoryMap() {
   //       console.log(error);
   //     })
   // }
+  const currentGeo = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+          console.log(location);
+        },
+        (error) => {
+          console.log(error);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  };
 
   const markerClickHandler = (store, e) => {
     console.log(store);
@@ -107,7 +135,23 @@ function PayHistoryMap() {
     searchDetailAddr(latlng.getLat(), latlng.getLng());
   };
 
+  const checkAndFetchData = async () => {
+    try {
+      const response = await checkJWT("/api/member/memberSession", "get", null);
+      console.log("JWT 확인 결과: " + response.memberId);
+      const memId = response.memberId;
+      setMemberId(memId);
+      getPaidStore(memId);
+    } catch (error) {
+      console.error("데이터 처리 중 오류 발생!" + error);
+    }
+
+    //결제 내역 가맹점 불러오기
+  };
+
   useEffect(() => {
+    checkAndFetchData();
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -125,7 +169,6 @@ function PayHistoryMap() {
           maximumAge: 0,
         }
       );
-      getRecommendStore();
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
@@ -134,7 +177,7 @@ function PayHistoryMap() {
   useKakaoLoader();
 
   return (
-    <div className="container" style={{ height: "94vh", minHeight: "94vh" }}>
+    <div className="container" style={{ height: "91svh", minHeight: "91svh" }}>
       {loading ? <Loading /> : null}
       <Map
         id="map"
@@ -153,7 +196,7 @@ function PayHistoryMap() {
             key={index}
             position={{ lat: store.storeLatX, lng: store.storeLonY }}
             image={{
-              src: customMarker,
+              src: store.reviewId === null ? customMarker : redMarker,
               size: {
                 width: 30,
                 height: 30,
@@ -169,6 +212,12 @@ function PayHistoryMap() {
           </div>
         )}
       </Map>
+
+      <div className="right_btn_div">
+        <div onClick={currentGeo}>
+          <img src={ScopeIcon} alt="currentGeoBtn" />
+        </div>
+      </div>
 
       <MapTopSelector pageState="history" />
 

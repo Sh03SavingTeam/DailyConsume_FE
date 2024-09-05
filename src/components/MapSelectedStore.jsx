@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function MapSelectedStore(props) {
   const { store } = props;
+  console.log(store);
   const [selectedStore, setSelectedStore] = useState(null);
   const navigate = useNavigate();
 
@@ -13,8 +14,7 @@ function MapSelectedStore(props) {
     console.log(storeRegNum);
 
     axios({
-      url:
-        "/api/recommend/detail?storeRegNum=" + storeRegNum,
+      url: "/api/recommend/detail?storeRegNum=" + storeRegNum,
       method: "GET",
     })
       .then((res) => {
@@ -30,6 +30,7 @@ function MapSelectedStore(props) {
     event.stopPropagation();
     navigate("/map/reviewregister", {
       state: {
+        payid: store.payId,
         storename: store.storeName,
         storebizNum: store.storeRegNum,
       },
@@ -47,12 +48,16 @@ function MapSelectedStore(props) {
         <div>{store.storeName}</div>
         <div>음식점 &gt; 한식</div>
         <div>{store.storeAddr}</div>
-        <button
-          className="goto_review_register"
-          onClick={(event) => registerReview(event, store)}
-        >
-          리뷰 작성하기
-        </button>
+        {store.reviewId === null ? (
+          <button
+            className="goto_review_register"
+            onClick={(event) => registerReview(event, store)}
+          >
+            리뷰 작성하기
+          </button>
+        ) : (
+          <span></span>
+        )}
       </div>
       {selectedStore && (
         <div className="store_detail">
