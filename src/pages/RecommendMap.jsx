@@ -130,7 +130,6 @@ function MapPage() {
   };
 
   const clickAllpatternRecommend = () => {
-    
     setLoading(true);
     currentGeo();
     axios({
@@ -282,11 +281,7 @@ function MapPage() {
 
   const checkAndFetchData = async () => {
     try {
-      const response = await checkJWT(
-        "/api/member/memberSession",
-        "get",
-        null
-      );
+      const response = await checkJWT("/api/member/memberSession", "get", null);
       console.log("JWT 확인 결과: " + response.memberId);
       const memId = response.memberId;
       setMemberId(memId);
@@ -295,8 +290,6 @@ function MapPage() {
     }
 
     //결제 내역 가맹점 불러오기
-    
-
   };
 
   return (
@@ -309,8 +302,9 @@ function MapPage() {
         level={3} // 지도의 확대 레벨
         onClick={mapClickHandler}
       >
+        {/* 사용자 현재 위치 표시. PC 경우 다소 부정확함 */}
         <MapMarker
-          position={{ lat: 37.55936310336185, lng: 126.92270138644199 }}
+          position={{ lat: location.latitude, lng: location.longitude }}
         />
 
         {stores.map((store, index) => (
