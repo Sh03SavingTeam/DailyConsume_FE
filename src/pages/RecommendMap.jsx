@@ -276,7 +276,7 @@ function MapPage() {
   useKakaoLoader();
 
   return (
-    <div className="container" style={{ height: "94vh", minHeight: "94vh" }}>
+    <div className="container" style={{ height: "91svh", minHeight: "91svh" }}>
       {loading ? <Loading /> : null}
       <Map
         id="map"
