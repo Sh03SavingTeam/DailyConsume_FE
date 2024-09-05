@@ -13,7 +13,7 @@ th {
 .address-contents {
   padding: 5px 2px 5px 2px;
   vertical-align: middle;
-  font-size: 10px;
+  font-size: 12px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -75,7 +75,7 @@ tr:last-child td {
   border-radius: 20px;
   padding: 6%;
   width: 90%;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 /********************************/

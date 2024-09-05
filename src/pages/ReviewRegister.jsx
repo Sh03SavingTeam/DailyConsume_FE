@@ -18,7 +18,8 @@ function ReviewRegister(props) {
   const navigate = useNavigate(); // useNavigate 사용
 
   const location = useLocation();
-  const { storename, storebizNum } = location.state || {};
+  const { payid, storename, storebizNum } = location.state || {};
+  console.log(payid + "_" + storename + "_" + storebizNum);
 
   // 로컬 스토리지에서 ACCESS TOKEN 가져오기
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
@@ -40,7 +41,7 @@ function ReviewRegister(props) {
 
   //리뷰객체
   const [review, setReview] = useState({
-    storeRegNum: "",
+    payId: 0,
     rating: 0.0,
   });
 
@@ -131,7 +132,6 @@ function ReviewRegister(props) {
       const { name, bizNum } = response.data;
       console.log("상호명 : ", name);
       console.log("사업자등록번호 : ", bizNum);
-      setBizNum(bizNum);
 
       //지도 -> 결제이력 -> 리뷰 작성 버튼 클릭 -> 상호명, 사업자등록번호 가지고 이동
       //-> 리뷰 작성 페이지로 이동 -> OCR 수행 -> 상호명, 사업자등록번호
@@ -148,14 +148,11 @@ function ReviewRegister(props) {
       console.log("선택한 사업자번호 : " + str_bizNum);
       //const str_bizNum = "632-85-00430";
 
-      // 상호명과 사업자등록번호 비교
-      if (name === str_name && bizNum === str_bizNum) {
+      if (bizNum === str_bizNum) {
+        // 상호명과 사업자등록번호 비교
         //일치(콘솔로만 띄워져있음. 팝업창으로도 띄워야 함)
         console.log("상호명과 사업자등록번호가 모두 일치합니다.");
         openPopUp("인증되었습니다", () => {
-          setReview({
-            storeRegNum: bizNum,
-          });
           setReviewButtonEnabled(true); // 리뷰 등록 버튼 활성화
           closePopUp(); // 팝업 닫기
         });
@@ -184,6 +181,7 @@ function ReviewRegister(props) {
 
     const updatedReview = {
       ...review,
+      payId: payid,
       rating: rating,
     };
 

@@ -160,3 +160,19 @@ h2 {
 .bold-sebang {
   font-family: "SEBANGGothicBold", sans-serif;
 }
+
+.card-title-size {
+  font-size: 21px;
+}
+
+.card-number-size {
+  font-size: 10px;
+}
+
+.card-title-name {
+  font-size: 17px;
+}
+
+.benefits-list {
+  font-size: 13px;
+}

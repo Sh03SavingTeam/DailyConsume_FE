@@ -44,10 +44,13 @@ function ConsumeLogin(props) {
           // 이후 원하는 페이지로 이동
           navigate("/");
         } else {
-          setErrorMessage("로그인 실패. 아이디 또는 비밀번호를 확인하세요.");
+          // 로그인 실패 시 에러 메시지 업데이트
+          setErrorMessage("비밀번호가 틀렸습니다."); // 에러 메시지 설정
         }
       })
       .catch((error) => {
+        // 에러 처리
+        setErrorMessage("로그인 중 오류가 발생했습니다."); // 에러 메시지 설정
         console.error("로그인 중 오류 발생:", error);
         showToast("로그인 실패.");
       });
@@ -92,6 +95,12 @@ function ConsumeLogin(props) {
                 placeholder="비밀번호"
                 onChange={handleChange}
               />
+              {/* 비밀번호 오류 시 빨간색으로 에러 메시지 표시 */}
+              {errorMessage && (
+                <div style={{ color: "red", marginTop: "5px" }}>
+                  {errorMessage}
+                </div>
+              )}
             </div>
             <div className="submit-button-center">
               <button
