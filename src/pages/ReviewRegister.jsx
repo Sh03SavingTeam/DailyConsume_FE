@@ -18,7 +18,8 @@ function ReviewRegister(props) {
   const navigate = useNavigate(); // useNavigate 사용
 
   const location = useLocation();
-  const { storename, storebizNum } = location.state || {};
+  const { payid, storename, storebizNum } = location.state || {};
+  console.log(payid + "_" + storename + "_" + storebizNum);
 
   // 로컬 스토리지에서 ACCESS TOKEN 가져오기
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
@@ -40,7 +41,7 @@ function ReviewRegister(props) {
 
   //리뷰객체
   const [review, setReview] = useState({
-    storeRegNum: "",
+    payId: 0,
     rating: 0.0,
   });
 
@@ -128,7 +129,7 @@ function ReviewRegister(props) {
       });
       console.log("영수증OCR:" + response.data);
 
-      const { subName, name, bizNum } = response.data;
+      const { name, bizNum } = response.data;
       console.log("상호명 : ", name);
       console.log("사업자등록번호 : ", bizNum);
 
@@ -152,9 +153,6 @@ function ReviewRegister(props) {
         //일치(콘솔로만 띄워져있음. 팝업창으로도 띄워야 함)
         console.log("상호명과 사업자등록번호가 모두 일치합니다.");
         openPopUp("인증되었습니다", () => {
-          setReview({
-            storeRegNum: bizNum,
-          });
           setReviewButtonEnabled(true); // 리뷰 등록 버튼 활성화
           closePopUp(); // 팝업 닫기
         });
@@ -183,6 +181,7 @@ function ReviewRegister(props) {
 
     const updatedReview = {
       ...review,
+      payId: payid,
       rating: rating,
     };
 
