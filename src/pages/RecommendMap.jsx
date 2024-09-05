@@ -297,7 +297,7 @@ function MapPage() {
       {loading ? <Loading /> : null}
       <Map
         id="map"
-        center={{ lat: 37.55936310336185, lng: 126.92270138644199 }}
+        center={{ lat: location.latitude, lng: location.longitude }}
         style={{ width: "100%", aspectRatio: 9 / 16 }}
         level={3} // 지도의 확대 레벨
         onClick={mapClickHandler}

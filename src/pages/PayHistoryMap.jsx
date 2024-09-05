@@ -12,6 +12,7 @@ import MapStoreList from "components/MapStoreList";
 import MapSelectedStore from "components/MapSelectedStore";
 import Loading from "components/Loading";
 import { checkJWT } from "services/checkJWT";
+import ScopeIcon from "../assets/scope.png";
 
 function PayHistoryMap() {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -75,6 +76,29 @@ function PayHistoryMap() {
   //       console.log(error);
   //     })
   // }
+  const currentGeo = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+          console.log(location);
+        },
+        (error) => {
+          console.log(error);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  };
 
   const markerClickHandler = (store, e) => {
     console.log(store);
@@ -188,6 +212,12 @@ function PayHistoryMap() {
           </div>
         )}
       </Map>
+
+      <div className="right_btn_div">
+        <div onClick={currentGeo}>
+          <img src={ScopeIcon} alt="currentGeoBtn" />
+        </div>
+      </div>
 
       <MapTopSelector pageState="history" />
 
