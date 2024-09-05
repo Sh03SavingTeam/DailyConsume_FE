@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import Footer from "../components/Footer";
 import customMarker from "../assets/location_7.png";
+import redMarker from "../assets/dayMarker.png";
 
 import axios from "axios";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
@@ -160,7 +161,7 @@ function PayHistoryMap() {
   useKakaoLoader();
 
   return (
-    <div className="container" style={{ height: "94vh", minHeight: "94vh" }}>
+    <div className="container" style={{ height: "91svh", minHeight: "91svh" }}>
       {loading ? <Loading /> : null}
       <Map
         id="map"
@@ -179,7 +180,9 @@ function PayHistoryMap() {
             key={index}
             position={{ lat: store.storeLatX, lng: store.storeLonY }}
             image={{
-              src: customMarker,
+              src: 
+              store.reviewId === null
+              ? customMarker : redMarker,
               size: {
                 width: 30,
                 height: 30,
