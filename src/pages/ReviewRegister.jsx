@@ -2,13 +2,13 @@ import React, { useRef, useState, useEffect } from "react";
 //import Webcam from "react-webcam";
 import { Camera } from "react-camera-pro";
 import Footer from "../components/Footer";
-import "../styles/reviewRegister.css";
 import ReactStars from "react-stars";
 import AWS from "aws-sdk";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import OCRConfirmedPopUp from "../components/ReceiptOCRPopUp";
 import { checkJWT } from "services/checkJWT";
+import "../styles/reviewRegister.css";
 
 function ReviewRegister(props) {
   //회원 객체
@@ -224,14 +224,20 @@ function ReviewRegister(props) {
                 aspectRatio={3 / 4}
                 facingMode={"environment"}
               />
-              <button className="picturebutton" onClick={handleTakePhoto}>
+              <button
+                className="review-picture-button"
+                onClick={handleTakePhoto}
+              >
                 영수증 인증
               </button>
             </>
           ) : (
             <>
               <img className="capRecieptIMG" src={image} alt="Captured" />
-              <button className="picturebutton" onClick={() => setImage(null)}>
+              <button
+                className="review-picture-button"
+                onClick={() => setImage(null)}
+              >
                 다시 인증하기
               </button>
             </>
@@ -259,7 +265,7 @@ function ReviewRegister(props) {
         <div className="pictureContainer">
           <button
             type="submit"
-            className="submit-button"
+            className="review-submit-button"
             onClick={handleRegisterReview}
             disabled={!isReviewButtonEnabled} // 버튼 비활성화 상태 제어
           >
