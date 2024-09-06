@@ -81,11 +81,11 @@ function AddressList(props) {
     closePopUp();
   };
 
-  //기본주소 변경 확인 시 수행
-  const handleDefaultAddrUpdate = (addrId) => {
-    handleRadioChange(addrId);
-    closePopUp();
-  };
+  // //기본주소 변경 확인 시 수행
+  // const handleDefaultAddrUpdate = (addrId) => {
+  //   handleRadioChange(addrId);
+  //   closePopUp();
+  // };
 
   const location = useLocation();
 
@@ -149,10 +149,19 @@ function AddressList(props) {
           addrId: selectedAddrId,
         },
       }).then(() => {
-        // After deletion, fetch the updated list
-        setAddrList((prevList) =>
-          prevList.filter((item) => item.addrId !== selectedAddrId)
-        );
+        setAddrList((prevList) => {
+          const updatedList = prevList.filter(
+            (item) => item.addrId !== selectedAddrId
+          );
+
+          // 기본 주소가 삭제된 경우
+          if (selectedAddrId === selectedAddrId) {
+            const newDefaultAddr = updatedList[0]?.addrId; // 남은 주소 중 첫 번째를 기본 주소로 설정하거나 null로 설정
+            setSelectedAddrId(newDefaultAddr);
+          }
+
+          return updatedList;
+        });
         closePopUp();
       });
     }
