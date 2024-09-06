@@ -6,13 +6,11 @@ import axios from "axios";
 import Footer from "../components/Footer";  
 import "../App.css";  
 import "../styles/RankCalendar.css";  
-import AmountListForDay from "../components/AmountListForDay";  
 import RabbitCompleteImage from "../assets/RabbitComplete.png";  
-import RabbitFail from "../assets/RabbitFail.png";  
-import { checkJWT } from "services/checkJWT";  
+import RabbitFail from "../assets/RabbitFail.png";
+import RankAmountListForDay from "components/RankAmountListForDay";
 
 const RankerCalendar = ({ memberId, onBack }) => { 
-  const [memberId2, setMemberId2] = useState("");
   const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일"));
   const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
   const [amountList, setAmountList] = useState([]);
@@ -45,21 +43,6 @@ const RankerCalendar = ({ memberId, onBack }) => {
       setWeeklyAchievements([]);
     }
   };
-  useEffect(() => {
-    checkJWT("/api/member/memberSession", "get", null)
-      .then((resopnse) => {
-        console.log("JWT 확인 결과" + resopnse.memberId);
-        const memberId2 = resopnse.memberId;
-        setMemberId2(memberId2);
-
-          const month = moment().format("MM");
-          fetchAmountList(month, memberId);
-          fetchWeeklyAchievements(month, memberId);
-        })
-        .catch((error) => {
-          console.error("There was an error!", error);
-        });
-  }, [memberId2]);
 
   useEffect(() => {
     const month = moment().format("MM");
@@ -155,7 +138,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
             formatMonthYear={formatMonthYear}
           />
           <hr className="calendar-divider" />
-          <AmountListForDay initialDay={nowDate} memberId={memberId} />
+          <RankAmountListForDay initialDay={nowDate} paramMember={memberId} />
         </div>
       </div>
       <Footer />
