@@ -6,9 +6,9 @@ import axios from "axios";
 import Footer from "../components/Footer";  
 import "../App.css";  
 import "../styles/RankCalendar.css";  
-import AmountListForDay from "../components/AmountListForDay";  
 import RabbitCompleteImage from "../assets/RabbitComplete.png";  
 import RabbitFail from "../assets/RabbitFail.png";
+import RankAmountListForDay from "components/RankAmountListForDay";
 
 const RankerCalendar = ({ memberId, onBack }) => { 
   const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일"));
@@ -138,7 +138,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
             formatMonthYear={formatMonthYear}
           />
           <hr className="calendar-divider" />
-          <AmountListForDay initialDay={nowDate} memberId={memberId} />
+          <RankAmountListForDay initialDay={nowDate} paramMember={memberId} />
         </div>
       </div>
       <Footer />
