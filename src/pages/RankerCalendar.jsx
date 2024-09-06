@@ -5,7 +5,7 @@ import moment from "moment";
 import axios from "axios";  
 import Footer from "../components/Footer";  
 import "../App.css";  
-import "../styles/Calendar.css";  
+import "../styles/RankCalendar.css";  
 import AmountListForDay from "../components/AmountListForDay";  
 import RabbitCompleteImage from "../assets/RabbitComplete.png";  
 import RabbitFail from "../assets/RabbitFail.png";
@@ -123,7 +123,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container2">
       <div className="prev-btn2" onClick={onBack}>&lt;</div> {/* onBack 사용 */}
       <div className="main-content">
         <div className="calendar-container">
