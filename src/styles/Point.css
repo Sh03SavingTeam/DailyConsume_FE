@@ -88,6 +88,11 @@
     margin-right: auto;
     margin-left: 10px;
     padding: 5px 20px 5px 20px;
+    cursor: pointer;
+}
+
+.balance button:disabled{
+    cursor: not-allowed;
 }
 
 .history-title {

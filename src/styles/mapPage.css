@@ -359,7 +359,6 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ddd;
 }
 
 .marker_click_div img {
@@ -379,18 +378,18 @@
 }
 
 .marker_store_info div:nth-child(1) {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: bold;
 }
 
 .marker_store_info div:nth-child(2) {
   color: rgb(147, 147, 147);
   font-weight: bold;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .marker_store_info div:nth-child(3) {
   color: rgb(88, 88, 88);
   font-weight: bold;
-  font-size: 13px;
+  font-size: 12px;
 }

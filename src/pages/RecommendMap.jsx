@@ -334,7 +334,7 @@ function MapPage() {
               selectedStore.storeRegNum === store.storeRegNum && (
                 <div
                   className="marker_click_div"
-                  style={{ padding: "5px", color: "#000" }}
+                  style={{ padding: "10px", color: "#000" }}
                 >
                   <img src={store.storeImg} />
                   <div className="marker_store_info">
