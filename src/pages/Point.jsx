@@ -99,7 +99,7 @@ function Point({ memberId }) {
 
       <div className="balance">
         <Link to="/MyPage/Refund">
-          <button>환급받기</button>
+          <button disabled={totalPoint <= 0}>환급받기</button>
         </Link>
         <p>{totalPoint !== null ? totalPoint.toLocaleString() : "0"}P</p>
       </div>
