@@ -246,6 +246,7 @@
   display: inline-block;
     width: 64svw;
     padding: 5px 7px;
+    max-width: 76%;
 }
 
 .menu_info_area > div:nth-child(1) {
