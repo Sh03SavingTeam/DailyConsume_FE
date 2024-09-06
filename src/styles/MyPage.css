@@ -8,10 +8,10 @@
   overflow: hidden;
 }
 .rinfo-container{
-  max-width: 413px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
+  max-width: 414px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
   margin: 0 auto; /* 자동 마진을 사용하여 중앙에 배치합니다. */
   padding: 20px; /* 내부 패딩을 설정합니다. */
-  background-color: #f8f8fdbf; /* 배경 색상을 연한 회색으로 설정합니다. */
+  background-color: #f8f8fd; /* 배경 색상을 연한 회색으로 설정합니다. */
   min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정합니다. */
   position: relative;
   overflow: hidden;
@@ -193,17 +193,20 @@
   text-align: right;
 }
 
-.rankinfo-container{
+.rankinfo-container {
   background-color: white;
   border-radius: 10px;
   display: flex;
-  padding:10px;
+  padding: 10px;
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
+  overflow: hidden; /* 넘치는 부분을 숨김 */
+  box-sizing: border-box; 
+  justify-content: center;
 }
+
 .rank1-container, .rank2-container, .rank3-container, .rank4-container{
-  width:107px; 
+  width:70px; 
   margin-left:4px; 
   margin-right:4px; 
   text-align: center;  
@@ -216,8 +219,12 @@
   padding-bottom: 10px;
   height:100%;
 }
+.rank2-container, .rank3-container, .rank4-container{
+  padding-bottom:14px !important;
+}
 .rank1-container.selected {
   background-color: #b6d9ffc8;
+  width:70px; 
 }
 .rank1-container:hover {
   background-color: #b6d9ffc8;
@@ -225,58 +232,59 @@
 }
 .rank2-container.selected {
   background-color: #daffdac8;
+  width:70px; 
 }
 .rank2-container:hover {
   background-color: #daffdac8;
 }
 .rank3-container.selected {
   background-color: #ffdabed6;
+  width:70px; 
 }
 .rank3-container:hover {
   background-color: #ffdabed6;
 }
 .rank4-container.selected {
   background-color: #ffd8ebcf;
+  width:70px; 
 }
 .rank4-container:hover {
   background-color: #ffd8ebcf;
 }
-.benefit-rank-image1{
-  width:66px;
-  height:36px;
+.benefit-rank-image1, .benefit-rank-image2,
+.benefit-rank-image3,
+.benefit-rank-image4
+{
+  width:80%;
+  height:50%;
 }
-.benefit-rank-image2{
-  width:72px;
-  height:42px;
-}
-.benefit-rank-image3{
-  width:80px;
-  height:50px;
-}
+.benefit-rank-image2,
+.benefit-rank-image3,
 .benefit-rank-image4{
-  width:104px;
-  height:74px;
+  margin-bottom:4px;
 }
-.rank-name1, .rank-range1 {
+
+.rank-name1, .rank-range1,
+.rank-name2, .rank-range2,
+.rank-name3, .rank-range3, 
+.rank-name4, .rank-range4
+{
   font-size:10px;
 }
-.rank-name2, .rank-range2 {
-  font-size:12px;
-}
-.rank-name3, .rank-range3 {
-  font-size:14px;
-}
-.rank-name4, .rank-range4 {
-  font-size:16px;
-}
+
 
 .benefit-info-container{
   background-color: white;
   border-radius: 10px;
   padding:12px;
 }
-.rank-name, .rank-standard, .rank-benefit-info {
-  margin-bottom: 6px;
+ .rank-standard, .rank-benefit-info {
+  margin-bottom: 8px;
+  font-size:11px;
+}
+.rank-name{
+  margin-bottom: 10px;
+  font-size:12px;
 }
 /*혜택버튼*/
 .benefit-btn{
