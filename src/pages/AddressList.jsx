@@ -73,7 +73,6 @@ function AddressList(props) {
     handleRadioChange(tempSelectedAddrId); // 기본 주소 변경
     closeDefaultAddrPopup(); // 팝업 닫기
     navigate("/mypage", { state: { selectedTab: "address" } });
-    window.location.reload();
   };
 
   //삭제버튼 클릭 시 삭제 수행
