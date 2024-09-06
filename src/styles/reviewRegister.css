@@ -36,30 +36,36 @@ h2 {
   margin-right: 50px;
 }
 
-.picturebutton {
+.review-picture-button {
   padding: 10px 20px;
   cursor: pointer;
   margin-top: 20px; /* 버튼 사이의 간격을 추가 */
-  background-color: #3b4cca;
+  background-color: #303473;
   color: #fff;
-  border-radius: 30px;
-  /* font-size: 16px;
-  font-weight: bold; */
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
   font-family: "SEBANGGothic", sans-serif;
   width: 60%;
 }
 
-.submit-button {
-  width: 100%;
-  background-color: #3b4cca;
+.review-submit-button {
+  width: 60%;
+  background-color: #303473;
   color: #fff;
   border: none;
   /* padding: 10px 20px; */
-  border-radius: 30px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: bold;
   height: 40px;
+}
+
+.review-submit-button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+  color: #fff;
 }
 
 .title {
