@@ -98,46 +98,105 @@ const CustomCalendar = () => {
   };
 
   // 각 날짜에 대해 표시할 내용을 커스터마이징하는 함수
+  // const f_formatDay = (locale, date) => {
+  //   const currentDay = moment(date).format("YYYY/MM/DD");
+  //   const filterData = amountList.filter((data) => data.day === currentDay);
+  //   const achievementsForDay = (weeklyAchievements || []).filter(
+  //     (achievement) => {
+  //       return (
+  //         moment(achievement["종료일"]).format("YYYY/MM/DD") === currentDay
+  //       );
+  //     }
+  //   );
+  //   return (
+  //     <div className="calendar-info">
+  //       <span>
+  //         {achievementsForDay.map((achievement, index) => (
+  //           <img
+  //             key={index}
+  //             src={
+  //               achievement["달성여부"] === "1"
+  //                 ? RabbitCompleteImage
+  //                 : RabbitFail
+  //             }
+  //             className="calanderRabbit-style"
+  //             alt="Weekly Achievement"
+  //           />
+  //         ))}
+  //         {moment(date).format("D")}
+  //       </span>
+  //       {filterData.length > 0 && (
+  //         <div>
+  //           <span className="calendar-count">{filterData.length}건</span>
+  //           <span className="calendar-amount">
+  //             {filterData
+  //               .reduce((sum, item) => sum + item.amount, 0)
+  //               .toLocaleString()}
+  //           </span>
+  //         </div>
+  //       )}
+  //     </div>
+  //   );
+  // };
   const f_formatDay = (locale, date) => {
+    // 현재 달력 타일의 날짜를 "YYYY/MM/DD" 형식으로 변환하여 currentDay에 저장
     const currentDay = moment(date).format("YYYY/MM/DD");
+    const today = moment(); // 오늘 날짜를 저장
+
+    // amountList에서 currentDay와 일치하는 날짜의 데이터를 필터링하여 filterData에 저장
     const filterData = amountList.filter((data) => data.day === currentDay);
+
+    // weeklyAchievements에서 currentDay와 일치하는 주간 목표 종료일 데이터를 필터링
     const achievementsForDay = (weeklyAchievements || []).filter(
-      (achievement) => {
-        return (
-          moment(achievement["종료일"]).format("YYYY/MM/DD") === currentDay
-        );
-      }
+        (achievement) => {
+          const achievementEndDate = moment(achievement["종료일"]).format("YYYY/MM/DD");
+
+          // 목표 종료일이 현재 날짜 이전인지 확인
+          const isPast = moment(achievementEndDate).isBefore(today, "day");
+
+          // 목표 종료일이 현재 날짜보다 과거인 경우만 필터링
+          return isPast && achievementEndDate === currentDay;
+        }
     );
+
+    // 달력 타일의 콘텐츠를 구성
     return (
-      <div className="calendar-info">
-        <span>
-          {achievementsForDay.map((achievement, index) => (
+        <div className="calendar-info">
+      <span>
+        {/* 주간 목표 데이터를 순회하면서 달성 여부에 따라 이미지 렌더링 */}
+        {achievementsForDay.map((achievement, index) => (
             <img
-              key={index}
-              src={
-                achievement["달성여부"] === "1"
-                  ? RabbitCompleteImage
-                  : RabbitFail
-              }
-              className="calanderRabbit-style"
-              alt="Weekly Achievement"
+                key={index} // 각 목표 데이터의 고유 인덱스를 key로 사용
+                src={
+                  achievement["달성여부"] === "1" // 달성 여부에 따라 이미지 선택
+                      ? RabbitCompleteImage // 목표를 달성했을 경우 성공 이미지 표시
+                      : RabbitFail // 목표를 달성하지 못했을 경우 실패 이미지 표시
+                }
+                className="calanderRabbit-style" // 이미지에 적용될 스타일 클래스
+                alt="Weekly Achievement" // 이미지의 alt 텍스트
             />
-          ))}
-          {moment(date).format("D")}
-        </span>
-        {filterData.length > 0 && (
-          <div>
-            <span className="calendar-count">{filterData.length}건</span>
-            <span className="calendar-amount">
-              {filterData
-                .reduce((sum, item) => sum + item.amount, 0)
-                .toLocaleString()}
-            </span>
-          </div>
-        )}
-      </div>
+        ))}
+        {/* 타일에 해당하는 날짜를 "D" 형식으로 출력 (달의 일자) */}
+        {moment(date).format("D")}
+      </span>
+
+          {/* filterData가 존재할 경우, 해당 날짜의 금액 데이터를 표시 */}
+          {filterData.length > 0 && (
+              <div>
+                {/* 해당 날짜의 금액 데이터 건수 표시 */}
+                <span className="calendar-count">{filterData.length}건</span>
+                {/* 해당 날짜의 금액 합계 표시, 천 단위 콤마 추가 */}
+                <span className="calendar-amount">
+            {filterData
+                .reduce((sum, item) => sum + item.amount, 0) // 각 항목의 금액을 합산
+                .toLocaleString()} {/* 합산된 금액을 문자열로 변환하여 표시 */}
+          </span>
+              </div>
+          )}
+        </div>
     );
   };
+
 
   // 달력의 요일 이름을 커스터마이징하는 함수 (월요일부터 시작)
   const formatShortWeekday = (locale, date) => {
