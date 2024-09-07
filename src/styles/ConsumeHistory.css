@@ -13,9 +13,9 @@
 }
 
 .container {
-  height: 61.5vh;
+  height: 61.5svh;
   overflow-y: auto;
-  min-height: 61.5vh;
+  min-height: 61.5svh;
   background-color: #f8f8fdbf;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
@@ -37,7 +37,7 @@
 }
 
 .con2 {
-  min-height: 120vh;
+  min-height: 120svh;
   overflow-y: auto;
 }
 
