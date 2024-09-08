@@ -145,7 +145,6 @@ function PayHistoryMap() {
     } catch (error) {
       console.error("데이터 처리 중 오류 발생!" + error);
     }
-
   };
 
   useEffect(() => {
@@ -180,14 +179,16 @@ function PayHistoryMap() {
       {loading ? <Loading /> : null}
       <Map
         id="map"
-        center={{ lat: location.latitude, lng: location.longitude }}
+        // center={{ lat: location.latitude, lng: location.longitude }}
+        center={{ lat: 37.55936310336185, lng: 126.92270138644199 }}
         style={{ width: "100%", aspectRatio: 9 / 16 }}
         level={3} // 지도의 확대 레벨
         onClick={mapClickHandler}
       >
         {/* 사용자 현재 위치 표시. PC 경우 다소 부정확함 */}
         <MapMarker
-          position={{ lat: location.latitude, lng: location.longitude }}
+          // position={{ lat: location.latitude, lng: location.longitude }}
+          position={{ lat: 37.55936310336185, lng: 126.92270138644199 }}
         />
 
         {stores.map((store, index) => (
