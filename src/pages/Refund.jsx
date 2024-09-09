@@ -5,6 +5,8 @@ import "../styles/Refund.css";
 import axios from "axios";
 import arrowImg from "../assets/arrow.png";
 import { checkJWT } from "services/checkJWT";
+import { showToast } from 'services/toast';
+import ToastPortal from 'services/toast';
 
 function Refund({ memberId }) {
   const [memberID, setMemberID] = useState("");
@@ -129,8 +131,10 @@ function Refund({ memberId }) {
           value={text}
           onChange={(e) => {
             const value = e.target.value;
-            if (value === "" || 0 < (Number(value) <= 9500)) {
+            if (value === "" || (0 < value && value <= point)) {
               setText(value);
+            } else{
+              showToast("보유하신 포인트 이하로 입력해주세요.");
             }
           }}
         />
