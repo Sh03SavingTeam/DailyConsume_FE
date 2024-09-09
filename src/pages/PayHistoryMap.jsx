@@ -179,16 +179,14 @@ function PayHistoryMap() {
       {loading ? <Loading /> : null}
       <Map
         id="map"
-        // center={{ lat: location.latitude, lng: location.longitude }}
-        center={{ lat: 37.55936310336185, lng: 126.92270138644199 }}
+        center={{ lat: location.latitude, lng: location.longitude }}
         style={{ width: "100%", aspectRatio: 9 / 16 }}
         level={3} // 지도의 확대 레벨
         onClick={mapClickHandler}
       >
         {/* 사용자 현재 위치 표시. PC 경우 다소 부정확함 */}
         <MapMarker
-          // position={{ lat: location.latitude, lng: location.longitude }}
-          position={{ lat: 37.55936310336185, lng: 126.92270138644199 }}
+          position={{ lat: location.latitude, lng: location.longitude }}
         />
 
         {stores.map((store, index) => (
