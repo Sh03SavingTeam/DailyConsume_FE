@@ -59,7 +59,7 @@ const RankerCalendar = ({ memberId, onBack }) => {
         .catch((error) => {
           console.error("There was an error!", error);
         });
-  }, [memberId2]);
+  }, [memberId]);
 
   useEffect(() => {
     const month = moment().format("MM");
