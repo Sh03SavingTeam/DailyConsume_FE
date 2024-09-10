@@ -184,6 +184,9 @@
     border-radius: 5px;
     cursor: pointer;
     font-family: "SEBANGGothic";
+    -webkit-user-select: none; /* iOS에서 선택할 수 없도록 설정 */
+    color: inherit; /* 상속받은 텍스트 색상 사용 */
+    text-decoration: none; /* 링크 스타일 제거 */
 }
 
 .footer-container {

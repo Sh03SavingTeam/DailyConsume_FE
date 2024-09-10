@@ -19,7 +19,7 @@ function CardRegister(props) {
     cardNum: "",
     expirationDate: "",
     cvc: "",
-    cardName: "",
+    cardName: "#Pay 신한카드",
     memberId: "",
   });
 
@@ -59,11 +59,7 @@ function CardRegister(props) {
     //     console.error("There was an error fetching the session data!", error);
     //   });
 
-    checkJWT(
-      "/api/member/memberSession",
-      "get",
-      null
-    ).then((response) => {
+    checkJWT("/api/member/memberSession", "get", null).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
 
@@ -99,9 +95,7 @@ function CardRegister(props) {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(
-        `/api/card/${type}CardList`
-      );
+      const response = await axios.get(`/api/card/${type}CardList`);
       setCards(response.data);
     } catch (err) {
       setError(err);
@@ -284,7 +278,7 @@ function CardRegister(props) {
                   CVC <span className="required">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="cvc"
                   placeholder="111"
                   required

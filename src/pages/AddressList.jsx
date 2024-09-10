@@ -73,7 +73,6 @@ function AddressList(props) {
     handleRadioChange(tempSelectedAddrId); // 기본 주소 변경
     closeDefaultAddrPopup(); // 팝업 닫기
     navigate("/mypage", { state: { selectedTab: "address" } });
-    window.location.reload();
   };
 
   //삭제버튼 클릭 시 삭제 수행
@@ -82,11 +81,11 @@ function AddressList(props) {
     closePopUp();
   };
 
-  //기본주소 변경 확인 시 수행
-  const handleDefaultAddrUpdate = (addrId) => {
-    handleRadioChange(addrId);
-    closePopUp();
-  };
+  // //기본주소 변경 확인 시 수행
+  // const handleDefaultAddrUpdate = (addrId) => {
+  //   handleRadioChange(addrId);
+  //   closePopUp();
+  // };
 
   const location = useLocation();
 
@@ -96,11 +95,7 @@ function AddressList(props) {
 
   //memberId가 'abcd'인 주소 데이터 조회
   useEffect(() => {
-    checkJWT(
-      "/api/member/memberSession",
-      "get",
-      null
-    ).then((response) => {
+    checkJWT("/api/member/memberSession", "get", null).then((response) => {
       console.log("JWT 확인 결과" + response.memberId);
       const fetchedMemberId = response.memberId;
       setMemberId(fetchedMemberId);
@@ -154,15 +149,23 @@ function AddressList(props) {
           addrId: selectedAddrId,
         },
       }).then(() => {
-        // After deletion, fetch the updated list
-        setAddrList((prevList) =>
-          prevList.filter((item) => item.addrId !== selectedAddrId)
-        );
+        setAddrList((prevList) => {
+          const updatedList = prevList.filter(
+            (item) => item.addrId !== selectedAddrId
+          );
+
+          // 기본 주소가 삭제된 경우
+          if (selectedAddrId === selectedAddrId) {
+            const newDefaultAddr = updatedList[0]?.addrId; // 남은 주소 중 첫 번째를 기본 주소로 설정하거나 null로 설정
+            setSelectedAddrId(newDefaultAddr);
+          }
+
+          return updatedList;
+        });
         closePopUp();
       });
     }
     navigate("/mypage", { state: { selectedTab: "address" } });
-    window.location.reload();
   };
 
   // Radio 버튼 선택 처리

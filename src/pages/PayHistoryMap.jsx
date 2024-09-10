@@ -145,7 +145,6 @@ function PayHistoryMap() {
     } catch (error) {
       console.error("데이터 처리 중 오류 발생!" + error);
     }
-
   };
 
   useEffect(() => {
