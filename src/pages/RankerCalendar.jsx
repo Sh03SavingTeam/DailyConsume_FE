@@ -9,13 +9,14 @@ import "../styles/RankCalendar.css";
 import RabbitCompleteImage from "../assets/RabbitComplete.png";  
 import RabbitFail from "../assets/RabbitFail.png";
 import RankAmountListForDay from "components/RankAmountListForDay";
+// import { checkJWT } from "services/checkJWT";
 
 const RankerCalendar = ({ memberId, onBack }) => { 
   const [nowDate, setNowDate] = useState(moment().format("YYYY년 MM월 DD일"));
   const [currentMonth, setCurrentMonth] = useState(moment().format("M월"));
   const [amountList, setAmountList] = useState([]);
   const [weeklyAchievements, setWeeklyAchievements] = useState([]);
-
+  // const [memberId2, setMemberId2] = useState("");
   const fetchAmountList = async (month, memberId) => {
     try {
       const response = await axios.get("/api/calendar/payhistory", {
@@ -44,21 +45,21 @@ const RankerCalendar = ({ memberId, onBack }) => {
     }
   };
 
-  useEffect(() => {
-    checkJWT("/api/member/memberSession", "get", null)
-      .then((resopnse) => {
-        console.log("JWT 확인 결과" + resopnse.memberId);
-        const memberId2 = resopnse.memberId;
-        setMemberId2(memberId2);
+  // useEffect(() => {
+  //   checkJWT("/api/member/memberSession", "get", null)
+  //     .then((resopnse) => {
+  //       console.log("JWT 확인 결과" + resopnse.memberId);
+  //       const memberId2 = resopnse.memberId;
+  //       setMemberId2(memberId2);
 
-          const month = moment().format("MM");
-          fetchAmountList(month, memberId);
-          fetchWeeklyAchievements(month, memberId);
-        })
-        .catch((error) => {
-          console.error("There was an error!", error);
-        });
-  }, [memberId]);
+  //         const month = moment().format("MM");
+  //         fetchAmountList(month, memberId);
+  //         fetchWeeklyAchievements(month, memberId);
+  //       })
+  //       .catch((error) => {
+  //         console.error("There was an error!", error);
+  //       });
+  // }, [memberId]);
 
 
   useEffect(() => {
