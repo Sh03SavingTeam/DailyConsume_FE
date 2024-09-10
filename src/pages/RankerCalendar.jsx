@@ -45,6 +45,23 @@ const RankerCalendar = ({ memberId, onBack }) => {
   };
 
   useEffect(() => {
+    checkJWT("/api/member/memberSession", "get", null)
+      .then((resopnse) => {
+        console.log("JWT 확인 결과" + resopnse.memberId);
+        const memberId2 = resopnse.memberId;
+        setMemberId2(memberId2);
+
+          const month = moment().format("MM");
+          fetchAmountList(month, memberId);
+          fetchWeeklyAchievements(month, memberId);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+  }, [memberId]);
+
+
+  useEffect(() => {
     const month = moment().format("MM");
     fetchAmountList(month, memberId);
     fetchWeeklyAchievements(month, memberId);
