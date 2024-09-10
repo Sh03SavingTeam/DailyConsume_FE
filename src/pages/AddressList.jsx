@@ -51,7 +51,7 @@ function AddressList(props) {
 
   //삭제확인 팝업창 열기
   const openPopUp = (addrId) => {
-    setSelectedAddrId(addrId);
+    setTempSelectedAddrId(addrId);
     setPopupOpen(true);
   };
 
@@ -141,23 +141,30 @@ function AddressList(props) {
   }, []);
 
   const handleDeleteAddr = () => {
-    if (selectedAddrId) {
+    if (tempSelectedAddrId) {
       axios({
         method: "delete",
         url: "/api/address/addrDelete",
         params: {
-          addrId: selectedAddrId,
+          addrId: tempSelectedAddrId,
         },
       }).then(() => {
         setAddrList((prevList) => {
           const updatedList = prevList.filter(
-            (item) => item.addrId !== selectedAddrId
+            (item) => item.addrId !== tempSelectedAddrId
           );
 
           // 기본 주소가 삭제된 경우
-          if (selectedAddrId === selectedAddrId) {
-            const newDefaultAddr = updatedList[0]?.addrId; // 남은 주소 중 첫 번째를 기본 주소로 설정하거나 null로 설정
+          if (selectedAddrId === tempSelectedAddrId) {
+            // 기본 주소가 삭제되었을 때만 새로운 기본 주소를 설정
+            const newDefaultAddr =
+              updatedList.length > 0 ? updatedList[0].addrId : null; // 남은 주소 중 첫 번째를 기본 주소로 설정하거나 주소가 없으면 null
             setSelectedAddrId(newDefaultAddr);
+
+            // 기본 주소가 변경되었을 경우 상태를 업데이트
+            if (newDefaultAddr) {
+              handleRadioChange(newDefaultAddr); // 새로운 기본 주소를 서버에 업데이트
+            }
           }
 
           return updatedList;
