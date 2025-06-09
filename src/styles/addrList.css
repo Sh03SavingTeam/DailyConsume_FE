@@ -1,0 +1,136 @@
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Adds space between rows */
+}
+
+th {
+  background-color: #94dbe0;
+  height: 30px;
+  font-size: 15px;
+}
+
+.address-contents {
+  padding: 5px 2px 5px 2px;
+  vertical-align: middle;
+  font-size: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:last-child td {
+  border-bottom: none; /* Remove the bottom border for the last row */
+}
+
+.defaultSelectArea {
+  width: 91px;
+}
+.DeleteArea {
+  width: 40px;
+}
+
+.deleteButton {
+  background-color: transparent;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  font-size: 11px;
+  transition: color 0.3s;
+  &:hover {
+    color: red;
+  }
+}
+
+.form_radio_btn input[type="radio"] {
+  display: none;
+}
+
+.form_radio_btn label {
+  display: inline-block; /* Ensure the label respects the width */
+  width: 80px; /* Set the fixed width */
+  text-align: center; /* Center the text within the label */
+  background-color: #e0e0e0; /* Grey background for unselected */
+  color: #555;
+  padding: 5px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Checked */
+.form_radio_btn input[type="radio"]:checked + label {
+  background: #303473;
+  color: #fff;
+  width: 90%;
+}
+
+/* Hover */
+.form_radio_btn label:hover {
+  color: #666;
+}
+
+/* Disabled */
+.form_radio_btn input[type="radio"] + label {
+  background: #f9fafc;
+  color: #666;
+  border-radius: 20px;
+  padding: 6%;
+  width: 90%;
+  font-size: 11px;
+}
+
+/********************************/
+
+.address-book {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 5%;
+  margin: 5%;
+  text-align: center;
+}
+
+.address-book h1 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.address-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 3px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+.address-item:last-child {
+  border-bottom: none;
+}
+
+.default-button, .delete-button {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 5px 10px;
+  font-size: 10px;
+  cursor: pointer;
+  /* margin-left: 14px; */
+}
+
+.default-button.default {
+  background-color: #303473;
+  color: white;
+}
+
+.add-button {
+  background-color: #303473;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 2%;
+  width: 33%;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+}

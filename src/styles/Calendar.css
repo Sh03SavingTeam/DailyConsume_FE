@@ -1,0 +1,278 @@
+/* 폰트 정의 */
+@font-face {
+  font-family: "SEBANGGothic";
+  src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SEBANGGothicBold";
+  src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+body, .calendar-container, .react-calendar, .react-calendar * {
+  font-family: "SEBANGGothic", sans-serif; /* 기본 폰트 설정 */
+}
+
+.calendar-container {
+  max-width: 480px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #ffffff; /* 캘린더 컨테이너의 배경색 */
+  border-radius: 20px 20px 20px 20px; /* 캘린더 컨테이너의 테두리 둥글게 */
+  margin: 0 auto; /* 자동 마진을 사용하여 중앙에 배치합니다. */
+  padding: 20px; /* 캘린더 컨테이너의 내부 여백 */
+  /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); !* 그림자 효과 *!*/
+  box-sizing: border-box; /* 패딩과 테두리 크기를 포함한 박스 크기 설정 */
+  -ms-overflow-style: none; /* IE와 Edge에서 스크롤바 숨김 */
+  scrollbar-width: none; /* Firefox에서 스크롤바 숨김 */
+  box-shadow: 5px 5px 5px lightgray;
+}
+
+.calendar-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera에서 스크롤바 숨김 */
+}
+
+.month-title {
+  align-self: flex-start;
+  margin-left: 0;
+  font-size: 2rem; /* 월 제목의 폰트 크기 */
+  font-weight: bold; /* 월 제목의 폰트 굵기 */
+  margin-bottom: 20px; /* 월 제목 아래 여백 */
+  font-family: "SEBANGGothic", sans-serif; /* 월 제목에 굵은 폰트 적용 */
+}
+
+.react-calendar {
+  width: 100%; /* 캘린더의 너비를 부모 요소에 맞춤 */
+  background-color: transparent; /* 캘린더 배경 투명 */
+  border: none; /* 캘린더 테두리 제거 */
+  box-shadow: none; /* 캘린더 그림자 제거 */
+}
+
+.react-calendar__month-view__weekdays {
+  display: flex;
+  justify-content: space-around; /* 요일을 균등하게 배치 */
+  /*font-size: 1.5rem; !* 요일 이름 폰트 크기 *!*/
+  font-weight: bold; /* 요일 이름 폰트 굵기 */
+  text-align: center; /* 요일 이름 중앙 정렬 */
+  padding: 10px 0; /* 요일 이름 위아래 여백 */
+  border-bottom: 2px solid #e0e0e0; /* 요일 아래 테두리 */
+  margin-bottom: 10px; /* 요일과 날짜 사이의 간격 */
+  font-family: "SEBANGGothic", sans-serif; /* 요일 이름에 굵은 폰트 적용 */
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  text-decoration: none; /* 요일 텍스트의 밑줄 제거 */
+  width: 14.28%; /* 요일 칸의 너비를 7등분 */
+  font-variant: normal; /* 필요한 경우 소문자로 표시 */
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-transform: none; /* 대문자 강제 변환을 해제 */
+  text-decoration: none; /* 요일 축약형 밑줄 제거 */
+  border-bottom: none; /* 요일 축약형 아래 테두리 제거 */
+  font-variant: normal; /* 필요한 경우 소문자로 표시 */
+  font-size: 1.2em;
+}
+
+.react-calendar__tile {
+  width: 100px; /* 각 날짜 타일의 너비 */
+  height: 70px; /* 각 날짜 타일의 높이 */
+  text-align: center; /* 날짜 타일의 텍스트 중앙 정렬 */
+  padding: 5px; /* 날짜 타일의 내부 여백 */
+  font-size: 1rem; /* 날짜 텍스트의 폰트 크기 */
+  border-radius: 15%; /* 날짜 타일의 모서리 둥글게 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 날짜 텍스트를 타일의 상단에 정렬 */
+  align-items: center; /* 날짜 텍스트를 수평 중앙 정렬 */
+  box-sizing: border-box; /* 패딩과 테두리 크기를 포함한 박스 크기 설정 */
+  -webkit-user-select: none; /* iOS에서 선택할 수 없도록 설정 */
+  color: inherit; /* 상속받은 텍스트 색상 사용 */
+  text-decoration: none; /* 링크 스타일 제거 */
+}
+
+.react-calendar__tile--now {
+  background: none;
+  /*  background-color: #cfeff9; !* 오늘 날짜의 배경색 *!*/
+  /*  border-radius: 15%; !* 오늘 날짜 타일의 모서리 둥글게 *!*/
+  /*  color: #ff0000; !* 오늘 날짜의 텍스트 색상 (빨간색) *!*/
+  /*  font-weight: bold; !* 오늘 날짜의 텍스트 굵기 *!*/
+}
+
+.react-calendar__tile--active {
+  background-color: #cfeff9; /* 활성화된 날짜의 배경색 */
+  color: #000000; /* 활성화된 날짜의 텍스트 색상 */
+  border-radius: 15%; /* 활성화된 날짜 타일의 모서리 둥글게 */
+  font-weight: bold; /* 활성화된 날짜의 텍스트 굵기 */
+  font-family: "SEBANGGothic", sans-serif; /* 활성화된 날짜에 굵은 폰트 적용 */
+}
+
+.react-calendar__tile--hasActive {
+  background-color: #cfeff9; /* 활성화된 날짜가 포함된 타일의 배경색 */
+}
+
+.react-calendar__tile--active:enabled:hover {
+  background-color: #b6e0f2; /* 활성화된 날짜 타일을 마우스로 호버할 때 배경색 */
+}
+
+.react-calendar__tile--active:enabled:focus {
+  background-color: #b6e0f2; /* 활성화된 날짜 타일을 포커스할 때 배경색 */
+}
+
+.react-calendar__tile abbr {
+  display: block;
+  margin-bottom: 5px;
+  align-self: center; /* 날짜의 텍스트를 중앙에 위치시킴 */
+  color: inherit; /* 날짜 텍스트의 상속된 색상 사용 */
+  text-decoration: none; /* 링크 스타일 제거 */
+}
+
+.react-calendar__month-view__weekdays__weekday:nth-child(1),
+.react-calendar__month-view__weekdays__weekday:nth-child(2),
+.react-calendar__month-view__weekdays__weekday:nth-child(3),
+.react-calendar__month-view__weekdays__weekday:nth-child(4),
+.react-calendar__month-view__weekdays__weekday:nth-child(5) {
+  color: black;
+}
+
+.react-calendar__month-view__weekdays__weekday:nth-child(6) {
+  color: #1500ff;
+}
+
+.react-calendar__month-view__weekdays__weekday:nth-child(7) {
+  color: red;
+}
+
+.saturday-tile {
+  color: #1500ff;
+}
+
+.saturday-tile:hover {
+  background-color: #e6f0ff;
+}
+
+.sunday-tile {
+  color: red;
+}
+
+.sunday-tile:hover {
+  background-color: #ffe6e6;
+}
+
+.calendar-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: top;
+  position: relative; /* 달력 날짜의 정보 배치를 위한 상대 위치 지정 */
+  font-family: "SEBANGGothic", sans-serif; /* 기본 폰트 적용 */
+}
+
+.calendar-info span {
+  width: 20px; /* 텍스트의 고정 너비 */
+  display: flex;
+  justify-content: center; /* 텍스트를 중앙 정렬 */
+}
+
+.calendar-info img {
+  z-index: 1;
+  width: 70px; /* 이미지의 너비를 원래 크기의 200%로 설정 */
+  height: 70px; /* 이미지의 높이를 원래 크기의 200%로 설정 */
+  object-fit: cover; /* 이미지가 타일을 꽉 채우도록 조정 */
+  position: absolute; /* 이미지의 위치를 절대적으로 설정 */
+  top: 25%; /* 이미지를 타일의 상단에서 45% 위로 이동 */
+  left: -123%; /* 이미지를 타일의 왼쪽에서 45% 왼쪽으로 이동 */
+  opacity: 50%;
+}
+
+.calendar-info span {
+  z-index: 0;
+  position: relative; /* 텍스트의 상대 위치 지정 */
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0; /* 상하 패딩을 추가하여 네비게이션 높이 증가 */
+  font-family: "SEBANGGothic", sans-serif; /* 기본 폰트 적용 */
+}
+
+.react-calendar__navigation button {
+  min-width: 44px; /* 네비게이션 버튼의 최소 너비 */
+  background: none; /* 버튼 배경 제거 */
+  /*font-size: 1.2rem; !* 버튼 텍스트 크기 *!*/
+  cursor: pointer; /* 버튼 클릭 커서 */
+  font-weight: bold !important; /* 월과 년도 라벨의 텍스트 굵기 */
+  font-family: "SEBANGGothicBold", sans-serif !important; /* 기본 폰트 적용 */
+  color: inherit; /* 상속받은 텍스트 색상 사용 */
+  text-decoration: none; /* 링크 스타일 제거 */
+}
+
+.react-calendar__navigation__label {
+  font-size: 1.5rem; /* 월과 년도 라벨의 텍스트 크기 */
+  font-weight: bold; /* 월과 년도 라벨의 텍스트 굵기 */
+  font-family: "SEBANGGothic", sans-serif; /* 월과 년도 라벨에 굵은 폰트 적용 */
+}
+
+@media (max-width: 600px) {
+  .react-calendar__navigation__label {
+    font-size: 1.2rem; /* 모바일 화면용으로 폰트 크기 조정 */
+  }
+}
+
+.calendar-count {
+  font-size: 0.7rem; /* 달력 날짜의 건수 텍스트 크기 */
+  color: #555;
+  font-family: "SEBANGGothic", sans-serif; /* 기본 폰트 적용 */
+}
+
+.calendar-amount {
+  font-size: 0.6rem; /* 달력 날짜의 금액 텍스트 크기 */
+  color: #333;
+  font-family: "SEBANGGothic", sans-serif; /* 기본 폰트 적용 */
+}
+
+.calendar-divider {
+  width: 100%; /* 구분선의 너비를 부모 요소에 맞춤 */
+  border: none; /* 구분선 테두리 제거 */
+  border-top: 5px solid #e0e0e0; /* 구분선의 위쪽 테두리 스타일 */
+  /*margin-top: 20px; !* 구분선의 상단 여백 *!*/
+}
+
+.amount-list-half {
+  width: 100%; /* 금액 리스트의 너비를 부모 요소에 맞춤 */
+  margin-top: 5px;
+}
+
+/*.amount-list-item {*/
+/*  display: flex;*/
+/*  justify-content: space-between; !* 리스트 아이템의 양쪽 정렬 *!*/
+/*  vertical-align: top; !* 리스트 아이템의 상단 정렬 *!*/
+/*  padding: 10px 0; !* 리스트 아이템의 상하 패딩 *!*/
+/*  border-bottom: 1px solid #e0e0e0; !* 리스트 아이템의 아래쪽 테두리 *!*/
+/*  font-size: 1rem;*/
+/*  font-family: "SEBANGGothic", sans-serif; !* 기본 폰트 적용 *!*/
+/*}*/
+
+.amount-list-item .amount {
+  font-weight: bold; /* 금액 텍스트의 굵기 */
+  font-family: "SEBANGGothic", sans-serif; /* 금액 텍스트에 굵은 폰트 적용 */
+}
+
+.amount-list-item .description {
+  color: #888; /* 설명 텍스트의 색상 */
+  font-size: 0.9rem; /* 설명 텍스트의 크기 */
+  font-family: "SEBANGGothic", sans-serif; /* 기본 폰트 적용 */
+}
+
+.calanderRabbit-style {
+  width: 40px; /* 토끼 이미지의 너비 */
+  height: 40px; /* 토끼 이미지의 높이 */
+}

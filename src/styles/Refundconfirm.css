@@ -1,0 +1,110 @@
+@font-face {
+    font-family: "SEBANGGothic";
+    src: url("../assets/fonts/SEBANGGothic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "SEBANGGothicBold";
+    src: url("../assets/fonts/SEBANGGothicBold.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+.confirm-container{
+    font-family: "SEBANGGothic";
+    margin: 0 auto;
+    padding: 0;
+    background-color: #f2f2f7;
+    min-height: 100vh;
+    overflow: auto;
+    max-width: 414px;
+}
+
+.confirm-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f2f2f7;
+    border-bottom: 1px solid #ddd;
+}
+
+.confirm-header h2 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+    font-size: 15px;
+}
+
+.confirm-img{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    padding: 20px 0px 20px 0px;
+}
+
+.confirm-img img{
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.confirm-img p{
+    font-size: 15px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+hr {
+    color:black;
+}
+
+.confirm-point{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+.point-text{
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.point-number{
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.confirm-cash{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.cash-text{
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.cash-number{
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.confirm-button{
+    width: 300px;
+    margin: 0 auto;
+}
+
+.confirm-button button{
+    width:100%;
+    font-family: "SEBANGGothic";
+    font-size: 15px;
+    background-color: #303473;
+    border: none;
+    border-radius: 10px;
+    color:#FFF;
+    padding: 10px 40px 10px 40px;
+}

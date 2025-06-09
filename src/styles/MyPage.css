@@ -1,0 +1,357 @@
+.rank-main-container {
+  max-width: 480px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
+  margin: 0 auto; /* 자동 마진을 사용하여 중앙에 배치합니다. */
+  padding: 20px; /* 내부 패딩을 설정합니다. */
+  background-color: #f8f8fdbf; /* 배경 색상을 연한 회색으로 설정합니다. */
+  min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정합니다. */
+  position: relative;
+  overflow: hidden;
+}
+.rinfo-container{
+  max-width: 414px; /* 최대 너비를 480px로 설정하여 모바일 화면에 맞게 조정합니다. */
+  margin: 0 auto; /* 자동 마진을 사용하여 중앙에 배치합니다. */
+  padding: 20px; /* 내부 패딩을 설정합니다. */
+  background-color: #f8f8fd; /* 배경 색상을 연한 회색으로 설정합니다. */
+  min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정합니다. */
+  position: relative;
+  overflow: hidden;
+}
+/*상단 랭크부분*/
+.rank-container {
+   background-color: white;
+    border-radius: 20px;
+    display: flex;
+    padding: 3%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.character-container{
+    padding-right: 10px;
+}
+.rank-info-container{
+    padding-left: 10px;
+    border-left: 1px solid gray;
+    width: 100%;
+}
+.rank-image{
+  width: 128px;
+  height: 99px;
+  
+}
+.rank-id{
+  text-align: center;
+  /*   background-image: url('../assets/BackLayer2.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;  */
+    padding: 10px;
+    font-weight: bold;
+}
+
+.rank-info3 {
+  text-align: right; /* 텍스트를 오른쪽 정렬 */
+  font-size: 12px; /* 글씨 크기를 12px로 설정 */
+  
+  margin-bottom: 2px;
+}
+
+.rank-info3 .highlight {
+  color: #303473; /* '20점' 부분의 색상 설정 */
+}
+
+.rank-info4 {
+  text-align: right;
+  font-size : 14px;
+  margin-top : 16px;
+}
+.rank-info5 {
+  text-align: right;
+  font-size : 10px;
+  color : #B6B6B6;
+  text-decoration: underline;
+  margin-top:4px;
+  margin-right: 4px;
+
+}
+.rank-info4 .rank-score{
+  font-size : 16px;
+}
+@keyframes progress-bar-stripes {
+    0% {
+      background-position-x: 1rem; } }
+  
+  .progress {
+    display: flex;
+    height: 1rem;
+    overflow: hidden;
+    font-size: 0.65625rem;
+    background-color: #e9ecef;
+    border-radius: 0.75rem; }
+  
+  .progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #1EAAE7;
+    transition: width 0.6s ease; }
+    @media (prefers-reduced-motion: reduce) {
+      .progress-bar {
+        transition: none; } }
+  
+  .progress-bar-striped {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 1rem 1rem; }
+  
+  .progress-bar-animated {
+    animation: 1s linear infinite progress-bar-stripes; }
+    @media (prefers-reduced-motion: reduce) {
+      .progress-bar-animated {
+        animation: none; } }
+
+
+/*랭킹 리스트 부분*/
+.text-wrap {
+  margin : 6px;
+  font-weight: bold;
+  font-family: "SEBANGGothicBold";
+}
+.list-container{
+  margin-top:10px;
+}
+.list-item{
+  background-color: white;
+    border-radius: 10px;
+    display: flex;
+    padding:10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.item-rank-image{
+  width: 98px;
+  height: 69px;
+}
+.item-info {
+  width: 100%;
+  padding: 6px;
+}
+.rank-count{
+  font-weight: bolder;
+}
+.item-info1{
+  font-size:14px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.item-info2{
+  font-size:14px;
+  width: 50%;
+}
+.item-info2 .highlight2 {
+  font-size:16px;
+}
+.info-link {
+  font-size: 10px;
+  color:#B6B6B6;
+  text-decoration: underline;
+  width: 50%;
+  text-align: right;
+
+}
+.item-info2-wrap {
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  width: 100%;
+}
+.rank-null-message{
+  margin:6px;
+  color:#B6B6B6;
+}
+
+/*등급별 혜택-RankInfo부분*/
+.benefit-container{
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  padding:10px;
+  align-items: center;
+  margin-bottom:20px;
+  margin-top: 20px;
+}
+.benefit-rank-info span{
+  display: block;
+  margin-bottom:6px;
+}
+.benefit-rank-info{
+  width:260px;
+}
+.benefit-button-container{
+  width:200px;
+  text-align: right;
+}
+
+.rankinfo-container {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* 넘치는 부분을 숨김 */
+  box-sizing: border-box; 
+  justify-content: center;
+}
+
+.rank1-container, .rank2-container, .rank3-container, .rank4-container{
+  width:70px; 
+  margin-left:4px; 
+  margin-right:4px; 
+  text-align: center;  
+  display: flex;          
+  flex-direction: column;  
+  align-items: center;     
+  justify-content: flex-end;
+  border-radius: 5px;
+  border:1px solid lightgray;
+  padding-bottom: 10px;
+  height:100%;
+}
+.rank2-container, .rank3-container, .rank4-container{
+  padding-bottom:14px !important;
+}
+.rank1-container.selected {
+  background-color: #b6d9ffc8;
+  width:70px; 
+}
+.rank1-container:hover {
+  background-color: #b6d9ffc8;
+  
+}
+.rank2-container.selected {
+  background-color: #daffdac8;
+  width:70px; 
+}
+.rank2-container:hover {
+  background-color: #daffdac8;
+}
+.rank3-container.selected {
+  background-color: #ffdabed6;
+  width:70px; 
+}
+.rank3-container:hover {
+  background-color: #ffdabed6;
+}
+.rank4-container.selected {
+  background-color: #ffd8ebcf;
+  width:70px; 
+}
+.rank4-container:hover {
+  background-color: #ffd8ebcf;
+}
+.benefit-rank-image1, .benefit-rank-image2,
+.benefit-rank-image3,
+.benefit-rank-image4
+{
+  width:80%;
+  height:50%;
+}
+.benefit-rank-image2,
+.benefit-rank-image3,
+.benefit-rank-image4{
+  margin-bottom:4px;
+}
+
+.rank-name1, .rank-range1,
+.rank-name2, .rank-range2,
+.rank-name3, .rank-range3, 
+.rank-name4, .rank-range4
+{
+  font-size:10px;
+}
+
+
+.benefit-info-container{
+  background-color: white;
+  border-radius: 10px;
+  padding:12px;
+}
+ .rank-standard, .rank-benefit-info {
+  margin-bottom: 8px;
+  font-size:11px;
+}
+.rank-name{
+  margin-bottom: 10px;
+  font-size:12px;
+}
+/*혜택버튼*/
+.benefit-btn{
+  color:white;
+  background-color: #303473;
+  border:1px solid #303473;
+  border-radius: 18px;
+  width:130px;
+  height: 40px;
+
+  font-size:12px;
+  font-family: "SEBANGGothic";
+}
+/*등급안내footer*/
+.footer-info{
+  background-color: #EBEBEB;
+  margin-top:20px;
+  padding:20px;
+  font-size:8px;
+}
+.footer-title{
+  display: grid !important;
+  margin-bottom:14px !important;
+  font-size:12px !important;
+}
+.footer-info span {
+  display: inline-block;
+  margin-bottom: 10px;
+  color:#464646;
+}
+
+.sec_container {
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.prev-btn {
+  z-index: 210;
+  position: absolute;
+  top: 0;
+  
+}
+.prev-btn2 {
+  z-index: 210;
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+.isVisable {
+  height: 0;
+  overflow: hidden;
+}
+
+.selectedMemberId {
+  height: 0;
+  overflow: hidden;
+}
+
+.not-center {
+  text-align: left !important;
+}
+.rankpage{
+  position: absolute !important;
+    top: 0;
+    left: 0;
+    max-width: 413px;
+    border:none;
+}

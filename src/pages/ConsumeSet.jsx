@@ -1,0 +1,80 @@
+import "../App.css";
+import "../styles/ConsumeHistory.css";
+import Footer from "../components/Footer";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { checkJWT } from "services/checkJWT";
+import { useEffect } from "react";
+
+function ConsumeSet({ memberId }) {
+  const [memberID, setMemberID] = useState("");
+  useEffect(() => {
+    checkJWT("/api/member/memberSession", "get", null)
+      .then((resopnse) => {
+        console.log("JWT 확인 결과" + resopnse.memberId);
+        const memberID = resopnse.memberId;
+        setMemberID(memberID);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, []);
+
+  // 금액을 저장할 상태
+  const [selectedAmount, setSelectedAmount] =
+    useState("설정할 금액을 선택하세요.");
+  // 금액 선택 시 호출되는 함수
+  const handleSelect = (amount) => {
+    setSelectedAmount(amount);
+  };
+
+  // 설정 버튼 클릭 시 호출되는 함수
+  const handleSetAmount = () => {
+    if (selectedAmount === "설정할 금액을 선택하세요.") {
+      alert("금액을 선택해주세요.");
+      return;
+    } else {
+      setMoney(selectedAmount);
+    }
+  };
+
+  const setMoney = async (selectedAmount) => {
+    try {
+      const amount = selectedAmount.replace(/,/g, "").replace("원", "");
+      const response = await axios.post(
+        `/mypage/myweeklymoney?memberId=${memberID}&weeklyMoney=${amount}`
+      );
+      console.log(response.data);
+      window.location.href = "/mypage";
+    } catch (error) {
+      console.error("실패", error);
+    }
+  };
+
+  return (
+    <div className="container con2">
+      <div className="title center">
+        <h2 className="set">💰주간소비금액💰 설정</h2>
+        <p className="p-set">1주간 사용할 금액을 설정해주세요.</p>
+      </div>
+      <div className="dropdown">
+        <button className="dropbtn">{selectedAmount}</button>
+        <div className="dropdown-content">
+          <p onClick={() => handleSelect("100,000원")}>100,000원</p>
+          <p onClick={() => handleSelect("150,000원")}>150,000원</p>
+          <p onClick={() => handleSelect("200,000원")}>200,000원</p>
+          <p onClick={() => handleSelect("250,000원")}>250,000원</p>
+          <p onClick={() => handleSelect("300,000원")}>300,000원</p>
+        </div>
+      </div>
+      <Link to="/mypage" state={{ selectedTab: "analysis" }}>
+        <button className="select" onClick={handleSetAmount}>
+          설정
+        </button>
+      </Link>
+      <Footer />
+    </div>
+  );
+}
+export default ConsumeSet;

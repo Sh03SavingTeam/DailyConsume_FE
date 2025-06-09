@@ -1,0 +1,47 @@
+
+.attendance-box {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 3%;
+    margin: 5%;
+}
+
+.ad-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    margin-top:5px;
+}
+
+.ad-info {
+    display: flex;
+}
+
+.ad-text1 {
+    color: black;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+.ad-text2 {
+    color: #B6B6B6;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.ad-text-box {
+    padding: 10px;
+}
+
+.attendance-btn-box {
+    background-color: #94DBE0;
+    margin: 10px;
+    border-radius: 15px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+}
